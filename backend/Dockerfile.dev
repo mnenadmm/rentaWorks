@@ -1,0 +1,34 @@
+# ------------------------------------------------------------------------------
+# Dockerfile.dev
+# Koristi se za LOKALNI RAZVOJ aplikacije.
+# Omogućava automatsko osvežavanje prilikom izmene koda (debug=True).
+# Pokreće Flask aplikaciju u development režimu (bez Gunicorn-a).
+# ------------------------------------------------------------------------------
+
+# Bazna Python slika (lagana verzija)
+FROM python:3.11-slim
+
+# Postavljanje radnog direktorijuma unutar kontejnera
+WORKDIR /app
+
+# Kopiranje samo requirements.txt da bi se keširao sloj zavisnosti
+COPY requirements.txt .
+
+# Instalacija Python zavisnosti
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Kopiranje ostatka projekta u kontejner
+COPY . .
+
+# Izlaganje porta koji koristi Flask
+EXPOSE 5000
+
+# Definisanje promenljivih okruženja za razvoj
+ENV FLASK_APP=app.py
+ENV FLASK_ENV=development
+
+
+
+# Pokretanje Flask development servera
+CMD ["python", "app.py"]
+
