@@ -1,0 +1,27 @@
+# ------------------------------------------------------------------------------
+# Dockerfile.prod
+# Koristi se za PRODUKCIJSKO (STALNO) POSTAVLJANJE aplikacije.
+# Pokreće aplikaciju preko Gunicorn servera (brži i robusniji od Flask servera).
+# Ne koristi debug režim – sigurnije, stabilnije.
+# ------------------------------------------------------------------------------
+
+# Bazna Python slika (lagana, bez nepotrebnih paketa)
+FROM python:3.11-slim
+
+# Postavljanje radnog direktorijuma unutar kontejnera
+WORKDIR /app
+
+# Kopiranje samo fajla sa zavisnostima da se koristi cache sloj
+COPY requirements.txt .
+
+# Instalacija zavisnosti bez keširanja i dodatnih nepotrebnih podataka
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Kopiranje aplikacionog koda
+COPY . .
+
+# Izlaganje porta na kojem Gunicorn sluša (isti kao i Flask – 5000)
+EXPOSE 5000
+
+# Komanda za pokretanje aplikacije u produkciji pomoću Gunicorn-a
+CMD ["gunicorn", "--bind", "0.0.0.0:5000", "app:app"]
