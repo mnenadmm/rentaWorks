@@ -1,13 +1,30 @@
-/* Lokalni stilovi za app.component */
+/* cela stranica i kontejner zauzimaju 100% visine */
+html, body {
+  height: 100%;
+  margin: 0;
+}
 
+/* app-container zauzima celu visinu i pravi flex kolonu */
 .app-container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh; /* min-height je ovde OK, može i 100vh */
+  height: 100vh;  /* visina viewporta */
+  overflow: hidden; /* sprečavamo da ceo container skroluje */
 }
 
-main {
-  flex-grow: 1;
-  min-height: 100px; /* samo da testiraš */
-  background-color: #f0f0f0; /* da vidiš gde je main */
+/* header ima fiksnu visinu ili po sadržaju */
+app-header {
+  flex-shrink: 0; /* ne dozvoli da se smanjuje */
+}
+
+/* content (main) zauzima sav preostali prostor i može da skroluje */
+main.content {
+  flex-grow: 1;   /* raste da popuni prostor */
+  overflow-y: auto;  /* omogućava vertikalni scroll ako je sadržaj veći */
+  padding: 1rem;  /* po potrebi */
+}
+
+/* footer ne raste, fiksiran je na dno */
+app-footer {
+  flex-shrink: 0;  /* ne smanjuje se */
 }
