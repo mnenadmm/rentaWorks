@@ -22,6 +22,7 @@ main.content {
   flex-grow: 1;   /* raste da popuni prostor */
   overflow-y: auto;  /* omogućava vertikalni scroll ako je sadržaj veći */
   padding: 1rem;  /* po potrebi */
+  margin-top: 60px; /* pomera sadržaj dole da ne bude ispod headera */
 }
 
 /* footer ne raste, fiksiran je na dno */
