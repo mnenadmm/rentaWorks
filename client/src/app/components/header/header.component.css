@@ -1,0 +1,161 @@
+/* Uvoz Google fonta "Inter" sa debljinama 400 i 600 */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+/* RESETUJE listu unutar navigacije - uklanja defaultne stilove liste */
+nav ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* OSNOVNI STIL ZA NAVIGACIJU */
+nav {
+  display: flex;                          /* Raspoređuje decu horizontalno */
+  justify-content: space-between;        /* Razmak između logoa i menija */
+  align-items: center;                   /* Vertikalno poravnanje u sredinu */
+  background-color: #7f7b70;             /* Pozadina - mekana crvenkasta nijansa */
+  color: white;                          /* Boja teksta */
+  padding: 0 1.5rem;                     /* Levo/desno unutrašnji razmak */
+  height: 60px;                          /* Visina navigacije */
+  position: fixed;                       /* Fiksirana na vrhu ekrana */
+  width: 100%;                           /* Puna širina */
+  top: 0;
+  left: 0;
+  z-index: 10000;                        /* Da bude iznad ostalih elemenata */
+  box-shadow: 0 2px 8px rgba(0,0,0,0.5); /* Senka ispod navigacije */
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: 600;                      /* Podebljani tekst */
+}
+
+/* STIL ZA LOGO */
+nav .logo {
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 1.2px;                 /* Razmak između slova */
+}
+
+/* STIL ZA DESKTOP MENI (horizontalni) */
+nav ul {
+  display: flex;
+  gap: 1.5rem;                           /* Razmak između stavki menija */
+}
+
+/* STIL ZA LINKOVE U MENIJU */
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+}
+
+/* HOVER EFEKAT ZA LINKOVE */
+nav ul li a:hover {
+  color: #ff9f8f;                        /* Svetlija boja pri prelasku */
+  background-color: rgba(255, 255, 255, 0.1); /* Blago svetla pozadina */
+}
+
+/* HAMBURGER DUGME - inicijalno sakriveno */
+.hamburger {
+  display: none;                         /* Ne prikazuje se na velikim ekranima */
+  flex-direction: column;
+  cursor: pointer;
+  width: 28px;
+  height: 22px;
+  justify-content: space-between;
+  z-index: 11000;                        /* Da bude iznad menija */
+  transition: transform 0.3s ease;
+}
+
+/* PRUGE UNUTAR HAMBURGERA */
+.hamburger span {
+  display: block;
+  height: 3.5px;
+  background: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* ANIMACIJA ZA HAMBURGER KADA SE OTVORI */
+.hamburger.open span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
+}
+.hamburger.open span:nth-child(2) {
+  opacity: 0;                            /* Nestaje srednja linija */
+}
+.hamburger.open span:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+/* MEDIA QUERY ZA MALE EKRANE */
+@media (max-width: 600px) {
+
+  /* OVERLAY KOJI SE POJAVLJUJE IZA MENIJA */
+  body.menu-open::before {
+    content: "";
+    position: fixed;
+    top: 60px;                           /* Ispod navigacije */
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 60px);
+    background-color: rgba(0, 0, 0, 0.45);
+    z-index: 9998;
+    transition: opacity 0.3s ease;
+  }
+
+  /* VERTIKALNI MOBILNI MENI */
+  nav ul {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    height: calc(100vh - 60px);
+    width: 100%;
+    background-color: rgba(13, 182, 208, 0.2); /* Providno plava nijansa */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);       /* Safari podrška */
+    flex-direction: column;                    /* Vertikalni meni */
+    padding-top: 2rem;
+    transform: translateX(-100%);              /* Početno sakriven */
+    transition: transform 0.3s ease-in-out;
+    box-shadow: 2px 0 8px rgba(0,0,0,0.4);
+    display: flex;
+    gap: 0.6rem;
+    align-items: center;
+    font-size: 1.3rem;
+    z-index: 9999;
+  }
+
+  /* KADA JE MENI OTVOREN - POMERA SE U VIDNO POLJE */
+  nav ul.open {
+    transform: translateX(0);
+  }
+
+  /* STAVKE U MOBILNOM MENIJU */
+  nav ul li {
+    margin-bottom: 1.2rem;
+  }
+
+  /* LINKOVI U MOBILNOM MENIJU */
+  nav ul li a {
+    padding: 0.5rem 1.2rem;
+    border-radius: 6px;
+    font-weight: 600;
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.2);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+  }
+
+  /* HOVER EFEKAT NA MOBILNIM LINKOVIMA */
+  nav ul li a:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+    color: #fff;
+  }
+
+  /* HAMBURGER POSTAJE VIDLJIV NA MALIM EKRANIMA */
+  .hamburger {
+    display: flex;
+  }
+}
