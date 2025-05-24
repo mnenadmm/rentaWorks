@@ -1,16 +1,15 @@
-/* styles.css */
-html, body {
-  height: 100%;
-  margin: 0;
-}
+/* Lokalni stilovi za app.component */
 
 .app-container {
   display: flex;
   flex-direction: column;
-  min-height: 100dvh;
+  min-height: 100vh; /* min-height je ovde OK, može i 100vh */
 }
 
 main {
   flex-grow: 1;
-  
+  /* Dodaj padding/margin po potrebi, na primer: */
+  padding: 1rem;
+  /* ili ako koristiš bootstrap: 
+     container klasa može biti u main-u, pa je ne moraš stavljati ovde */
 }
