@@ -1,15 +1,15 @@
-/* Omogućava sticky footer */
+/* styles.css */
 html, body {
   height: 100%;
   margin: 0;
+}
+
+.app-container {
   display: flex;
   flex-direction: column;
+  min-height: 100dvh;
 }
-app-root {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-}
+
 main {
   flex-grow: 1;
 }
