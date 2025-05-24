@@ -1,7 +1,13 @@
+footer {
+  padding-top: 0.25rem;   /* 4px gore */
+  padding-bottom: 0.25rem; /* 4px dole */
+  font-size: 0.9rem;      /* malo manji font za ceo footer */
+  line-height: 1.2;       /* da tekst bude kompaktniji */
+}
+
 footer nav {
   flex-wrap: nowrap;
-  font-size: 0.9rem;
-    
+  padding: 0;             /* uklonio padding da ne dodaje visinu */
 }
 
 footer nav .nav-link {
