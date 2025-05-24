@@ -8,7 +8,7 @@ html, body {
 .app-container {
   display: flex;
   flex-direction: column;
-  height: 100vh;  /* visina viewporta */
+  height: 100dvh;  /* visina viewporta */
   overflow: hidden; /* sprečavamo da ceo container skroluje */
 }
 
