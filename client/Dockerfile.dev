@@ -1,0 +1,18 @@
+# client/Dockerfile.dev
+
+FROM node:18
+
+WORKDIR /app
+
+# Kopiraj samo package.json i package-lock.json da instaliraš dependency-je (brže)
+COPY package*.json ./
+
+RUN npm install
+
+# Kopiraj sve ostalo (kod aplikacije)
+COPY . .
+
+EXPOSE 4200
+
+# Angular CLI development server dostupan spolja
+CMD ["npm", "start"]

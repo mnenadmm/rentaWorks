@@ -1,0 +1,15 @@
+footer nav {
+  flex-wrap: nowrap;
+  font-size: 0.9rem;
+}
+
+footer nav .nav-link {
+  padding-left: 0.4rem;
+  padding-right: 0.4rem;
+}
+
+@media (max-width: 576px) {
+  footer nav {
+    flex-wrap: wrap;
+  }
+}
