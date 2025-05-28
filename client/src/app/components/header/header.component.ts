@@ -8,11 +8,19 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./header.component.css']
 })
 export class HeaderComponent {
-  menuOpen = false;
+menuOpen = false;
 
-  toggleMenu() {
-    this.menuOpen = !this.menuOpen;
-    document.body.classList.toggle('menu-open', this.menuOpen);
-  }
+setMenuState(open: boolean) {
+  this.menuOpen = open;
+  document.body.classList.toggle('menu-open', open);
+}
+
+toggleMenu() {
+  this.setMenuState(!this.menuOpen);
+}
+
+closeMenu() {
+  this.setMenuState(false);
+}
 }
 
