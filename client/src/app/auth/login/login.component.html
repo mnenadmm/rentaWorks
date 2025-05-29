@@ -6,7 +6,7 @@
         <label for="username">Korisničko ime</label>
         <div class="input-icon">
           <i class="icon">&#64;</i>
-          <input type="text" id="username" [(ngModel)]="username" name="username" placeholder="Unesi korisničko ime" required />
+         <input type="text" id="username" [(ngModel)]="username" name="username" placeholder="Unesi korisničko ime" required [disabled]="isLockedOut" />
         </div>
       </div>
 
@@ -21,19 +21,21 @@
             name="password"
             placeholder="Unesi lozinku"
             required
+            [disabled]="isLockedOut"
           />
           <button
             type="button"
             class="toggle-password"
             (click)="togglePasswordVisibility()"
             [attr.aria-label]="showPassword ? 'Sakrij lozinku' : 'Prikaži lozinku'"
-          >
+            [disabled]="isLockedOut"
+            >
             {{ showPassword ? '🙈' : '👁️' }}
           </button>
         </div>
       </div>
-
-      <button type="submit">Prijavi se</button>
+    <button type="submit" [disabled]="isLockedOut">Prijavi se</button>
+      
 
       <!-- Ovde ide error poruka -->
       <div *ngIf="errorMessage" class="error-message" role="alert" aria-live="assertive" style="color: red; margin-top: 1rem;">
