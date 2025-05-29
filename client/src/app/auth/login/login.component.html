@@ -1,14 +1,39 @@
-<div class="login-container">
-  <h2>Prijava</h2>
-  <form>
-    <div class="form-group">
-      <label for="username">Korisničko ime</label>
-      <input type="text" id="username" name="username" placeholder="Unesite korisničko ime" />
-    </div>
-    <div class="form-group">
-      <label for="password">Lozinka</label>
-      <input type="password" id="password" name="password" placeholder="Unesite lozinku" />
-    </div>
-    <button type="submit">Uloguj se</button>
-  </form>
+<div class="login-wrapper">
+  <div class="login-container">
+    <h2>Prijavi se</h2>
+    <form (submit)="onLogin()">
+      <div class="form-group">
+        <label for="username">Korisničko ime</label>
+        <div class="input-icon">
+          <i class="icon">&#64;</i>
+          <input type="text" id="username" [(ngModel)]="username" name="username" placeholder="Unesi korisničko ime" required />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="password">Lozinka</label>
+        <div class="input-icon password-wrapper">
+          <i class="icon">🔒</i>
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            id="password"
+            [(ngModel)]="password"
+            name="password"
+            placeholder="Unesi lozinku"
+            required
+          />
+          <button
+            type="button"
+            class="toggle-password"
+            (click)="togglePasswordVisibility()"
+            [attr.aria-label]="showPassword ? 'Sakrij lozinku' : 'Prikaži lozinku'"
+          >
+            {{ showPassword ? '🙈' : '👁️' }}
+          </button>
+        </div>
+      </div>
+
+      <button type="submit">Prijavi se</button>
+    </form>
+  </div>
 </div>
