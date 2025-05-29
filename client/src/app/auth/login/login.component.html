@@ -34,6 +34,11 @@
       </div>
 
       <button type="submit">Prijavi se</button>
+
+      <!-- Ovde ide error poruka -->
+      <div *ngIf="errorMessage" class="error-message" role="alert" aria-live="assertive" style="color: red; margin-top: 1rem;">
+        {{ errorMessage }}
+      </div>
     </form>
   </div>
 </div>
