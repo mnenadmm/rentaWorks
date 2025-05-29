@@ -12,7 +12,7 @@ export class LoginComponent {
   username: string = '';
   password: string = '';
   showPassword: boolean = false;
-  errorMessage: string | null = 'Uneli ste pogresno korisnicko ime ili lozinku';
+  errorMessage: string = '';
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
@@ -20,13 +20,13 @@ export class LoginComponent {
 
   onLogin() {
     // Resetuj error poruku pre provere
-    this.errorMessage = null;
+    this.errorMessage = '';
 
     if (this.username && this.password) {
       console.log('Prijava uspešna:', this.username, this.password);
-      // Ovde možeš emitovati event, pozvati servis, itd.
+     this.errorMessage = 'Korisničko ime ili lozinka nisu ispravni. Molimo pokušajte ponovo.';
     } else {
-      this.errorMessage = 'Molimo unesite korisničko ime i lozinku.';
+     this.errorMessage = 'Korisničko ime ili lozinka nisu ispravni. Molimo pokušajte ponovo.';
     }
   }
 }
