@@ -1,54 +1,113 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, interval, Subscription } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginLockService {
   private maxAttempts = 3;
-  private lockDuration = 30000; // 30 sekundi blokada
-  private attempts = 0;
-  private lockExpiration: number | null = null;
+  private lockoutDurationMs = 30000; // 30 sekundi
 
-  constructor() { }
+  private attemptsKey = 'loginAttempts';
+  private lockUntilKey = 'loginLockUntil';
 
-  canAttempt(): boolean {
-    if (this.isLocked()) {
-      return false;
-    }
-    return true;
+  private remainingTimeSubject = new BehaviorSubject<number>(0);
+  remainingTime$ = this.remainingTimeSubject.asObservable();
+
+  private countdownSub?: Subscription;
+
+  constructor() {
+    this.checkLockStatus();
   }
 
-  recordAttempt(success: boolean): void {
+  private getAttempts(): number {
+    return Number(localStorage.getItem(this.attemptsKey)) || 0;
+  }
+
+  private setAttempts(val: number) {
+    localStorage.setItem(this.attemptsKey, val.toString());
+  }
+
+  private getLockUntil(): number {
+    return Number(localStorage.getItem(this.lockUntilKey)) || 0;
+  }
+
+  private setLockUntil(timestamp: number) {
+    localStorage.setItem(this.lockUntilKey, timestamp.toString());
+  }
+
+  canAttempt(): boolean {
+    const now = Date.now();
+    return now >= this.getLockUntil();
+  }
+
+  isLocked(): boolean {
+    return !this.canAttempt();
+  }
+
+  getRemainingLockTime(): number {
+    const now = Date.now();
+    const lockUntil = this.getLockUntil();
+    return lockUntil > now ? lockUntil - now : 0;
+  }
+
+  recordAttempt(success: boolean) {
+    if (this.isLocked()) {
+      return; // ne dozvoljavamo nove pokušaje dok je zaključano
+    }
+
     if (success) {
-      this.reset();
+      this.setAttempts(0);
+      this.clearLock();
     } else {
-      this.attempts++;
-      if (this.attempts >= this.maxAttempts) {
-        this.lockExpiration = Date.now() + this.lockDuration;
+      let attempts = this.getAttempts() + 1;
+      this.setAttempts(attempts);
+
+      if (attempts >= this.maxAttempts) {
+        this.lockUser();
       }
     }
   }
 
-  isLocked(): boolean {
-    if (this.lockExpiration && Date.now() < this.lockExpiration) {
-      return true;
-    }
-    if (this.lockExpiration && Date.now() >= this.lockExpiration) {
-      this.reset();
-      return false;
-    }
-    return false;
+  private lockUser() {
+    const lockUntil = Date.now() + this.lockoutDurationMs;
+    this.setLockUntil(lockUntil);
+    this.startCountdown();
   }
 
-  getRemainingLockTime(): number {
-    if (!this.lockExpiration) {
-      return 0;
-    }
-    return Math.max(this.lockExpiration - Date.now(), 0);
+  private clearLock() {
+    localStorage.removeItem(this.lockUntilKey);
+    this.remainingTimeSubject.next(0);
+    this.stopCountdown();
   }
 
-  reset(): void {
-    this.attempts = 0;
-    this.lockExpiration = null;
+  private startCountdown() {
+    this.stopCountdown();
+
+    this.countdownSub = interval(1000).subscribe(() => {
+      const remaining = this.getRemainingLockTime();
+      this.remainingTimeSubject.next(Math.ceil(remaining / 1000));
+
+      if (remaining <= 0) {
+        this.setAttempts(0);
+        this.clearLock();
+      }
+    });
+  }
+
+  private stopCountdown() {
+    if (this.countdownSub) {
+      this.countdownSub.unsubscribe();
+      this.countdownSub = undefined;
+    }
+  }
+
+  private checkLockStatus() {
+    if (this.isLocked()) {
+      this.startCountdown();
+    } else {
+      this.setAttempts(0);
+      this.clearLock();
+    }
   }
 }

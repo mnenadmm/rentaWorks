@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common'; 
-import { LoginLockService } from '../../services/login-lock.service';// putanja može da varira
+import { CommonModule } from '@angular/common';
+import { LoginLockService } from '../../services/login-lock.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -10,51 +11,61 @@ import { LoginLockService } from '../../services/login-lock.service';// putanja 
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
-  username: string = '';
-  password: string = '';
-  showPassword: boolean = false;
-  errorMessage: string = '';
-  isLockedOut: boolean = false;
+export class LoginComponent implements OnDestroy {
+  username = '';
+  password = '';
+  showPassword = false;
+  errorMessage = '';
+  isLockedOut = false;
+  remainingLockTime = 0;
 
-  constructor(private loginLockService: LoginLockService) {}
+  private timerSub?: Subscription;
+
+  constructor(private loginLockService: LoginLockService) {
+    this.isLockedOut = this.loginLockService.isLocked();
+    this.timerSub = this.loginLockService.remainingTime$.subscribe(time => {
+      this.remainingLockTime = time;
+      this.isLockedOut = this.loginLockService.isLocked();
+      if (this.isLockedOut) {
+        this.errorMessage = `Previše neuspešnih pokušaja. Pokušajte ponovo za ${this.remainingLockTime} sekundi.`;
+      } else {
+        this.errorMessage = '';
+      }
+    });
+  }
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
 
   onLogin() {
-    this.errorMessage = '';
-
-    if (!this.loginLockService.canAttempt()) {
-      const remaining = Math.ceil(this.loginLockService.getRemainingLockTime() / 1000);
-      this.errorMessage = `Previše neuspešnih pokušaja. Pokušajte ponovo za ${remaining} sekundi.`;
-      this.isLockedOut = true;
+    if (this.isLockedOut) {
       return;
     }
 
-    if (this.username && this.password) {
-      const isValid = this.fakeLogin(this.username, this.password);
-
-      this.loginLockService.recordAttempt(isValid);
-
-      if (!isValid) {
-        this.errorMessage = 'Korisničko ime ili lozinka nisu ispravni. Molimo pokušajte ponovo.';
-      } else {
-        this.errorMessage = '';
-        this.isLockedOut = false;
-        // Uspešna prijava - dodaj ovde dalje akcije ako treba
-        console.log('Prijava uspešna:', this.username);
-      }
-    } else {
+    if (!this.username || !this.password) {
       this.errorMessage = 'Korisničko ime i lozinka su obavezni.';
+      return;
     }
 
-    this.isLockedOut = this.loginLockService.isLocked();
+    const isValid = this.fakeLogin(this.username, this.password);
+
+    this.loginLockService.recordAttempt(isValid);
+
+    if (!isValid) {
+      this.errorMessage = 'Korisničko ime ili lozinka nisu ispravni. Molimo pokušajte ponovo.';
+    } else {
+      this.errorMessage = '';
+      console.log('Prijava uspešna:', this.username);
+      // ovde ide redirect ili dalji tok prijave
+    }
   }
 
-  // Primer funkcije za validaciju - zameni sa stvarnim pozivom backendu
   fakeLogin(user: string, pass: string): boolean {
     return user === 'admin' && pass === 'admin123';
+  }
+
+  ngOnDestroy() {
+    this.timerSub?.unsubscribe();
   }
 }
