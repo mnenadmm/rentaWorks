@@ -1,181 +1,204 @@
+/* Uvozi Google font Inter */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
 
+/* Osnovna pravila za box model da se padding i border uračunavaju u širinu i visinu */
 * {
   box-sizing: border-box;
 }
 
+/* Stil za telo dokumenta */
 body {
-  margin: 0;
-  padding: 0;
-  font-family: 'Inter', sans-serif;
-  background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  margin: 0; /* Uklanja default marginu */
+  padding: 0; /* Uklanja default padding */
+  font-family: 'Inter', sans-serif; /* Postavlja glavni font */
+  background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%); /* Pozadinski gradijent */
+  min-height: 100vh; /* Visina tela je minimum visina vidljivog prozora */
+  display: flex; /* Koristi Flexbox za centriranje */
+  justify-content: center; /* Horizontalno centriranje */
+  align-items: center; /* Vertikalno centriranje */
+  padding: 1rem; /* Spoljni razmak oko tela */
+  -webkit-font-smoothing: antialiased; /* Bolje renderovanje fontova na webkit browserima */
+  -moz-osx-font-smoothing: grayscale; /* Bolje renderovanje fontova na Firefox Mac */
 }
 
+/* Omotač forme za login */
 .login-wrapper {
-  width: 100%;
-  max-width: 420px;
-  padding: 1rem;
+  width: 100%; /* Širina zauzima celu širinu roditelja */
+  max-width: 420px; /* Maksimalna širina je 420px */
+  padding: 1rem; /* Unutrašnji razmak */
+  
+  /* Dodato za horizontalno pomeranje prema centru ekrana */
+  margin-left: auto;  /* Automatski razmak s leve strane */
+  margin-right: auto; /* Automatski razmak s desne strane */
 }
 
+/* Kontejner unutar omotača koji drži formu i stilizuje je */
 .login-container {
-  background: rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
-  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.25); /* Poluprozirna bela pozadina */
+  backdrop-filter: blur(25px); /* Zamagljenje pozadine iza elementa */
+  -webkit-backdrop-filter: blur(25px); /* Za Safari */
+  border-radius: 24px; /* Zaobljeni uglovi */
   box-shadow:
-    0 8px 24px rgba(0, 0, 0, 0.12),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.3);
-  padding: 2.5rem 2.25rem;
-  color: #222;
-  border: 1px solid rgba(255, 255, 255, 0.4);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+    0 8px 24px rgba(0, 0, 0, 0.12), /* Spoljašnja senka */
+    inset 0 0 0 1px rgba(255, 255, 255, 0.3); /* Unutrašnja linija */
+  padding: 2.5rem 2.25rem; /* Unutrašnji razmak */
+  color: #222; /* Boja teksta */
+  border: 1px solid rgba(255, 255, 255, 0.4); /* Tanka linija oko elementa */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animacija promena */
 }
 
+/* Hover i focus efekat za lepši vizuelni feedback */
 .login-container:hover,
 .login-container:focus-within {
-  transform: translateY(-6px);
+  transform: translateY(-6px); /* Pomeri malo gore */
   box-shadow:
-    0 12px 36px rgba(0, 0, 0, 0.18),
-    inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+    0 12px 36px rgba(0, 0, 0, 0.18), /* Intenzivnija senka */
+    inset 0 0 0 1px rgba(255, 255, 255, 0.5); /* Intenzivnija unutrašnja linija */
 }
 
+/* Stil za naslov unutar login forme */
 .login-container h2 {
-  text-align: center;
-  font-size: 2.2rem;
-  margin-bottom: 2.25rem;
-  font-weight: 700;
-  color: #2c2c2c;
-  letter-spacing: 0.03em;
-  user-select: none;
+  text-align: center; /* Centriran tekst */
+  font-size: 2.2rem; /* Veličina fonta */
+  margin-bottom: 2.25rem; /* Razmak ispod */
+  font-weight: 700; /* Podebljano */
+  color: #2c2c2c; /* Tamna boja */
+  letter-spacing: 0.03em; /* Razmak između slova */
+  user-select: none; /* Onemogućava selektovanje teksta */
 }
 
+/* Razmak između grupa formi */
 .form-group {
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.75rem; /* Donji razmak */
 }
 
+/* Stil za labele polja */
 label {
-  display: block;
-  margin-bottom: 0.6rem;
-  font-weight: 600;
-  color: #3a3a3a;
-  font-size: 0.95rem;
-  letter-spacing: 0.02em;
+  display: block; /* Prikazuje se kao blok element */
+  margin-bottom: 0.6rem; /* Razmak ispod */
+  font-weight: 600; /* Srednje podebljano */
+  color: #3a3a3a; /* Tamnosiva boja */
+  font-size: 0.95rem; /* Veličina fonta */
+  letter-spacing: 0.02em; /* Razmak između slova */
 }
 
+/* Wrapper za input sa ikonicom */
 .input-icon {
-  position: relative;
+  position: relative; /* Omogućava apsolutno pozicioniranje ikonice */
 }
 
+/* Stil za input polja sa ikonom */
 .input-icon input {
-  width: 100%;
-  padding: 0.75rem 1rem 0.75rem 3rem;
-  border: none;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.85);
-  font-size: 1.05rem;
-  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.06);
-  transition: box-shadow 0.25s ease, background 0.25s ease;
-  color: #222;
-  font-weight: 500;
-  caret-color: #7b61ff;
+  width: 100%; /* Širina 100% unutar wrappera */
+  padding: 0.75rem 1rem 0.75rem 3rem; /* Unutrašnji razmak, sa leve strane veći zbog ikonice */
+  border: none; /* Bez ivice */
+  border-radius: 16px; /* Zaobljeni uglovi */
+  background: rgba(255, 255, 255, 0.85); /* Poluprozirna bela pozadina */
+  font-size: 1.05rem; /* Veličina fonta */
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.06); /* Blaga unutrašnja senka */
+  transition: box-shadow 0.25s ease, background 0.25s ease; /* Animacija prilikom promene */
+  color: #222; /* Boja teksta */
+  font-weight: 500; /* Srednje podebljano */
+  caret-color: #7b61ff; /* Boja kursora */
 }
 
+/* Stil placeholder teksta u input poljima */
 .input-icon input::placeholder {
-  color: #9a9a9a;
-  font-weight: 400;
+  color: #9a9a9a; /* Svetlosiva boja */
+  font-weight: 400; /* Normalna težina fonta */
 }
 
+/* Stil prilikom fokusa na input polje */
 .input-icon input:focus {
-  outline: none;
-  box-shadow: 0 0 0 3px #7b61ffaa;
-  background: rgba(255, 255, 255, 0.98);
+  outline: none; /* Uklanja default outline */
+  box-shadow: 0 0 0 3px #7b61ffaa; /* Plavi senka oko inputa */
+  background: rgba(255, 255, 255, 0.98); /* Snažnija bela pozadina */
 }
 
+/* Stil za ikonu unutar input wrappera */
 .input-icon .icon {
-  position: absolute;
-  top: 50%;
-  left: 1rem;
-  transform: translateY(-50%);
-  font-size: 1.3rem;
-  opacity: 0.55;
-  user-select: none;
+  position: absolute; /* Apsolutno pozicioniranje */
+  top: 50%; /* Vertikalno centriranje */
+  left: 1rem; /* Pomeranje sa leve strane */
+  transform: translateY(-50%); /* Pravi precizno vertikalno centriranje */
+  font-size: 1.3rem; /* Veličina ikonice */
+  opacity: 0.55; /* Blago providna */
+  user-select: none; /* Ne može da se selektuje */
 }
 
+/* Wrapper za password input i dugme za toggle */
 .password-wrapper {
-  display: flex;
-  align-items: center;
+  display: flex; /* Fleks kontejner */
+  align-items: center; /* Vertikalno centriranje */
 }
 
+/* Dugme za prikazivanje/sakrivanje lozinke */
 .toggle-password {
-  position: absolute;
-  right: 1rem;
-  top: 50%;
-  transform: translateY(-50%);
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  font-size: 1.25rem;
-  opacity: 0.6;
-  transition: opacity 0.2s ease, transform 0.2s ease;
-  user-select: none;
-  padding: 0;
-  line-height: 1;
+  position: absolute; /* Apsolutno pozicioniranje */
+  right: 1rem; /* Sa desne strane */
+  top: 50%; /* Vertikalno centriranje */
+  transform: translateY(-50%); /* Precizno centriranje */
+  background: transparent; /* Bez pozadine */
+  border: none; /* Bez ivice */
+  cursor: pointer; /* Kursor pokazivač */
+  font-size: 1.25rem; /* Veličina ikone */
+  opacity: 0.6; /* Blago providno */
+  transition: opacity 0.2s ease, transform 0.2s ease; /* Animacija */
+  user-select: none; /* Ne može da se selektuje */
+  padding: 0; /* Bez unutrašnjeg razmaka */
+  line-height: 1; /* Visina linije */
 }
 
+/* Hover i focus efekti za dugme */
 .toggle-password:hover,
 .toggle-password:focus {
-  opacity: 1;
-  transform: translateY(-50%) scale(1.1);
-  outline: none;
+  opacity: 1; /* Potpuno vidljivo */
+  transform: translateY(-50%) scale(1.1); /* Blago povećano */
+  outline: none; /* Bez outline */
 }
 
+/* Stil za dugme submit */
 button[type="submit"] {
-  width: 100%;
-  padding: 1.1rem;
-  font-size: 1.15rem;
-  font-weight: 700;
-  background: linear-gradient(135deg, #7b61ff, #5c92ff);
-  color: #fff;
-  border: none;
-  border-radius: 16px;
-  cursor: pointer;
-  box-shadow: 0 6px 15px #7b61ff99;
-  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.15s ease;
-  user-select: none;
+  width: 100%; /* Širina celog roditelja */
+  padding: 1.1rem; /* Unutrašnji razmak */
+  font-size: 1.15rem; /* Veličina fonta */
+  font-weight: 700; /* Podebljano */
+  background: linear-gradient(135deg, #7b61ff, #5c92ff); /* Gradijent pozadine */
+  color: #fff; /* Bela boja teksta */
+  border: none; /* Bez ivice */
+  border-radius: 16px; /* Zaobljeni uglovi */
+  cursor: pointer; /* Kursor pokazivač */
+  box-shadow: 0 6px 15px #7b61ff99; /* Senka dugmeta */
+  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.15s ease; /* Animacije */
+  user-select: none; /* Ne može da se selektuje */
 }
 
+/* Hover i focus efekti za dugme */
 button[type="submit"]:hover,
 button[type="submit"]:focus {
-  background: linear-gradient(135deg, #6946ff, #3f82fc);
-  box-shadow: 0 8px 20px #6946ffcc;
-  transform: scale(1.04);
-  outline: none;
+  background: linear-gradient(135deg, #6946ff, #3f82fc); /* Tamniji gradijent */
+  box-shadow: 0 8px 20px #6946ffcc; /* Jača senka */
+  transform: scale(1.04); /* Malo uvećanje */
+  outline: none; /* Bez outline */
 }
 
-/* Responsive adjustments */
+/* Responsive pravila za male ekrane */
 @media (max-width: 480px) {
   .login-container {
-    padding: 1.8rem 1.5rem;
+    padding: 1.8rem 1.5rem; /* Manji padding */
   }
 
   .login-container h2 {
-    font-size: 1.8rem;
-    margin-bottom: 1.5rem;
+    font-size: 1.8rem; /* Manja veličina naslova */
+    margin-bottom: 1.5rem; /* Manji razmak */
   }
 
   .input-icon input {
-    padding-left: 2.5rem;
+    padding-left: 2.5rem; /* Manji razmak za ikonice */
   }
 
   button[type="submit"] {
-    padding: 1rem;
-    font-size: 1.05rem;
+    padding: 1rem; /* Manji padding */
+    font-size: 1.05rem; /* Manja veličina fonta */
   }
 }
