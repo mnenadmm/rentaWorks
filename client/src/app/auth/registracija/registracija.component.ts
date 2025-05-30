@@ -6,7 +6,7 @@ import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-registracija',
   standalone: true,
-  imports: [RouterModule, CommonModule, ReactiveFormsModule],  // DODATO ReactiveFormsModule
+  imports: [RouterModule, CommonModule, ReactiveFormsModule],
   templateUrl: './registracija.component.html',
   styleUrls: ['./registracija.component.css']
 })
@@ -29,11 +29,9 @@ export class RegistracijaComponent implements OnInit {
   }
 
   sledeciKorak() {
-    if (this.korak === 1) {
-      if (this.formaKorak1.invalid) {
-        this.formaKorak1.markAllAsTouched();
-        return;
-      }
+    if (this.korak === 1 && this.formaKorak1.invalid) {
+      this.formaKorak1.markAllAsTouched();
+      return;
     }
 
     if (this.korak < this.ukupnoKoraka) {
@@ -46,12 +44,10 @@ export class RegistracijaComponent implements OnInit {
       this.korak--;
     }
   }
-  submitRegistraciju() {
-  // Ovde ide logika za završetak registracije, slanje podataka na backend itd.
-  // Za sada samo prikazujemo alert i resetujemo korake:
-  alert('Registracija je završena!');
-  this.korak = 1;
-  this.formaKorak1.reset();
-}
 
+  submitRegistraciju() {
+    alert('Registracija je završena!');
+    this.korak = 1;
+    this.formaKorak1.reset();
+  }
 }
