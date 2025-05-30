@@ -19,6 +19,7 @@ export class ResetPasswordComponent {
   constructor(private router: Router) {}
 
   onSubmit(): void {
+    // Resetujemo poruke pre validacije
     this.successMessage = null;
     this.errorMessage = null;
 
@@ -32,20 +33,19 @@ export class ResetPasswordComponent {
       return;
     }
 
+    // Odmah postavljamo isSubmitting kako bismo blokirali dalje klikove
     this.isSubmitting = true;
 
-    // Simuliramo async poziv
+    // Odmah postavljamo successMessage, ne čekamo
+    this.successMessage = 'Link za reset lozinke je poslat na tvoju email adresu.';
+    this.errorMessage = null;  // Ukloni grešku čim uspešno pošaljemo
+    this.email = '';  // Očisti input
+
+    // Nakon 3 sekunde vrši redirekciju
     setTimeout(() => {
-      this.isSubmitting = false;
-      this.successMessage = 'Link za reset lozinke je poslat na tvoju email adresu.';
-      this.email = '';  // Očistimo input, bez error-a
-
-      // Posle 3 sekunde redirekt na login
-      setTimeout(() => {
-        this.router.navigate(['/login']);
-      }, 3000);
-
-    }, 1500);
+      this.router.navigate(['/login']);
+      this.isSubmitting = false; // omogući dugme nakon redirekcije (ako se vrati)
+    }, 3000);
   }
 
   private validateEmail(email: string): boolean {
