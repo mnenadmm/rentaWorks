@@ -1,36 +1,106 @@
-<div class="form-container">
-  <h2>Registracija</h2>
-  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
-
-    <div class="form-group">
-      <label for="email">Email <span class="required">*</span></label>
-      <input id="email" type="email" formControlName="email" placeholder="Unesite email" />
-      <p class="error-msg" *ngIf="email?.invalid && (email?.touched || email?.dirty)" @fadeSlideIn>
-        <span *ngIf="email?.errors?.['required']">Email je obavezan.</span>
-        <span *ngIf="email?.errors?.['email']">Unesite validan email.</span>
-      </p>
+<div class="registracija-container">
+  <!-- Progress bar i prikaz koraka -->
+  <div class="progress-wrapper">
+    <div class="progress-info">
+      Korak {{ korak }} od {{ ukupnoKoraka }}
     </div>
-
-    <div class="form-group">
-      <label for="password">Lozinka <span class="required">*</span></label>
-      <input id="password" type="password" formControlName="password" placeholder="Unesite lozinku" />
-      <p class="error-msg" *ngIf="password?.invalid && (password?.touched || password?.dirty)" @fadeSlideIn>
-        <span *ngIf="password?.errors?.['required']">Lozinka je obavezna.</span>
-        <span *ngIf="password?.errors?.['minlength']">Lozinka mora imati najmanje 6 karaktera.</span>
-      </p>
+    <div class="progress-bar">
+      <div
+        class="progress-fill"
+        [style.width.%]="(korak / ukupnoKoraka) * 100"
+      ></div>
     </div>
-
-    <div class="form-group">
-      <label for="confirmPassword">Potvrda lozinke <span class="required">*</span></label>
-      <input id="confirmPassword" type="password" formControlName="confirmPassword" placeholder="Potvrdite lozinku" />
-      <p class="error-msg" *ngIf="confirmPassword?.invalid && (confirmPassword?.touched || confirmPassword?.dirty)" @fadeSlideIn>
-        <span *ngIf="confirmPassword?.errors?.['required']">Potvrda lozinke je obavezna.</span>
-      </p>
-      <p class="error-msg" *ngIf="registerForm.hasError('mismatch') && (confirmPassword?.touched || confirmPassword?.dirty)" @fadeSlideIn>
-        Lozinke se ne poklapaju.
-      </p>
+    <div class="steps-indicator">
+      <div
+        class="step"
+        *ngFor="let s of [].constructor(ukupnoKoraka); let i = index"
+        [class.active]="i + 1 === korak"
+        [class.completed]="i + 1 < korak"
+      >
+        {{ i + 1 }}
+      </div>
     </div>
+  </div>
 
-    <button type="submit" [disabled]="registerForm.invalid">Registruj se</button>
+  <!-- Forma za prvi korak -->
+  <form
+    *ngIf="korak === 1"
+    [formGroup]="formaKorak1"
+    (ngSubmit)="sledeciKorak()"
+    novalidate
+    class="form-step"
+  >
+    <label>
+      Username:
+      <input formControlName="username" />
+      <div class="error" *ngIf="formaKorak1.get('username')?.touched && formaKorak1.get('username')?.invalid">
+        Username je obavezan (min 4 karaktera)
+      </div>
+    </label>
+
+    <label>
+      Ime:
+      <input formControlName="ime" />
+      <div class="error" *ngIf="formaKorak1.get('ime')?.touched && formaKorak1.get('ime')?.invalid">
+        Ime je obavezno
+      </div>
+    </label>
+
+    <label>
+      Prezime:
+      <input formControlName="prezime" />
+      <div class="error" *ngIf="formaKorak1.get('prezime')?.touched && formaKorak1.get('prezime')?.invalid">
+        Prezime je obavezno
+      </div>
+    </label>
+
+    <label>
+      Email:
+      <input formControlName="email" type="email" />
+      <div class="error" *ngIf="formaKorak1.get('email')?.touched && formaKorak1.get('email')?.invalid">
+        Unesite validan email
+      </div>
+    </label>
+
+    <label>
+      Lozinka:
+      <input formControlName="lozinka" type="password" />
+      <div class="error" *ngIf="formaKorak1.get('lozinka')?.touched && formaKorak1.get('lozinka')?.invalid">
+        Lozinka je obavezna (min 6 karaktera)
+      </div>
+    </label>
+
+    <div class="buttons">
+      <button type="button" (click)="prethodniKorak()" [disabled]="korak === 1">
+        Nazad
+      </button>
+      <button type="submit">Dalje</button>
+    </div>
   </form>
+
+  <!-- Ostali koraci: samo za primer -->
+  <div *ngIf="korak === 2" class="form-step">
+    <!-- Ovde ide forma za drugi korak -->
+    <p>Ovde ide forma za korak 2...</p>
+    <div class="buttons">
+      <button (click)="prethodniKorak()">Nazad</button>
+      <button (click)="sledeciKorak()">Dalje</button>
+    </div>
+  </div>
+
+  <div *ngIf="korak === 3" class="form-step">
+    <p>Ovde ide forma za korak 3...</p>
+    <div class="buttons">
+      <button (click)="prethodniKorak()">Nazad</button>
+      <button (click)="sledeciKorak()">Dalje</button>
+    </div>
+  </div>
+
+  <div *ngIf="korak === 4" class="form-step">
+    <p>Ovde ide forma za korak 4...</p>
+    <div class="buttons">
+      <button (click)="prethodniKorak()">Nazad</button>
+      <button (click)="submitRegistraciju()">Završi registraciju</button>
+    </div>
+  </div>
 </div>
