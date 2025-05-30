@@ -80,7 +80,7 @@ export class LoginComponent implements OnDestroy {
 
   // Privremena metoda za "fake" login (može se zameniti pravim backend pozivom)
   fakeLogin(user: string, pass: string): boolean {
-    return user === 'admin' && pass === 'admin123';
+    return user === 'admin' && pass === 'Admin123';
   }
 
   // Očisti pretplatu kada komponenta bude uništena (da se spreče memory leak-ovi)
