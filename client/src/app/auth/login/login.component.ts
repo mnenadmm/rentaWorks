@@ -60,7 +60,7 @@ export class LoginComponent implements OnDestroy {
     const hasMinLength = this.password.length >= 8;
     const hasUppercase = /[A-Z]/.test(this.password);
     if (!hasMinLength || !hasUppercase) {
-      this.errorMessage = 'Lozinka mora imati najmanje 8 karaktera i bar jedno veliko slovo.';
+      this.errorMessage = 'Korisničko ime ili lozinka nisu ispravni. Molimo pokušajte ponovo.';
       return;
     }
     // Poziv fiktivne funkcije za proveru kredencijala (dummy login)
