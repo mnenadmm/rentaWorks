@@ -34,13 +34,13 @@ export class ResetPasswordComponent {
 
     this.isSubmitting = true;
 
-    // Simulacija async poziva - ovde ubaci pravi HTTP poziv
+    // Simuliramo async poziv
     setTimeout(() => {
       this.isSubmitting = false;
       this.successMessage = 'Link za reset lozinke je poslat na tvoju email adresu.';
-      this.email = '';
+      this.email = '';  // Očistimo input, bez error-a
 
-      // Automatski redirect nakon 3 sekunde
+      // Posle 3 sekunde redirekt na login
       setTimeout(() => {
         this.router.navigate(['/login']);
       }, 3000);
