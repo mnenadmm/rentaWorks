@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-registracija',
   standalone: true,
-  imports: [RouterModule, CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './registracija.component.html',
   styleUrls: ['./registracija.component.css']
 })
@@ -29,13 +28,10 @@ export class RegistracijaComponent implements OnInit {
   }
 
   sledeciKorak() {
-    if (this.korak === 1) {
-      if (this.formaKorak1.invalid) {
-        this.formaKorak1.markAllAsTouched();
-        return;
-      }
+    if (this.korak === 1 && this.formaKorak1.invalid) {
+      this.formaKorak1.markAllAsTouched();
+      return;
     }
-
     if (this.korak < this.ukupnoKoraka) {
       this.korak++;
     }
@@ -48,7 +44,7 @@ export class RegistracijaComponent implements OnInit {
   }
 
   submitRegistraciju() {
-    alert('Registracija je završena!');
+    alert('Registracija završena!');
     this.korak = 1;
     this.formaKorak1.reset();
   }

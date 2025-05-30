@@ -1,14 +1,14 @@
 <div class="registracija-container">
   <div class="progress-bar">
     <div class="korak" *ngFor="let k of [].constructor(ukupnoKoraka); let i = index"
-         [class.active]="i + 1 <= korak">
-      <div class="broj">{{ i + 1 }}</div>
+         [class.active]="i + 1 === korak">
       Korak {{ i + 1 }}
     </div>
   </div>
 
   <div class="sadrzaj-koraka">
     <ng-container [ngSwitch]="korak">
+
       <form *ngSwitchCase="1" [formGroup]="formaKorak1" (ngSubmit)="sledeciKorak()">
         <label>
           Username:
@@ -57,27 +57,20 @@
 
       <div *ngSwitchCase="2">
         <p>Ovde ide forma za izbor tipa korisnika i dodatne podatke</p>
-        <div class="dugmici">
-          <button (click)="prethodniKorak()">Nazad</button>
-          <button (click)="sledeciKorak()">Dalje</button>
-        </div>
       </div>
 
       <div *ngSwitchCase="3">
         <p>Ovde ide forma za dodatne profilne podatke</p>
-        <div class="dugmici">
-          <button (click)="prethodniKorak()">Nazad</button>
-          <button (click)="sledeciKorak()">Dalje</button>
-        </div>
       </div>
 
       <div *ngSwitchCase="4">
         <p>Ovde ide pregled i potvrda podataka</p>
-        <div class="dugmici">
-          <button (click)="prethodniKorak()">Nazad</button>
-          <button (click)="submitRegistraciju()">Potvrdi</button>
-        </div>
       </div>
+
     </ng-container>
+  </div>
+
+  <div class="dugmici" *ngIf="korak > 1">
+    <button (click)="prethodniKorak()">Nazad</button>
   </div>
 </div>
