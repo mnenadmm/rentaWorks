@@ -29,9 +29,11 @@ export class RegistracijaComponent implements OnInit {
   }
 
   sledeciKorak() {
-    if (this.korak === 1 && this.formaKorak1.invalid) {
-      this.formaKorak1.markAllAsTouched();
-      return;
+    if (this.korak === 1) {
+      if (this.formaKorak1.invalid) {
+        this.formaKorak1.markAllAsTouched();
+        return;
+      }
     }
 
     if (this.korak < this.ukupnoKoraka) {
