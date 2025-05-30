@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { BehaviorSubject, interval, Subscription } from 'rxjs';
 
 @Injectable({
@@ -16,23 +17,30 @@ export class LoginLockService {
 
   private countdownSub?: Subscription;
 
-  constructor() {
+  private isBrowser: boolean;
+
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
     this.checkLockStatus();
   }
 
   private getAttempts(): number {
+    if (!this.isBrowser) return 0; // server nema localStorage
     return Number(localStorage.getItem(this.attemptsKey)) || 0;
   }
 
   private setAttempts(val: number) {
+    if (!this.isBrowser) return;
     localStorage.setItem(this.attemptsKey, val.toString());
   }
 
   private getLockUntil(): number {
+    if (!this.isBrowser) return 0;
     return Number(localStorage.getItem(this.lockUntilKey)) || 0;
   }
 
   private setLockUntil(timestamp: number) {
+    if (!this.isBrowser) return;
     localStorage.setItem(this.lockUntilKey, timestamp.toString());
   }
 
@@ -76,6 +84,7 @@ export class LoginLockService {
   }
 
   private clearLock() {
+    if (!this.isBrowser) return;
     localStorage.removeItem(this.lockUntilKey);
     this.remainingTimeSubject.next(0);
     this.stopCountdown();
