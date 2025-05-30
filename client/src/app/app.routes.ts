@@ -7,6 +7,7 @@ import { ContactComponent } from './pages/contact/contact.component';
 import { UsloviKoriscenjaComponent } from './pages/uslovi-koriscenja/uslovi-koriscenja.component';
 import { PodrskaComponent } from './pages/podrska/podrska.component';
 import { InfoComponent } from './pages/info/info.component';
+import { ResetPasswordComponent } from './auth/reset-password/reset-password.component';
 export const routes: Routes = [
     { path: '', component: PocetnaComponent },
     { path: 'login', component: LoginComponent },
@@ -16,5 +17,7 @@ export const routes: Routes = [
     { path: 'uslovi', component: UsloviKoriscenjaComponent },
     { path: 'podrska', component:  PodrskaComponent },
     { path: 'info', component:  InfoComponent },
+    { path: 'reset-password', component: ResetPasswordComponent },
+
     
 ];
