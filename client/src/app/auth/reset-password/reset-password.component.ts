@@ -15,15 +15,14 @@ export class ResetPasswordComponent {
   successMessage: string | null = null;
   errorMessage: string | null = null;
   isSubmitting = false;
-  formSubmitted = false;
 
   constructor(private router: Router) {}
 
   onSubmit(): void {
-    this.formSubmitted = true; // korisnik je kliknuo submit
     this.successMessage = null;
     this.errorMessage = null;
 
+    // Fallback validacija (ako nekako zaobiđe HTML validaciju)
     if (!this.email) {
       this.errorMessage = 'Email je obavezan.';
       return;
@@ -38,7 +37,8 @@ export class ResetPasswordComponent {
     this.successMessage = 'Link za reset lozinke je poslat na tvoju email adresu.';
     this.errorMessage = null;
 
-    // Ne čistimo odmah email, jer bi to okinulo ispis errora u šablonu
+    // Ne brišemo email ovde — jer bi to okinulo error validaciju na inputu
+    // Redirect posle 3 sekunde
     setTimeout(() => {
       this.router.navigate(['/login']);
       this.isSubmitting = false;
