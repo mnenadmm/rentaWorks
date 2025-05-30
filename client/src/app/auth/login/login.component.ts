@@ -13,35 +13,24 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnDestroy {
-  // Polja za unos korisničkog imena i lozinke
   username = '';
   password = '';
-
-  // Kontrola prikaza lozinke (tekstualno ili maskirano)
   showPassword = false;
-
-  // Poruka o grešci
   errorMessage = '';
-
-  // Da li je korisnik trenutno zaključan zbog više neuspešnih pokušaja
+  // Da li je korisnik trenutno zaključan zbog previše neuspešnih pokušaja
   isLockedOut = false;
-
-  // Vreme koje je ostalo do kraja zaključavanja (u sekundama)
+  // Vreme (u sekundama) do kraja zaključavanja
   remainingLockTime = 0;
-
-  // Pretplata na timer koji se osvežava svakih sekund
+  // Pretplata na osvežavanje preostalog vremena
   private timerSub?: Subscription;
-
   constructor(private loginLockService: LoginLockService) {
-    // Proveri odmah da li je korisnik zaključan
+    // Proveri da li je korisnik odmah zaključan
     this.isLockedOut = this.loginLockService.isLocked();
-
-    // Pretplata na promene vremena do otključavanja
+    // Pretplati se na promene vremena do kraja zaključavanja
     this.timerSub = this.loginLockService.remainingTime$.subscribe(time => {
       this.remainingLockTime = time;
       this.isLockedOut = this.loginLockService.isLocked();
-
-      // Ažuriraj poruku u skladu sa statusom zaključavanja
+      // Ažuriraj poruku o grešci ako je korisnik zaključan
       if (this.isLockedOut) {
         this.errorMessage = `Previše neuspešnih pokušaja. Pokušajte ponovo za ${this.remainingLockTime} sekundi.`;
       } else {
@@ -49,46 +38,52 @@ export class LoginComponent implements OnDestroy {
       }
     });
   }
-
-  // Promena vidljivosti lozinke
+  // Funkcija za prikaz/sakrivanje lozinke
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
 
-  // Glavna metoda za prijavu
   onLogin() {
-    // Ako je korisnik zaključan, ne dozvoli prijavu
+    // Ako je korisnik zaključan – prekini proces prijave
     if (this.isLockedOut) {
       return;
     }
-
     // Provera da li su oba polja popunjena
     if (!this.username || !this.password) {
       this.errorMessage = 'Korisničko ime i lozinka su obavezni.';
       return;
     }
 
-    // Fiktivna provera podataka (možeš povezati sa backendom)
+    // ✅ DODATA VALIDACIJA LOZINKE:
+    // - najmanje 8 karaktera
+    // - bar jedno veliko slovo
+    const hasMinLength = this.password.length >= 8;
+    const hasUppercase = /[A-Z]/.test(this.password);
+    if (!hasMinLength || !hasUppercase) {
+      this.errorMessage = 'Lozinka mora imati najmanje 8 karaktera i bar jedno veliko slovo.';
+      return;
+    }
+    // Poziv fiktivne funkcije za proveru kredencijala (dummy login)
     const isValid = this.fakeLogin(this.username, this.password);
-
-    // Zabeleži pokušaj logovanja (uspešan ili ne)
+    // Evidentiraj pokušaj logovanja
     this.loginLockService.recordAttempt(isValid);
-
+    // Ako prijava nije uspešna – prikaži poruku
     if (!isValid) {
       this.errorMessage = 'Korisničko ime ili lozinka nisu ispravni. Molimo pokušajte ponovo.';
     } else {
+      // Uspešna prijava – obrisi poruku o grešci
       this.errorMessage = '';
       console.log('Prijava uspešna:', this.username);
-      // Ovde ide navigacija ka početnoj stranici ili dashboard-u
+      // TODO: ovde možeš dodati navigaciju (router.navigate)
     }
   }
 
-  // Privremena funkcija za validaciju (menjati za realan backend)
+  // Privremena metoda za "fake" login (može se zameniti pravim backend pozivom)
   fakeLogin(user: string, pass: string): boolean {
     return user === 'admin' && pass === 'admin123';
   }
 
-  // Očisti pretplatu kada se komponenta uništi
+  // Očisti pretplatu kada komponenta bude uništena (da se spreče memory leak-ovi)
   ngOnDestroy() {
     this.timerSub?.unsubscribe();
   }
