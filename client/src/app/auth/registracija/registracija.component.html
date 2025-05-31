@@ -7,14 +7,14 @@
       [class.active]="i + 1 === korak"
       [attr.data-number]="i + 1"
     >
-      <!-- Broj će se prikazati CSS-om -->
+      <!-- Broj prikazan CSS-om -->
     </div>
   </div>
 
   <div class="sadrzaj-koraka">
     <ng-container [ngSwitch]="korak">
 
-      <form *ngSwitchCase="1" [formGroup]="formaKorak1" (ngSubmit)="sledeciKorak()">
+      <form *ngSwitchCase="1" [formGroup]="formaKorak1" (ngSubmit)="sledeciKorak()" class="forma-registracija">
         <label>
           Username:
           <input formControlName="username" />
@@ -60,15 +60,15 @@
         </div>
       </form>
 
-      <div *ngSwitchCase="2">
+      <div *ngSwitchCase="2" class="sadrzaj">
         <p>Ovde ide forma za izbor tipa korisnika i dodatne podatke</p>
       </div>
 
-      <div *ngSwitchCase="3">
+      <div *ngSwitchCase="3" class="sadrzaj">
         <p>Ovde ide forma za dodatne profilne podatke</p>
       </div>
 
-      <div *ngSwitchCase="4">
+      <div *ngSwitchCase="4" class="sadrzaj">
         <p>Ovde ide pregled i potvrda podataka</p>
       </div>
 
