@@ -1,136 +1,181 @@
-.registration-container {
-  max-width: 460px;
-  margin: 4rem auto;
-  padding: 2rem;
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  font-family: Arial, sans-serif;
+/* Uvozi Google font Inter */ 
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+
+/* Osnovna pravila za box model da se padding i border uračunavaju u širinu i visinu */
+* {
+  box-sizing: border-box;
 }
 
+/* Stil za telo dokumenta */
+body {
+  margin: 0; /* Uklanja default marginu */
+  padding: 0; /* Uklanja default padding */
+  font-family: 'Inter', sans-serif; /* Postavlja glavni font */
+  background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%); /* Pozadinski gradijent */
+  min-height: 100vh; /* Visina tela je minimum visina vidljivog prozora */
+  display: flex; /* Koristi Flexbox za centriranje */
+  justify-content: center; /* Horizontalno centriranje */
+  align-items: center; /* Vertikalno centriranje */
+  padding: 1rem; /* Spoljni razmak oko tela */
+  -webkit-font-smoothing: antialiased; /* Bolje renderovanje fontova na webkit browserima */
+  -moz-osx-font-smoothing: grayscale; /* Bolje renderovanje fontova na Firefox Mac */
+}
+
+/* Omotač forme za login */
 .registracija-wrapper {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
+  width: 100%; /* Širina zauzima celu širinu roditelja */
+  max-width: 420px; /* Maksimalna širina je 420px */
+  padding: 1rem; /* Unutrašnji razmak */
+  
+  /* Dodato za horizontalno pomeranje prema centru ekrana */
+  margin-left: auto;  /* Automatski razmak s leve strane */
+  margin-right: auto; /* Automatski razmak s desne strane */
+}
+/* Kontejner unutar omotača koji drži formu i stilizuje je */
+.registracija-container {
+  background: rgba(255, 255, 255, 0.25); /* Poluprozirna bela pozadina */
+  backdrop-filter: blur(25px); /* Zamagljenje pozadine iza elementa */
+  -webkit-backdrop-filter: blur(25px); /* Za Safari */
+  border-radius: 24px; /* Zaobljeni uglovi */
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.12), /* Spoljašnja senka */
+    inset 0 0 0 1px rgba(255, 255, 255, 0.3); /* Unutrašnja linija */
+  padding: 2.5rem 2.25rem; /* Unutrašnji razmak */
+  color: #222; /* Boja teksta */
+  border: 1px solid rgba(255, 255, 255, 0.4); /* Tanka linija oko elementa */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animacija promena */
 }
 
-.progress-bar {
-  position: relative;
-  margin-bottom: 2rem;
-  height: 30px;
+/* Hover i focus efekat za lepši vizuelni feedback */
+.registracija-container:hover,
+.registracija-container:focus-within {
+  transform: translateY(-6px); /* Pomeri malo gore */
+  box-shadow:
+    0 12px 36px rgba(0, 0, 0, 0.18), /* Intenzivnija senka */
+    inset 0 0 0 1px rgba(255, 255, 255, 0.5); /* Intenzivnija unutrašnja linija */
 }
 
-.progress-line {
-  position: absolute;
-  top: 50%;
-  left: 10px;
-  right: 10px;
-  height: 3px;
-  background-color: #e0e0e0;
-  transform: translateY(-50%);
-  z-index: 1;
-  border-radius: 2px;
+/* Razmak između grupa formi */
+.form-group {
+  margin-bottom: 1.75rem; /* Donji razmak */
 }
 
-.steps {
-  display: flex;
-  justify-content: space-between;
-  position: relative;
-  z-index: 2;
-  padding: 0 10px;
-}
-
-.step {
-  width: 32px;
-  height: 32px;
-  background: #f1f1f1;
-  border-radius: 50%;
-  border: 2px solid #bbb;
-  color: #666;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: bold;
-  font-size: 14px;
-  user-select: none;
-  transition: all 0.3s ease;
-}
-
-.step.active {
-  background-color: #007bff;
-  border-color: #007bff;
-  color: white;
-}
-
-.step.completed {
-  background-color: #28a745;
-  border-color: #28a745;
-  color: white;
-}
-
+/* Stil za labele polja */
 label {
-  display: block;
-  margin-bottom: 0.5rem;
-  font-weight: 600;
-  color: #333;
+  display: block; /* Prikazuje se kao blok element */
+  margin-bottom: 0.6rem; /* Razmak ispod */
+  font-weight: 600; /* Srednje podebljano */
+  color: #3a3a3a; /* Tamnosiva boja */
+  font-size: 0.95rem; /* Veličina fonta */
+  letter-spacing: 0.02em; /* Razmak između slova */
 }
 
-input {
-  width: 100%;
-  padding: 0.6rem 0.8rem;
-  margin-bottom: 1rem;
-  border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 14px;
-  outline: none;
-  transition: border 0.3s ease;
+/* Wrapper za input sa ikonicom */
+.input-icon {
+  position: relative; /* Omogućava apsolutno pozicioniranje ikonice */
 }
 
-input:focus {
-  border-color: #007bff;
+/* Stil za input polja sa ikonom */
+.input-icon input {
+  width: 100%; /* Širina 100% unutar wrappera */
+  padding: 0.75rem 1rem 0.75rem 3rem; /* Unutrašnji razmak, sa leve strane veći zbog ikonice */
+  border: none; /* Bez ivice */
+  border-radius: 16px; /* Zaobljeni uglovi */
+  background: rgba(255, 255, 255, 0.85); /* Poluprozirna bela pozadina */
+  font-size: 1.05rem; /* Veličina fonta */
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.06); /* Blaga unutrašnja senka */
+  transition: box-shadow 0.25s ease, background 0.25s ease; /* Animacija prilikom promene */
+  color: #222; /* Boja teksta */
+  font-weight: 500; /* Srednje podebljano */
+  caret-color: #7b61ff; /* Boja kursora */
 }
 
-.error {
-  color: #d9534f;
-  font-size: 0.85rem;
-  margin-top: -0.8rem;
-  margin-bottom: 0.8rem;
+/* Stil placeholder teksta u input poljima */
+.input-icon input::placeholder {
+  color: #9a9a9a; /* Svetlosiva boja */
+  font-weight: 400; /* Normalna težina fonta */
 }
 
-.step-content {
-  flex: 1;
+/* Stil prilikom fokusa na input polje */
+.input-icon input:focus {
+  outline: none; /* Uklanja default outline */
+  box-shadow: 0 0 0 3px #7b61ffaa; /* Plavi senka oko inputa */
+  background: rgba(255, 255, 255, 0.98); /* Snažnija bela pozadina */
 }
 
-.buttons {
-  display: flex;
-  justify-content: flex-end;
-  gap: 1rem;
-  margin-top: 1rem;
+/* Stil za ikonu unutar input wrappera */
+.input-icon .icon {
+  position: absolute; /* Apsolutno pozicioniranje */
+  top: 50%; /* Vertikalno centriranje */
+  left: 1rem; /* Pomeranje sa leve strane */
+  transform: translateY(-50%); /* Pravi precizno vertikalno centriranje */
+  font-size: 1.3rem; /* Veličina ikonice */
+  opacity: 0.55; /* Blago providna */
+  user-select: none; /* Ne može da se selektuje */
 }
 
-button {
-  padding: 0.6rem 1.4rem;
-  border: none;
-  border-radius: 6px;
-  background-color: #007bff;
-  color: white;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  font-size: 14px;
+/* Wrapper za password input i dugme za toggle */
+.password-wrapper {
+  display: flex; /* Fleks kontejner */
+  align-items: center; /* Vertikalno centriranje */
 }
 
-button[disabled] {
-  background-color: #ccc;
-  cursor: not-allowed;
+/* Dugme za prikazivanje/sakrivanje lozinke */
+.toggle-password {
+  position: absolute; /* Apsolutno pozicioniranje */
+  right: 1rem; /* Sa desne strane */
+  top: 50%; /* Vertikalno centriranje */
+  transform: translateY(-50%); /* Precizno centriranje */
+  background: transparent; /* Bez pozadine */
+  border: none; /* Bez ivice */
+  cursor: pointer; /* Kursor pokazivač */
+  font-size: 1.25rem; /* Veličina ikone */
+  opacity: 0.6; /* Blago providno */
+  transition: opacity 0.2s ease, transform 0.2s ease; /* Animacija */
+  user-select: none; /* Ne može da se selektuje */
+  padding: 0; /* Bez unutrašnjeg razmaka */
+  line-height: 1; /* Visina linije */
 }
 
-button:hover:not([disabled]) {
-  background-color: #0056b3;
+/* Hover i focus efekti za dugme */
+.toggle-password:hover,
+.toggle-password:focus {
+  opacity: 1; /* Potpuno vidljivo */
+  transform: translateY(-50%) scale(1.1); /* Blago povećano */
+  outline: none; /* Bez outline */
 }
 
-@media (max-width: 600px) {
-  .registration-container {
-    padding: 1rem;
-  }
+/* Stil za dugme submit */
+button[type="submit"] {
+  width: 100%; /* Širina celog roditelja */
+  padding: 1.1rem; /* Unutrašnji razmak */
+  font-size: 1.15rem; /* Veličina fonta */
+  font-weight: 700; /* Podebljano */
+  background: linear-gradient(135deg, #7b61ff, #5c92ff); /* Gradijent pozadine */
+  color: #fff; /* Bela boja teksta */
+  border: none; /* Bez ivice */
+  border-radius: 16px; /* Zaobljeni uglovi */
+  cursor: pointer; /* Kursor pokazivač */
+  box-shadow: 0 6px 15px #7b61ff99; /* Senka dugmeta */
+  transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.15s ease; /* Animacije */
+  user-select: none; /* Ne može da se selektuje */
+}
+/* Stil za naslov unutar login forme */
+.login-container h2 {
+  text-align: center; /* Centriran tekst */
+  font-size: 2.2rem; /* Veličina fonta */
+  margin-bottom: 2.25rem; /* Razmak ispod */
+  font-weight: 700; /* Podebljano */
+  color: #2c2c2c; /* Tamna boja */
+  letter-spacing: 0.03em; /* Razmak između slova */
+  user-select: none; /* Onemogućava selektovanje teksta */
+}
+/* Hover i focus efekti za dugme */
+button[type="submit"]:hover,
+button[type="submit"]:focus {
+  background: linear-gradient(135deg, #6946ff, #3f82fc); /* Tamniji gradijent */
+  box-shadow: 0 8px 20px #6946ffcc; /* Jača senka */
+  transform: scale(1.04); /* Malo uvećanje */
+  outline: none; /* Bez outline */
 }
