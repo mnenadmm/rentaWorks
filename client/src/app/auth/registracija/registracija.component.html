@@ -1,6 +1,19 @@
 <div class="registracija-wrapper">
   <div class="registracija-container">
-    <h2>Registruj se</h2>
+        <h2>Registruj se</h2>
+         <div class="progress-bar">
+        <div class="progress-line"></div>
+        <div class="steps">
+          <div 
+            class="step" 
+            *ngFor="let s of steps; let i = index"
+            [class.active]="currentStep === i + 1"
+            [class.completed]="currentStep > i + 1"
+          >
+            {{ i + 1 }}
+          </div>
+        </div>
+      </div>
 
   </div>
 </div>
