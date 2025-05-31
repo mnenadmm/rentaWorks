@@ -162,7 +162,7 @@ button[type="submit"] {
   user-select: none; /* Ne može da se selektuje */
 }
 /* Stil za naslov unutar login forme */
-.login-container h2 {
+.registracija-container h2 {
   text-align: center; /* Centriran tekst */
   font-size: 2.2rem; /* Veličina fonta */
   margin-bottom: 2.25rem; /* Razmak ispod */
