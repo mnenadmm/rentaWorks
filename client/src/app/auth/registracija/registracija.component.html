@@ -123,7 +123,7 @@
   <div *ngIf="step1Form.get('confirmPassword')?.touched && step1Form.get('confirmPassword')?.invalid" class="error">
     Potvrda lozinke je obavezna.
   </div>
-  <div *ngIf="step1Form.errors?.['passwordMismatch'] && (step1Form.touched || step1Form.dirty)" class="error-message">
+  <div *ngIf="step1Form.errors?.['passwordMismatch'] && (step1Form.touched || step1Form.dirty)" class="error">
   Lozinke se ne poklapaju.
 </div>
 </div>
