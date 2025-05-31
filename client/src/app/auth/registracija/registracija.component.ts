@@ -14,6 +14,8 @@ export class RegistracijaComponent  {
 errorMessage = '';
   currentStep = 1;
   steps = [1, 2, 3, 4];
+  showPassword = false;
+  isLockedOut = false;
 
   step1Form: FormGroup;
 
@@ -51,5 +53,8 @@ errorMessage = '';
       this.step1Form.markAllAsTouched();
       this.currentStep = 1;
     }
+  }
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
   }
 }

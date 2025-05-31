@@ -73,6 +73,33 @@
           />
         </div>
       </div>
+      <!-- Polje za lozinku sa toggle dugmetom -->
+      <div class="form-group">
+        <label for="password">Lozinka</label>
+        <div class="input-icon password-wrapper">
+          <i class="icon">🔒</i>
+          <input
+            [type]="showPassword ? 'text' : 'password'"
+            id="password"
+           
+            name="password"
+            placeholder="Unesi lozinku"
+            required
+            [disabled]="isLockedOut"
+          />
+          <button
+            type="button"
+            class="toggle-password"
+            (click)="togglePasswordVisibility()"
+            [attr.aria-label]="showPassword ? 'Sakrij lozinku' : 'Prikaži lozinku'"
+            [disabled]="isLockedOut"
+          >
+            {{ showPassword ? '🙈' : '👁️' }}
+          </button>
+        </div>
+
+        
+      </div>
       </form>
 
   </div>
