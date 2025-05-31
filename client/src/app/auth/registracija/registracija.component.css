@@ -41,7 +41,7 @@ body {
   box-shadow:
     0 8px 24px rgba(0, 0, 0, 0.12), /* Spoljašnja senka */
     inset 0 0 0 1px rgba(255, 255, 255, 0.3); /* Unutrašnja linija */
-  padding: 2.5rem 2.25rem; /* Unutrašnji razmak */
+  padding: 1.5rem 1.5rem;  /* Unutrašnji razmak */
   color: #222; /* Boja teksta */
   border: 1px solid rgba(255, 255, 255, 0.4); /* Tanka linija oko elementa */
   transition: transform 0.3s ease, box-shadow 0.3s ease; /* Animacija promena */
@@ -79,11 +79,11 @@ label {
 /* Stil za input polja sa ikonom */
 .input-icon input {
   width: 100%; /* Širina 100% unutar wrappera */
-  padding: 0.75rem 1rem 0.75rem 3rem; /* Unutrašnji razmak, sa leve strane veći zbog ikonice */
+  padding: 0.5rem 1rem 0.5rem 2.5rem; /* Unutrašnji razmak, sa leve strane veći zbog ikonice */
   border: none; /* Bez ivice */
-  border-radius: 16px; /* Zaobljeni uglovi */
+  border-radius: 12px; /* Zaobljeni uglovi */
   background: rgba(255, 255, 255, 0.85); /* Poluprozirna bela pozadina */
-  font-size: 1.05rem; /* Veličina fonta */
+  font-size: 0.9rem; /* Veličina fonta */
   box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.06); /* Blaga unutrašnja senka */
   transition: box-shadow 0.25s ease, background 0.25s ease; /* Animacija prilikom promene */
   color: #222; /* Boja teksta */
@@ -149,13 +149,13 @@ label {
 /* Stil za dugme submit */
 button[type="submit"] {
   width: 100%; /* Širina celog roditelja */
-  padding: 1.1rem; /* Unutrašnji razmak */
-  font-size: 1.15rem; /* Veličina fonta */
+  padding: 0.7rem; /* Unutrašnji razmak */
+  font-size: 1rem; /* Veličina fonta */
   font-weight: 700; /* Podebljano */
   background: linear-gradient(135deg, #7b61ff, #5c92ff); /* Gradijent pozadine */
   color: #fff; /* Bela boja teksta */
   border: none; /* Bez ivice */
-  border-radius: 16px; /* Zaobljeni uglovi */
+  border-radius: 12px; /* Zaobljeni uglovi */
   cursor: pointer; /* Kursor pokazivač */
   box-shadow: 0 6px 15px #7b61ff99; /* Senka dugmeta */
   transition: background 0.3s ease, box-shadow 0.3s ease, transform 0.15s ease; /* Animacije */
@@ -164,8 +164,8 @@ button[type="submit"] {
 /* Stil za naslov unutar login forme */
 .registracija-container h2 {
   text-align: center; /* Centriran tekst */
-  font-size: 2.2rem; /* Veličina fonta */
-  margin-bottom: 2.25rem; /* Razmak ispod */
+  font-size: 1.6rem; /* Veličina fonta */
+  margin-bottom: 1.2rem; /* Razmak ispod */
   font-weight: 700; /* Podebljano */
   color: #2c2c2c; /* Tamna boja */
   letter-spacing: 0.03em; /* Razmak između slova */
@@ -182,8 +182,8 @@ button[type="submit"]:focus {
 
 .progress-bar {
   position: relative;
-  margin-bottom: 2rem;
-  height: 30px;
+  margin-bottom: 1rem;
+  height: 20px;
 }
 .progress-line {
   position: absolute;
