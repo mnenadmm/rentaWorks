@@ -16,8 +16,11 @@ errorMessage = '';
   steps = [1, 2, 3, 4];
   showPassword = false;
   isLockedOut = false;
+    
+  
 
   step1Form: FormGroup;
+  
 
   constructor(private fb: FormBuilder) {
     this.step1Form = this.fb.group({

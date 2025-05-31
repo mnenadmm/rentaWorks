@@ -15,8 +15,11 @@
         </div>
       </div>
 
-      <form *ngIf="currentStep === 1" [formGroup]="step1Form" (ngSubmit)="nextStep()">
-         <!-- Polje za korisničko ime -->
+      <form  [formGroup]="step1Form" (ngSubmit)="nextStep()">
+        <ng-container *ngIf="currentStep === 1">
+    <!-- polja za korak 1 -->
+  
+        <!-- Polje za korisničko ime -->
       <div class="form-group">
         <label for="username">Korisničko ime</label>
         <div class="input-icon">
@@ -111,10 +114,16 @@
     />
    
   </div>
+      
+        
+      </div>
       <div class="buttons">
         <button type="submit" [disabled]="step1Form.invalid">Dalje</button>
-      </div>  
       </div>
+      </ng-container>
+      <ng-container *ngIf="currentStep === 2">
+    <h5>Novo</h5>
+      </ng-container>
       </form>
 
   </div>
