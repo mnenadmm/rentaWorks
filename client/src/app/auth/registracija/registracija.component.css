@@ -393,22 +393,21 @@ button:hover:not([disabled]) {
     padding: 0.8rem;
     border-radius: 16px;
   }
-  .step {
+.step {
   width: 60px;
   height: 60px;
   background: #eee;
-  border-radius: 50%;
+  border-radius: 50%;    /* pravi krug */
   border: 2px solid #ccc;
   color: #777;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: center;   /* vertikalno centriranje */
+  justify-content: center; /* horizontalno centriranje */
   font-weight: bold;
   cursor: default;
   transition: all 0.3s ease;
   user-select: none;
   font-size: 1.2rem;
-  line-height: 60px;  /* ili line-height: 30px; */
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;
