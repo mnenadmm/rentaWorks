@@ -179,3 +179,61 @@ button[type="submit"]:focus {
   transform: scale(1.04); /* Malo uvećanje */
   outline: none; /* Bez outline */
 }
+
+.progress-bar {
+  position: relative;
+  margin-bottom: 2rem;
+  height: 30px;
+}
+.progress-line {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  right: 10px;
+  height: 3px;
+  background-color: #ccc;
+  transform: translateY(-50%);
+  z-index: 1;
+  border-radius: 2px;
+}
+
+.steps {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  z-index: 2;
+  padding: 0 10px;
+}
+
+.step {
+  width: 30px;
+  height: 30px;
+  background: #eee;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  color: #777;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  cursor: default;
+  transition: all 0.3s ease;
+  user-select: none;
+}
+
+.step.active {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: white;
+}
+
+.step.completed {
+  background-color: #28a745;
+  border-color: #28a745;
+  color: white;
+}
+
+.step-content {
+  flex: 1;
+  overflow-y: auto;
+}
