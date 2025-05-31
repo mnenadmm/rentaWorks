@@ -11,7 +11,7 @@ import { RouterModule } from '@angular/router';
   templateUrl: './registracija.component.html',
   styleUrls: ['./registracija.component.css']
 })
-export class RegistracijaComponent  {
+export class RegistracijaComponent {
   errorMessage = '';
   currentStep = 1;
   steps = [1, 2, 3, 4];
@@ -26,8 +26,9 @@ export class RegistracijaComponent  {
       ime: ['', Validators.required],
       prezime: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(8)]],
-      confirmPassword: ['', Validators.required],
+      // Postavljanje disabled na kontrolu PRAVILNO u FormGroup konstruktoru
+      password: [{ value: '', disabled: this.isLockedOut }, [Validators.required, Validators.minLength(8)]],
+      confirmPassword: [{ value: '', disabled: this.isLockedOut }, Validators.required],
     }, { validators: this.passwordMatchValidator });
   }
 
@@ -42,7 +43,7 @@ export class RegistracijaComponent  {
       this.step1Form.markAllAsTouched();
       this.errorMessage = '';
       if(this.step1Form.errors?.['passwordMismatch']) {
-        this.errorMessage = 'password i potvrda lozinke se ne poklapaju.';
+        this.errorMessage = 'Lozinka i potvrda lozinke se ne poklapaju.';
       }
       return;
     }
@@ -71,5 +72,17 @@ export class RegistracijaComponent  {
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
+  }
+
+  // Primer ako treba naknadno da zaključaš/otključaš polja
+  setLockout(lock: boolean) {
+    this.isLockedOut = lock;
+    if (lock) {
+      this.step1Form.get('password')?.disable();
+      this.step1Form.get('confirmPassword')?.disable();
+    } else {
+      this.step1Form.get('password')?.enable();
+      this.step1Form.get('confirmPassword')?.enable();
+    }
   }
 }
