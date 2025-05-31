@@ -274,7 +274,21 @@ button:hover:not([disabled]) {
   font-size: 0.85rem; /* manja slova */
   margin-top: 0.25rem;
 }
-
+select {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: white;
+  color: #333;
+  appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg fill='gray' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  background-size: 16px;
+  box-sizing: border-box;
+}
 /* 1. Male telefone (do 480px) */
 @media (max-width: 480px) {
   .registracija-wrapper {
