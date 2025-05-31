@@ -17,7 +17,7 @@
 
     <form [formGroup]="step1Form" (ngSubmit)="nextStep()">
 
-      <ng-container *ngIf="currentStep === 2">
+      <ng-container *ngIf="currentStep === 1">
         <div class="form-group">
           <label for="username">Korisničko ime</label>
           <div class="input-icon">
@@ -135,7 +135,7 @@
         </div>
       </ng-container>
 
-      <ng-container *ngIf="currentStep === 1">
+      <ng-container *ngIf="currentStep === 2">
         <div class="form-group">
   <label for="drzavljanstvo">Državljanstvo:</label>
   <div class="input-icon">
