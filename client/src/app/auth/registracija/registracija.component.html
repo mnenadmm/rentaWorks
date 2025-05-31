@@ -1,8 +1,13 @@
 <div class="registracija-container">
+
   <div class="progress-bar">
-    <div class="korak" *ngFor="let k of [].constructor(ukupnoKoraka); let i = index"
-         [class.active]="i + 1 === korak">
-      Korak {{ i + 1 }}
+    <div 
+      class="korak" 
+      *ngFor="let k of [].constructor(ukupnoKoraka); let i = index"
+      [class.active]="i + 1 === korak"
+      [attr.data-number]="i + 1"
+    >
+      <!-- Broj će se prikazati CSS-om -->
     </div>
   </div>
 
@@ -51,7 +56,7 @@
         </div>
 
         <div class="dugmici">
-          <button type="submit">Dalje</button>
+          <button type="submit" [disabled]="formaKorak1.invalid">Dalje</button>
         </div>
       </form>
 
@@ -73,4 +78,5 @@
   <div class="dugmici" *ngIf="korak > 1">
     <button (click)="prethodniKorak()">Nazad</button>
   </div>
+
 </div>
