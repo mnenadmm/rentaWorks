@@ -1,26 +1,24 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import { Component } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-registracija',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,RouterModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule],
   templateUrl: './registracija.component.html',
   styleUrls: ['./registracija.component.css']
 })
 export class RegistracijaComponent  {
-errorMessage = '';
+  errorMessage = '';
   currentStep = 1;
   steps = [1, 2, 3, 4];
   showPassword = false;
   isLockedOut = false;
-    
-  
 
   step1Form: FormGroup;
-  
 
   constructor(private fb: FormBuilder) {
     this.step1Form = this.fb.group({
@@ -28,16 +26,28 @@ errorMessage = '';
       ime: ['', Validators.required],
       prezime: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      lozinka: ['', [Validators.required, Validators.minLength(6)]],
-    });
+      password: ['', [Validators.required, Validators.minLength(6)]],
+      confirmPassword: ['', Validators.required],
+    }, { validators: this.passwordMatchValidator });
+  }
+
+  passwordMatchValidator(group: AbstractControl): ValidationErrors | null {
+    const password = group.get('password')?.value;
+    const confirmPassword = group.get('confirmPassword')?.value;
+    return password === confirmPassword ? null : { passwordMismatch: true };
   }
 
   nextStep() {
     if(this.currentStep === 1 && this.step1Form.invalid) {
       this.step1Form.markAllAsTouched();
+      this.errorMessage = '';
+      if(this.step1Form.errors?.['passwordMismatch']) {
+        this.errorMessage = 'password i potvrda lozinke se ne poklapaju.';
+      }
       return;
     }
     if (this.currentStep < this.steps.length) {
+      this.errorMessage = '';
       this.currentStep++;
     }
   }
@@ -45,18 +55,20 @@ errorMessage = '';
   prevStep() {
     if (this.currentStep > 1) {
       this.currentStep--;
+      this.errorMessage = '';
     }
   }
 
   submit() {
     if (this.step1Form.valid) {
-      // Ovde ide logika za submit (poziv API, itd)
       alert('Registracija poslata!');
+      // TODO: poziv API-ja i ostala logika
     } else {
       this.step1Form.markAllAsTouched();
       this.currentStep = 1;
     }
   }
+
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
