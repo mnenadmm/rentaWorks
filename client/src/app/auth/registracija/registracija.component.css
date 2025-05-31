@@ -274,3 +274,123 @@ button:hover:not([disabled]) {
   font-size: 0.85rem; /* manja slova */
   margin-top: 0.25rem;
 }
+
+/* 1. Male telefone (do 480px) */
+@media (max-width: 480px) {
+  .registracija-wrapper {
+    max-width: 100%;
+    padding: 0.5rem;
+  }
+
+  .registracija-container {
+    padding: 1rem;
+    border-radius: 16px;
+  }
+
+  .input-icon i {
+    font-size: 0.85rem;
+    left: 0.5rem;
+  }
+
+  .input-icon input {
+    font-size: 0.85rem;
+    padding-left: 2rem;
+    height: 2.4rem;
+  }
+
+  button[type="submit"] {
+    font-size: 0.9rem;
+    padding: 0.6rem;
+    border-radius: 12px;
+  }
+}
+
+/* 2. Srednje telefone (481px do 767px) */
+@media (min-width: 481px) and (max-width: 767px) {
+  .registracija-wrapper {
+    max-width: 380px;
+    padding: 0.75rem;
+  }
+
+  .registracija-container {
+    padding: 1.5rem;
+    border-radius: 20px;
+  }
+
+  .input-icon i {
+    font-size: 0.95rem;
+    left: 0.6rem;
+  }
+
+  .input-icon input {
+    font-size: 0.95rem;
+    padding-left: 2.2rem;
+    height: 2.6rem;
+  }
+
+  button[type="submit"] {
+    font-size: 1rem;
+    padding: 0.7rem;
+    border-radius: 14px;
+  }
+}
+
+/* 3. Mali računari / veći tableti (768px do 1023px) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .registracija-wrapper {
+    max-width: 420px;
+    padding: 1rem;
+  }
+
+  .registracija-container {
+    padding: 2rem;
+    border-radius: 22px;
+  }
+
+  .input-icon i {
+    font-size: 1rem;
+    left: 0.7rem;
+  }
+
+  .input-icon input {
+    font-size: 1rem;
+    padding-left: 2.5rem;
+    height: 2.8rem;
+  }
+
+  button[type="submit"] {
+    font-size: 1rem;
+    padding: 0.8rem;
+    border-radius: 16px;
+  }
+}
+
+/* 4. Veći računari i desktop (1024px i više) */
+@media (min-width: 1024px) {
+  .registracija-wrapper {
+    max-width: 420px;
+    padding: 1rem;
+  }
+
+  .registracija-container {
+    padding: 2rem;
+    border-radius: 24px;
+  }
+
+  .input-icon i {
+    font-size: 1rem;
+    left: 0.7rem;
+  }
+
+  .input-icon input {
+    font-size: 1rem;
+    padding-left: 2.5rem;
+    height: 2.8rem;
+  }
+
+  button[type="submit"] {
+    font-size: 1rem;
+    padding: 0.8rem;
+    border-radius: 16px;
+  }
+}
