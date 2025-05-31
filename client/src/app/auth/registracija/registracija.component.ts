@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
+import {FormsModule , FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -7,7 +7,7 @@ import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-registracija',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, RouterModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule,FormsModule ],
   templateUrl: './registracija.component.html',
   styleUrls: ['./registracija.component.css']
 })
@@ -19,7 +19,18 @@ export class RegistracijaComponent {
   isLockedOut = false;
 
   step1Form: FormGroup;
-
+   korisnik = {
+    drzavljanstvo: ''
+  };
+  // Primer TypeScript liste država
+drzave = [
+  { code: 'RS', name: 'Srbija' },
+  { code: 'HR', name: 'Hrvatska' },
+  { code: 'BA', name: 'Bosna i Hercegovina' },
+  { code: 'DE', name: 'Nemačka' },
+  { code: 'US', name: 'Sjedinjene Američke Države' },
+  // itd. (možemo dodati celu listu ako želiš)
+];
   constructor(private fb: FormBuilder) {
     this.step1Form = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(4)]],

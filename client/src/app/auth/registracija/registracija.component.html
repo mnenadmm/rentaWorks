@@ -17,7 +17,7 @@
 
     <form [formGroup]="step1Form" (ngSubmit)="nextStep()">
 
-      <ng-container *ngIf="currentStep === 1">
+      <ng-container *ngIf="currentStep === 2">
         <div class="form-group">
           <label for="username">Korisničko ime</label>
           <div class="input-icon">
@@ -135,8 +135,15 @@
         </div>
       </ng-container>
 
-      <ng-container *ngIf="currentStep === 2">
-        <h5>Drugi korak forme</h5>
+      <ng-container *ngIf="currentStep === 1">
+        <div class="form-group">
+          <label>Drzavljanstvo:</label>
+          <select name="drzavljanstvo" [(ngModel)]="korisnik.drzavljanstvo">
+            <option *ngFor="let drzava of drzave" [value]="drzava.code">
+            {{ drzava.name }}
+          </option>
+        </select>
+        </div>
         <div class="buttons">
           <button type="button" (click)="prevStep()">Nazad</button>
           <button type="button" (click)="nextStep()">Dalje</button>
