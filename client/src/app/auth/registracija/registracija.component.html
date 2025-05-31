@@ -15,5 +15,12 @@
         </div>
       </div>
 
+      <form *ngIf="currentStep === 1" [formGroup]="step1Form" (ngSubmit)="nextStep()">
+        <label>
+        Username:
+        <input formControlName="username" />
+      </label>
+      </form>
+
   </div>
 </div>
