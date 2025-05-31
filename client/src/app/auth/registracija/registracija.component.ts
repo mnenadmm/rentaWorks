@@ -37,7 +37,7 @@ drzave = [
       ime: ['', Validators.required],
       prezime: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      // Postavljanje disabled na kontrolu PRAVILNO u FormGroup konstruktoru
+      drzavljanstvo: ['', Validators.required],  
       password: [{ value: '', disabled: this.isLockedOut }, [Validators.required, Validators.minLength(8)]],
       confirmPassword: [{ value: '', disabled: this.isLockedOut }, Validators.required],
     }, { validators: this.passwordMatchValidator });

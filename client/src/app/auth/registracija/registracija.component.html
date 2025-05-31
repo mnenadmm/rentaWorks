@@ -142,7 +142,7 @@
     <i class="icon">🌍</i>
     <select
       id="drzavljanstvo"
-      name="drzavljanstvo"
+      formControlName="drzavljanstvo"
       [(ngModel)]="korisnik.drzavljanstvo"
     >
       <option value="">-- Izaberite državljanstvo --</option>
@@ -150,6 +150,9 @@
         {{ drzava.name }}
       </option>
     </select>
+    <div *ngIf="step1Form.get('drzavljanstvo')?.touched && step1Form.get('drzavljanstvo')?.invalid" class="error">
+    Molimo izaberite državljanstvo.
+  </div>
   </div>
 </div>
 
