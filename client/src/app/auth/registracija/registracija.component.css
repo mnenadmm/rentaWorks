@@ -393,4 +393,25 @@ button:hover:not([disabled]) {
     padding: 0.8rem;
     border-radius: 16px;
   }
+  .step {
+  width: 30px;
+  height: 30px;
+  background: #eee;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+  color: #e7070e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  cursor: default;
+  transition: all 0.3s ease;
+  user-select: none;
+  font-size: 1rem;
+  line-height: 1;  /* ili line-height: 30px; */
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
 }
