@@ -9,21 +9,19 @@ import { CommonModule } from '@angular/common';
   templateUrl: './registracija.component.html',
   styleUrls: ['./registracija.component.css']
 })
-export class RegistracijaComponent implements OnInit {
+export class RegistracijaComponent  {
   korak = 1;
   ukupnoKoraka = 4;
 
-  formaKorak1!: FormGroup;
+  formaKorak1: FormGroup;
 
-  constructor(private fb: FormBuilder) {}
-
-  ngOnInit(): void {
+  constructor(private fb: FormBuilder) {
     this.formaKorak1 = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(4)]],
       ime: ['', Validators.required],
       prezime: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      lozinka: ['', [Validators.required, Validators.minLength(6)]]
+      lozinka: ['', [Validators.required, Validators.minLength(6)]],
     });
   }
 
@@ -42,10 +40,11 @@ export class RegistracijaComponent implements OnInit {
       this.korak--;
     }
   }
-
-  submitRegistraciju() {
-    alert('Registracija završena!');
-    this.korak = 1;
-    this.formaKorak1.reset();
-  }
+  submit() {
+  // Ovde ide logika za slanje podataka na server ili završetak registracije
+  alert('Registracija završena! Podaci su poslati.');
+  // Primer: resetovanje forme i vraćanje na prvi korak
+  this.korak = 1;
+  this.formaKorak1.reset();
+}
 }

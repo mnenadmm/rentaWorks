@@ -1,94 +1,139 @@
-.registracija-container {
-  max-width: 450px;
-  margin: 30px auto;
-  padding: 25px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+/* MOBILE FIRST */
+.registracija-wrapper {
+  max-width: 100vw;
+  padding: 1rem;
+  box-sizing: border-box;
+  min-height: calc(100vh - 120px); /* pretpostavljamo header + footer visine zajedno oko 120px */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  overflow: hidden;
   font-family: Arial, sans-serif;
 }
 
+/* Progress bar u jednoj liniji, 4 koraka */
 .progress-bar {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-bottom: 25px;
-  gap: 15px;
+  margin-bottom: 1.5rem;
+  gap: 0.5rem;
 }
 
 .korak {
-  flex: 0 0 30px;
-  height: 30px;
-  background-color: #ccc;
-  border-radius: 50%;
+  flex: 1;
+  height: 6px;
+  background-color: #ddd;
+  border-radius: 3px;
   position: relative;
-  cursor: default;
-  transition: background-color 0.3s ease;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: bold;
-  color: #555;
-}
-
-.korak.active {
-  background-color: #4a90e2;
-  color: white;
-}
-
-.sadrzaj-koraka {
-  margin-bottom: 20px;
-}
-
-label {
-  display: block;
-  margin-bottom: 15px;
-  font-weight: 600;
-  color: #333;
-}
-
-input {
-  width: 100%;
-  padding: 7px 10px;
-  margin-top: 5px;
-  border: 1px solid #bbb;
-  border-radius: 4px;
-  font-size: 14px;
-  box-sizing: border-box;
-  transition: border-color 0.2s;
-}
-
-input:focus {
-  outline: none;
-  border-color: #4a90e2;
-}
-
-.error {
-  color: #d9534f;
-  font-size: 12px;
-  margin-top: 3px;
-}
-
-.dugmici {
-  text-align: right;
-}
-
-button {
-  background-color: #4a90e2;
-  color: white;
-  border: none;
-  padding: 8px 18px;
-  font-size: 14px;
-  border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 }
 
-button:disabled {
-  background-color: #9bbce3;
+.korak::before {
+  content: attr(data-number);
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #bbb;
+  color: white;
+  width: 24px;
+  height: 24px;
+  line-height: 24px;
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 14px;
+  user-select: none;
+  transition: background-color 0.3s ease;
+}
+
+.korak.active,
+.korak:hover {
+  background-color: #4285f4;
+}
+
+.korak.active::before {
+  background-color: #4285f4;
+}
+
+.korak.completed {
+  background-color: #34a853;
+}
+
+.korak.completed::before {
+  background-color: #34a853;
+}
+
+/* Form styling */
+form label {
+  display: block;
+  margin-bottom: 0.6rem;
+  font-weight: 600;
+  font-size: 14px;
+  color: #333;
+}
+
+form input {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.2rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.error {
+  color: #d93025;
+  font-size: 12px;
+  margin-top: -0.8rem;
+  margin-bottom: 0.8rem;
+}
+
+/* Dugmici */
+.dugmici {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.dugmici button {
+  background-color: #4285f4;
+  color: white;
+  border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+}
+
+.dugmici button:disabled {
+  background-color: #a8c0f9;
   cursor: not-allowed;
 }
 
-button:hover:not(:disabled) {
-  background-color: #357abd;
+.dugmici button:hover:not(:disabled) {
+  background-color: #3367d6;
+}
+
+/* Placeholder koraka */
+.placeholder {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+/* RESPONSIVE */
+
+/* Veći ekrani */
+@media (min-width: 768px) {
+  .registracija-wrapper {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
 }
