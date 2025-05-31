@@ -137,13 +137,22 @@
 
       <ng-container *ngIf="currentStep === 1">
         <div class="form-group">
-          <label>Drzavljanstvo:</label>
-          <select name="drzavljanstvo" [(ngModel)]="korisnik.drzavljanstvo">
-            <option *ngFor="let drzava of drzave" [value]="drzava.code">
-            {{ drzava.name }}
-          </option>
-        </select>
-        </div>
+  <label for="drzavljanstvo">Državljanstvo:</label>
+  <div class="input-icon">
+    <i class="icon">🌍</i>
+    <select
+      id="drzavljanstvo"
+      name="drzavljanstvo"
+      [(ngModel)]="korisnik.drzavljanstvo"
+    >
+      <option value="">-- Izaberite državljanstvo --</option>
+      <option *ngFor="let drzava of drzave" [value]="drzava.code">
+        {{ drzava.name }}
+      </option>
+    </select>
+  </div>
+</div>
+
         <div class="buttons">
           <button type="button" (click)="prevStep()">Nazad</button>
           <button type="button" (click)="nextStep()">Dalje</button>
