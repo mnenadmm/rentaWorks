@@ -10,13 +10,14 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./registracija.component.css']
 })
 export class RegistracijaComponent  {
-  korak = 1;
-  ukupnoKoraka = 4;
 
-  formaKorak1: FormGroup;
+  currentStep = 1;
+  steps = [1, 2, 3, 4];
+
+  step1Form: FormGroup;
 
   constructor(private fb: FormBuilder) {
-    this.formaKorak1 = this.fb.group({
+    this.step1Form = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(4)]],
       ime: ['', Validators.required],
       prezime: ['', Validators.required],
@@ -25,26 +26,29 @@ export class RegistracijaComponent  {
     });
   }
 
-  sledeciKorak() {
-    if (this.korak === 1 && this.formaKorak1.invalid) {
-      this.formaKorak1.markAllAsTouched();
+  nextStep() {
+    if(this.currentStep === 1 && this.step1Form.invalid) {
+      this.step1Form.markAllAsTouched();
       return;
     }
-    if (this.korak < this.ukupnoKoraka) {
-      this.korak++;
+    if (this.currentStep < this.steps.length) {
+      this.currentStep++;
     }
   }
 
-  prethodniKorak() {
-    if (this.korak > 1) {
-      this.korak--;
+  prevStep() {
+    if (this.currentStep > 1) {
+      this.currentStep--;
     }
   }
+
   submit() {
-  // Ovde ide logika za slanje podataka na server ili završetak registracije
-  alert('Registracija završena! Podaci su poslati.');
-  // Primer: resetovanje forme i vraćanje na prvi korak
-  this.korak = 1;
-  this.formaKorak1.reset();
-}
+    if (this.step1Form.valid) {
+      // Ovde ide logika za submit (poziv API, itd)
+      alert('Registracija poslata!');
+    } else {
+      this.step1Form.markAllAsTouched();
+      this.currentStep = 1;
+    }
+  }
 }

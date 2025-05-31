@@ -1,23 +1,29 @@
-<div class="registracija-wrapper">
+<div class="registration-container">
 
   <div class="progress-bar">
-    <div 
-      class="korak" 
-      *ngFor="let k of [].constructor(ukupnoKoraka); let i = index"
-      [class.active]="i + 1 === korak"
-      [class.completed]="i + 1 < korak"
-      [attr.data-number]="i + 1"
-    ></div>
+    <div class="progress-line"></div>
+    <div class="steps">
+      <div 
+        class="step" 
+        *ngFor="let s of steps; let i = index"
+        [class.active]="currentStep === i + 1"
+        [class.completed]="currentStep > i + 1"
+      >
+        {{ i + 1 }}
+      </div>
+    </div>
   </div>
 
-  <div class="korak-sadrzaj">
+  <div class="step-content">
 
-    <form *ngIf="korak === 1" [formGroup]="formaKorak1" (ngSubmit)="sledeciKorak()" novalidate>
+    <!-- KORAK 1 -->
+    <form *ngIf="currentStep === 1" [formGroup]="step1Form" (ngSubmit)="nextStep()">
+
       <label>
         Username:
         <input formControlName="username" />
       </label>
-      <div *ngIf="formaKorak1.get('username')?.invalid && formaKorak1.get('username')?.touched" class="error">
+      <div *ngIf="step1Form.get('username')?.invalid && step1Form.get('username')?.touched" class="error">
         Username mora imati najmanje 4 karaktera.
       </div>
 
@@ -25,7 +31,7 @@
         Ime:
         <input formControlName="ime" />
       </label>
-      <div *ngIf="formaKorak1.get('ime')?.invalid && formaKorak1.get('ime')?.touched" class="error">
+      <div *ngIf="step1Form.get('ime')?.invalid && step1Form.get('ime')?.touched" class="error">
         Ime je obavezno.
       </div>
 
@@ -33,7 +39,7 @@
         Prezime:
         <input formControlName="prezime" />
       </label>
-      <div *ngIf="formaKorak1.get('prezime')?.invalid && formaKorak1.get('prezime')?.touched" class="error">
+      <div *ngIf="step1Form.get('prezime')?.invalid && step1Form.get('prezime')?.touched" class="error">
         Prezime je obavezno.
       </div>
 
@@ -41,7 +47,7 @@
         Email:
         <input formControlName="email" type="email" />
       </label>
-      <div *ngIf="formaKorak1.get('email')?.invalid && formaKorak1.get('email')?.touched" class="error">
+      <div *ngIf="step1Form.get('email')?.invalid && step1Form.get('email')?.touched" class="error">
         Email nije validan.
       </div>
 
@@ -49,34 +55,40 @@
         Lozinka:
         <input formControlName="lozinka" type="password" />
       </label>
-      <div *ngIf="formaKorak1.get('lozinka')?.invalid && formaKorak1.get('lozinka')?.touched" class="error">
+      <div *ngIf="step1Form.get('lozinka')?.invalid && step1Form.get('lozinka')?.touched" class="error">
         Lozinka mora imati najmanje 6 karaktera.
       </div>
 
-      <div class="dugmici">
-        <button type="submit" [disabled]="formaKorak1.invalid">Dalje</button>
+      <div class="buttons">
+        <button type="submit" [disabled]="step1Form.invalid">Dalje</button>
       </div>
     </form>
 
-    <div *ngIf="korak === 2" class="placeholder">
+    <!-- KORACI 2 i 3: samo primer sadržaja sa dugmetom nazad i dalje -->
+    <div *ngIf="currentStep === 2">
       <p>Ovde ide forma za izbor tipa korisnika i dodatne podatke</p>
-      <button (click)="sledeciKorak()">Dalje</button>
+      <div class="buttons">
+        <button (click)="prevStep()">Nazad</button>
+        <button (click)="nextStep()">Dalje</button>
+      </div>
     </div>
 
-    <div *ngIf="korak === 3" class="placeholder">
+    <div *ngIf="currentStep === 3">
       <p>Ovde ide forma za dodatne profilne podatke</p>
-      <button (click)="sledeciKorak()">Dalje</button>
+      <div class="buttons">
+        <button (click)="prevStep()">Nazad</button>
+        <button (click)="nextStep()">Dalje</button>
+      </div>
     </div>
 
-    <div *ngIf="korak === 4" class="placeholder">
+    <!-- KORAK 4: pregled i submit -->
+    <div *ngIf="currentStep === 4">
       <p>Ovde ide pregled i potvrda podataka</p>
-      <button (click)="submit()">Potvrdi</button>
+      <div class="buttons">
+        <button (click)="prevStep()">Nazad</button>
+        <button (click)="submit()">Submit</button>
+      </div>
     </div>
 
   </div>
-
-  <div class="dugmici" *ngIf="korak > 1">
-    <button (click)="prethodniKorak()">Nazad</button>
-  </div>
-
 </div>
