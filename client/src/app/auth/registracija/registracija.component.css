@@ -269,3 +269,8 @@ button[disabled] {
 button:hover:not([disabled]) {
   background-color: #0056b3;
 }
+.error-message {
+  color: red;
+  font-size: 0.85rem; /* manja slova */
+  margin-top: 0.25rem;
+}
