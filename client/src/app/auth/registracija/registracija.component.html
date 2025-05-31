@@ -88,8 +88,8 @@
             <i class="icon">🔒</i>
             <input
               [type]="showPassword ? 'text' : 'password'"
-              id="lozinka"
-              formControlName="lozinka"
+              id="password"
+              formControlName="password"
               placeholder="Unesi lozinku"
               [disabled]="isLockedOut"
             />
@@ -103,8 +103,8 @@
               {{ showPassword ? '🙈' : '👁️' }}
             </button>
           </div>
-          <div *ngIf="step1Form.get('lozinka')?.touched && step1Form.get('lozinka')?.invalid" class="error">
-            Lozinka je obavezna i mora imati najmanje 6 karaktera.
+          <div *ngIf="step1Form.get('password')?.touched && step1Form.get('password')?.invalid" class="error">
+            Lozinka je obavezna i mora imati najmanje 8 karaktera.
           </div>
         </div>
 
