@@ -1,77 +1,78 @@
-<div class="registracija-container">
+<div class="registracija-wrapper">
 
   <div class="progress-bar">
     <div 
       class="korak" 
       *ngFor="let k of [].constructor(ukupnoKoraka); let i = index"
       [class.active]="i + 1 === korak"
-    >
-      {{ i + 1 }}
-    </div>
+      [class.completed]="i + 1 < korak"
+      [attr.data-number]="i + 1"
+    ></div>
   </div>
 
-  <div class="sadrzaj-koraka">
-    <ng-container [ngSwitch]="korak">
+  <div class="korak-sadrzaj">
 
-      <form *ngSwitchCase="1" [formGroup]="formaKorak1" (ngSubmit)="sledeciKorak()">
-        <label>
-          Username:
-          <input formControlName="username" />
-        </label>
-        <div *ngIf="formaKorak1.get('username')?.invalid && formaKorak1.get('username')?.touched" class="error">
-          Username mora imati najmanje 4 karaktera.
-        </div>
-
-        <label>
-          Ime:
-          <input formControlName="ime" />
-        </label>
-        <div *ngIf="formaKorak1.get('ime')?.invalid && formaKorak1.get('ime')?.touched" class="error">
-          Ime je obavezno.
-        </div>
-
-        <label>
-          Prezime:
-          <input formControlName="prezime" />
-        </label>
-        <div *ngIf="formaKorak1.get('prezime')?.invalid && formaKorak1.get('prezime')?.touched" class="error">
-          Prezime je obavezno.
-        </div>
-
-        <label>
-          Email:
-          <input formControlName="email" type="email" />
-        </label>
-        <div *ngIf="formaKorak1.get('email')?.invalid && formaKorak1.get('email')?.touched" class="error">
-          Email nije validan.
-        </div>
-
-        <label>
-          Lozinka:
-          <input formControlName="lozinka" type="password" />
-        </label>
-        <div *ngIf="formaKorak1.get('lozinka')?.invalid && formaKorak1.get('lozinka')?.touched" class="error">
-          Lozinka mora imati najmanje 6 karaktera.
-        </div>
-
-        <div class="dugmici">
-          <button type="submit" [disabled]="formaKorak1.invalid">Dalje</button>
-        </div>
-      </form>
-
-      <div *ngSwitchCase="2">
-        <p>Ovde ide forma za izbor tipa korisnika i dodatne podatke</p>
+    <form *ngIf="korak === 1" [formGroup]="formaKorak1" (ngSubmit)="sledeciKorak()" novalidate>
+      <label>
+        Username:
+        <input formControlName="username" />
+      </label>
+      <div *ngIf="formaKorak1.get('username')?.invalid && formaKorak1.get('username')?.touched" class="error">
+        Username mora imati najmanje 4 karaktera.
       </div>
 
-      <div *ngSwitchCase="3">
-        <p>Ovde ide forma za dodatne profilne podatke</p>
+      <label>
+        Ime:
+        <input formControlName="ime" />
+      </label>
+      <div *ngIf="formaKorak1.get('ime')?.invalid && formaKorak1.get('ime')?.touched" class="error">
+        Ime je obavezno.
       </div>
 
-      <div *ngSwitchCase="4">
-        <p>Ovde ide pregled i potvrda podataka</p>
+      <label>
+        Prezime:
+        <input formControlName="prezime" />
+      </label>
+      <div *ngIf="formaKorak1.get('prezime')?.invalid && formaKorak1.get('prezime')?.touched" class="error">
+        Prezime je obavezno.
       </div>
 
-    </ng-container>
+      <label>
+        Email:
+        <input formControlName="email" type="email" />
+      </label>
+      <div *ngIf="formaKorak1.get('email')?.invalid && formaKorak1.get('email')?.touched" class="error">
+        Email nije validan.
+      </div>
+
+      <label>
+        Lozinka:
+        <input formControlName="lozinka" type="password" />
+      </label>
+      <div *ngIf="formaKorak1.get('lozinka')?.invalid && formaKorak1.get('lozinka')?.touched" class="error">
+        Lozinka mora imati najmanje 6 karaktera.
+      </div>
+
+      <div class="dugmici">
+        <button type="submit" [disabled]="formaKorak1.invalid">Dalje</button>
+      </div>
+    </form>
+
+    <div *ngIf="korak === 2" class="placeholder">
+      <p>Ovde ide forma za izbor tipa korisnika i dodatne podatke</p>
+      <button (click)="sledeciKorak()">Dalje</button>
+    </div>
+
+    <div *ngIf="korak === 3" class="placeholder">
+      <p>Ovde ide forma za dodatne profilne podatke</p>
+      <button (click)="sledeciKorak()">Dalje</button>
+    </div>
+
+    <div *ngIf="korak === 4" class="placeholder">
+      <p>Ovde ide pregled i potvrda podataka</p>
+      <button (click)="submit()">Potvrdi</button>
+    </div>
+
   </div>
 
   <div class="dugmici" *ngIf="korak > 1">
