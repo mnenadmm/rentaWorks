@@ -19,6 +19,7 @@ export class RegistracijaComponent {
   isLockedOut = false;
 
   step1Form: FormGroup;
+  step2Form: FormGroup;
    korisnik = {
     drzavljanstvo: ''
   };
@@ -37,10 +38,15 @@ drzave = [
       ime: ['', Validators.required],
       prezime: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      drzavljanstvo: ['', Validators.required],  
+       
       password: [{ value: '', disabled: this.isLockedOut }, [Validators.required, Validators.minLength(8)]],
       confirmPassword: [{ value: '', disabled: this.isLockedOut }, Validators.required],
     }, { validators: this.passwordMatchValidator });
+
+this.step2Form = this.fb.group({
+  drzavljanstvo: ['', Validators.required],
+  // ...ostala polja za drugi korak
+});
   }
 
   passwordMatchValidator(group: AbstractControl): ValidationErrors | null {
