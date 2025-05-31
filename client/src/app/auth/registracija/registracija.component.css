@@ -393,21 +393,23 @@ button:hover:not([disabled]) {
     padding: 0.8rem;
     border-radius: 16px;
   }
-.step {
-  width: 60px;
-  height: 60px;
+  .step {
+    box-sizing: border-box;
+  width: 40px;
+  height: 40px;
   background: #eee;
-  border-radius: 50%;    /* pravi krug */
+  border-radius: 50%;
   border: 2px solid #ccc;
   color: #777;
   display: flex;
-  align-items: center;   /* vertikalno centriranje */
-  justify-content: center; /* horizontalno centriranje */
+  align-items: center;
+  justify-content: center;
   font-weight: bold;
   cursor: default;
   transition: all 0.3s ease;
   user-select: none;
-  font-size: 1.2rem;
+  font-size: 1rem;
+  line-height: 1;  /* ili line-height: 30px; */
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;
