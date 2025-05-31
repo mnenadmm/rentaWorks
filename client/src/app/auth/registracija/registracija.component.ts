@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
   styleUrls: ['./registracija.component.css']
 })
 export class RegistracijaComponent  {
-
+errorMessage = '';
   currentStep = 1;
   steps = [1, 2, 3, 4];
 
