@@ -1,14 +1,28 @@
+/* Container cele registracije, centrira i ograničava širinu */
+.registracija-container {
+  max-width: 400px;
+  margin: 40px auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #fafafa;
+  padding: 25px 30px 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  color: #333;
+}
+
+/* PROGRESS BAR */
+
 .progress-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  max-width: 320px;       /* širina cele linije */
-  margin: 20px auto 40px; /* centrirano sa marginama */
+  max-width: 320px;
+  margin: 0 auto 30px;
   position: relative;
   padding: 0 10px;
 }
 
-/* Linija koja ide iza krugova */
+/* Linija iza krugova */
 .progress-bar::before {
   content: '';
   position: absolute;
@@ -16,34 +30,114 @@
   left: 10px;
   right: 10px;
   height: 3px;
-  background-color: #ccc;
+  background-color: #ddd;
   transform: translateY(-50%);
   border-radius: 2px;
   z-index: 1;
 }
 
-/* Svaki korak = krug */
+/* Krugovi */
 .korak {
   position: relative;
   z-index: 2;
   background: #eee;
-  color: #888;
+  color: #666;
   width: 32px;
   height: 32px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-weight: 700;
+  font-weight: 600;
   font-size: 16px;
   box-shadow: 0 0 5px rgba(0,0,0,0.05);
   cursor: default;
   transition: background-color 0.3s, color 0.3s;
 }
 
-/* Aktivni korak - plavi krug */
+/* Aktivni korak - plavi */
 .korak.active {
   background-color: #007bff;
   color: white;
-  box-shadow: 0 0 8px rgba(0,123,255,0.6);
+  box-shadow: 0 0 8px rgba(0,123,255,0.7);
+}
+
+/* SADRŽAJ KORAKA */
+
+.sadrzaj-koraka {
+  margin-top: 10px;
+}
+
+/* Forme unutar koraka */
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  font-size: 14px;
+  color: #222;
+}
+
+input {
+  padding: 8px 10px;
+  font-size: 14px;
+  border: 1.8px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 14px;
+  transition: border-color 0.3s;
+}
+
+input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+.error {
+  color: #d9534f;
+  font-size: 12px;
+  margin-top: -12px;
+  margin-bottom: 10px;
+  font-style: italic;
+}
+
+/* Dugmici */
+
+.dugmici {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.dugmici button {
+  padding: 8px 18px;
+  font-size: 14px;
+  background-color: #007bff;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.dugmici button:hover {
+  background-color: #0056b3;
+}
+
+.dugmici button:disabled {
+  background-color: #a0cfff;
+  cursor: default;
+}
+
+/* Dugme Nazad */
+.dugmici button:nth-child(1) {
+  background-color: #6c757d;
+}
+
+.dugmici button:nth-child(1):hover {
+  background-color: #5a6268;
 }
