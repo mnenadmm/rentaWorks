@@ -1,136 +1,109 @@
-/* Container */
 .registracija-container {
-  max-width: 420px;
-  margin: 30px auto;
-  padding: 20px;
-  font-family: Arial, sans-serif;
-  box-sizing: border-box;
+  width: 400px;
+  margin: 40px auto;
+  padding: 25px;
+  border: 2px solid #4a90e2;
+  border-radius: 10px;
+  background-color: #f0f8ff;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Progress bar container */
 .progress-bar {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  position: relative;
-  margin-bottom: 30px;
-  padding: 0 15px;
-  max-width: 100%;
+  margin-bottom: 25px;
 }
 
-/* Horizontal line behind circles */
-.progress-bar::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 15px;
-  right: 15px;
-  height: 4px;
-  background: #ddd;
-  border-radius: 2px;
-  transform: translateY(-50%);
-  z-index: 1;
-}
-
-/* Each step circle */
 .korak {
-  position: relative;
-  z-index: 2;
   width: 30px;
   height: 30px;
-  background-color: #eee;
+  background-color: #ccc;
   border-radius: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: 700;
-  color: #999;
-  font-size: 14px;
+  position: relative;
   cursor: default;
-  user-select: none;
-  transition: background-color 0.3s, color 0.3s;
+  transition: background-color 0.3s ease;
 }
 
-/* Show step number inside the circle */
-.korak::before {
-  content: attr(data-number);
-}
-
-/* Active step style */
 .korak.active {
-  background-color: #007bff;
+  background-color: #4a90e2;
   color: white;
-  box-shadow: 0 0 8px rgba(0, 123, 255, 0.7);
 }
 
-/* Form content */
-.sadrzaj-koraka label {
+.korak::after {
+  content: attr(data-number);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-weight: bold;
+  color: inherit;
+}
+
+.sadrzaj-koraka {
+  min-height: 320px;
+}
+
+.forma-registracija label {
   display: block;
-  margin-bottom: 12px;
+  margin-bottom: 15px;
   font-weight: 600;
   color: #333;
 }
 
-.sadrzaj-koraka input {
+.forma-registracija input {
   width: 100%;
   padding: 8px 10px;
-  margin-top: 5px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
   font-size: 14px;
+  border: 1.5px solid #ccc;
+  border-radius: 5px;
   box-sizing: border-box;
-  transition: border-color 0.3s;
+  transition: border-color 0.3s ease;
 }
 
-.sadrzaj-koraka input:focus {
-  border-color: #007bff;
+.forma-registracija input:focus {
+  border-color: #4a90e2;
   outline: none;
 }
 
 .error {
-  color: #d9534f;
+  color: #e74c3c;
   font-size: 12px;
-  margin-top: 4px;
+  margin-top: 3px;
+  margin-bottom: 8px;
 }
 
-/* Buttons container */
 .dugmici {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 20px;
-  gap: 10px;
+  margin-top: 25px;
+  text-align: right;
 }
 
 .dugmici button {
-  padding: 10px 18px;
-  background-color: #007bff;
-  color: white;
+  background-color: #4a90e2;
   border: none;
+  color: white;
+  padding: 9px 20px;
+  font-size: 15px;
   border-radius: 6px;
   cursor: pointer;
-  font-weight: 600;
-  font-size: 14px;
-  transition: background-color 0.3s;
-  min-width: 100px;
-}
-
-.dugmici button:hover:not(:disabled) {
-  background-color: #0056b3;
+  transition: background-color 0.3s ease;
 }
 
 .dugmici button:disabled {
-  background-color: #aaa;
+  background-color: #a0c0f0;
   cursor: not-allowed;
 }
 
-/* Responsive - za manje ekrane */
-@media (max-width: 480px) {
-  .registracija-container {
-    padding: 15px;
-    max-width: 100%;
-  }
+.dugmici button:hover:not(:disabled) {
+  background-color: #357abd;
+}
 
-  .progress-bar {
-    padding: 0 10px;
-  }
+.sadrzaj {
+  font-size: 15px;
+  color: #555;
+  padding: 20px 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  background-color: #fafafa;
+  min-height: 150px;
 }
