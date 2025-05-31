@@ -393,8 +393,15 @@ button:hover:not([disabled]) {
     padding: 0.8rem;
     border-radius: 16px;
   }
-  .step {
-    box-sizing: border-box;
+ .steps {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 10px;
+  border: 1px solid red; /* samo za proveru */
+}
+
+.step {
+  box-sizing: border-box;
   width: 40px;
   height: 40px;
   background: #eee;
@@ -409,10 +416,8 @@ button:hover:not([disabled]) {
   transition: all 0.3s ease;
   user-select: none;
   font-size: 1rem;
-  line-height: 1;  /* ili line-height: 30px; */
+  line-height: 1;
   margin: 0;
   padding: 0;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 }
