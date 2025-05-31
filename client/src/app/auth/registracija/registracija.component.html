@@ -16,10 +16,22 @@
       </div>
 
       <form *ngIf="currentStep === 1" [formGroup]="step1Form" (ngSubmit)="nextStep()">
-        <label>
-        Username:
-        <input formControlName="username" />
-      </label>
+         <!-- Polje za korisničko ime -->
+      <div class="form-group">
+        <label for="username">Korisničko ime</label>
+        <div class="input-icon">
+          <i class="icon">&#64;</i>
+          <input
+            type="text"
+            id="username"
+            
+            name="username"
+            placeholder="Unesi korisničko ime"
+            required
+            
+          />
+        </div>
+      </div>
       </form>
 
   </div>
