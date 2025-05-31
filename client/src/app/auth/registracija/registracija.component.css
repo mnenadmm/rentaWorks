@@ -58,13 +58,13 @@ body {
 
 /* Razmak između grupa formi */
 .form-group {
-  margin-bottom: 1.75rem; /* Donji razmak */
+  margin-bottom: 1.2rem; /* Donji razmak */
 }
 
 /* Stil za labele polja */
 label {
   display: block; /* Prikazuje se kao blok element */
-  margin-bottom: 0.6rem; /* Razmak ispod */
+  margin-bottom: 0.2rem; /* Razmak ispod */
   font-weight: 600; /* Srednje podebljano */
   color: #3a3a3a; /* Tamnosiva boja */
   font-size: 0.95rem; /* Veličina fonta */
