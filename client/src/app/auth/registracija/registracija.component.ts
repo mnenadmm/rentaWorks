@@ -48,7 +48,9 @@ export class RegistracijaComponent {
 
       step2: this.fb.group({
         drzavljanstvo: ['', Validators.required],
-        adresa: ['', Validators.required]
+        adresa: ['', Validators.required],
+        grad: ['', Validators.required],
+        telefon: ['', Validators.required]
       }),
 
       step3: this.fb.group({}),
