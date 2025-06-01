@@ -1,11 +1,12 @@
 <div class="registracija-wrapper">
   <div class="registracija-container">
     <h2>Registruj se</h2>
+
     <div class="progress-bar">
       <div class="progress-line"></div>
       <div class="steps">
-        <div 
-          class="step" 
+        <div
+          class="step"
           *ngFor="let s of steps; let i = index"
           [class.active]="currentStep === i + 1"
           [class.completed]="currentStep > i + 1"
@@ -15,9 +16,10 @@
       </div>
     </div>
 
-    <form [formGroup]="step1Form" (ngSubmit)="nextStep()">
-
+    <form [formGroup]="getCurrentForm()" (ngSubmit)="handleSubmit()">
+      <!-- STEP 1 -->
       <ng-container *ngIf="currentStep === 1">
+        <!-- Korisničko ime -->
         <div class="form-group">
           <label for="username">Korisničko ime</label>
           <div class="input-icon">
@@ -34,6 +36,7 @@
           </div>
         </div>
 
+        <!-- Ime -->
         <div class="form-group">
           <label for="ime">Ime</label>
           <div class="input-icon">
@@ -50,6 +53,7 @@
           </div>
         </div>
 
+        <!-- Prezime -->
         <div class="form-group">
           <label for="prezime">Prezime</label>
           <div class="input-icon">
@@ -66,6 +70,7 @@
           </div>
         </div>
 
+        <!-- Email -->
         <div class="form-group">
           <label for="email">Email</label>
           <div class="input-icon">
@@ -82,94 +87,91 @@
           </div>
         </div>
 
-       <div class="form-group">
-  <label for="lozinka">Lozinka</label>
-  <div class="input-icon password-wrapper">
-    <i class="icon">🔒</i>
-    <input
-      [type]="showPassword ? 'text' : 'password'"
-      id="password"
-      formControlName="password"
-      placeholder="Unesi lozinku"
-      
-    />
-    <button
-      type="button"
-      class="toggle-password"
-      (click)="togglePasswordVisibility()"
-      [attr.aria-label]="showPassword ? 'Sakrij lozinku' : 'Prikaži lozinku'"
-      [disabled]="isLockedOut"
-    >
-      {{ showPassword ? '🙈' : '👁️' }}
-    </button>
-  </div>
-  <div *ngIf="step1Form.get('password')?.touched && step1Form.get('password')?.invalid" class="error">
-    Lozinka je obavezna i mora imati najmanje 8 karaktera.
-  </div>
-</div>
+        <!-- Lozinka -->
+        <div class="form-group">
+          <label for="lozinka">Lozinka</label>
+          <div class="input-icon password-wrapper">
+            <i class="icon">🔒</i>
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              id="password"
+              formControlName="password"
+              placeholder="Unesi lozinku"
+            />
+            <button
+              type="button"
+              class="toggle-password"
+              (click)="togglePasswordVisibility()"
+              [attr.aria-label]="showPassword ? 'Sakrij lozinku' : 'Prikaži lozinku'"
+              [disabled]="isLockedOut"
+            >
+              {{ showPassword ? '🙈' : '👁️' }}
+            </button>
+          </div>
+          <div *ngIf="step1Form.get('password')?.touched && step1Form.get('password')?.invalid" class="error">
+            Lozinka je obavezna i mora imati najmanje 8 karaktera.
+          </div>
+        </div>
 
-<div class="form-group">
-  <label for="confirmPassword">Potvrdi lozinku</label>
-  <div class="input-icon password-wrapper">
-    <i class="icon">🔒</i>
-    <input
-      [type]="showPassword ? 'text' : 'password'"
-      id="confirmPassword"
-      formControlName="confirmPassword"
-      placeholder="Ponovo unesi lozinku"
-    
-    />
-  </div>
-  <div *ngIf="step1Form.get('confirmPassword')?.touched && step1Form.get('confirmPassword')?.invalid" class="error">
-    Potvrda lozinke je obavezna.
-  </div>
-  <div *ngIf="step1Form.errors?.['passwordMismatch'] && (step1Form.touched || step1Form.dirty)" class="error">
-  Lozinke se ne poklapaju.
-</div>
-</div>
-
-        
+        <!-- Potvrdi lozinku -->
+        <div class="form-group">
+          <label for="confirmPassword">Potvrdi lozinku</label>
+          <div class="input-icon password-wrapper">
+            <i class="icon">🔒</i>
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              id="confirmPassword"
+              formControlName="confirmPassword"
+              placeholder="Ponovo unesi lozinku"
+            />
+          </div>
+          <div *ngIf="step1Form.get('confirmPassword')?.touched && step1Form.get('confirmPassword')?.invalid" class="error">
+            Potvrda lozinke je obavezna.
+          </div>
+          <div *ngIf="step1Form.errors?.['passwordMismatch'] && (step1Form.touched || step1Form.dirty)" class="error">
+            Lozinke se ne poklapaju.
+          </div>
+        </div>
 
         <div class="buttons">
           <button type="submit" [disabled]="step1Form.invalid">Dalje</button>
         </div>
       </ng-container>
 
+      <!-- STEP 2 -->
       <ng-container *ngIf="currentStep === 2">
         <div class="form-group">
-  <label for="drzavljanstvo">Državljanstvo:</label>
-  <div class="input-icon">
-    <i class="icon">🌍</i>
-    <select
-      id="drzavljanstvo"
-      formControlName="drzavljanstvo"
-     
-    >
-      <option value="">-- Izaberite državljanstvo --</option>
-      <option *ngFor="let drzava of drzave" [value]="drzava.code">
-        {{ drzava.name }}
-      </option>
-    </select>
-    <div *ngIf="step2Form.get('drzavljanstvo')?.touched && step2Form.get('drzavljanstvo')?.invalid" class="error">
-    Molimo izaberite državljanstvo.
-  </div>
-  </div>
-</div>
+          <label for="drzavljanstvo">Državljanstvo:</label>
+          <div class="input-icon">
+            <i class="icon">🌍</i>
+            <select id="drzavljanstvo" formControlName="drzavljanstvo">
+              <option value="">-- Izaberite državljanstvo --</option>
+              <option *ngFor="let drzava of drzave" [value]="drzava.code">
+                {{ drzava.name }}
+              </option>
+            </select>
+          </div>
+          <div *ngIf="step2Form.get('drzavljanstvo')?.touched && step2Form.get('drzavljanstvo')?.invalid" class="error">
+            Molimo izaberite državljanstvo.
+          </div>
+        </div>
 
         <div class="buttons">
           <button type="button" (click)="prevStep()">Nazad</button>
-          <button type="button" (click)="nextStep()">Dalje</button>
+          <button type="submit" [disabled]="step2Form.invalid">Dalje</button>
         </div>
       </ng-container>
 
+      <!-- STEP 3 -->
       <ng-container *ngIf="currentStep === 3">
         <h5>Treći korak forme</h5>
         <div class="buttons">
           <button type="button" (click)="prevStep()">Nazad</button>
-          <button type="button" (click)="nextStep()">Dalje</button>
+          <button type="submit">Dalje</button>
         </div>
       </ng-container>
 
+      <!-- STEP 4 -->
       <ng-container *ngIf="currentStep === 4">
         <h5>Završi</h5>
         <div class="buttons">
@@ -177,7 +179,6 @@
           <button type="button" (click)="submit()" [disabled]="step1Form.invalid">Pošalji</button>
         </div>
       </ng-container>
-
     </form>
   </div>
 </div>
