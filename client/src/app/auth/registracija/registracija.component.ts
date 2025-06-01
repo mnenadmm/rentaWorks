@@ -50,7 +50,7 @@ export class RegistracijaComponent {
         drzavljanstvo: ['', Validators.required],
         adresa: ['', Validators.required],
         grad: ['', Validators.required],
-        telefon: ['', Validators.required],
+        telefon: ['', [Validators.required, Validators.pattern(/^\+?\d+$/)]],
         adresaBroj: ['', Validators.required]
       }),
 
