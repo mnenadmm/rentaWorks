@@ -171,6 +171,21 @@
           </div>
         </div>
         <div class="form-group">
+          <label for="adresaBroj">Broj</label>
+          <div class="input-icon">
+            <i class="icon">&#64;</i>
+            <input
+              type="number"
+              id="adresaBroj"
+              formControlName="adresaBroj"
+              placeholder="Unesite broj"
+            />
+          </div>
+          <div *ngIf="step2Form.get('adresaBroj')?.touched && step2Form.get('adresaBroj')?.invalid" class="error">
+            Unesite broj stanovanja
+          </div>
+        </div>
+        <div class="form-group">
           <label for="username">Grad</label>
           <div class="input-icon">
             <i class="icon">&#64;</i>
@@ -190,7 +205,7 @@
           <div class="input-icon">
             <i class="icon">&#64;</i>
             <input
-              type="telefon"
+              type="tel"
               id="telefon"
               formControlName="telefon"
               placeholder="Telefon"
