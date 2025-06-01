@@ -26,7 +26,14 @@ app-header {
 
 /* Footer isto ne sme da se skuplja i zadržava svoju visinu */
 app-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 40px; /* ili koliko je visina footer-a */
   flex-shrink: 0;
+  background-color: #f5f5f5; /* po potrebi */
+  z-index: 9999;
 }
 
 /* Glavni sadržaj raste da popuni prostor između headera i footera,
@@ -37,4 +44,5 @@ main.content {
   overflow-y: auto;     /* skrolovanje unutar glavnog sadržaja */
   padding: 1rem;        /* unutrašnji razmak */
   margin-top: 60px;     /* rezerviše prostor ispod fiksnog headera */
+  margin-bottom: 40px; /* da sadržaj ne bude ispod footera */
 }
