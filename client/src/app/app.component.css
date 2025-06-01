@@ -1,31 +1,32 @@
-/* cela stranica i kontejner zauzimaju 100% visine */
+/* Cela stranica i kontejner zauzimaju 100% visine */
 html, body {
   height: 100%;
   margin: 0;
 }
 
-/* app-container zauzima celu visinu i pravi flex kolonu */
+/* app-container zauzima celu visinu viewporta i pravi flex kolonu */
 .app-container {
   display: flex;
   flex-direction: column;
-    
-  overflow: hidden; /* sprečavamo da ceo container skroluje */
+  height: 100vh;  /* cela visina vidljivog dela ekrana */
+  overflow: hidden; /* sprečava da ceo container skroluje */
 }
 
-/* header ima fiksnu visinu ili po sadržaju */
+/* Header ne sme da se skuplja i zadržava svoju visinu */
 app-header {
-  flex-shrink: 0; /* ne dozvoli da se smanjuje */
+  flex-shrink: 0;
 }
 
-/* content (main) zauzima sav preostali prostor i može da skroluje */
-main.content {
-  flex-grow: 1;   /* raste da popuni prostor */
-  overflow-y: auto;  /* omogućava vertikalni scroll ako je sadržaj veći */
-  padding: 1rem;  /* po potrebi */
-  margin-top: 0; 
-}
-
-/* footer ne raste, fiksiran je na dno */
+/* Footer isto ne sme da se skuplja i zadržava svoju visinu */
 app-footer {
-  flex-shrink: 0;  /* ne smanjuje se */
+  flex-shrink: 0;
+}
+
+/* Glavni sadržaj raste da popuni prostor između headera i footera,
+   i omogućava vertikalni skrol ako je sadržaj veći */
+main.content {
+  flex-grow: 1;      /* raste da zauzme sav raspoloživi prostor */
+  overflow-y: auto;  /* skrolovanje unutar glavnog sadržaja */
+  padding: 1rem;     /* po potrebi */
+  margin-top: 0;
 }
