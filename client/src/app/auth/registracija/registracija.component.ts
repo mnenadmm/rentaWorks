@@ -47,7 +47,8 @@ export class RegistracijaComponent {
       }, { validators: this.passwordMatchValidator }),
 
       step2: this.fb.group({
-        drzavljanstvo: ['', Validators.required]
+        drzavljanstvo: ['', Validators.required],
+        adresa: ['', Validators.required]
       }),
 
       step3: this.fb.group({}),

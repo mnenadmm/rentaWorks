@@ -155,6 +155,21 @@
             Molimo izaberite državljanstvo.
           </div>
         </div>
+        <div class="form-group">
+          <label for="username">Adresa</label>
+          <div class="input-icon">
+            <i class="icon">&#64;</i>
+            <input
+              type="adresa"
+              id="adresa"
+              formControlName="adresa"
+              placeholder="Unesite vasu adresu"
+            />
+          </div>
+          <div *ngIf="step2Form.get('adresa')?.touched && step2Form.get('adresa')?.invalid" class="error">
+            Korisničko ime je obavezno (min 4 karaktera).
+          </div>
+        </div>
 
         <div class="buttons">
           <button type="button" (click)="prevStep()">Nazad</button>
