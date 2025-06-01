@@ -8,13 +8,20 @@ html, body {
 .app-container {
   display: flex;
   flex-direction: column;
-  height: 100vh;  /* cela visina vidljivog dela ekrana */
-  overflow: hidden; /* sprečava da ceo container skroluje */
+  height: 100vh;      /* cela visina vidljivog dela ekrana */
+  overflow: hidden;   /* sprečava da ceo container skroluje */
 }
 
 /* Header ne sme da se skuplja i zadržava svoju visinu */
+/* VAŽNO: Header je fiksiran na vrh, visine 60px */
 app-header {
   flex-shrink: 0;
+  position: fixed;     /* fiksiran na vrhu */
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  z-index: 10000;
 }
 
 /* Footer isto ne sme da se skuplja i zadržava svoju visinu */
@@ -24,9 +31,10 @@ app-footer {
 
 /* Glavni sadržaj raste da popuni prostor između headera i footera,
    i omogućava vertikalni skrol ako je sadržaj veći */
+/* Dodajemo margin-top da se sadržaj pomeri ispod fiksnog headera */
 main.content {
-  flex-grow: 1;      /* raste da zauzme sav raspoloživi prostor */
-  overflow-y: auto;  /* skrolovanje unutar glavnog sadržaja */
-  padding: 1rem;     /* po potrebi */
-  margin-top: 0;
+  flex-grow: 1;         /* raste da zauzme sav raspoloživi prostor */
+  overflow-y: auto;     /* skrolovanje unutar glavnog sadržaja */
+  padding: 1rem;        /* unutrašnji razmak */
+  margin-top: 60px;     /* rezerviše prostor ispod fiksnog headera */
 }
