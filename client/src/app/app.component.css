@@ -8,7 +8,7 @@ html, body {
 .app-container {
   display: flex;
   flex-direction: column;
-  height: 100dvh;  /* visina viewporta */     
+    
   overflow: hidden; /* sprečavamo da ceo container skroluje */
 }
 
@@ -22,7 +22,7 @@ main.content {
   flex-grow: 1;   /* raste da popuni prostor */
   overflow-y: auto;  /* omogućava vertikalni scroll ako je sadržaj veći */
   padding: 1rem;  /* po potrebi */
-  margin-top: 60px; /* pomera sadržaj dole da ne bude ispod headera */
+  margin-top: 0; 
 }
 
 /* footer ne raste, fiksiran je na dno */
