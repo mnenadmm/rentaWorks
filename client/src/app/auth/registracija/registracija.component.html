@@ -167,10 +167,39 @@
             />
           </div>
           <div *ngIf="step2Form.get('adresa')?.touched && step2Form.get('adresa')?.invalid" class="error">
-            Korisničko ime je obavezno (min 4 karaktera).
+            Adresa je obavezno polje 
           </div>
         </div>
-
+        <div class="form-group">
+          <label for="username">Grad</label>
+          <div class="input-icon">
+            <i class="icon">&#64;</i>
+            <input
+              type="grad"
+              id="grad"
+              formControlName="grad"
+              placeholder="Unesite grad"
+            />
+          </div>
+          <div *ngIf="step2Form.get('grad')?.touched && step2Form.get('grad')?.invalid" class="error">
+            Unesite grad 
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="username">Telefon</label>
+          <div class="input-icon">
+            <i class="icon">&#64;</i>
+            <input
+              type="telefon"
+              id="telefon"
+              formControlName="telefon"
+              placeholder="Telefon"
+            />
+          </div>
+          <div *ngIf="step2Form.get('telefon')?.touched && step2Form.get('telefon')?.invalid" class="error">
+            Unesite telefon
+          </div>
+        </div>
         <div class="buttons">
           <button type="button" (click)="prevStep()">Nazad</button>
           <button type="submit" [disabled]="step2Form.invalid">Dalje</button>
