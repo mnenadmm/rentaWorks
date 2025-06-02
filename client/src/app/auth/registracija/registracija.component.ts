@@ -88,6 +88,13 @@ export class RegistracijaComponent {
   get step3Form() {
     return this.form.get('step3') as FormGroup;
   }
+  // ovo je geter za tip  korisnika
+  get tipKorisnikaControl() {
+  return this.form.get('step3.tipKorisnika');
+}
+get zanimanjeControl() {
+  return this.form.get('step3.zanimanje');
+}
   // Custom validator: proverava da li se lozinka i potvrda poklapaju
   passwordMatchValidator(group: AbstractControl): ValidationErrors | null {
     const password = group.get('password')?.value;

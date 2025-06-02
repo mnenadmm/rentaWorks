@@ -250,6 +250,20 @@
     </label>
   </div>
 </div>
+<div class="form-group">
+    <!-- Select za zanimanje - prikazuje se samo ako je fizicko lice -->
+  <div *ngIf="tipKorisnikaControl?.value === 'fizicko'" style="margin-top: 15px;">
+    <label for="zanimanje">Zanimanje:</label>
+    <select formControlName="zanimanje" id="zanimanje">
+      <option value="">-- Izaberite zanimanje --</option>
+      <option *ngFor="let z of zanimanja" [value]="z.id">{{ z.naziv }}</option>
+    </select>
+    <div *ngIf="zanimanjeControl?.touched && zanimanjeControl?.invalid" style="color: red; font-size: 0.9em;">
+      Zanimanje je obavezno.
+    </div>
+  </div>
+</div>
+
 
         
         
