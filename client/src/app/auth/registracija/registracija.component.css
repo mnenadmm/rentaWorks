@@ -409,74 +409,7 @@ button:hover:not([disabled]) {
   margin-bottom: 8px;
 }
 
-/* Radio dugmad wrapper */
-.form-group > div {
-  display: flex;
-  gap: 30px; /* razmak između radio dugmadi */
-  align-items: center;
-}
 
-/* Sakrivamo default radio dugme */
-.form-group input[type="radio"] {
-  display: none;
-}
-
-/* Stilizujemo labelu koja će predstavljati radio dugme */
-.form-group input[type="radio"] + label {
-  position: relative;
-  padding-left: 35px;
-  cursor: pointer;
-  user-select: none;
-  font-size: 1rem;
-  color: #555;
-  transition: color 0.3s ease;
-}
-
-/* Pravimo kružić za radio dugme */
-.form-group input[type="radio"] + label::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 22px;
-  height: 22px;
-  border: 2px solid #888;
-  border-radius: 50%;
-  background: #fff;
-  box-sizing: border-box;
-  transition: border-color 0.3s ease, background-color 0.3s ease;
-}
-
-/* Kada je radio dugme čekirano */
-.form-group input[type="radio"]:checked + label::before {
-  border-color: #3b82f6; /* plava boja */
-  background: #3b82f6;
-}
-
-/* Unutrašnji krug za cekirano stanje */
-.form-group input[type="radio"]:checked + label::after {
-  content: "";
-  position: absolute;
-  left: 7px;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 8px;
-  height: 8px;
-  background: white;
-  border-radius: 50%;
-}
-
-/* Hover efekat na labelu */
-.form-group input[type="radio"] + label:hover {
-  color: #1e40af;
-}
-
-/* Fokus na radio dugme (za pristupačnost) */
-.form-group input[type="radio"]:focus + label::before {
-  outline: 2px solid #2563eb;
-  outline-offset: 2px;
-} 
 
 /* 3. Mali računari / veći tableti (768px do 1023px) */
 @media (min-width: 768px) and (max-width: 1023px) {
