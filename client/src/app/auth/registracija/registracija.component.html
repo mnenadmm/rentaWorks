@@ -220,48 +220,49 @@
           <button type="submit" [disabled]="step2Form.invalid">Dalje</button>
         </div>
       </ng-container>
-
       <!-- STEP 3 -->
       <ng-container *ngIf="currentStep === 3">
         <div class="form-group">
-  <label>Tip korisnika:</label><br>
+          <label>Tip korisnika:</label><br>
+        <div class="radio-option">
+          <label>
+              <input
+                type="radio"
+                formControlName="tipKorisnika"
+                value="fizicko"
+                class="custom-radio"
+              />
+            Fizičko lice
+          </label>
+        </div>
 
-  <div class="radio-option">
-    <label>
-      <input
-        type="radio"
-        formControlName="tipKorisnika"
-        value="fizicko"
-        class="custom-radio"
-      />
-      Fizičko lice
-    </label>
+      <div class="radio-option">
+        <label>
+          <input
+            type="radio"
+            formControlName="tipKorisnika"
+            value="pravno"
+            class="custom-radio"
+          />
+          Pravno lice
+        </label>
+      </div>
   </div>
-
-  <div class="radio-option">
-    <label>
-      <input
-        type="radio"
-        formControlName="tipKorisnika"
-        value="pravno"
-        class="custom-radio"
-      />
-      Pravno lice
-    </label>
-  </div>
-</div>
 <div class="form-group">
     <!-- Select za zanimanje - prikazuje se samo ako je fizicko lice -->
   <div *ngIf="tipKorisnikaControl?.value === 'fizicko'" style="margin-top: 15px;">
-    <label for="zanimanje">Zanimanje:</label>
+  <label for="zanimanje">Zanimanje:</label>
+  <div class="input-icon">
+    <i class="icon">💼</i> <!-- Možeš staviti neku odgovarajuću ikonu, npr. 💼 -->
     <select formControlName="zanimanje" id="zanimanje">
       <option value="">-- Izaberite zanimanje --</option>
       <option *ngFor="let z of zanimanja" [value]="z.id">{{ z.naziv }}</option>
     </select>
-    <div *ngIf="zanimanjeControl?.touched && zanimanjeControl?.invalid" style="color: red; font-size: 0.9em;">
-      Zanimanje je obavezno.
-    </div>
   </div>
+  <div *ngIf="zanimanjeControl?.touched && zanimanjeControl?.invalid" class="error">
+    Zanimanje je obavezno.
+  </div>
+</div>
 </div>
 
 
