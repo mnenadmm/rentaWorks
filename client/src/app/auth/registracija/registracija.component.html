@@ -18,7 +18,7 @@
 
     <form [formGroup]="getCurrentForm()" (ngSubmit)="handleSubmit()">
       <!-- STEP 1 -->
-      <ng-container *ngIf="currentStep === 3">
+      <ng-container *ngIf="currentStep === 1">
         <!-- Korisničko ime -->
         <div class="form-group">
           <label for="username">Korisničko ime</label>
@@ -222,28 +222,22 @@
       </ng-container>
 
       <!-- STEP 3 -->
-      <ng-container *ngIf="currentStep === 1">
+      <ng-container *ngIf="currentStep === 3">
         <div class="form-group">
-    <label>Tip korisnika:</label>
-    <div>
-      <label>
-        <input
-          type="radio"
-          formControlName="tipKorisnika"
-          value="fizicko"
-        />
-        Fizičko lice
-      </label>
+    <div *ngIf="currentStep === 3" [formGroup]="step3Form">
+  <label for="tipKorisnika">Tip korisnika</label>
+  <select id="tipKorisnika" formControlName="tipKorisnika">
+    <option value="fizicko">Fizičko lice</option>
+    <option value="pravno">Pravno lice</option>
+  </select>
 
-      <label style="margin-left: 20px;">
-        <input
-          type="radio"
-          formControlName="tipKorisnika"
-          value="pravno"
-        />
-        Pravno lice
-      </label>
-    </div>
+  <label for="zanimanje">Zanimanje</label>
+  <select id="zanimanje" formControlName="zanimanje">
+    <option *ngFor="let zanimanje of zanimanja" [value]="zanimanje.id">
+      {{ zanimanje.naziv }}
+    </option>
+  </select>
+</div>
   </div>
         
         
