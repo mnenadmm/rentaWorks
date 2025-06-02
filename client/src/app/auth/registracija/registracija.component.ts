@@ -10,7 +10,10 @@ import {
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-
+interface Zanimanje {
+  id: number;
+  naziv: string;
+}
 @Component({
   selector: 'app-registracija',
   standalone: true,
@@ -34,18 +37,16 @@ export class RegistracijaComponent {
     { code: 'DE', name: 'Nemačka' },
     { code: 'US', name: 'Sjedinjene Američke Države' }
   ];
-  zanimanja= [
-    { idZanimanja: 1, name: 'Elektricar' },
-    { idZanimanja: 2, name: 'Vozac' },
-    { idZanimanja: 3, name: 'Poslasticar' },
-    { idZanimanja: 4, name: 'Konobar' },
-    { idZanimanja: 5, name: 'Pizza majstor' },
-    { idZanimanja: 6, name: 'Kuvar' }
+ tipKorisnika: 'fizicko' | 'pravno' = 'fizicko';
+  izabranoZanimanje: string = '';
+   zanimanja: Zanimanje[] = [
+    { id: 1, naziv: 'Programer' },
+    { id: 2, naziv: 'Advokat' },
+    { id: 3, naziv: 'Lekar' },
+    { id: 4, naziv: 'Profesor' },
+    { id: 5, naziv: 'Inženjer' },
+    { id: 6, naziv: 'Dizajner' }
   ];
-  tip_korisnika =[
-    { id_tip_korisnika: 1 , name: 'Fizicko lice'},
-    { id_tip_korisnika: 2 , name: 'Pravno lice'},
-  ]
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
       step1: this.fb.group({

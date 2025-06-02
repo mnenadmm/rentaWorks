@@ -224,23 +224,25 @@
       <!-- STEP 3 -->
       <ng-container *ngIf="currentStep === 3">
         <div class="form-group">
-  <label class="main-label">Želim da se registrujem kao:</label>
-  <div class="radio-card-group">
-    <label class="radio-card">
-      <input type="radio" formControlName="tip_korisnika" value="fizicko" />
-      <div class="card-content">
-        <span>🧍 Fizičko lice</span>
-      </div>
+      <div class="flex flex-col gap-4 p-4 bg-white rounded-xl shadow-md w-full max-w-md">
+  <label class="text-lg font-semibold">Tip korisnika</label>
+  
+  <div class="flex gap-6">
+    <label class="flex items-center gap-2 cursor-pointer">
+      <input type="radio" name="tipKorisnika" [(ngModel)]="tipKorisnika" value="fizicko" class="accent-blue-600" />
+      <span>Fizičko lice</span>
     </label>
-    <label class="radio-card">
-      <input type="radio" formControlName="tip_korisnika" value="pravno" />
-      <div class="card-content">
-        <span>🏢 Pravno lice</span>
-      </div>
+    <label class="flex items-center gap-2 cursor-pointer">
+      <input type="radio" name="tipKorisnika" [(ngModel)]="tipKorisnika" value="pravno" class="accent-blue-600" />
+      <span>Pravno lice</span>
     </label>
   </div>
-  <div *ngIf="step3Form.get('tip_korisnika')?.touched && step2Form.get('tip_korisnika')?.invalid" class="error">
-    Molimo izaberite tip korisnika.
+
+  <div *ngIf="tipKorisnika === 'fizicko'" class="mt-4">
+    <label for="zanimanje" class="block mb-1 text-sm font-medium">Zanimanje</label>
+    <select id="zanimanje" [(ngModel)]="izabranoZanimanje" class="w-full border rounded-lg p-2">
+      <option *ngFor="let zanimanje of zanimanja" [value]="zanimanje">{{ zanimanje }}</option>
+    </select>
   </div>
 </div>
         <div class="form-group">
@@ -249,13 +251,14 @@
             <i class="icon">🌍</i>
             <select id="zanimanje" formControlName="zanimanje">
               <option value="">-- Izaberite zaniamnja --</option>
-              <option *ngFor="let zanimanje of zanimanja" [value]="zanimanje.idZanimanja">
-                {{ zanimanje.name }}
+              <option *ngFor="let zanimanje of zanimanja" [value]="zanimanje.id">
+                {{ zanimanje.naziv }}
               </option>
             </select>
           </div>
           <div *ngIf="step3Form.get('zanimanje')?.touched && step2Form.get('zanimanje')?.invalid" class="error">
             Molimo izaberite zanimanje.
+          </div>
           </div>
         </div>
         <div class="buttons">
