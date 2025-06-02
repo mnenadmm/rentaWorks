@@ -476,7 +476,7 @@ button:hover:not([disabled]) {
 .form-group input[type="radio"]:focus + label::before {
   outline: 2px solid #2563eb;
   outline-offset: 2px;
-}
+} 
 
 /* 3. Mali računari / veći tableti (768px do 1023px) */
 @media (min-width: 768px) and (max-width: 1023px) {
