@@ -68,7 +68,7 @@ export class RegistracijaComponent {
       }),
 
       step3: this.fb.group({
-        tip_korisnika: ['', Validators.required], 
+        tipKorisnika: ['', Validators.required], 
         zanimanje: ['', Validators.required], 
       }),
       step4: this.fb.group({})
