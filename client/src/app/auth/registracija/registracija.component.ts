@@ -13,7 +13,7 @@ import {
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './registracija.component.html',
-  styleUrls: ['./registracija.component.scss'],
+  styleUrls: ['./registracija.component.css'],
 })
 export class RegistracijaComponent {
   currentStep = 1;
