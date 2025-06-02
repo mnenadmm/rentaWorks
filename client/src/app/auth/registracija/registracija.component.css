@@ -313,7 +313,23 @@ button:hover:not([disabled]) {
   outline: none;
   box-shadow: 0 0 0 3px #7b61ffaa;
   background: rgba(255, 255, 255, 0.98);
+
+
 }
+
+.radio-group {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.radio-group label {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-weight: 500;
+}
+
 /* 1. Male telefone (do 480px) */
 @media (max-width: 480px) {
   .registracija-wrapper {
