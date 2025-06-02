@@ -224,18 +224,32 @@
       <!-- STEP 3 -->
       <ng-container *ngIf="currentStep === 3">
         <div class="form-group">
-            <label>Tip korisnika:</label><br>
+  <label>Tip korisnika:</label><br>
 
-  <label>
-    <input type="radio" formControlName="tipKorisnika" value="fizicko" style="transform: scale(1.3); margin-right: 8px;">
-    Fizičko lice
-  </label>
+  <div style="display: inline-block; margin-right: 30px;">
+    <label>
+      <input
+        type="radio"
+        formControlName="tipKorisnika"
+        value="fizicko"
+        style="transform: scale(1.3); margin-right: 8px;"
+      />
+      Fizičko lice
+    </label>
+  </div>
 
-  <label style="margin-left: 20px;">
-    <input type="radio" formControlName="tipKorisnika" value="pravno" style="transform: scale(1.3); margin-right: 8px;">
-    Pravno lice
-  </label> 
-        </div>
+  <div style="display: inline-block;">
+    <label>
+      <input
+        type="radio"
+        formControlName="tipKorisnika"
+        value="pravno"
+        style="transform: scale(1.3); margin-right: 8px;"
+      />
+      Pravno lice
+    </label>
+  </div>
+</div>
         
         
         <div class="buttons">
