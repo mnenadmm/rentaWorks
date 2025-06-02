@@ -224,21 +224,21 @@
       <!-- STEP 3 -->
       <ng-container *ngIf="currentStep === 3">
         <div class="form-group">
-          <label for="drzavljanstvo">Zelim da se registrujem kao
-          </label>
-          <div class="input-icon">
-            <i class="icon">🌍</i>
-            <select id="tip_korisnika" formControlName="tip_korisnika">
-              <option value="">-- Izaberite vrstu korisnika --</option>
-              <option *ngFor="let tip of tip_korisnika" [value]="tip.id_tip_korisnika">
-                {{ tip.name }}
-              </option>
-            </select>
-          </div>
-          <div *ngIf="step2Form.get('zanimanje')?.touched && step2Form.get('zanimanje')?.invalid" class="error">
-            Molimo izaberite zanimanje.
-          </div>
-        </div>
+  <label>Zelim da se registrujem kao:</label>
+  <div class="radio-group">
+    <label>
+      <input type="radio" formControlName="tip_korisnika" value="fizicko" />
+      Fizicko lice
+    </label>
+    <label>
+      <input type="radio" formControlName="tip_korisnika" value="pravno" />
+      Pravno lice
+    </label>
+  </div>
+  <div *ngIf="step2Form.get('tip_korisnika')?.touched && step2Form.get('tip_korisnika')?.invalid" class="error">
+    Molimo izaberite tip korisnika.
+  </div>
+</div>
         <div class="form-group">
           <label for="drzavljanstvo">Zanimanje:</label>
           <div class="input-icon">
