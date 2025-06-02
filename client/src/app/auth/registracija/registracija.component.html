@@ -224,21 +224,18 @@
       <!-- STEP 3 -->
       <ng-container *ngIf="currentStep === 3">
         <div class="form-group">
-    <div *ngIf="currentStep === 3" [formGroup]="step3Form">
-  <label for="tipKorisnika">Tip korisnika</label>
-  <select id="tipKorisnika" formControlName="tipKorisnika">
-    <option value="fizicko">Fizičko lice</option>
-    <option value="pravno">Pravno lice</option>
-  </select>
+            <label>Tip korisnika:</label><br>
 
-  <label for="zanimanje">Zanimanje</label>
-  <select id="zanimanje" formControlName="zanimanje">
-    <option *ngFor="let zanimanje of zanimanja" [value]="zanimanje.id">
-      {{ zanimanje.naziv }}
-    </option>
-  </select>
-</div>
-  </div>
+  <label>
+    <input type="radio" formControlName="tipKorisnika" value="fizicko" style="transform: scale(1.3); margin-right: 8px;">
+    Fizičko lice
+  </label>
+
+  <label style="margin-left: 20px;">
+    <input type="radio" formControlName="tipKorisnika" value="pravno" style="transform: scale(1.3); margin-right: 8px;">
+    Pravno lice
+  </label> 
+        </div>
         
         
         <div class="buttons">
