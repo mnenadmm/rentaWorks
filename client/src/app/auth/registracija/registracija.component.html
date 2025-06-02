@@ -223,7 +223,21 @@
 
       <!-- STEP 3 -->
       <ng-container *ngIf="currentStep === 3">
-        <h5>Treći korak forme</h5>
+        <div class="form-group">
+          <label for="drzavljanstvo">Zanimanje:</label>
+          <div class="input-icon">
+            <i class="icon">🌍</i>
+            <select id="zanimanje" formControlName="zanimanje">
+              <option value="">-- Izaberite zaniamnja --</option>
+              <option *ngFor="let zanimanje of zanimanja" [value]="zanimanje.idZanimanja">
+                {{ zanimanje.name }}
+              </option>
+            </select>
+          </div>
+          <div *ngIf="step2Form.get('zanimanje')?.touched && step2Form.get('zanimanje')?.invalid" class="error">
+            Molimo izaberite zanimanje.
+          </div>
+        </div>
         <div class="buttons">
           <button type="button" (click)="prevStep()">Nazad</button>
           <button type="submit">Dalje</button>
