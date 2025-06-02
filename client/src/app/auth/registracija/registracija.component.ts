@@ -27,6 +27,7 @@ export class RegistracijaComponent {
   steps = [1, 2, 3, 4];
   showPassword = false;
   isLockedOut = false;
+  izabranoZanimanjeId: number | null = null;
 
   form: FormGroup;
 
@@ -38,7 +39,7 @@ export class RegistracijaComponent {
     { code: 'US', name: 'Sjedinjene Američke Države' }
   ];
  tipKorisnika: 'fizicko' | 'pravno' = 'fizicko';
-  izabranoZanimanje: string = '';
+  
    zanimanja: Zanimanje[] = [
     { id: 1, naziv: 'Programer' },
     { id: 2, naziv: 'Advokat' },

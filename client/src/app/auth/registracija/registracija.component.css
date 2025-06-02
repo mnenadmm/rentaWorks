@@ -400,52 +400,7 @@ button:hover:not([disabled]) {
     border-radius: 14px;
   }
 }
-.radio-card-group {
-  display: flex;
-  gap: 1rem;
-  margin-top: 0.5rem;
-}
 
-.radio-card {
-  flex: 1;
-  cursor: pointer;
-  position: relative;
-  border: 2px solid transparent;
-  border-radius: 12px;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(8px);
-  color: #fff;
-  text-align: center;
-  transition: 0.3s ease;
-  padding: 1rem;
-  user-select: none;
-}
-
-.radio-card input[type="radio"] {
-  display: none;
-}
-
-.radio-card .card-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 0.5rem;
-}
-
-.radio-card .icon {
-  font-size: 2rem;
-}
-
-.radio-card .text {
-  font-size: 1rem;
-  font-weight: 600;
-}
-
-.radio-card input[type="radio"]:checked + .card-content,
-.radio-card:has(input[type="radio"]:checked) {
-  border: 2px solid #4fd1c5;
-  background: rgba(79, 209, 197, 0.2);
-}
 
 /* 3. Mali računari / veći tableti (768px do 1023px) */
 @media (min-width: 768px) and (max-width: 1023px) {
