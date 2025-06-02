@@ -1,17 +1,19 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+
 import {
   FormGroup,
   FormBuilder,
   ReactiveFormsModule,
   Validators,
   AbstractControl,
+  FormsModule 
 } from '@angular/forms';
 
 @Component({
   selector: 'app-registracija',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule,FormsModule ],
   templateUrl: './registracija.component.html',
   styleUrls: ['./registracija.component.css'],
 })
@@ -22,6 +24,18 @@ export class RegistracijaComponent {
 
   showPassword = false;
   isLockedOut = false; // za dugme prikaza lozinke ako je potrebno
+    izabranoZanimanjeId: number | null = null;  // ovde se čuva ID izabranog zanimanja
+  tipLica: string = ''; // vrednosti: 'fizicko_lice' ili 'pravno_lice' ili nešto drugo
+zanimanja = [
+  { id: 1, naziv: 'Inženjer' },
+  { id: 2, naziv: 'Lekar' },
+  { id: 3, naziv: 'Nastavnik' },
+  { id: 4, naziv: 'Arhitekta' },
+  { id: 5, naziv: 'Programer' },
+  { id: 6, naziv: 'Vodoinstalater' },
+  { id: 7, naziv: 'Poljoprivrednik' },
+  { id: 8, naziv: 'Novinar' },
+];
 
   drzave = [
     { code: 'RS', name: 'Srbija' },
