@@ -224,15 +224,19 @@
       <!-- STEP 3 -->
       <ng-container *ngIf="currentStep === 3">
         <div class="form-group">
-  <label>Zelim da se registrujem kao:</label>
-  <div class="radio-group">
-    <label>
+  <label class="main-label">Želim da se registrujem kao:</label>
+  <div class="radio-card-group">
+    <label class="radio-card">
       <input type="radio" formControlName="tip_korisnika" value="fizicko" />
-      Fizicko lice
+      <div class="card-content">
+        <span>🧍 Fizičko lice</span>
+      </div>
     </label>
-    <label>
+    <label class="radio-card">
       <input type="radio" formControlName="tip_korisnika" value="pravno" />
-      Pravno lice
+      <div class="card-content">
+        <span>🏢 Pravno lice</span>
+      </div>
     </label>
   </div>
   <div *ngIf="step2Form.get('tip_korisnika')?.touched && step2Form.get('tip_korisnika')?.invalid" class="error">

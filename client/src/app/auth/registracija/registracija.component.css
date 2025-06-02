@@ -316,19 +316,52 @@ button:hover:not([disabled]) {
 
 
 }
-
-.radio-group {
+.radio-card-group {
   display: flex;
   gap: 1rem;
-  margin-top: 0.5rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
 }
 
-.radio-group label {
-  display: flex;
-  align-items: center;
-  gap: 0.3rem;
-  font-weight: 500;
+.radio-card {
+  position: relative;
+  cursor: pointer;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: 0.3s ease;
+  flex: 1;
+  min-width: 150px;
 }
+
+.radio-card input[type="radio"] {
+  display: none;
+}
+
+.radio-card .card-content {
+  padding: 1rem 1.5rem;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border: 2px solid transparent;
+  border-radius: 16px;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #fff;
+  transition: all 0.3s ease;
+  user-select: none;
+}
+
+.radio-card:hover .card-content {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.radio-card input[type="radio"]:checked + .card-content {
+  border-color: #ffffffaa;
+  background: rgba(255, 255, 255, 0.3);
+  color: #000;
+}
+
+
 
 /* 1. Male telefone (do 480px) */
 @media (max-width: 480px) {
