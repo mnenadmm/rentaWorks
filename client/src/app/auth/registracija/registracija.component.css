@@ -402,21 +402,21 @@ button:hover:not([disabled]) {
 }
 /* Omotač za tip korisnika */
 .form-group label {
-  font-weight: 600;
-  font-size: 1rem;
-  color: #333;
-  display: block;
-  margin-bottom: 8px;
+  margin-bottom: 4px;
+  display: inline-block;
 }
 
 .radio-option {
   display: inline-block;
   margin-right: 30px;
+  vertical-align: middle; /* poravnanje po sredini linije */
+  margin-top: -5px;       /* podiže dugmad bliže labeli */
 }
 
 .custom-radio {
   transform: scale(1.3);
   margin-right: 8px;
+  vertical-align: middle; /* centriranje dugmeta uz tekst */
 }
 
 
