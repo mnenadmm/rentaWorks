@@ -231,29 +231,18 @@
       <!-- STEP 3 -->
       <ng-container *ngIf="currentStep === 3">
         <div class="form-group">
-          <label>Tip korisnika:</label><br />
-          <div class="radio-group">
-            <label>
-              <input
-                type="radio"
-                formControlName="tip"
-                value="radnik"
-              />
-              Radnik
-            </label>
-            <label>
-              <input
-                type="radio"
-                formControlName="tip"
-                value="poslodavac"
-              />
-              Poslodavac
-            </label>
-          </div>
-          <div *ngIf="step3Form.get('tip')?.touched && step3Form.get('tip')?.invalid" class="error">
-            Izaberite tip korisnika.
-          </div>
+           <label class="radio-label">
+             <input type="radio" name="tip_lica" value="fizicko" checked>
+             <span class="custom-radio"></span>
+             Fizičko lice
+           </label>
+           <label class="radio-label">
+             <input type="radio" name="tip_lica" value="pravno">
+             <span class="custom-radio"></span>
+             Pravno lice
+           </label>
         </div>
+
 
         <div class="buttons">
           <button type="button" (click)="prevStep()">Nazad</button>
