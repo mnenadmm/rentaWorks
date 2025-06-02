@@ -409,6 +409,15 @@ button:hover:not([disabled]) {
   margin-bottom: 8px;
 }
 
+.radio-option {
+  display: inline-block;
+  margin-right: 30px;
+}
+
+.custom-radio {
+  transform: scale(1.3);
+  margin-right: 8px;
+}
 
 
 /* 3. Mali računari / veći tableti (768px do 1023px) */
