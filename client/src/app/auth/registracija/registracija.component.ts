@@ -34,7 +34,14 @@ export class RegistracijaComponent {
     { code: 'DE', name: 'Nemačka' },
     { code: 'US', name: 'Sjedinjene Američke Države' }
   ];
-
+  zanimanja= [
+    { idZanimanja: 1, name: 'Elektricar' },
+    { idZanimanja: 2, name: 'Vozac' },
+    { idZanimanja: 3, name: 'Poslasticar' },
+    { idZanimanja: 4, name: 'Konobar' },
+    { idZanimanja: 5, name: 'Pizza majstor' },
+    { idZanimanja: 6, name: 'Kuvar' }
+  ];
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
       step1: this.fb.group({
@@ -54,7 +61,9 @@ export class RegistracijaComponent {
         adresaBroj: ['', Validators.required]
       }),
 
-      step3: this.fb.group({}),
+      step3: this.fb.group({
+        zanimanje: ['', Validators.required], 
+      }),
       step4: this.fb.group({})
     });
   }
