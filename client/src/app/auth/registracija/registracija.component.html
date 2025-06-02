@@ -237,17 +237,17 @@
               <input
                 type="radio"
                 formControlName="tip"
-                value="radnik"
+                value="fizicko_lice"
               />
-              Radnik
+              Fizicko lice
             </label>
             <label>
               <input
                 type="radio"
                 formControlName="tip"
-                value="poslodavac"
+                value="pravno_lice"
               />
-              Poslodavac
+              Pravno lice
             </label>
           </div>
           <div *ngIf="step3Form.get('tip')?.touched && step3Form.get('tip')?.invalid" class="error">
