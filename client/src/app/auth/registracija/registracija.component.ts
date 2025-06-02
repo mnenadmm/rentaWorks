@@ -42,6 +42,10 @@ export class RegistracijaComponent {
     { idZanimanja: 5, name: 'Pizza majstor' },
     { idZanimanja: 6, name: 'Kuvar' }
   ];
+  tip_korisnika =[
+    { id_tip_korisnika: 1 , name: 'Fizicko lice'},
+    { id_tip_korisnika: 2 , name: 'Pravno lice'},
+  ]
   constructor(private fb: FormBuilder) {
     this.form = this.fb.group({
       step1: this.fb.group({

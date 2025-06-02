@@ -224,6 +224,22 @@
       <!-- STEP 3 -->
       <ng-container *ngIf="currentStep === 3">
         <div class="form-group">
+          <label for="drzavljanstvo">Zelim da se registrujem kao
+          </label>
+          <div class="input-icon">
+            <i class="icon">🌍</i>
+            <select id="tip_korisnika" formControlName="tip_korisnika">
+              <option value="">-- Izaberite vrstu korisnika --</option>
+              <option *ngFor="let tip of tip_korisnika" [value]="tip.id_tip_korisnika">
+                {{ tip.name }}
+              </option>
+            </select>
+          </div>
+          <div *ngIf="step2Form.get('zanimanje')?.touched && step2Form.get('zanimanje')?.invalid" class="error">
+            Molimo izaberite zanimanje.
+          </div>
+        </div>
+        <div class="form-group">
           <label for="drzavljanstvo">Zanimanje:</label>
           <div class="input-icon">
             <i class="icon">🌍</i>
