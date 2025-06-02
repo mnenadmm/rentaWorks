@@ -18,7 +18,7 @@
 
     <form [formGroup]="getCurrentForm()" (ngSubmit)="handleSubmit()">
       <!-- STEP 1 -->
-      <ng-container *ngIf="currentStep === 3">
+      <ng-container *ngIf="currentStep === 1">
         <!-- Korisničko ime -->
         <div class="form-group">
           <label for="username">Korisničko ime</label>
@@ -222,7 +222,7 @@
       </ng-container>
 
       <!-- STEP 3 -->
-      <ng-container *ngIf="currentStep === 1">
+      <ng-container *ngIf="currentStep === 3">
         <div class="form-group">
             <label for="username">Telefon</label>
         </div>
