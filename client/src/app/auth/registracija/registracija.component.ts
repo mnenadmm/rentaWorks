@@ -66,6 +66,7 @@ export class RegistracijaComponent {
       }),
 
       step3: this.fb.group({
+        tip_korisnika: ['', Validators.required], 
         zanimanje: ['', Validators.required], 
       }),
       step4: this.fb.group({})
@@ -81,7 +82,10 @@ export class RegistracijaComponent {
   get step2Form() {
     return this.form.get('step2') as FormGroup;
   }
-
+  // Getter za formu drugog koraka
+  get step3Form() {
+    return this.form.get('step3') as FormGroup;
+  }
   // Custom validator: proverava da li se lozinka i potvrda poklapaju
   passwordMatchValidator(group: AbstractControl): ValidationErrors | null {
     const password = group.get('password')?.value;

@@ -239,7 +239,7 @@
       </div>
     </label>
   </div>
-  <div *ngIf="step2Form.get('tip_korisnika')?.touched && step2Form.get('tip_korisnika')?.invalid" class="error">
+  <div *ngIf="step3Form.get('tip_korisnika')?.touched && step2Form.get('tip_korisnika')?.invalid" class="error">
     Molimo izaberite tip korisnika.
   </div>
 </div>
@@ -254,7 +254,7 @@
               </option>
             </select>
           </div>
-          <div *ngIf="step2Form.get('zanimanje')?.touched && step2Form.get('zanimanje')?.invalid" class="error">
+          <div *ngIf="step3Form.get('zanimanje')?.touched && step2Form.get('zanimanje')?.invalid" class="error">
             Molimo izaberite zanimanje.
           </div>
         </div>
