@@ -76,6 +76,16 @@ zanimanja = [
       tip: ['', Validators.required],
       zanimanje: ['', Validators.required],
     });
+    // 👉 Logika za resetovanje i kontrolu zanimanja
+  this.step3Form.get('tip')?.valueChanges.subscribe(value => {
+    const zanimanjeControl = this.step3Form.get('zanimanje');
+    if (value === 'fizicko_lice') {
+      zanimanjeControl?.enable();
+    } else {
+      zanimanjeControl?.reset();
+      zanimanjeControl?.disable();
+    }
+  });
   }
 
   getCurrentForm(): FormGroup {
