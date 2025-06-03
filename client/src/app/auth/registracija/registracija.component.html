@@ -254,7 +254,7 @@
             Izaberite tip korisnika.
           </div>
         </div>
-        <div *ngIf="tipLica === 'fizicko_lice'">
+        <div *ngIf="step3Form.get('tip')?.value === 'fizicko_lice'">
           <label for="zanimanje">Zanimanje:</label>
             <select id="zanimanje" [(ngModel)]="izabranoZanimanjeId">
               <option *ngFor="let z of zanimanja" [value]="z.id">{{ z.naziv }}</option>
