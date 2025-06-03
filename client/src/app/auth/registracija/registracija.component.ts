@@ -118,6 +118,7 @@ zanimanja = [
     if (form.valid) {
       if (this.currentStep === this.totalSteps) {
         // Logika za slanje podataka na backend ili dalju obradu
+        console.log('ovo je tip zanimanja ',this.step3Form.value)
         console.log('Registracija uspešna', {
           ...this.step1Form.value,
           ...this.step2Form.value,
