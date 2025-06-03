@@ -74,6 +74,7 @@ zanimanja = [
 
     this.step3Form = this.fb.group({
       tip: ['', Validators.required],
+      zanimanje: ['', Validators.required],
     });
   }
 
