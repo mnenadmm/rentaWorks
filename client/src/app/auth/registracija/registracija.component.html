@@ -256,7 +256,9 @@
         </div>
         <div *ngIf="step3Form.get('tip')?.value === 'fizicko_lice'">
          <div class="input-icon">
-          <label for="zanimanje">Zanimanje:</label>
+          <label for="zanimanje">
+            <i class="fas fa-briefcase"></i> Zanimanje:
+          </label>
             <select id="zanimanje" formControlName="zanimanje">
               <option *ngFor="let z of zanimanja" [value]="z.id">{{ z.naziv }}</option>
             </select>
