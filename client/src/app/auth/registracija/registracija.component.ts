@@ -155,7 +155,7 @@ export class RegistracijaComponent {
       const payload = {
         ...this.step1Form.value,
         ...this.step2Form.value,
-        ...this.step3Form.value, // uzmi i disabled vrednosti
+        ...this.step3Form.value,
       };
 
       console.log('Registracija uspešna:', payload);
