@@ -1,18 +1,27 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+// Angular Material moduli
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 import {
   FormGroup,
   FormBuilder,
   ReactiveFormsModule,
   Validators,
   AbstractControl,
-  FormsModule
+  FormsModule,
+  
 } from '@angular/forms';
 
 @Component({
   selector: 'app-registracija',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule,MatFormFieldModule,
+  MatInputModule,
+  MatDatepickerModule,
+  MatNativeDateModule ],
   templateUrl: './registracija.component.html',
   styleUrls: ['./registracija.component.css'],
 })
