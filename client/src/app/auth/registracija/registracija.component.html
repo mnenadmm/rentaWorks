@@ -254,7 +254,8 @@
             Izaberite tip korisnika.
           </div>
         </div>
-        <div >
+        <div >  <!-- Prikazujemo samo ako je tip = fizicko_lice -->
+  <div *ngIf="step3Form.get('tip')?.value === 'fizicko_lice'">
           <div class="form-group">
             <label for="zanimanje">Zanimanje</label>
             <div class="input-icon">
@@ -292,6 +293,7 @@
           <button type="button" (click)="prevStep()">Nazad</button>
           <button type="submit" [disabled]="step3Form.invalid">Završi</button>
         </div>
+      </div>
       </ng-container>
     </form>
   </div>
