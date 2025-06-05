@@ -26,7 +26,8 @@ export class RegistracijaComponent {
   isLockedOut = false; // za dugme prikaza lozinke ako je potrebno
     izabranoZanimanjeId: number | null = null;  // ovde se čuva ID izabranog zanimanja
   tipLica: string = ''; // vrednosti: 'fizicko_lice' ili 'pravno_lice' ili nešto drugo
-zanimanja = [
+  today = new Date().toISOString().split('T')[0];
+  zanimanja = [
   { id: 1, naziv: 'Inženjer' },
   { id: 2, naziv: 'Lekar' },
   { id: 3, naziv: 'Nastavnik' },
@@ -75,15 +76,21 @@ zanimanja = [
     this.step3Form = this.fb.group({
       tip: ['', Validators.required],
       zanimanje: ['', Validators.required],
+      datumRodjenja: [{ value: '', disabled: true }, Validators.required],
     });
     // 👉 Logika za resetovanje i kontrolu zanimanja
   this.step3Form.get('tip')?.valueChanges.subscribe(value => {
     const zanimanjeControl = this.step3Form.get('zanimanje');
+    const datumRodjenjaControl = this.step3Form.get('datumRodjenja');
     if (value === 'fizicko_lice') {
       zanimanjeControl?.enable();
+      datumRodjenjaControl?.enable();
     } else {
       zanimanjeControl?.reset();
       zanimanjeControl?.disable();
+
+      datumRodjenjaControl?.reset();
+      datumRodjenjaControl?.disable();
     }
   });
   }
