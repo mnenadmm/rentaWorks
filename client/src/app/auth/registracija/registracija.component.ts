@@ -1,42 +1,50 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
 import {
   FormGroup,
   FormBuilder,
   ReactiveFormsModule,
   Validators,
   AbstractControl,
-  FormsModule 
+  FormsModule
 } from '@angular/forms';
 
 @Component({
   selector: 'app-registracija',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule,FormsModule ],
+  imports: [CommonModule, ReactiveFormsModule, FormsModule],
   templateUrl: './registracija.component.html',
   styleUrls: ['./registracija.component.css'],
 })
 export class RegistracijaComponent {
+  // === Stanje ===
   currentStep = 1;
   totalSteps = 3;
   steps = [1, 2, 3];
-
   showPassword = false;
-  isLockedOut = false; // za dugme prikaza lozinke ako je potrebno
-    izabranoZanimanjeId: number | null = null;  // ovde se čuva ID izabranog zanimanja
-  tipLica: string = ''; // vrednosti: 'fizicko_lice' ili 'pravno_lice' ili nešto drugo
+  isLockedOut = false;
+
+  // === Podaci korisnika ===
+  tipLica: string = '';
+  izabranoZanimanjeId: number | null = null;
   today = new Date().toISOString().split('T')[0];
+
+  // === Forme ===
+  step1Form!: FormGroup;
+  step2Form!: FormGroup;
+  step3Form!: FormGroup;
+
+  // === Podaci iz domena ===
   zanimanja = [
-  { id: 1, naziv: 'Inženjer' },
-  { id: 2, naziv: 'Lekar' },
-  { id: 3, naziv: 'Nastavnik' },
-  { id: 4, naziv: 'Arhitekta' },
-  { id: 5, naziv: 'Programer' },
-  { id: 6, naziv: 'Vodoinstalater' },
-  { id: 7, naziv: 'Poljoprivrednik' },
-  { id: 8, naziv: 'Novinar' },
-];
+    { id: 1, naziv: 'Inženjer' },
+    { id: 2, naziv: 'Lekar' },
+    { id: 3, naziv: 'Nastavnik' },
+    { id: 4, naziv: 'Arhitekta' },
+    { id: 5, naziv: 'Programer' },
+    { id: 6, naziv: 'Vodoinstalater' },
+    { id: 7, naziv: 'Poljoprivrednik' },
+    { id: 8, naziv: 'Novinar' },
+  ];
 
   drzave = [
     { code: 'RS', name: 'Srbija' },
@@ -48,11 +56,16 @@ export class RegistracijaComponent {
     { code: 'AL', name: 'Albanija' },
   ];
 
-  step1Form: FormGroup;
-  step2Form: FormGroup;
-  step3Form: FormGroup;
-
   constructor(private fb: FormBuilder) {
+    this.initStep1Form();
+    this.initStep2Form();
+    this.initStep3Form();
+    this.registerFormListeners();
+  }
+
+  // === Inicijalizacija formi ===
+
+  private initStep1Form() {
     this.step1Form = this.fb.group(
       {
         username: ['', [Validators.required, Validators.minLength(4)]],
@@ -64,7 +77,9 @@ export class RegistracijaComponent {
       },
       { validators: this.passwordsMatchValidator }
     );
+  }
 
+  private initStep2Form() {
     this.step2Form = this.fb.group({
       drzavljanstvo: ['', Validators.required],
       adresa: ['', Validators.required],
@@ -72,83 +87,82 @@ export class RegistracijaComponent {
       grad: ['', Validators.required],
       telefon: ['', Validators.required],
     });
+  }
 
+  private initStep3Form() {
     this.step3Form = this.fb.group({
       tip: ['', Validators.required],
-      zanimanje: ['', Validators.required],
+      zanimanje: [{ value: '', disabled: true }, Validators.required],
       datumRodjenja: [{ value: '', disabled: true }, Validators.required],
     });
-    // 👉 Logika za resetovanje i kontrolu zanimanja
-  this.step3Form.get('tip')?.valueChanges.subscribe(value => {
-    const zanimanjeControl = this.step3Form.get('zanimanje');
-    const datumRodjenjaControl = this.step3Form.get('datumRodjenja');
-    if (value === 'fizicko_lice') {
-      zanimanjeControl?.enable();
-      datumRodjenjaControl?.enable();
-    } else {
-      zanimanjeControl?.reset();
-      zanimanjeControl?.disable();
-
-      datumRodjenjaControl?.reset();
-      datumRodjenjaControl?.disable();
-    }
-  });
   }
 
-  getCurrentForm(): FormGroup {
-    switch (this.currentStep) {
-      case 1:
-        return this.step1Form;
-      case 2:
-        return this.step2Form;
-      case 3:
-        return this.step3Form;
-      default:
-        return this.step1Form;
-    }
+  // === Listeneri i helperi ===
+
+  private registerFormListeners() {
+    this.step3Form.get('tip')?.valueChanges.subscribe(value => {
+      const jeFizicko = value === 'fizicko_lice';
+      this.toggleFormControl('zanimanje', jeFizicko);
+      this.toggleFormControl('datumRodjenja', jeFizicko);
+    });
   }
 
-  passwordsMatchValidator(group: AbstractControl) {
+  private toggleFormControl(controlName: string, enable: boolean) {
+    const control = this.step3Form.get(controlName);
+    if (!control) return;
+    enable ? control.enable() : (control.reset(), control.disable());
+  }
+
+  private passwordsMatchValidator(group: AbstractControl) {
     const password = group.get('password')?.value;
     const confirm = group.get('confirmPassword')?.value;
     return password === confirm ? null : { passwordMismatch: true };
   }
+
+  // === UI interakcije ===
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
 
   nextStep() {
-    if (this.currentStep < this.totalSteps) {
-      this.currentStep++;
-    }
+    if (this.currentStep < this.totalSteps) this.currentStep++;
   }
 
   prevStep() {
-    if (this.currentStep > 1) {
-      this.currentStep--;
+    if (this.currentStep > 1) this.currentStep--;
+  }
+
+  getCurrentForm(): FormGroup {
+    switch (this.currentStep) {
+      case 1: return this.step1Form;
+      case 2: return this.step2Form;
+      case 3: return this.step3Form;
+      default: return this.step1Form;
     }
   }
 
+  // === Slanje forme ===
+
   handleSubmit() {
     const form = this.getCurrentForm();
-
-    if (form.valid) {
-      if (this.currentStep === this.totalSteps) {
-        // Logika za slanje podataka na backend ili dalju obradu
-        console.log('ovo je tip zanimanja ',this.step3Form.value)
-        console.log('Registracija uspešna', {
-          ...this.step1Form.value,
-          ...this.step2Form.value,
-          ...this.step3Form.value,
-        });
-        alert('Registracija uspešna!');
-        // Reset forme ili redirekcija...
-      } else {
-        this.nextStep();
-      }
-    } else {
+    if (!form.valid) {
       form.markAllAsTouched();
+      return;
+    }
+
+    if (this.currentStep === this.totalSteps) {
+      const payload = {
+        ...this.step1Form.value,
+        ...this.step2Form.value,
+        ...this.step3Form.value, // uzmi i disabled vrednosti
+      };
+
+      console.log('Registracija uspešna:', payload);
+      alert('Registracija uspešna!');
+      // TODO: Slanje na backend
+    } else {
+      this.nextStep();
     }
   }
 }
