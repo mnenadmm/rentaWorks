@@ -108,8 +108,8 @@
               {{ showPassword ? '🙈' : '👁️' }}
             </button>
           </div>
-          <div *ngIf="step1Form.get('password')?.touched && step1Form.get('password')?.invalid" class="error">
-            Lozinka je obavezna i mora imati najmanje 8 karaktera.
+          <div *ngIf="getPasswordError()" class="error">
+            {{ getPasswordError() }}
           </div>
         </div>
 
