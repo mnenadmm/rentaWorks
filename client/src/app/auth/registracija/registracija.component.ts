@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-// Angular Material moduli
+
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -81,13 +81,32 @@ export class RegistracijaComponent {
         ime: ['', Validators.required],
         prezime: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required, Validators.minLength(8)]],
+        password: ['',[
+                        Validators.required,
+                        Validators.minLength(8),
+                        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/)
+                      ]
+                  ],
         confirmPassword: ['', Validators.required],
       },
       { validators: this.passwordsMatchValidator }
     );
   }
-
+getPasswordError(): string | null {
+  const control = this.step1Form.get('password');
+  if (control && control.touched && control.errors) {
+    if (control.errors['required']) {
+      return 'Lozinka je obavezna.';
+    }
+    if (control.errors['minlength']) {
+      return 'Lozinka mora imati najmanje 8 karaktera.';
+    }
+    if (control.errors['pattern']) {
+      return 'Lozinka mora sadržati najmanje jedno veliko slovo, malo slovo, broj i specijalni karakter.';
+    }
+  }
+  return null;
+}
   private initStep2Form() {
     this.step2Form = this.fb.group({
       drzavljanstvo: ['', Validators.required],
