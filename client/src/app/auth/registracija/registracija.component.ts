@@ -18,10 +18,12 @@ import {
 @Component({
   selector: 'app-registracija',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule,MatFormFieldModule,
+  imports: [CommonModule, ReactiveFormsModule, FormsModule,
+    MatFormFieldModule,
   MatInputModule,
   MatDatepickerModule,
-  MatNativeDateModule ],
+  MatNativeDateModule 
+],
   templateUrl: './registracija.component.html',
   styleUrls: ['./registracija.component.css'],
 })
