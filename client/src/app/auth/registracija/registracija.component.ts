@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { provideNativeDateAdapter } from '@angular/material/core';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatInputModule } from '@angular/material/input';
+
+
+
+
 import {
   FormGroup,
   FormBuilder,
@@ -17,18 +16,15 @@ import {
 
 @Component({
   selector: 'app-registracija',
-  standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule,
-  MatFormFieldModule,
-  MatInputModule,
-  MatDatepickerModule,
-  MatNativeDateModule 
-],
-  providers: [provideNativeDateAdapter()],
+ 
+
+ 
+
   templateUrl: './registracija.component.html',
   styleUrls: ['./registracija.component.css'],
 })
 export class RegistracijaComponent {
+
   // === Stanje ===
   currentStep = 1;
   totalSteps = 3;
@@ -39,7 +35,9 @@ export class RegistracijaComponent {
   // === Podaci korisnika ===
   tipLica: string = '';
   izabranoZanimanjeId: number | null = null;
-  today = new Date().toISOString().split('T')[0];
+  
+
+  
 
   // === Forme ===
   step1Form!: FormGroup;

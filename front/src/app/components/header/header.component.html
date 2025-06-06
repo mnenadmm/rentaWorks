@@ -1,0 +1,16 @@
+<nav>
+  <div class="logo">RentaWork</div>
+  <div class="hamburger" aria-label="Toggle menu" role="button" tabindex="0"
+       (click)="toggleMenu()" [class.open]="menuOpen">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <ul [class.open]="menuOpen">
+    <li><a class="btn btn-outline-light" routerLink="/" (click)="closeMenu()">Pocetna</a></li>
+    <li><a class="btn btn-outline-light" routerLink="/info" (click)="closeMenu()">Info</a></li>
+    <li><a class="btn btn-outline-light" routerLink="/register" (click)="closeMenu()">Registruj se </a></li>
+    <li><a class="btn btn-outline-light" routerLink="/login" (click)="closeMenu()">Login</a></li>
+  </ul>
+</nav>
+

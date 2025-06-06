@@ -8,7 +8,7 @@ import { RouterModule } from '@angular/router';
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
-  imports: [RouterModule, HeaderComponent, FooterComponent]
+ 
 })
 export class AppComponent implements AfterViewInit {
   title = 'client';

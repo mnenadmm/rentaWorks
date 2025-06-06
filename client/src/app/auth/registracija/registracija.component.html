@@ -267,23 +267,16 @@
           </div>
 <div class="form-group">
   <label for="datumRodjenja">Datum rođenja</label>
-  <mat-form-field appearance="outline" class="full-width">
-    <mat-label>Izaberite datum</mat-label>
-    <input
-      matInput
-      [matDatepicker]="picker"
-      id="datumRodjenja"
-      formControlName="datumRodjenja"
-      [max]="today"
-    />
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-  <div
-    *ngIf="step3Form.get('datumRodjenja')?.touched && step3Form.get('datumRodjenja')?.invalid"
-    class="error"
-  >
-    Unesite datum rođenja.
+  <input
+    type="text"
+    id="datumRodjenja"
+    class="form-control"
+    formControlName="datumRodjenja"
+    [flatpickr]="flatpickrOptions"
+    placeholder="Izaberite datum"
+  />
+  <div class="text-danger mt-1" *ngIf="step3Form.get('datumRodjenja')?.touched && step3Form.get('datumRodjenja')?.invalid">
+    Datum rođenja je obavezan.
   </div>
 </div>
         </div>

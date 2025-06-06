@@ -21,4 +21,3 @@ closeMenu() {
   this.setMenuState(false);
 }
 }
-
