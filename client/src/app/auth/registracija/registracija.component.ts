@@ -124,7 +124,7 @@ getPasswordError(): string | null {
     this.step3Form = this.fb.group({
       tip: ['', Validators.required],
       zanimanje: [{ value: '', disabled: true }, Validators.required],
-      datumRodjenja: [{ value: '', disabled: true }, Validators.required],
+      datumRodjenja: ['', Validators.required],
     });
   }
 
@@ -138,11 +138,17 @@ getPasswordError(): string | null {
     });
   }
 
-  private toggleFormControl(controlName: string, enable: boolean) {
-    const control = this.step3Form.get(controlName);
-    if (!control) return;
-    enable ? control.enable() : (control.reset(), control.disable());
+ private toggleFormControl(controlName: string, enable: boolean) {
+  const control = this.step3Form.get(controlName);
+  if (!control) return;
+  if (enable) {
+    control.enable();
+  } else {
+    control.reset();
+    control.disable();
   }
+  control.updateValueAndValidity(); 
+}
 
   private passwordsMatchValidator(group: AbstractControl) {
     const password = group.get('password')?.value;
