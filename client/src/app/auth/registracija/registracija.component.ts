@@ -19,7 +19,7 @@ import {
   selector: 'app-registracija',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, FormsModule,
-    MatFormFieldModule,
+  MatFormFieldModule,
   MatInputModule,
   MatDatepickerModule,
   MatNativeDateModule 
