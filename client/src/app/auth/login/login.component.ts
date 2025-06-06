@@ -1,14 +1,9 @@
 import { Component, OnDestroy } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
 import { LoginLockService } from '../../services/login-lock.service';
 import { Subscription } from 'rxjs';
-import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-login',
-  standalone: true,
-  imports: [FormsModule, CommonModule, RouterModule],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
