@@ -33,7 +33,8 @@ class Korisnik(db.Model):
     datum_registracije = db.Column(db.DateTime, default=datetime.utcnow)
     aktivan = db.Column(db.Boolean, default=True)
     verifikovan_email = db.Column(db.Boolean, default=False)
-    
+    # dodati jmbg
+    # dodati broj adrese
     profilna_slika = db.Column(db.String(255), nullable=True)
     biografija = db.Column(db.Text, nullable=True)
     grad = db.Column(db.String(100), nullable=True)
