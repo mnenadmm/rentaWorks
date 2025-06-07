@@ -16,10 +16,7 @@ import {
 
 @Component({
   selector: 'app-registracija',
- 
-
- 
-
+  standalone:false,
   templateUrl: './registracija.component.html',
   styleUrls: ['./registracija.component.css'],
 })
