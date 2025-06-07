@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { HeaderComponent } from './components/header/header.component';
 
 @Component({
   selector: 'app-root',
+  standalone: false,
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
-  imports: [HeaderComponent]
+  styleUrls: ['./app.component.css']  // ovde mora biti styleUrls i niz
 })
 export class AppComponent {
   title = 'front';
