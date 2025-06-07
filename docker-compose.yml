@@ -45,14 +45,14 @@ services:
       - .env
     networks:
       - backend-net
-  front:
+  client:
     build:
-      context: ./front
+      context: ./client
       dockerfile: Dockerfile.dev
-    image: zadruga-front:dev
+    image: zadruga-client:dev
     restart: unless-stopped
     volumes:
-      - ./front:/app
+      - ./client:/app
       - /app/node_modules
     ports:
       - "4200:4200"
@@ -71,9 +71,9 @@ services:
       - "443:443"
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./front/dist:/usr/share/nginx/html
+      - ./client/dist:/usr/share/nginx/html
     depends_on:
-      - front
+      - client
       - backend
       - pgadmin
     networks:
