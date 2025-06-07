@@ -1,5 +1,5 @@
 // app.module.ts
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
@@ -30,6 +30,7 @@ import { LoginComponent } from './auth/login/login.component';
     FormsModule,
     RouterModule.forRoot(routes),
     RegistracijaModule,
+    ReactiveFormsModule,
     // ostali moduli
   ],
   bootstrap: [AppComponent]
