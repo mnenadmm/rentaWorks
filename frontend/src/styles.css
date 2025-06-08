@@ -1,1 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+/* Globalni stilovi koji važe za celu aplikaciju */
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body se postavlja kao flex container da bi sticky footer radio */
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
