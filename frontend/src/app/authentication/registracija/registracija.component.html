@@ -272,7 +272,7 @@
     id="datumRodjenja"
     class="form-control"
     formControlName="datumRodjenja"
-    [disabled]="isDatumRodjenjaDisabled"
+    formControl]="step3Form.get('datumRodjenja')" 
   />
   <div class="text-danger mt-1" *ngIf="step3Form.get('datumRodjenja')?.touched && step3Form.get('datumRodjenja')?.invalid">
     Datum rođenja je obavezan.
