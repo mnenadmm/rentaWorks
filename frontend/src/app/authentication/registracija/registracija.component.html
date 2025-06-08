@@ -266,23 +266,22 @@
             </div>
           </div>
           </div>
-  <div *ngIf="step3Form.get('tip')?.value === 'fizicko_lice'">
-  <mat-form-field appearance="fill" class="w-100">
-    <mat-label>Datum rođenja</mat-label>
-    <input
-      matInput
-      [matDatepicker]="picker"
-      formControlName="datumRodjenja"
-      [max]="maxDate"
-    />
-    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-    <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field>
-
+    <div *ngIf="step3Form.get('tip')?.value === 'fizicko_lice'">
+        <div class="form-group">
+  <label for="datumRodjenja">Datum rođenja</label>
+  <input
+    type="date"
+    id="datumRodjenja"
+    class="form-control custom-date"
+    formControlName="datumRodjenja"
+    [max]="maxDate"
+  />
   <div class="text-danger mt-1" *ngIf="step3Form.get('datumRodjenja')?.touched && step3Form.get('datumRodjenja')?.invalid">
     Datum rođenja je obavezan.
   </div>
 </div>
+
+    </div>
 
         
 
