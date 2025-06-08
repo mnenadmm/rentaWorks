@@ -5,7 +5,7 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile.dev  # koristi za razvoj (otkomentariši po potrebi)
-      # dockerfile: Dockerfile.prod  # koristi za produkciju
+      # dockerfile: Dockerfile.prod  # koristi za produkcijuqq
     image: zadruga-backend:dev
     restart: unless-stopped
     volumes:
