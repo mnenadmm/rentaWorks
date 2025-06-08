@@ -113,7 +113,7 @@ getPasswordError(): string | null {
     this.step3Form = this.fb.group({
       tip: ['', Validators.required],
       zanimanje: [{ value: '', disabled: true }, Validators.required],
-      datumRodjenja: ['', Validators.required],
+      datumRodjenja: [{ value: '', disabled: true },, Validators.required],
     });
   }
 get isDatumRodjenjaDisabled(): boolean {
