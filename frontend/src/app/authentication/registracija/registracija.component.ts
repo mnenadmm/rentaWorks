@@ -56,8 +56,10 @@ export class RegistracijaComponent {
     { code: 'ME', name: 'Crna Gora' },
     { code: 'AL', name: 'Albanija' },
   ];
-
+  maxDate: string;
   constructor(private fb: FormBuilder) {
+      const today = new Date();
+    this.maxDate = today.toISOString().split('T')[0]; // format: YYYY-MM-DD
     this.initStep1Form();
     this.initStep2Form();
     this.initStep3Form();

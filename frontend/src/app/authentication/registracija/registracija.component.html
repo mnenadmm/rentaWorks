@@ -272,9 +272,9 @@
   <input
     type="date"
     id="datumRodjenja"
-    class="form-control"
+    class="form-control custom-date"
     formControlName="datumRodjenja"
-    
+    [max]="maxDate"
   />
   <div class="text-danger mt-1" *ngIf="step3Form.get('datumRodjenja')?.touched && step3Form.get('datumRodjenja')?.invalid">
     Datum rođenja je obavezan.
