@@ -114,6 +114,28 @@ label {
   opacity: 0.55; /* Blago providna */
   user-select: none; /* Ne može da se selektuje */
 }
+/* Stilizacija za <input type="date"> sa klasom .custom-date */
+input[type="date"].custom-date {
+  appearance: none;                 /* Uklanja default stilove inputa */
+  -webkit-appearance: none;         /* Uklanja default stilove u WebKit browserima (Chrome, Safari) */
+  -moz-appearance: none;            /* Uklanja default stilove u Firefox-u */
+
+  padding: 8px 12px;                /* Unutrašnji razmak (gore-dole: 8px, levo-desno: 12px) */
+  border: 1px solid #ccc;           /* Siva ivica */
+  border-radius: 6px;               /* Zaobljeni uglovi inputa */
+  font-size: 16px;                  /* Veličina teksta u inputu */
+  background-color: #fff;           /* Bela pozadina inputa */
+  color: #333;                      /* Tamno siva boja teksta */
+  width: 100%;                      /* Input zauzima celu širinu roditeljskog elementa */
+  box-sizing: border-box;           /* Padding i border se uključuju u ukupnu širinu */
+}
+
+/* Stilizacija ikone kalendara unutar date inputa (radi u WebKit browserima) */
+input[type="date"].custom-date::-webkit-calendar-picker-indicator {
+  filter: invert(0.4);              /* Lagano potamni ikonicu da se bolje vidi na svetloj pozadini */
+  cursor: pointer;                  /* Menja pokazivač miša u "ruku" kada je iznad ikonice */
+}
+
 
 /* Wrapper za password input i dugme za toggle */
 .password-wrapper {
