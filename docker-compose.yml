@@ -52,7 +52,7 @@ services:
     image: zadruga-frontend
     restart: unless-stopped
     volumes:
-      - ./frontend
+      - ./frontend:/app
       - /app/node_modules
     ports:
       - "4200:4200"
