@@ -116,7 +116,9 @@ getPasswordError(): string | null {
       datumRodjenja: ['', Validators.required],
     });
   }
-
+get isDatumRodjenjaDisabled(): boolean {
+  return this.step3Form.get('datumRodjenja')?.disabled ?? false;
+}
   // === Listeneri i helperi ===
 
   private registerFormListeners() {
