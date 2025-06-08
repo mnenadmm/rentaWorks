@@ -9,6 +9,12 @@ import { FooterComponent } from './components/footer/footer.component';
 import { LoginComponent } from './authentication/login/login.component';
 import { ResetPasswordComponent } from './authentication/reset-password/reset-password.component';
 import { RegistracijaComponent } from './authentication/registracija/registracija.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,10 +28,16 @@ import { RegistracijaComponent } from './authentication/registracija/registracij
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule 
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    BrowserAnimationsModule,
+    MatFormFieldModule,   
+    MatInputModule ,
   ],
   providers: [
-    provideClientHydration(withEventReplay())
+    provideClientHydration(withEventReplay()),
+    { provide: MAT_DATE_LOCALE, useValue: 'sr-RS' }
   ],
   bootstrap: [AppComponent]
 })
