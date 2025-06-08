@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component} from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
@@ -56,10 +56,9 @@ export class RegistracijaComponent {
     { code: 'ME', name: 'Crna Gora' },
     { code: 'AL', name: 'Albanija' },
   ];
-  maxDate: string;
+maxDate: Date = new Date();
   constructor(private fb: FormBuilder) {
-      const today = new Date();
-    this.maxDate = today.toISOString().split('T')[0]; // format: YYYY-MM-DD
+
     this.initStep1Form();
     this.initStep2Form();
     this.initStep3Form();
