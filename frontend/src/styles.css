@@ -1,6 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 /* Globalni stilovi koji važe za celu aplikaciju */
-@import "~@eonasdan/tempus-dominus/dist/css/tempus-dominus.min.css";
+
+
+
 
 html, body {
   height: 100%;
