@@ -1,6 +1,9 @@
 import { Component, AfterViewInit } from '@angular/core';
 // Import iz Tempus Dominus biblioteke
-import { TempusDominus, DateTime } from '@eonasdan/tempus-dominus';
+import { TempusDominus} from '@eonasdan/tempus-dominus';
+const { DateTime } = require("luxon");
+
+
 import {
   FormGroup,
   FormBuilder,
@@ -17,7 +20,7 @@ export class RegistracijaComponent implements AfterViewInit {
     // Instance datepickera
   
   picker!: TempusDominus;
- maxDate = new DateTime(new Date());
+maxDate = DateTime.now().toJSDate();
   // === Stanje ===
   currentStep = 1;
   totalSteps = 3;
