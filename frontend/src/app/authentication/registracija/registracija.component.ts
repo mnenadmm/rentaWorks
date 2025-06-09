@@ -1,6 +1,4 @@
 import { Component, AfterViewInit } from '@angular/core';
-// Import iz Tempus Dominus biblioteke
-
 
 
 import {
@@ -18,8 +16,7 @@ import {
 export class RegistracijaComponent implements AfterViewInit {
     // Instance datepickera
   
-
-
+  // Ograničava na današnji datum i ranije
   // === Stanje ===
   currentStep = 1;
   totalSteps = 3;
@@ -199,10 +196,15 @@ get isDatumRodjenjaDisabled(): boolean {
       this.nextStep();
     }
   }
+  selectedDate?: Date;
+
+onDateSelected(date: Date) {
+  this.selectedDate = date;
+  console.log('Izabrani datum:', date);
+}
   // *** NOVO *** Inicijalizacija Tempus Dominus datepickera nakon što je view inicijalizovan
   ngAfterViewInit(): void {
-   const element = document.getElementById('datetimepicker')!;
-
+   
 }
 
 
