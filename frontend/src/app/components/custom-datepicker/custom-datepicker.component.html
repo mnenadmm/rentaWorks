@@ -1,0 +1,16 @@
+<div class="calendar">
+  <div class="header">
+    <button (click)="prevMonth()">&#8592;</button>
+    <span>{{ getMonthName() }} {{ currentYear }}</span>
+    <button (click)="nextMonth()">&#8594;</button>
+  </div>
+  <div class="days">
+    <button 
+      *ngFor="let day of days" 
+      (click)="selectDay(day)" 
+      [class.selected]="selectedDate?.getDate() === day && selectedDate?.getMonth() === currentMonth && selectedDate?.getFullYear() === currentYear"
+    >
+      {{ day }}
+    </button>
+  </div>
+</div>

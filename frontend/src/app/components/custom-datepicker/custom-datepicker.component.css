@@ -1,0 +1,34 @@
+.calendar {
+  width: 250px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  user-select: none;
+  font-family: Arial, sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  align-items: center;
+}
+
+.days {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+}
+
+.days button {
+  padding: 8px 0;
+  background-color: white;
+  border: 1px solid #ddd;
+  cursor: pointer;
+  border-radius: 3px;
+}
+
+.days button.selected {
+  background-color: #007bff;
+  color: white;
+  font-weight: bold;
+}

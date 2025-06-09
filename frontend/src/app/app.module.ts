@@ -9,6 +9,7 @@ import { FooterComponent } from './components/footer/footer.component';
 import { LoginComponent } from './authentication/login/login.component';
 import { ResetPasswordComponent } from './authentication/reset-password/reset-password.component';
 import { RegistracijaComponent } from './authentication/registracija/registracija.component';
+import { CustomDatepickerComponent } from './components/custom-datepicker/custom-datepicker.component';
 
 
 @NgModule({
@@ -18,7 +19,8 @@ import { RegistracijaComponent } from './authentication/registracija/registracij
     FooterComponent,
     LoginComponent,
     ResetPasswordComponent,
-    RegistracijaComponent
+    RegistracijaComponent,
+    CustomDatepickerComponent
   ],
   imports: [
     BrowserModule,

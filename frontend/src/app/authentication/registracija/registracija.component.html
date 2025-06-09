@@ -268,18 +268,8 @@
           </div>
     <div *ngIf="step3Form.get('tip')?.value === 'fizicko_lice'">
         <div class="form-group">
-  <label for="datumRodjenja">Datum rođenja</label>
- 
-    <input
-      type="text"
-      id="datumRodjenja"
-      class="form-control"
-      formControlName="datumRodjenja"
-     
-    />
-    <span class="input-group-text" data-td-toggle="datetimepicker" data-td-target="#datetimepicker">
-      <i class="bi bi-calendar"></i>
-    </span>
+ <app-custom-datepicker (dateSelected)="onDateSelected($event)"></app-custom-datepicker>
+<p>Izabrani datum: {{ selectedDate | date: 'dd.MM.yyyy' }}</p>
  
   <div class="text-danger mt-1" *ngIf="step3Form.get('datumRodjenja')?.touched && step3Form.get('datumRodjenja')?.invalid">
     Datum rođenja je obavezan.
