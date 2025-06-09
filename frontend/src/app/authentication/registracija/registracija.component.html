@@ -268,18 +268,24 @@
           </div>
     <div *ngIf="step3Form.get('tip')?.value === 'fizicko_lice'">
         <div class="form-group">
-          <label for="datumRodjenja">Datum rođenja</label>
-          <input
-            type="date"
-            id="datumRodjenja"
-            class="form-control custom-date"
-            formControlName="datumRodjenja"
-            [max]="maxDate"
-          />
-          <div class="text-danger mt-1" *ngIf="step3Form.get('datumRodjenja')?.touched && step3Form.get('datumRodjenja')?.invalid">
-            Datum rođenja je obavezan.
-          </div>
-      </div>
+  <label for="datumRodjenja">Datum rođenja</label>
+  <div class="input-group date" id="datetimepicker" data-td-target-input="nearest" data-td-target-toggle="nearest">
+    <input
+      type="text"
+      id="datumRodjenja"
+      class="form-control"
+      formControlName="datumRodjenja"
+      data-td-target="#datetimepicker"
+      autocomplete="off"
+    />
+    <span class="input-group-text" data-td-toggle="datetimepicker" data-td-target="#datetimepicker">
+      <i class="bi bi-calendar"></i>
+    </span>
+  </div>
+  <div class="text-danger mt-1" *ngIf="step3Form.get('datumRodjenja')?.touched && step3Form.get('datumRodjenja')?.invalid">
+    Datum rođenja je obavezan.
+  </div>
+</div>
 
     </div>
 

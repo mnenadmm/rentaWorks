@@ -1,11 +1,11 @@
-import { Component} from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
+// Import iz Tempus Dominus biblioteke
+import { TempusDominus, DateTime } from '@eonasdan/tempus-dominus';
 import {
   FormGroup,
   FormBuilder,
   Validators,
   AbstractControl,
-
-  
 } from '@angular/forms';
 @Component({
   selector: 'app-registracija',
@@ -13,8 +13,11 @@ import {
   templateUrl: './registracija.component.html',
   styleUrl: './registracija.component.css'
 })
-export class RegistracijaComponent {
-  maxDate: Date = new Date();
+export class RegistracijaComponent implements AfterViewInit {
+    // Instance datepickera
+  
+  picker!: TempusDominus;
+ maxDate = new DateTime(new Date());
   // === Stanje ===
   currentStep = 1;
   totalSteps = 3;
@@ -194,4 +197,32 @@ get isDatumRodjenjaDisabled(): boolean {
       this.nextStep();
     }
   }
+  // *** NOVO *** Inicijalizacija Tempus Dominus datepickera nakon što je view inicijalizovan
+  ngAfterViewInit(): void {
+   const element = document.getElementById('datetimepicker')!;
+  this.picker = new TempusDominus(element, {
+      display: {
+        components: {
+          calendar: true,
+          date: true,
+          month: true,
+          year: true,
+          decades: true,
+          clock: false,
+          hours: false,
+          minutes: false,
+          seconds: false,
+        }
+      },
+      restrictions: {
+        maxDate: this.maxDate,
+      }
+    });
 }
+
+
+
+
+
+}
+
