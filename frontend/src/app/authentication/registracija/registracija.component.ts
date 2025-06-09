@@ -2,7 +2,6 @@ import { Component} from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
- 
   Validators,
   AbstractControl,
 
@@ -15,13 +14,14 @@ import {
   styleUrl: './registracija.component.css'
 })
 export class RegistracijaComponent {
-
+  maxDate: Date = new Date();
   // === Stanje ===
   currentStep = 1;
   totalSteps = 3;
   steps = [1, 2, 3];
   showPassword = false;
   isLockedOut = false;
+
 
   // === Podaci korisnika ===
   tipLica: string = '';
@@ -56,7 +56,7 @@ export class RegistracijaComponent {
     { code: 'ME', name: 'Crna Gora' },
     { code: 'AL', name: 'Albanija' },
   ];
-maxDate: Date = new Date();
+
   constructor(private fb: FormBuilder) {
 
     this.initStep1Form();
