@@ -140,3 +140,21 @@ input[type="date"].custom-date:focus {
   box-shadow: 0 0 0 3px #7b61ffaa;
   background: rgba(255, 255, 255, 0.98);
 }
+
+.input-icon {
+  display: flex;
+  align-items: center;
+  width: 300px; /* ili max-width: 100% da se prilagodi */
+  gap: 8px; /* razmak između ikone i inputa */
+}
+
+.input-icon i.icon {
+  flex-shrink: 0; /* Ikona neće da se menja u veličini */
+  font-size: 1.2rem; /* po potrebi */
+}
+
+.input-icon .custom-date {
+  flex-grow: 1;  /* input zauzima preostali prostor */
+  min-width: 0;  /* sprečava prelazak u novi red */
+  box-sizing: border-box;
+}
