@@ -122,7 +122,7 @@ button:disabled {
 /* Osnovni stil za input date da ima istu širinu kao ostali inputi */
 input[type="date"].custom-date {
   width: 100%;           /* Širina isto kao ostali inputi */
-  background-color: rgba(255, 255, 255, 0.85); /* Poluprozirna bela pozadina, isto kao kod zanimanja */
+  background-color: rgba(240, 8, 8, 0.85); /* Poluprozirna bela pozadina, isto kao kod zanimanja */
   padding: 0.5rem 1rem;  /* Padding da bude isti kao kod drugih inputa */
   border-radius: 12px;   /* Zaobljeni uglovi */
   border: none;          /* Bez ivice (kao zanimanje) */
@@ -141,20 +141,3 @@ input[type="date"].custom-date:focus {
   background: rgba(255, 255, 255, 0.98);
 }
 
-.input-icon {
-  display: flex;
-  align-items: center;
-  width: 300px; /* ili max-width: 100% da se prilagodi */
-  gap: 8px; /* razmak između ikone i inputa */
-}
-
-.input-icon i.icon {
-  flex-shrink: 0; /* Ikona neće da se menja u veličini */
-  font-size: 1.2rem; /* po potrebi */
-}
-
-.input-icon .custom-date {
-  flex-grow: 1;  /* input zauzima preostali prostor */
-  min-width: 0;  /* sprečava prelazak u novi red */
-  box-sizing: border-box;
-}
