@@ -6,7 +6,7 @@
 
 /* Stil za input - isti kao ostali inputi sa ikonama */
 .custom-date {
-  width: 200px;
+  width:100%;
   padding: 8px 12px;
   border-radius: 12px;
   border: none;
@@ -121,8 +121,7 @@ button:disabled {
 }
 /* Osnovni stil za input date da ima istu širinu kao ostali inputi */
 input[type="date"].custom-date {
-    
-  width: 420px; ;           /* Širina isto kao ostali inputi */
+  width: 100%;           /* Širina isto kao ostali inputi */
   background-color: rgba(255, 255, 255, 0.85); /* Poluprozirna bela pozadina, isto kao kod zanimanja */
   padding: 0.5rem 1rem;  /* Padding da bude isti kao kod drugih inputa */
   border-radius: 12px;   /* Zaobljeni uglovi */
