@@ -2,6 +2,7 @@
   <input 
     type="text" 
     readonly 
+    class="custom-date"
     (click)="toggleCalendar()" 
     [value]="selectedDate ? selectedDate.toLocaleDateString() : 'Odaberi datum rođenja'"
   />
@@ -30,8 +31,8 @@
                           selectedDate?.getMonth() === currentMonth &&
                           selectedDate?.getFullYear() === currentYear"
         >
-                        {{ day }}
-    </button>
+        {{ day }}
+      </button>
     </div>
   </div>
 </div>
