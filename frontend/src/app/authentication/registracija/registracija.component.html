@@ -271,8 +271,7 @@
   <label for="datumRodjenja">Datum rođenja</label>
   <div class="input-icon">
     <i class="icon">📅</i> <!-- Možeš izmeniti ikonicu po želji -->
-   <i class="icon">📅</i>
-        <app-custom-datepicker formControlName="datumRodjenja" (dateSelected)="onDateSelected($event)"></app-custom-datepicker>
+    <app-custom-datepicker (dateSelected)="onDateSelected($event)"></app-custom-datepicker>
   </div>
   <p>Izabrani datum: {{ selectedDate | date: 'dd.MM.yyyy' }}</p>
 
@@ -280,7 +279,6 @@
     Datum rođenja je obavezan.
   </div>
 </div>
-
 
     </div>
 
