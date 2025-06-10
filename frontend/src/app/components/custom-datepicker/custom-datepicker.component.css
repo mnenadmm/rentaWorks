@@ -1,34 +1,69 @@
+.datepicker-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+input {
+  padding: 8px;
+  width: 200px;
+  cursor: pointer;
+}
+
 .calendar {
-  width: 250px;
+  position: absolute;
+  background: white;
   border: 1px solid #ccc;
   padding: 10px;
-  user-select: none;
-  font-family: Arial, sans-serif;
+  z-index: 100;
+  width: 220px;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px;
   align-items: center;
+  margin-bottom: 10px;
+}
+
+.header span {
+  cursor: pointer;
+  font-weight: bold;
 }
 
 .days {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 5px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
 }
 
 .days button {
-  padding: 8px 0;
-  background-color: white;
-  border: 1px solid #ddd;
-  cursor: pointer;
-  border-radius: 3px;
+  width: 30px;
+  height: 30px;
 }
 
-.days button.selected {
+button.selected {
   background-color: #007bff;
   color: white;
-  font-weight: bold;
+  border-radius: 50%;
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.year-picker {
+  max-height: 150px;
+  overflow-y: auto;
+  border-top: 1px solid #eee;
+  margin-top: 5px;
+}
+
+.year-picker div {
+  padding: 4px 8px;
+  cursor: pointer;
+}
+
+.year-picker div:hover {
+  background-color: #f0f0f0;
 }
