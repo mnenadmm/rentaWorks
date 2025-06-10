@@ -1,58 +1,142 @@
-/* Stil za <input type="date"> koji je u wrapperu sa ikonom, isti kao ostali inputi */
-input[type="date"].custom-date {
-  width: 100%;                     /* Isto kao kod ostalih inputa */
-  padding: 0.5rem 1rem 0.5rem 2.5rem; /* Isti padding kao kod inputa sa ikonom */
-  border: none;                   /* Bez ivice kao kod ostalih inputa */
-  border-radius: 12px;            /* Zaobljeni uglovi */
-  background: rgba(255, 255, 255, 0.85); /* Poluprozirna bela pozadina */
-  font-size: 0.9rem;              /* Veličina fonta kao kod ostalih inputa */
-  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.06); /* Blaga unutrašnja senka */
-  color: #222;                   /* Tamna boja teksta */
-  font-weight: 500;              /* Srednje podebljano */
-  caret-color: #7b61ff;          /* Boja kursora */
-  box-sizing: border-box;        /* Padding i border uračunati u širinu */
-  appearance: none;              /* Uklanja default stil */
-  -webkit-appearance: none;
-  -moz-appearance: none;
+.datepicker-wrapper {
+  position: relative;
+  display: inline-block;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Stil placeholdera ako treba (u zavisnosti od browsera) */
-input[type="date"].custom-date::placeholder {
-  color: #9a9a9a;
-  font-weight: 400;
+/* Stil za input - isti kao ostali inputi sa ikonama */
+.custom-date {
+  width: 200px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: none;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.06);
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: #222;
+  font-weight: 500;
+  caret-color: #7b61ff;
+  box-sizing: border-box;
+  user-select: none;
+  background: rgba(255, 255, 255, 0.85);
+  transition: box-shadow 0.25s ease, background 0.25s ease;
 }
 
-/* Focus efekat kao i kod ostalih inputa */
-input[type="date"].custom-date:focus {
+.custom-date:focus {
   outline: none;
   box-shadow: 0 0 0 3px #7b61ffaa;
   background: rgba(255, 255, 255, 0.98);
 }
 
-/* Stilizacija ikone kalendara unutar date inputa (radi u WebKit browserima) */
-input[type="date"].custom-date::-webkit-calendar-picker-indicator {
-  filter: invert(0.4);
+.calendar {
+  position: absolute;
+  background: white;
+  border: 1px solid #ccc;
+  padding: 10px;
+  z-index: 100;
+  width: 220px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-weight: 600;
+  color: #444;
+}
+
+.header button {
+  background: none;
+  border: none;
   cursor: pointer;
-  right: 1rem; /* Dodaj malo marginu sa desne strane da se ne preklapa */
-  position: absolute;
+  font-size: 1.2rem;
+  padding: 0 6px;
+  color: #7b61ff;
+  border-radius: 6px;
+  transition: background-color 0.2s ease;
 }
 
-/* Wrapper za input sa ikonama kao i kod zanimanja */
-.input-icon {
-  position: relative;
+.header button:hover {
+  background-color: #e0d9ff;
 }
 
-.input-icon input[type="date"].custom-date {
-  padding-left: 2.5rem; /* Razmak sa leve strane za ikonu */
-}
-
-/* Ikonica kalendara (možeš dodati i svoju) */
-.input-icon .icon {
-  position: absolute;
-  top: 50%;
-  left: 1rem;
-  transform: translateY(-50%);
-  font-size: 1.3rem;
-  opacity: 0.55;
+.header span {
+  cursor: pointer;
   user-select: none;
+}
+
+.days {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.days button {
+  width: 30px;
+  height: 30px;
+  border: none;
+  border-radius: 6px;
+  background-color: transparent;
+  cursor: pointer;
+  font-weight: 500;
+  color: #444;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.days button:hover:not(:disabled) {
+  background-color: #ddd;
+}
+
+button.selected {
+  background-color: #7b61ff;
+  color: white;
+  border-radius: 50%;
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.year-picker {
+  max-height: 150px;
+  overflow-y: auto;
+  border-top: 1px solid #eee;
+  margin-top: 5px;
+}
+
+.year-picker div {
+  padding: 6px 10px;
+  cursor: pointer;
+  border-radius: 6px;
+  user-select: none;
+  transition: background-color 0.2s ease;
+}
+
+.year-picker div:hover {
+  background-color: #f0f0f0;
+}
+/* Osnovni stil za input date da ima istu širinu kao ostali inputi */
+input[type="date"].custom-date {
+  width: 100%;           /* Širina isto kao ostali inputi */
+  background-color: rgba(255, 255, 255, 0.85); /* Poluprozirna bela pozadina, isto kao kod zanimanja */
+  padding: 0.5rem 1rem;  /* Padding da bude isti kao kod drugih inputa */
+  border-radius: 12px;   /* Zaobljeni uglovi */
+  border: none;          /* Bez ivice (kao zanimanje) */
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.06); /* Blaga unutrašnja senka */
+  font-size: 0.9rem;     /* Isto kao zanimanje */
+  color: #222;           /* Tekst boja */
+  font-weight: 500;
+  box-sizing: border-box;
+  caret-color: #7b61ff;  /* Boja kursora */
+}
+
+/* Fokus stil da bude kao kod zanimanja */
+input[type="date"].custom-date:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px #7b61ffaa;
+  background: rgba(255, 255, 255, 0.98);
 }
