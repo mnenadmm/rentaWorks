@@ -1,16 +1,37 @@
-<div class="calendar">
-  <div class="header">
-    <button (click)="prevMonth()">&#8592;</button>
-    <span>{{ getMonthName() }} {{ currentYear }}</span>
-    <button (click)="nextMonth()">&#8594;</button>
-  </div>
-  <div class="days">
-    <button 
-      *ngFor="let day of days" 
-      (click)="selectDay(day)" 
-      [class.selected]="selectedDate?.getDate() === day && selectedDate?.getMonth() === currentMonth && selectedDate?.getFullYear() === currentYear"
-    >
-      {{ day }}
+<div class="datepicker-wrapper">
+  <input 
+    type="text" 
+    readonly 
+    (click)="toggleCalendar()" 
+    [value]="selectedDate ? selectedDate.toLocaleDateString() : 'Odaberi datum rođenja'"
+  />
+
+  <div class="calendar" *ngIf="showCalendar">
+    <div class="header">
+      <button (click)="prevMonth()">&#8592;</button>
+      <span (click)="toggleYearPicker()">
+        {{ getMonthName() }} {{ currentYear }}
+      </span>
+      <button (click)="nextMonth()">&#8594;</button>
+    </div>
+
+    <div class="year-picker" *ngIf="showYearPicker">
+      <div *ngFor="let year of years" (click)="selectYear(year)">
+        {{ year }}
+      </div>
+    </div>
+
+    <div class="days" *ngIf="!showYearPicker">
+      <button 
+        *ngFor="let day of days" 
+        (click)="selectDay(day)" 
+        [disabled]="isFutureDate(day)"
+        [class.selected]="selectedDate?.getDate() === day &&
+                          selectedDate?.getMonth() === currentMonth &&
+                          selectedDate?.getFullYear() === currentYear"
+        >
+                        {{ day }}
     </button>
+    </div>
   </div>
 </div>
