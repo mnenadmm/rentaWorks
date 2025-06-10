@@ -18,7 +18,7 @@
   caret-color: #7b61ff;
   box-sizing: border-box;
   user-select: none;
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(34, 237, 7, 0.85);
   transition: box-shadow 0.25s ease, background 0.25s ease;
 }
 
