@@ -21,7 +21,8 @@ export class RegistracijaComponent implements OnInit {
 
   tipLica: string = '';
   izabranoZanimanjeId: number | null = null;
-  formSuccess = false;
+  successMessage = '';
+
 
   step1Form!: FormGroup;
   step2Form!: FormGroup;
@@ -184,7 +185,8 @@ export class RegistracijaComponent implements OnInit {
       };
       console.log('poslali smo formu ',payload)
       
-    this.formSuccess = true;
+    const email = this.step1Form.get('email')?.value || '[nepoznat email]';
+    this.successMessage = `Na email: ${email} je poslat link za verifikaciju. Proverite svoj inbox.`;
       // TODO: Slanje na backend
     } else {
       this.nextStep();
