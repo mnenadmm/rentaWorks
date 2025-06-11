@@ -1,43 +1,31 @@
-import { Component, AfterViewInit } from '@angular/core';
-
-
+import { Component, OnInit } from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
   Validators,
   AbstractControl,
 } from '@angular/forms';
+
 @Component({
   selector: 'app-registracija',
   standalone: false,
   templateUrl: './registracija.component.html',
-  styleUrl: './registracija.component.css'
+  styleUrls: ['./registracija.component.css']  // ispravno styleUrls
 })
-export class RegistracijaComponent implements AfterViewInit {
-    // Instance datepickera
-  
-  // Ograničava na današnji datum i ranije
-  // === Stanje ===
+export class RegistracijaComponent implements OnInit {
   currentStep = 1;
   totalSteps = 3;
   steps = [1, 2, 3];
   showPassword = false;
   isLockedOut = false;
 
-
-  // === Podaci korisnika ===
   tipLica: string = '';
   izabranoZanimanjeId: number | null = null;
-  
 
-  
-
-  // === Forme ===
   step1Form!: FormGroup;
   step2Form!: FormGroup;
   step3Form!: FormGroup;
 
-  // === Podaci iz domena ===
   zanimanja = [
     { id: 1, naziv: 'Inženjer' },
     { id: 2, naziv: 'Lekar' },
@@ -60,14 +48,15 @@ export class RegistracijaComponent implements AfterViewInit {
   ];
 
   constructor(private fb: FormBuilder) {
+    // Konstruktor samo dependency injection
+  }
 
+  ngOnInit() {
     this.initStep1Form();
     this.initStep2Form();
     this.initStep3Form();
     this.registerFormListeners();
   }
-
-  // === Inicijalizacija formi ===
 
   private initStep1Form() {
     this.step1Form = this.fb.group(
@@ -76,32 +65,36 @@ export class RegistracijaComponent implements AfterViewInit {
         ime: ['', Validators.required],
         prezime: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
-        password: ['',[
-                        Validators.required,
-                        Validators.minLength(8),
-                        Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/)
-                      ]
-                  ],
+        password: [
+          '',
+          [
+            Validators.required,
+            Validators.minLength(8),
+            Validators.pattern(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/),
+          ],
+        ],
         confirmPassword: ['', Validators.required],
       },
       { validators: this.passwordsMatchValidator }
     );
   }
-getPasswordError(): string | null {
-  const control = this.step1Form.get('password');
-  if (control && control.touched && control.errors) {
-    if (control.errors['required']) {
-      return 'Lozinka je obavezna.';
+
+  getPasswordError(): string | null {
+    const control = this.step1Form.get('password');
+    if (control && control.touched && control.errors) {
+      if (control.errors['required']) {
+        return 'Lozinka je obavezna.';
+      }
+      if (control.errors['minlength']) {
+        return 'Lozinka mora imati najmanje 8 karaktera.';
+      }
+      if (control.errors['pattern']) {
+        return 'Lozinka mora sadržati najmanje jedno veliko slovo, malo slovo, broj i specijalni karakter.';
+      }
     }
-    if (control.errors['minlength']) {
-      return 'Lozinka mora imati najmanje 8 karaktera.';
-    }
-    if (control.errors['pattern']) {
-      return 'Lozinka mora sadržati najmanje jedno veliko slovo, malo slovo, broj i specijalni karakter.';
-    }
+    return null;
   }
-  return null;
-}
+
   private initStep2Form() {
     this.step2Form = this.fb.group({
       drzavljanstvo: ['', Validators.required],
@@ -119,38 +112,36 @@ getPasswordError(): string | null {
       datumRodjenja: [{ value: '', disabled: true }, Validators.required],
     });
   }
-get isDatumRodjenjaDisabled(): boolean {
-  return this.step3Form.get('datumRodjenja')?.disabled ?? false;
-}
-  // === Listeneri i helperi ===
+
+  get isDatumRodjenjaDisabled(): boolean {
+    return this.step3Form.get('datumRodjenja')?.disabled ?? false;
+  }
 
   private registerFormListeners() {
-    this.step3Form.get('tip')?.valueChanges.subscribe(value => {
+    this.step3Form.get('tip')?.valueChanges.subscribe((value) => {
       const jeFizicko = value === 'fizicko_lice';
       this.toggleFormControl('zanimanje', jeFizicko);
       this.toggleFormControl('datumRodjenja', jeFizicko);
     });
   }
 
- private toggleFormControl(controlName: string, enable: boolean) {
-  const control = this.step3Form.get(controlName);
-  if (!control) return;
-  if (enable) {
-    control.enable();
-  } else {
-    control.reset();
-    control.disable();
+  private toggleFormControl(controlName: string, enable: boolean) {
+    const control = this.step3Form.get(controlName);
+    if (!control) return;
+    if (enable) {
+      control.enable();
+    } else {
+      control.reset();
+      control.disable();
+    }
+    control.updateValueAndValidity();
   }
-  control.updateValueAndValidity(); 
-}
 
   private passwordsMatchValidator(group: AbstractControl) {
     const password = group.get('password')?.value;
     const confirm = group.get('confirmPassword')?.value;
     return password === confirm ? null : { passwordMismatch: true };
   }
-
-  // === UI interakcije ===
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
@@ -166,14 +157,16 @@ get isDatumRodjenjaDisabled(): boolean {
 
   getCurrentForm(): FormGroup {
     switch (this.currentStep) {
-      case 1: return this.step1Form;
-      case 2: return this.step2Form;
-      case 3: return this.step3Form;
-      default: return this.step1Form;
+      case 1:
+        return this.step1Form;
+      case 2:
+        return this.step2Form;
+      case 3:
+        return this.step3Form;
+      default:
+        return this.step1Form;
     }
   }
-
-  // === Slanje forme ===
 
   handleSubmit() {
     const form = this.getCurrentForm();
@@ -196,20 +189,12 @@ get isDatumRodjenjaDisabled(): boolean {
       this.nextStep();
     }
   }
+
   selectedDate?: Date;
 
-onDateSelected(date: Date) {
-  this.selectedDate = date;
-  console.log('Izabrani datum:', date);
+  onDateSelected(date: Date) {
+    this.step3Form.get('datumRodjenja')!.setValue(date);
+    this.step3Form.get('datumRodjenja')!.markAsTouched();
+    this.step3Form.get('datumRodjenja')!.updateValueAndValidity();
+  }
 }
-  // *** NOVO *** Inicijalizacija Tempus Dominus datepickera nakon što je view inicijalizovan
-  ngAfterViewInit(): void {
-   
-}
-
-
-
-
-
-}
-
