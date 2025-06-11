@@ -20,6 +20,7 @@ export class RegistracijaComponent implements OnInit {
   steps = [1, 2, 3];
   showPassword = false;
   isLockedOut = false;
+  formSubmitted = false;
 
   tipLica: string = '';
   izabranoZanimanjeId: number | null = null;
@@ -188,6 +189,7 @@ export class RegistracijaComponent implements OnInit {
       console.log('poslali smo formu ',payload)
     const email = this.step1Form.get('email')?.value || '[nepoznat email]';
     this.successMessage = `Na email:  ${email} je poslat link za verifikaciju. Proverite svoj inbox.`;
+    this.formSubmitted = true;
     setTimeout(() => {
                         this.router.navigate(['/login']);
                       }, 4000); // 4 sekunde 
