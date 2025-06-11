@@ -19,6 +19,7 @@
  <div *ngIf="successMessage" class="success-message">
   {{ successMessage }}
 </div>
+  <div *ngIf="!formSubmitted">
     <form [formGroup]="getCurrentForm()" (ngSubmit)="handleSubmit()">
       <!-- STEP 1 -->
       <ng-container *ngIf="currentStep === 1">
@@ -294,5 +295,6 @@
       </div>
       </ng-container>
     </form>
+    </div>
   </div>
 </div>
