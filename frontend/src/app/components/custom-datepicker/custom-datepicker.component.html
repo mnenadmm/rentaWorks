@@ -4,6 +4,7 @@
     *ngIf="isMobile"
     type="date"
     class="form-control"
+    [max]="maxDate"
     (change)="onMobileDateChange($event)"
   />
 
