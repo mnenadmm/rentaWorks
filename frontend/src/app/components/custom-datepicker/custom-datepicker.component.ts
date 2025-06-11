@@ -1,5 +1,4 @@
-import { Component, ElementRef, EventEmitter, HostListener, Output} from '@angular/core';
-
+import { Component, ElementRef, EventEmitter, HostListener, Output } from '@angular/core';
 
 @Component({
   selector: 'app-custom-datepicker',
@@ -9,12 +8,13 @@ import { Component, ElementRef, EventEmitter, HostListener, Output} from '@angul
 })
 export class CustomDatepickerComponent {
   currentYear: number;
-  currentMonth: number; // 0-based (0 = januar)
+  currentMonth: number;
   days: number[] = [];
   selectedDate?: Date;
-   showCalendar = false;
+  showCalendar = false;
   showYearPicker = false;
   years: number[] = [];
+
   @Output() dateSelected = new EventEmitter<Date>();
 
   constructor(private eRef: ElementRef) {
@@ -23,22 +23,29 @@ export class CustomDatepickerComponent {
     this.currentMonth = today.getMonth();
     this.generateCalendar();
     this.generateYears();
-    
   }
+
   @HostListener('document:click', ['$event'])
-  
+  onClickOutside(event: MouseEvent) {
+    if (!this.eRef.nativeElement.contains(event.target)) {
+      this.showCalendar = false;
+      this.showYearPicker = false;
+    }
+  }
+
   toggleCalendar() {
     this.showCalendar = !this.showCalendar;
     this.showYearPicker = false;
   }
-    generateYears() {
+
+  generateYears() {
     const current = new Date().getFullYear();
     for (let year = current; year >= 1930; year--) {
       this.years.push(year);
     }
   }
+
   generateCalendar() {
-    // Broj dana u mesecu
     const daysInMonth = new Date(this.currentYear, this.currentMonth + 1, 0).getDate();
     this.days = Array.from({ length: daysInMonth }, (_, i) => i + 1);
   }
@@ -62,14 +69,15 @@ export class CustomDatepickerComponent {
     }
     this.generateCalendar();
   }
+
   isFutureDate(day: number): boolean {
-  const date = new Date(this.currentYear, this.currentMonth, day);
-  const today = new Date();
-  // Poništavanje vremena da poređenje bude po datumu
-  today.setHours(0, 0, 0, 0);
-  date.setHours(0, 0, 0, 0);
-  return date > today;
-}
+    const date = new Date(this.currentYear, this.currentMonth, day);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    date.setHours(0, 0, 0, 0);
+    return date > today;
+  }
+
   selectDay(day: number) {
     const selected = new Date(this.currentYear, this.currentMonth, day);
     const today = new Date();
@@ -85,9 +93,11 @@ export class CustomDatepickerComponent {
   getMonthName() {
     return new Date(this.currentYear, this.currentMonth).toLocaleString('default', { month: 'long' });
   }
-   toggleYearPicker() {
+
+  toggleYearPicker() {
     this.showYearPicker = !this.showYearPicker;
   }
+
   selectYear(year: number) {
     this.currentYear = year;
     this.showYearPicker = false;
