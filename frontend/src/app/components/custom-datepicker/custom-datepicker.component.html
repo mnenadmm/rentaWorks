@@ -6,9 +6,10 @@
     class="form-control"
     [max]="maxDate"
     (change)="onMobileDateChange($event)"
+    formControlName="datumRodjenja"
   />
 
-  <!-- 💻 Desktop koristi vašu custom komponentu -->
+  <!-- 💻 Desktop koristi custom komponentu -->
   <ng-container *ngIf="!isMobile">
     <input 
       type="text" 

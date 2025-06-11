@@ -23,7 +23,7 @@ export class CustomDatepickerComponent {
   isMobile = false;
   maxDate: string;
   // Emituje izabrani datum ka roditeljskoj komponenti
-  @Output() dateSelected = new EventEmitter<Date>();
+  @Output() dateSelected = new EventEmitter<Date | null>();
 
   constructor(private eRef: ElementRef) {
     const today = new Date();
@@ -57,7 +57,10 @@ onMobileDateChange(event: Event) {
 
     if (selected <= today) {
       this.selectedDate = selected;
-      this.dateSelected.emit(selected);
+      this.dateSelected.emit(selected);  // emituj datum roditelju
+    } else {
+      // možeš emitovati null ili neki signal da datum nije validan
+      this.dateSelected.emit(null);
     }
   }
 }
