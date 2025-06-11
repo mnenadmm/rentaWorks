@@ -274,6 +274,7 @@
     <app-custom-datepicker (dateSelected)="onDateSelected($event)"></app-custom-datepicker>
   </div>
 
+
   <div class="text-danger mt-1" *ngIf="step3Form.get('datumRodjenja')?.touched && step3Form.get('datumRodjenja')?.invalid">
     Datum rođenja je obavezan.
   </div>
@@ -283,13 +284,12 @@
 
         
 
-        
-      </div>
-      </ng-container>
-      <div class="buttons">
+        <div class="buttons">
           <button type="button" (click)="prevStep()">Nazad</button>
           <button type="submit" [disabled]="step3Form.invalid">Završi</button>
         </div>
+      </div>
+      </ng-container>
     </form>
   </div>
 </div>
