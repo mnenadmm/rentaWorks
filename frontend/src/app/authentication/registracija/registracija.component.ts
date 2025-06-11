@@ -181,9 +181,8 @@ export class RegistracijaComponent implements OnInit {
         ...this.step2Form.value,
         ...this.step3Form.value,
       };
-
-      console.log('Registracija uspešna:', payload);
-      alert('Registracija uspešna!');
+      console.log('poslali smo formu ', form)
+     
       // TODO: Slanje na backend
     } else {
       this.nextStep();
