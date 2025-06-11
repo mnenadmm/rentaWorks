@@ -1,18 +1,42 @@
-/* styles.css */
-:root {
-  --app-height: 100vh; /* inicijalna vrednost dok TS ne postavi pravu */
-}
+/* GLOBALNO: style.css ili styles.css */
 
+/* Body i html: zauzimaju full visinu, ali bez scrolla */
 html, body {
   margin: 0;
   padding: 0;
-  height: 100%;      /* da bi body sa flex-grow radio ispravno */
+  height: 100%;
+  overflow: hidden;           /* onemogućava scroll cele stranice */
   box-sizing: border-box;
 }
 
-body {
+/* .app-container: koristi dynamic viewport, bez scrolla */
+.app-container {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  overflow-x: hidden; /* samo horizontalni skrol */
+  height: 100dvh;             /* dinamička visina viewporta na mobilu */
+  width: 100%;
+  overflow: hidden;           /* sprečava scroll na nivou kontejnera */
+}
+
+/* Fiksni header i footer ostaju na mestu */
+app-header {
+  position: fixed; top: 0; left: 0;
+  width: 100%; height: 60px;
+  z-index: 1000;
+}
+app-footer {
+  position: fixed; bottom: 0; left: 0;
+  width: 100%; height: 40px;
+  z-index: 1000;
+}
+
+/* Glavni sadržaj: jedini scrollable deo */
+main.content {
+  margin-top: 60px;           /* ispod headera */
+  margin-bottom: 40px;        /* iznad footera */
+  flex: 1;                    /* raste da popuni preostali prostor */
+  overflow-y: auto;           /* vertikalni scroll samo ovde */
+  -webkit-overflow-scrolling: touch; /* glatki “bounce” na iOS */
+  overscroll-behavior: contain;      /* sprečava da scroll prelomi na body */
+  padding: 1rem;
 }
