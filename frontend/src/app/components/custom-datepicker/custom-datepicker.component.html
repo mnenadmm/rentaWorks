@@ -1,19 +1,19 @@
 <div class="datepicker-wrapper">
   <input 
-  type="text" 
-  readonly 
-  class="custom-date"
-  (click)="toggleCalendar()" 
-  [value]="selectedDate ? (selectedDate | date:'dd.MM.yyyy') : 'Odaberi datum rođenja'"
-/>
+    type="text" 
+    readonly 
+    class="custom-date"
+    (click)="toggleCalendar()" 
+    [value]="selectedDate ? (selectedDate | date:'dd.MM.yyyy') : 'Odaberi datum rođenja'"
+  />
 
   <div class="calendar" *ngIf="showCalendar">
     <div class="header">
-      <button (click)="prevMonth()">&#8592;</button>
+      <button type="button" (click)="prevMonth()">&#8592;</button>
       <span (click)="toggleYearPicker()">
         {{ getMonthName() }} {{ currentYear }}
       </span>
-      <button (click)="nextMonth()">&#8594;</button>
+      <button type="button" (click)="nextMonth()">&#8594;</button>
     </div>
 
     <div class="year-picker" *ngIf="showYearPicker">
@@ -24,13 +24,14 @@
 
     <div class="days" *ngIf="!showYearPicker">
       <button 
+        type="button"
         *ngFor="let day of days" 
         (click)="selectDay(day)" 
         [disabled]="isFutureDate(day)"
         [class.selected]="selectedDate?.getDate() === day &&
                           selectedDate?.getMonth() === currentMonth &&
                           selectedDate?.getFullYear() === currentYear"
-        >
+      >
         {{ day }}
       </button>
     </div>
