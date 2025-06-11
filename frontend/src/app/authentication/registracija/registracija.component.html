@@ -273,7 +273,6 @@
     <i class="icon">📅</i> <!-- Možeš izmeniti ikonicu po želji -->
     <app-custom-datepicker (dateSelected)="onDateSelected($event)"></app-custom-datepicker>
   </div>
-  <p>Izabrani datum: {{ selectedDate | date: 'dd.MM.yyyy' }}</p>
 
   <div class="text-danger mt-1" *ngIf="step3Form.get('datumRodjenja')?.touched && step3Form.get('datumRodjenja')?.invalid">
     Datum rođenja je obavezan.

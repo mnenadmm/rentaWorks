@@ -1,11 +1,11 @@
 <div class="datepicker-wrapper">
   <input 
-    type="text" 
-    readonly 
-    class="custom-date"
-    (click)="toggleCalendar()" 
-    [value]="selectedDate ? selectedDate.toLocaleDateString() : 'Odaberi datum rođenja'"
-  />
+  type="text" 
+  readonly 
+  class="custom-date"
+  (click)="toggleCalendar()" 
+  [value]="selectedDate ? (selectedDate | date:'dd.MM.yyyy') : 'Odaberi datum rođenja'"
+/>
 
   <div class="calendar" *ngIf="showCalendar">
     <div class="header">
