@@ -21,6 +21,7 @@ export class CustomDatepickerComponent {
   showYearPicker = false;
   years: number[] = [];
   isMobile = false;
+  maxDate: string;
   // Emituje izabrani datum ka roditeljskoj komponenti
   @Output() dateSelected = new EventEmitter<Date>();
 
@@ -33,6 +34,8 @@ export class CustomDatepickerComponent {
 
   // 📱 Detekcija mobilnog uređaja
   this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+   // Postavi maxDate u formatu yyyy-MM-dd (standard za <input type="date">)
+  this.maxDate = today.toISOString().split('T')[0];
   }
 
   // Zatvara kalendar ako se klikne van komponente
