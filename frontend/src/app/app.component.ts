@@ -9,12 +9,10 @@ import { Component, HostListener, AfterViewInit } from '@angular/core';
  
 })
 export class AppComponent implements AfterViewInit {
-
   setAppContainerHeight() {
     if (typeof window !== 'undefined') {
       const appHeight = window.innerHeight + 'px';
       document.documentElement.style.setProperty('--app-height', appHeight);
-      console.log('Visina app-container postavljena na:', appHeight);
     }
   }
 

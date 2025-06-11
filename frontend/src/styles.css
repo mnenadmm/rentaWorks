@@ -1,28 +1,18 @@
-/* You can add global styles to this file, and also import other style files */
-/* Globalni stilovi koji važe za celu aplikaciju */
-
-
-
+/* styles.css */
+:root {
+  --app-height: 100vh; /* inicijalna vrednost dok TS ne postavi pravu */
+}
 
 html, body {
-  height: 100%;
   margin: 0;
   padding: 0;
+  height: 100%;      /* da bi body sa flex-grow radio ispravno */
   box-sizing: border-box;
 }
 
-/* Body se postavlja kao flex container da bi sticky footer radio */
 body {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-}
-
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
-.app-container {
-  height: var(--app-height);
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
+  overflow-x: hidden; /* samo horizontalni skrol */
 }
