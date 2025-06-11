@@ -15,6 +15,7 @@ import {
   styleUrls: ['./registracija.component.css']  // ispravno styleUrls
 })
 export class RegistracijaComponent implements OnInit {
+  
   currentStep = 1;
   totalSteps = 3;
   steps = [1, 2, 3];
@@ -188,7 +189,7 @@ export class RegistracijaComponent implements OnInit {
       };
       console.log('poslali smo formu ',payload)
     const email = this.step1Form.get('email')?.value || '[nepoznat email]';
-    this.successMessage = `Na email:  ${email} je poslat link za verifikaciju. Proverite svoj inbox.`;
+    this.successMessage = `Na email:  ${email} je poslat link za verifikaciju.`;
     this.formSubmitted = true;
     setTimeout(() => {
                         this.router.navigate(['/login']);
