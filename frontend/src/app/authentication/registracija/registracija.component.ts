@@ -201,9 +201,16 @@ export class RegistracijaComponent implements OnInit {
 
   selectedDate?: Date;
 
-  onDateSelected(date: Date) {
-    this.step3Form.get('datumRodjenja')!.setValue(date);
-    this.step3Form.get('datumRodjenja')!.markAsTouched();
-    this.step3Form.get('datumRodjenja')!.updateValueAndValidity();
+ onDateSelected(date: Date | null) {
+  if (date) {
+    // Pretvori Date u string formata 'YYYY-MM-DD' za form kontrolu
+    const isoDate = date.toISOString().split('T')[0];
+    this.step3Form.get('datumRodjenja')!.setValue(isoDate);
+  } else {
+    this.step3Form.get('datumRodjenja')!.setValue(null);
   }
+  this.step3Form.get('datumRodjenja')!.markAsTouched();
+  this.step3Form.get('datumRodjenja')!.updateValueAndValidity();
+}
+  
 }
