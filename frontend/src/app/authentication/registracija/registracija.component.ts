@@ -186,7 +186,7 @@ export class RegistracijaComponent implements OnInit {
       console.log('poslali smo formu ',payload)
       
     const email = this.step1Form.get('email')?.value || '[nepoznat email]';
-    this.successMessage = `Na email: ${email} je poslat link za verifikaciju. Proverite svoj inbox.`;
+    this.successMessage = `Na email:  ${email} je poslat link za verifikaciju. Proverite svoj inbox.`;
       // TODO: Slanje na backend
     } else {
       this.nextStep();
