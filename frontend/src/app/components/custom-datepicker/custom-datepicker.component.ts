@@ -1,5 +1,6 @@
 import { Component, ElementRef, EventEmitter, HostListener, Output} from '@angular/core';
 
+
 @Component({
   selector: 'app-custom-datepicker',
   standalone: false,
@@ -77,6 +78,7 @@ export class CustomDatepickerComponent {
       this.selectedDate = selected;
       this.dateSelected.emit(selected);
       this.showCalendar = false;
+      this.showYearPicker = false;
     }
   }
 
