@@ -1,15 +1,15 @@
 /* Cela stranica i kontejner zauzimaju 100% visine */
 html, body {
-  height: 100%;
   margin: 0;
+  padding: 0;
+  height: 100%;
+  overflow: hidden;
 }
 
-/* app-container zauzima celu visinu viewporta i pravi flex kolonu */
 .app-container {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;      /* cela visina vidljivog dela ekrana */
-  overflow: hidden;   /* sprečava da ceo container skroluje */
+  overflow: hidden;
+  position: relative;
+  width: 100%;
 }
 
 /* Header ne sme da se skuplja i zadržava svoju visinu */
