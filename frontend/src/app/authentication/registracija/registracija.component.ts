@@ -27,14 +27,14 @@ export class RegistracijaComponent implements OnInit {
   step3Form!: FormGroup;
 
   zanimanja = [
-    { id: 1, naziv: 'Inženjer' },
-    { id: 2, naziv: 'Lekar' },
-    { id: 3, naziv: 'Nastavnik' },
-    { id: 4, naziv: 'Arhitekta' },
+    { id: 1, naziv: 'Gradjevincki radnik' },
+    { id: 2, naziv: 'Vozac C' },
+    { id: 3, naziv: 'Moler' },
+    { id: 4, naziv: 'ELektricar' },
     { id: 5, naziv: 'Programer' },
     { id: 6, naziv: 'Vodoinstalater' },
-    { id: 7, naziv: 'Poljoprivrednik' },
-    { id: 8, naziv: 'Novinar' },
+    { id: 7, naziv: 'Dostavljac' },
+    { id: 8, naziv: 'Fizicki radnik' },
   ];
 
   drzave = [

@@ -19,120 +19,7 @@
     <form [formGroup]="getCurrentForm()" (ngSubmit)="handleSubmit()">
       <!-- STEP 1 -->
       <ng-container *ngIf="currentStep === 1">
-        <!-- Korisničko ime -->
-        <div class="form-group">
-          <label for="username">Korisničko ime</label>
-          <div class="input-icon">
-            <i class="icon">&#64;</i>
-            <input
-              type="text"
-              id="username"
-              formControlName="username"
-              placeholder="Unesi korisničko ime"
-            />
-          </div>
-          <div *ngIf="step1Form.get('username')?.touched && step1Form.get('username')?.invalid" class="error">
-            Korisničko ime je obavezno (min 4 karaktera).
-          </div>
-        </div>
-
-        <!-- Ime -->
-        <div class="form-group">
-          <label for="ime">Ime</label>
-          <div class="input-icon">
-            <i class="icon">&#64;</i>
-            <input
-              type="text"
-              id="ime"
-              formControlName="ime"
-              placeholder="Unesi ime"
-            />
-          </div>
-          <div *ngIf="step1Form.get('ime')?.touched && step1Form.get('ime')?.invalid" class="error">
-            Ime je obavezno.
-          </div>
-        </div>
-
-        <!-- Prezime -->
-        <div class="form-group">
-          <label for="prezime">Prezime</label>
-          <div class="input-icon">
-            <i class="icon">&#64;</i>
-            <input
-              type="text"
-              id="prezime"
-              formControlName="prezime"
-              placeholder="Unesi prezime"
-            />
-          </div>
-          <div *ngIf="step1Form.get('prezime')?.touched && step1Form.get('prezime')?.invalid" class="error">
-            Prezime je obavezno.
-          </div>
-        </div>
-
-        <!-- Email -->
-        <div class="form-group">
-          <label for="email">Email</label>
-          <div class="input-icon">
-            <i class="icon">&#64;</i>
-            <input
-              type="email"
-              id="email"
-              formControlName="email"
-              placeholder="Unesi email"
-            />
-          </div>
-          <div *ngIf="step1Form.get('email')?.touched && step1Form.get('email')?.invalid" class="error">
-            Unesite validan email.
-          </div>
-        </div>
-
-        <!-- Lozinka -->
-        <div class="form-group">
-          <label for="password">Lozinka</label>
-          <div class="input-icon password-wrapper">
-            <i class="icon">🔒</i>
-            <input
-              [type]="showPassword ? 'text' : 'password'"
-              id="password"
-              formControlName="password"
-              placeholder="Unesi lozinku"
-            />
-            <button
-              type="button"
-              class="toggle-password"
-              (click)="togglePasswordVisibility()"
-              [attr.aria-label]="showPassword ? 'Sakrij lozinku' : 'Prikaži lozinku'"
-              [disabled]="isLockedOut"
-            >
-              {{ showPassword ? '🙈' : '👁️' }}
-            </button>
-          </div>
-          <div *ngIf="getPasswordError()" class="error">
-            {{ getPasswordError() }}
-          </div>
-        </div>
-
-        <!-- Potvrdi lozinku -->
-        <div class="form-group">
-          <label for="confirmPassword">Potvrdi lozinku</label>
-          <div class="input-icon password-wrapper">
-            <i class="icon">🔒</i>
-            <input
-              [type]="showPassword ? 'text' : 'password'"
-              id="confirmPassword"
-              formControlName="confirmPassword"
-              placeholder="Ponovo unesi lozinku"
-            />
-          </div>
-          <div *ngIf="step1Form.get('confirmPassword')?.touched && step1Form.get('confirmPassword')?.invalid" class="error">
-            Potvrda lozinke je obavezna.
-          </div>
-          <div *ngIf="step1Form.errors?.['passwordMismatch'] && (step1Form.touched || step1Form.dirty)" class="error">
-            Lozinke se ne poklapaju.
-          </div>
-        </div>
-
+        <!-- ... tvoj postojeći STEP 1 HTML ... -->
         <div class="buttons">
           <button type="submit" [disabled]="step1Form.invalid">Dalje</button>
         </div>
@@ -140,88 +27,7 @@
 
       <!-- STEP 2 -->
       <ng-container *ngIf="currentStep === 2">
-        <!-- sadržaj step 2 -->
-        <div class="form-group">
-          <label for="drzavljanstvo">Državljanstvo:</label>
-          <div class="input-icon">
-            <i class="icon">🌍</i>
-            <select id="drzavljanstvo" formControlName="drzavljanstvo">
-              <option value="">-- Izaberite državljanstvo --</option>
-              <option *ngFor="let drzava of drzave" [value]="drzava.code">
-                {{ drzava.name }}
-              </option>
-            </select>
-          </div>
-          <div *ngIf="step2Form.get('drzavljanstvo')?.touched && step2Form.get('drzavljanstvo')?.invalid" class="error">
-            Molimo izaberite državljanstvo.
-          </div>
-        </div>
-
-        <!-- Ostala polja STEP 2 -->
-        <div class="form-group">
-          <label for="adresa">Adresa</label>
-          <div class="input-icon">
-            <i class="icon">&#64;</i>
-            <input
-              type="text"
-              id="adresa"
-              formControlName="adresa"
-              placeholder="Unesite vašu adresu"
-            />
-          </div>
-          <div *ngIf="step2Form.get('adresa')?.touched && step2Form.get('adresa')?.invalid" class="error">
-            Adresa je obavezno polje.
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="adresaBroj">Broj</label>
-          <div class="input-icon">
-            <i class="icon">&#64;</i>
-            <input
-              type="number"
-              id="adresaBroj"
-              formControlName="adresaBroj"
-              placeholder="Unesite broj"
-            />
-          </div>
-          <div *ngIf="step2Form.get('adresaBroj')?.touched && step2Form.get('adresaBroj')?.invalid" class="error">
-            Unesite broj stanovanja.
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="grad">Grad</label>
-          <div class="input-icon">
-            <i class="icon">&#64;</i>
-            <input
-              type="text"
-              id="grad"
-              formControlName="grad"
-              placeholder="Unesite grad"
-            />
-          </div>
-          <div *ngIf="step2Form.get('grad')?.touched && step2Form.get('grad')?.invalid" class="error">
-            Unesite grad.
-          </div>
-        </div>
-
-        <div class="form-group">
-          <label for="telefon">Telefon</label>
-          <div class="input-icon">
-            <i class="icon">&#64;</i>
-            <input
-              type="tel"
-              id="telefon"
-              formControlName="telefon"
-              placeholder="Telefon"
-            />
-          </div>
-          <div *ngIf="step2Form.get('telefon')?.touched && step2Form.get('telefon')?.invalid" class="error">
-            Unesite telefon.
-          </div>
-        </div>
-
+        <!-- ... tvoj postojeći STEP 2 HTML ... -->
         <div class="buttons">
           <button type="button" (click)="prevStep()">Nazad</button>
           <button type="submit" [disabled]="step2Form.invalid">Dalje</button>
@@ -230,64 +36,55 @@
 
       <!-- STEP 3 -->
       <ng-container *ngIf="currentStep === 3">
+        <!-- Tip korisnika -->
         <div class="form-group">
           <label>Tip korisnika:</label><br />
           <div class="radio-group">
             <label>
-              <input
-                type="radio"
-                formControlName="tip"
-                value="fizicko_lice"
-              />
-              Fizicko lice
+              <input type="radio" formControlName="tip" value="fizicko_lice" /> Fizicko lice
             </label>
             <label>
-              <input
-                type="radio"
-                formControlName="tip"
-                value="pravno_lice"
-              />
-              Pravno lice
+              <input type="radio" formControlName="tip" value="pravno_lice" /> Pravno lice
             </label>
           </div>
           <div *ngIf="step3Form.get('tip')?.touched && step3Form.get('tip')?.invalid" class="error">
             Izaberite tip korisnika.
           </div>
         </div>
-        <div >  <!-- Prikazujemo samo ako je tip = fizicko_lice -->
-  <div *ngIf="step3Form.get('tip')?.value === 'fizicko_lice'">
+
+        <!-- Zanimanje -->
+        <div *ngIf="step3Form.get('tip')?.value === 'fizicko_lice'">
           <div class="form-group">
             <label for="zanimanje">Zanimanje</label>
             <div class="input-icon">
-             <i class="icon">👨‍⚕️</i> 
+              <i class="icon">👨‍⚕️</i>
               <select id="zanimanje" formControlName="zanimanje">
+                <option value="">--Izaberite zanimanje--</option>
                 <option *ngFor="let z of zanimanja" [value]="z.id">{{ z.naziv }}</option>
               </select>
             </div>
           </div>
+
+          <!-- Datum rođenja -->
+          <div class="form-group">
+            <label for="datumRodjenja">Datum rođenja</label>
+            <div class="input-icon">
+              <i class="icon">📅</i>
+              <app-custom-datepicker (dateSelected)="onDateSelected($event)"></app-custom-datepicker>
+            </div>
+            <div 
+              class="text-danger mt-1"
+              *ngIf="step3Form.get('datumRodjenja')?.touched && step3Form.get('datumRodjenja')?.invalid"
+            >
+              Datum rođenja je obavezan.
+            </div>
           </div>
-    <div *ngIf="step3Form.get('tip')?.value === 'fizicko_lice'">
-        <div class="form-group">
-  <label for="datumRodjenja">Datum rođenja</label>
-  <div class="input-icon">
-    <i class="icon">📅</i> <!-- Možeš izmeniti ikonicu po želji -->
-    <app-custom-datepicker (dateSelected)="onDateSelected($event)"></app-custom-datepicker>
-  </div>
-
-  <div class="text-danger mt-1" *ngIf="step3Form.get('datumRodjenja')?.touched && step3Form.get('datumRodjenja')?.invalid">
-    Datum rođenja je obavezan.
-  </div>
-</div>
-
-    </div>
-
-        
+        </div>
 
         <div class="buttons">
           <button type="button" (click)="prevStep()">Nazad</button>
           <button type="submit" [disabled]="step3Form.invalid">Završi</button>
         </div>
-      </div>
       </ng-container>
     </form>
   </div>
