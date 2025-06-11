@@ -25,12 +25,7 @@ export class CustomDatepickerComponent {
     
   }
   @HostListener('document:click', ['$event'])
-  handleClickOutside(event: MouseEvent) {
-    if (!this.eRef.nativeElement.contains(event.target)) {
-      this.showCalendar = false;
-      this.showYearPicker = false;
-    }
-  }
+  
   toggleCalendar() {
     this.showCalendar = !this.showCalendar;
     this.showYearPicker = false;
