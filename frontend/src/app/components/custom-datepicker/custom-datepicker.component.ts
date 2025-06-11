@@ -1,4 +1,10 @@
-import { Component, ElementRef, EventEmitter, HostListener, Output } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  HostListener,
+  Output
+} from '@angular/core';
 
 @Component({
   selector: 'app-custom-datepicker',
@@ -14,8 +20,8 @@ export class CustomDatepickerComponent {
   showCalendar = false;
   showYearPicker = false;
   years: number[] = [];
-
-  // Emituje izabrani datum ka roditeljskom komponentu
+  isMobile = false;
+  // Emituje izabrani datum ka roditeljskoj komponenti
   @Output() dateSelected = new EventEmitter<Date>();
 
   constructor(private eRef: ElementRef) {
@@ -24,6 +30,9 @@ export class CustomDatepickerComponent {
     this.currentMonth = today.getMonth();   // Postavlja trenutni mesec
     this.generateCalendar();                // Inicijalno generiše dane u mesecu
     this.generateYears();                   // Popunjava listu godina
+
+  // 📱 Detekcija mobilnog uređaja
+  this.isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   }
 
   // Zatvara kalendar ako se klikne van komponente
@@ -34,11 +43,26 @@ export class CustomDatepickerComponent {
       this.showYearPicker = false;
     }
   }
+ 
+onMobileDateChange(event: Event) {
+  const input = event.target as HTMLInputElement;
+  if (input?.value) {
+    const selected = new Date(input.value);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    selected.setHours(0, 0, 0, 0);
 
-  // Otvara/zatvara kalendar kada se klikne na input
+    if (selected <= today) {
+      this.selectedDate = selected;
+      this.dateSelected.emit(selected);
+    }
+  }
+}
+
+  // Otvara/zatvara kalendar
   toggleCalendar() {
     this.showCalendar = !this.showCalendar;
-    this.showYearPicker = false; // Ako je picker otvoren, zatvara se
+    this.showYearPicker = false; // Zatvara picker ako je otvoren
   }
 
   // Pravi listu godina od trenutne godine do 1930
@@ -77,7 +101,7 @@ export class CustomDatepickerComponent {
     this.generateCalendar();
   }
 
-  // Proverava da li je određeni dan u budućnosti (nije dozvoljen za selekciju)
+  // Proverava da li je dan u budućnosti (nije dozvoljen za selekciju)
   isFutureDate(day: number): boolean {
     const date = new Date(this.currentYear, this.currentMonth, day);
     const today = new Date();
@@ -90,28 +114,27 @@ export class CustomDatepickerComponent {
   selectDay(day: number) {
     const selected = new Date(this.currentYear, this.currentMonth, day);
     const today = new Date();
-
     if (selected <= today) {
       this.selectedDate = selected;
-      this.dateSelected.emit(selected); // Obaveštava roditeljsku komponentu
+      this.dateSelected.emit(selected); // Obaveštava roditelja
       this.showCalendar = false;
       this.showYearPicker = false;
     }
   }
 
-  // Vraća naziv trenutnog meseca (na lokalizovan način)
-  getMonthName() {
+  // Vraća naziv trenutnog meseca
+  getMonthName(): string {
     return new Date(this.currentYear, this.currentMonth).toLocaleString('default', {
       month: 'long'
     });
   }
 
-  // Otvara/zatvara prikaz za biranje godine
+  // Otvara/zatvara prikaz za izbor godine
   toggleYearPicker() {
     this.showYearPicker = !this.showYearPicker;
   }
 
-  // Selektuje godinu i generiše kalendar za tu godinu
+  // Selektuje godinu i osvežava prikaz
   selectYear(year: number) {
     this.currentYear = year;
     this.showYearPicker = false;

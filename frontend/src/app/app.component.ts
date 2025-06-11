@@ -1,4 +1,4 @@
-import { Component, HostListener, AfterViewInit } from '@angular/core';
+import { Component } from '@angular/core';
 
 
 @Component({
@@ -8,25 +8,6 @@ import { Component, HostListener, AfterViewInit } from '@angular/core';
   styleUrls: ['./app.component.css'],
  
 })
-export class AppComponent implements AfterViewInit {
-  setAppContainerHeight() {
-    if (typeof window !== 'undefined') {
-      const appHeight = window.innerHeight + 'px';
-      document.documentElement.style.setProperty('--app-height', appHeight);
-    }
-  }
+export class AppComponent {
 
-  @HostListener('window:resize')
-  onResize() {
-    this.setAppContainerHeight();
-  }
-
-  @HostListener('window:orientationchange')
-  onOrientationChange() {
-    this.setAppContainerHeight();
-  }
-
-  ngAfterViewInit() {
-    this.setAppContainerHeight();
-  }
 }
