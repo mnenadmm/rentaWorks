@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 import {
   FormGroup,
   FormBuilder,
@@ -49,7 +51,7 @@ export class RegistracijaComponent implements OnInit {
     { code: 'AL', name: 'Albanija' },
   ];
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder,private router: Router) {
     // Konstruktor samo dependency injection
   }
 
@@ -184,10 +186,11 @@ export class RegistracijaComponent implements OnInit {
         ...this.step3Form.value,
       };
       console.log('poslali smo formu ',payload)
-      
     const email = this.step1Form.get('email')?.value || '[nepoznat email]';
     this.successMessage = `Na email:  ${email} je poslat link za verifikaciju. Proverite svoj inbox.`;
-      // TODO: Slanje na backend
+    setTimeout(() => {
+                        this.router.navigate(['/login']);
+                      }, 4000); // 4 sekunde 
     } else {
       this.nextStep();
     }
