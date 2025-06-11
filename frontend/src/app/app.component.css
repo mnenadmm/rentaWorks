@@ -1,20 +1,20 @@
-/* app.component.css */
-
+/* Uklonjeno overflow: hidden na html/body */
 html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-  overflow-x: hidden; /* Samo horizontalni skrol zabranjen */
+  overflow-x: hidden; /* Zabranjen samo horizontalni skrol */
 }
 
+/* Glavni kontejner koji koristi dvh za mobilne uređaje */
 .app-container {
   display: flex;
   flex-direction: column;
-  min-height: 100dvh; /* NOVO: rešenje za mobilne uređaje */
+  min-height: 100dvh; /* Visina viewporta (mobil) */
   width: 100%;
 }
 
-/* Header */
+/* Fiksni header na vrhu */
 app-header {
   position: fixed;
   top: 0;
@@ -24,7 +24,7 @@ app-header {
   z-index: 10000;
 }
 
-/* Footer */
+/* Fiksni footer na dnu */
 app-footer {
   position: fixed;
   bottom: 0;
@@ -35,11 +35,11 @@ app-footer {
   background-color: #f5f5f5;
 }
 
-/* Glavni sadržaj */
+/* Glavni skrolujući sadržaj između header/footer */
 main.content {
-  flex: 1;
+  flex: 1; /* Iskoristi sav preostali prostor */
   overflow-y: auto;
-  margin-top: 60px;
-  margin-bottom: 40px;
+  margin-top: 60px;   /* Rezerviši mesto ispod header-a */
+  margin-bottom: 40px;/* Rezerviši mesto iznad footer-a */
   padding: 1rem;
 }
