@@ -182,7 +182,7 @@ export class RegistracijaComponent implements OnInit {
         ...this.step3Form.value,
       };
       console.log('poslali smo formu ', form)
-     
+     alert('Forma poslata')
       // TODO: Slanje na backend
     } else {
       this.nextStep();
