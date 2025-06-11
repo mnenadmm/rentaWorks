@@ -21,6 +21,7 @@ export class RegistracijaComponent implements OnInit {
 
   tipLica: string = '';
   izabranoZanimanjeId: number | null = null;
+  formSuccess = false;
 
   step1Form!: FormGroup;
   step2Form!: FormGroup;
@@ -181,8 +182,9 @@ export class RegistracijaComponent implements OnInit {
         ...this.step2Form.value,
         ...this.step3Form.value,
       };
-      console.log('poslali smo formu ', form)
-     alert('Forma poslata')
+      console.log('poslali smo formu ',payload)
+      
+    this.formSuccess = true;
       // TODO: Slanje na backend
     } else {
       this.nextStep();

@@ -15,7 +15,10 @@
         </div>
       </div>
     </div>
-
+     <!-- Poruka uspeha -->
+  <div *ngIf="formSuccess" class="form-success-message">
+    🎉 Uspešno ste poslali registraciju!
+  </div>
     <form [formGroup]="getCurrentForm()" (ngSubmit)="handleSubmit()">
       <!-- STEP 1 -->
       <ng-container *ngIf="currentStep === 1">
