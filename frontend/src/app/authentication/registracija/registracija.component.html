@@ -264,9 +264,14 @@
     <label for="zanimanje">Zanimanje</label>
     <div class="input-icon">
       <i class="icon">👨‍⚕️</i>
-      <select id="zanimanje" formControlName="zanimanje" class="zanimanje-select" size="6">
-        <option *ngFor="let z of zanimanja" [value]="z.id">{{ z.naziv }}</option>
-      </select>
+      <div class="zanimanje-scroll">
+        <select formControlName="zanimanje" id="zanimanje" (change)="onZanimanjeSelected($event)">
+           <option value="" disabled selected>Izaberi zanimanje</option> 
+          <option *ngFor="let zanimanje of zanimanja" [value]="zanimanje.id">
+            {{ zanimanje.naziv }}
+          </option>
+        </select>
+      </div>
     </div>
   </div>
 </div>
