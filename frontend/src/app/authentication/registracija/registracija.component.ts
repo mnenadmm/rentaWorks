@@ -15,7 +15,7 @@ import {
   styleUrls: ['./registracija.component.css']  // ispravno styleUrls
 })
 export class RegistracijaComponent implements OnInit {
-  
+  vestineDropdownOpen = false;
   currentStep = 1;
   totalSteps = 3;
   steps = [1, 2, 3];
@@ -165,7 +165,20 @@ export class RegistracijaComponent implements OnInit {
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
+  toggleVestineDropdown() {
+  this.vestineDropdownOpen = !this.vestineDropdownOpen;
+}
 
+closeVestineDropdown() {
+  this.vestineDropdownOpen = false;
+}
+
+getSelectedVestineNames(): string[] {
+  const selectedIds: number[] = this.step3Form.get('vestine')?.value || [];
+  return this.vestine
+    .filter(v => selectedIds.includes(v.id))
+    .map(v => v.naziv);
+}
   nextStep() {
     if (this.currentStep < this.totalSteps) this.currentStep++;
   }
