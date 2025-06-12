@@ -283,6 +283,20 @@
     Datum rođenja je obavezan.
   </div>
 </div>
+<div class="form-group">
+  <label>Veštine (opciono)</label>
+  <div class="checkbox-group">
+    <label *ngFor="let v of vestine">
+      <input
+        type="checkbox"
+        [value]="v.id"
+        (change)="onVestinaChange($event)"
+        [checked]="step3Form.get('vestine')?.value.includes(v.id)"
+      />
+      {{ v.naziv }}
+    </label>
+  </div>
+</div>
 
     </div>
 
