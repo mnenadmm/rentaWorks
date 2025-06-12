@@ -43,6 +43,14 @@ export class RegistracijaComponent implements OnInit {
     { id: 6, naziv: 'Vodoinstalater' },
     { id: 7, naziv: 'Dostavljac' },
     { id: 8, naziv: 'Fizicki radnik' },
+      { id: 9, naziv: 'Gradjevincki radnik' },
+    { id: 10, naziv: 'Zanimanje 10' },
+    { id: 11, naziv: 'Zanimanje 11' },
+    { id: 12, naziv: 'Zanimanje 12' },
+    { id: 13, naziv: 'Zanimanje 13' },
+    { id: 14, naziv: 'Zanimanje 14' },
+    { id: 15, naziv: 'Zanimanje 15' },
+    { id: 16, naziv: 'Zanimanje 16' },
   ];
 
   drzave = [
