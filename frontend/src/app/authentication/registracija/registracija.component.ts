@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 
 import {
@@ -16,6 +16,7 @@ import {
 })
 export class RegistracijaComponent implements OnInit {
   vestineDropdownOpen = false;
+  showVestineSection = false;
   currentStep = 1;
   totalSteps = 3;
   steps = [1, 2, 3];
@@ -61,7 +62,17 @@ export class RegistracijaComponent implements OnInit {
   constructor(private fb: FormBuilder,private router: Router) {
     // Konstruktor samo dependency injection
   }
+toggleVestineSection() {
+  this.showVestineSection = !this.showVestineSection;
+}
 
+openVestineSection() {
+  this.showVestineSection = true;
+}
+
+closeVestineSection() {
+  this.showVestineSection = false;
+}
   ngOnInit() {
     this.initStep1Form();
     this.initStep2Form();
@@ -165,13 +176,7 @@ export class RegistracijaComponent implements OnInit {
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
-  toggleVestineDropdown() {
-  this.vestineDropdownOpen = !this.vestineDropdownOpen;
-}
 
-closeVestineDropdown() {
-  this.vestineDropdownOpen = false;
-}
 
 getSelectedVestineNames(): string[] {
   const selectedIds: number[] = this.step3Form.get('vestine')?.value || [];
@@ -247,6 +252,9 @@ onVestinaChange(event: any) {
   } else {
     vestineForm?.setValue(selected.filter((id: number) => id !== +event.target.value));
   }
+
+  vestineForm?.markAsTouched();
+  vestineForm?.updateValueAndValidity();
 }
   
 }
