@@ -265,11 +265,10 @@
     <div class="input-icon">
       <i class="icon">👨‍⚕️</i>
       <div class="zanimanje-scroll">
-        <select formControlName="zanimanje" id="zanimanje" (change)="onZanimanjeSelected($event)">
-           <option value="" disabled selected>Izaberi zanimanje</option> 
-          <option *ngFor="let zanimanje of zanimanja" [value]="zanimanje.id">
-            {{ zanimanje.naziv }}
-          </option>
+        <select formControlName="zanimanje" (change)="onZanimanjeSelected($event)">
+           <option *ngFor="let zanimanje of zanimanja" [value]="zanimanje.id">
+             {{ zanimanje.naziv }}
+           </option>
         </select>
       </div>
     </div>
@@ -297,10 +296,10 @@
     </button>
   </div>
 
- <div *ngIf="showVestineSection" class="form-group">
-  <label>Veštine</label>
-  <div class="input-icon">
-    <i class="icon">🛠️</i>
+  <div *ngIf="showVestineSection" class="vestine-wrapper border rounded p-3 bg-light">
+    <p class="mb-2">Izaberi veštine:</p>
+
+    <!-- OVO JE DODATA KUTIJA ZA SCROLL -->
     <div class="vestine-scroll">
       <div class="form-check" *ngFor="let vestina of vestine">
         <input
@@ -317,7 +316,6 @@
       </div>
     </div>
   </div>
-</div>
 </div>
 
     </div>
