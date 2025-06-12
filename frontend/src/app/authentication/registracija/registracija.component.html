@@ -286,24 +286,27 @@
 <div class="form-group">
   <label>Veštine (opciono)</label>
 
-  <div class="custom-dropdown" (click)="toggleVestineDropdown()" tabindex="0" (blur)="closeVestineDropdown()">
-    <button type="button" class="dropdown-btn">
-      Izabrano: {{ getSelectedVestineNames().join(', ') || 'nema ništa' }}
-      <span class="arrow" [class.open]="vestineDropdownOpen">&#9662;</span>
-    </button>
+  <!-- Dugme za otvaranje/zatvaranje sekcije sa veštinama -->
+<button type="button" (click)="toggleVestineSection()">
+  {{ showVestineSection ? 'Sakrij veštine' : 'Prikaži veštine' }}
+</button>
 
-    <div class="dropdown-menu" *ngIf="vestineDropdownOpen" (click)="$event.stopPropagation()">
-      <label *ngFor="let v of vestine" class="dropdown-item">
-        <input
-          type="checkbox"
-          [value]="v.id"
-          (change)="onVestinaChange($event)"
-          [checked]="step3Form.get('vestine')?.value.includes(v.id)"
-        />
-        {{ v.naziv }}
-      </label>
-    </div>
+<!-- Sekcija sa veštinama, prikazuje se samo ako je showVestineSection = true -->
+<div *ngIf="showVestineSection" class="vestine-section">
+  <p>Izaberi veštine (opciono):</p>
+
+  <div *ngFor="let vestina of vestine">
+    <label>
+      <input
+        type="checkbox"
+        [value]="vestina.id"
+        (change)="onVestinaChange($event)"
+        [checked]="step3Form.get('vestine')?.value?.includes(vestina.id)"
+      />
+      {{ vestina.naziv }}
+    </label>
   </div>
+</div>
 </div>
 
     </div>
