@@ -52,7 +52,12 @@ export class RegistracijaComponent implements OnInit {
     { code: 'ME', name: 'Crna Gora' },
     { code: 'AL', name: 'Albanija' },
   ];
-
+  vestine = [
+  { id: 1, naziv: 'Spajanje optičkih kablova' },
+  { id: 2, naziv: 'Vožnja B kategorije' },
+  { id: 3, naziv: 'Zamena instalacija' },
+  { id: 4, naziv: 'Rad na visini' }
+];
   constructor(private fb: FormBuilder,private router: Router) {
     // Konstruktor samo dependency injection
   }
@@ -116,6 +121,7 @@ export class RegistracijaComponent implements OnInit {
       tip: ['', Validators.required],
       zanimanje: [{ value: '', disabled: true }, Validators.required],
       datumRodjenja: [{ value: '', disabled: true }, Validators.required],
+      vestine: this.fb.array([]) // inicijalno prazno
     });
   }
 
@@ -128,6 +134,13 @@ export class RegistracijaComponent implements OnInit {
       const jeFizicko = value === 'fizicko_lice';
       this.toggleFormControl('zanimanje', jeFizicko);
       this.toggleFormControl('datumRodjenja', jeFizicko);
+      const zanimanjeControl = this.step3Form.get('zanimanje');
+      if (jeFizicko){
+        zanimanjeControl?.setValidators([Validators.required]);
+      }else {
+        zanimanjeControl?.clearValidators();
+      }
+        zanimanjeControl?.updateValueAndValidity();
     });
   }
 
@@ -211,6 +224,16 @@ export class RegistracijaComponent implements OnInit {
   }
   this.step3Form.get('datumRodjenja')!.markAsTouched();
   this.step3Form.get('datumRodjenja')!.updateValueAndValidity();
+}
+onVestinaChange(event: any) {
+  const vestineForm = this.step3Form.get('vestine');
+  const selected = vestineForm?.value || [];
+
+  if (event.target.checked) {
+    vestineForm?.setValue([...selected, +event.target.value]);
+  } else {
+    vestineForm?.setValue(selected.filter((id: number) => id !== +event.target.value));
+  }
 }
   
 }
