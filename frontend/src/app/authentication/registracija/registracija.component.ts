@@ -1,4 +1,5 @@
 import { Component, OnInit, HostListener } from '@angular/core';
+import { FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 
 import {
@@ -244,17 +245,21 @@ getSelectedVestineNames(): string[] {
   this.step3Form.get('datumRodjenja')!.updateValueAndValidity();
 }
 onVestinaChange(event: any) {
-  const vestineForm = this.step3Form.get('vestine');
-  const selected = vestineForm?.value || [];
+  const vestineArray = this.step3Form.get('vestine') as FormArray;
+
+  const vestinaId = +event.target.value;
 
   if (event.target.checked) {
-    vestineForm?.setValue([...selected, +event.target.value]);
+    vestineArray.push(this.fb.control(vestinaId));
   } else {
-    vestineForm?.setValue(selected.filter((id: number) => id !== +event.target.value));
+    const index = vestineArray.controls.findIndex(x => x.value === vestinaId);
+    if (index !== -1) {
+      vestineArray.removeAt(index);
+    }
   }
 
-  vestineForm?.markAsTouched();
-  vestineForm?.updateValueAndValidity();
+  vestineArray.markAsTouched();
+  vestineArray.updateValueAndValidity();
 }
   
 }
