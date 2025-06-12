@@ -285,16 +285,24 @@
 </div>
 <div class="form-group">
   <label>Veštine (opciono)</label>
-  <div class="checkbox-group">
-    <label *ngFor="let v of vestine">
-      <input
-        type="checkbox"
-        [value]="v.id"
-        (change)="onVestinaChange($event)"
-        [checked]="step3Form.get('vestine')?.value.includes(v.id)"
-      />
-      {{ v.naziv }}
-    </label>
+
+  <div class="custom-dropdown" (click)="toggleVestineDropdown()" tabindex="0" (blur)="closeVestineDropdown()">
+    <button type="button" class="dropdown-btn">
+      Izabrano: {{ getSelectedVestineNames().join(', ') || 'nema ništa' }}
+      <span class="arrow" [class.open]="vestineDropdownOpen">&#9662;</span>
+    </button>
+
+    <div class="dropdown-menu" *ngIf="vestineDropdownOpen" (click)="$event.stopPropagation()">
+      <label *ngFor="let v of vestine" class="dropdown-item">
+        <input
+          type="checkbox"
+          [value]="v.id"
+          (change)="onVestinaChange($event)"
+          [checked]="step3Form.get('vestine')?.value.includes(v.id)"
+        />
+        {{ v.naziv }}
+      </label>
+    </div>
   </div>
 </div>
 
