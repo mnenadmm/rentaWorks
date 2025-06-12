@@ -530,7 +530,7 @@ button:hover:not([disabled]) {
 .form-check {
   margin-bottom: 6px;
 }
-.zanimanje-scroll {
+.scrollable-select {
   max-height: 150px;
   overflow-y: auto;
   border: 1px solid #ccc;
