@@ -156,19 +156,25 @@ closeVestineSection() {
   }
 
   private registerFormListeners() {
-    this.step3Form.get('tip')?.valueChanges.subscribe((value) => {
-      const jeFizicko = value === 'fizicko_lice';
-      this.toggleFormControl('zanimanje', jeFizicko);
-      this.toggleFormControl('datumRodjenja', jeFizicko);
-      const zanimanjeControl = this.step3Form.get('zanimanje');
-      if (jeFizicko){
-        zanimanjeControl?.setValidators([Validators.required]);
-      }else {
-        zanimanjeControl?.clearValidators();
-      }
-        zanimanjeControl?.updateValueAndValidity();
-    });
-  }
+  this.step3Form.get('tip')?.valueChanges.subscribe((value) => {
+    const jeFizicko = value === 'fizicko_lice';
+
+    // Omogući/Onemogući polja
+    this.toggleFormControl('zanimanje', jeFizicko);
+    this.toggleFormControl('datumRodjenja', jeFizicko);
+
+    // Validacija za zanimanje
+    const zanimanjeControl = this.step3Form.get('zanimanje');
+    if (jeFizicko) {
+      zanimanjeControl?.setValidators([Validators.required]);
+    } else {
+      zanimanjeControl?.clearValidators();
+      zanimanjeControl?.reset(); // 🔄 Resetuj vrednost ako nije fizičko lice
+    }
+
+    zanimanjeControl?.updateValueAndValidity();
+  });
+}
 
   private toggleFormControl(controlName: string, enable: boolean) {
     const control = this.step3Form.get(controlName);
@@ -274,6 +280,9 @@ onVestinaChange(event: any) {
 
   vestineArray.markAsTouched();
   vestineArray.updateValueAndValidity();
+}
+onZanimanjeSelected(event: any) {
+  this.izabranoZanimanjeId = +event.target.value;
 }
   
 }
