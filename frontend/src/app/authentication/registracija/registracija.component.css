@@ -513,9 +513,20 @@ button:hover:not([disabled]) {
   }
 
 }
-.vestine-section {
-  margin-top: 1rem;
-  padding: 1rem;
+.vestine-wrapper {
+  max-width: 100%;
+}
+
+.vestine-scroll {
+  max-height: 150px; /*  */
+  overflow-y: auto;
   border: 1px solid #ccc;
-  border-radius: 8px;
+  padding: 8px;
+  border-radius: 4px;
+  background-color: #fff;
+}
+
+/* Opcionalno: malo razmaka između checkbox-a */
+.form-check {
+  margin-bottom: 6px;
 }

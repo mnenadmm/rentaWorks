@@ -292,21 +292,24 @@
     </button>
   </div>
 
-  <div *ngIf="showVestineSection" class="border rounded p-3 bg-light">
+  <div *ngIf="showVestineSection" class="vestine-wrapper border rounded p-3 bg-light">
     <p class="mb-2">Izaberi veštine:</p>
 
-    <div class="form-check" *ngFor="let vestina of vestine">
-      <input
-        class="form-check-input"
-        type="checkbox"
-        [value]="vestina.id"
-        (change)="onVestinaChange($event)"
-        [checked]="step3Form.get('vestine')?.value?.includes(vestina.id)"
-        [id]="'vestina_' + vestina.id"
-      />
-      <label class="form-check-label" [for]="'vestina_' + vestina.id">
-        {{ vestina.naziv }}
-      </label>
+    <!-- OVO JE DODATA KUTIJA ZA SCROLL -->
+    <div class="vestine-scroll">
+      <div class="form-check" *ngFor="let vestina of vestine">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          [value]="vestina.id"
+          (change)="onVestinaChange($event)"
+          [checked]="step3Form.get('vestine')?.value?.includes(vestina.id)"
+          [id]="'vestina_' + vestina.id"
+        />
+        <label class="form-check-label" [for]="'vestina_' + vestina.id">
+          {{ vestina.naziv }}
+        </label>
+      </div>
     </div>
   </div>
 </div>
