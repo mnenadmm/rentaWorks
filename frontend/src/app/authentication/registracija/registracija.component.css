@@ -531,7 +531,7 @@ button:hover:not([disabled]) {
   margin-bottom: 6px;
 }
 .scrollable-select {
-  max-height: 150px;
+  max-height: 35px;
   overflow-y: auto;
   border: 1px solid #ccc;
   border-radius: 4px;
