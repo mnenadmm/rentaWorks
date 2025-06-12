@@ -265,7 +265,7 @@
     <div class="input-icon">
       <i class="icon">👨‍⚕️</i>
       <div class="zanimanje-scroll">
-        <select formControlName="zanimanje" (change)="onZanimanjeSelected($event)">
+        <select formControlName="zanimanje" (change)="onZanimanjeSelected($event)" class="scrollable-select">
            <option *ngFor="let zanimanje of zanimanja" [value]="zanimanje.id">
              {{ zanimanje.naziv }}
            </option>
