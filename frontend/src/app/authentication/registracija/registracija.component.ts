@@ -58,7 +58,13 @@ export class RegistracijaComponent implements OnInit {
   { id: 1, naziv: 'Spajanje optičkih kablova' },
   { id: 2, naziv: 'Vožnja B kategorije' },
   { id: 3, naziv: 'Zamena instalacija' },
-  { id: 4, naziv: 'Rad na visini' }
+  { id: 4, naziv: 'Rad na visini' },
+  { id: 5, naziv: 'Zanimanje 5' },
+  { id: 6, naziv: 'Zanimanje 6' },
+  { id: 7, naziv: 'Zanimanje 7' },
+  { id: 8, naziv: 'Zanimanje 8' },
+  { id: 9, naziv: 'Zanimanje 9' },
+  { id: 10, naziv: 'Zanimanje 10' }
 ];
   constructor(private fb: FormBuilder,private router: Router) {
     // Konstruktor samo dependency injection
