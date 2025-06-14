@@ -313,37 +313,49 @@ export class RegistracijaComponent implements OnInit {
     this.izabranoZanimanjeId = +event.target.value;
   }
 
-  /** Glavna metoda za slanje forme i navigaciju između koraka */
-  handleSubmit() {
-    const form = this.getCurrentForm();
+/**
+ * Glavna metoda za slanje forme i navigaciju između koraka
+ */
+handleSubmit() {
+  // Dohvata trenutno aktivnu formu na osnovu trenutnog koraka
+  const form = this.getCurrentForm();
 
-    if (!form.valid) {
-      form.markAllAsTouched();
-      return;
-    }
-
-    if (this.currentStep === this.totalSteps) {
-      // Sakupljanje podataka iz svih koraka
-      const payload = {
-        ...this.step1Form.value,
-        ...this.step2Form.value,
-        ...this.step3Form.value,
-      };
-
-      console.log('Poslali smo formu:', payload);
-
-      const email = this.step1Form.get('email')?.value || '[nepoznat email]';
-      this.successMessage = `Na email: ${email} je poslat link za verifikaciju.`;
-      this.formSubmitted = true;
-
-      // Nakon 4 sekunde preusmeravamo na login stranicu
-      setTimeout(() => {
-        this.router.navigate(['/login']);
-      }, 4000);
-
-    } else {
-      // Idemo na sledeći korak forme
-      this.nextStep();
-    }
+  // Ako forma nije validna, obeleži sva polja kao "dodirnuta" da se prikažu greške i prekini izvršavanje
+  if (!form.valid) {
+    form.markAllAsTouched();
+    return;
   }
+
+  // Ako smo na poslednjem koraku, pripremi i pošalji podatke
+  if (this.currentStep === this.totalSteps) {
+    // Izvući confirmPassword iz step1Form da ga ne šaljemo na backend
+    const { confirmPassword, ...step1DataWithoutConfirm } = this.step1Form.value;
+
+    // Sastavi payload kombinujući podatke iz sva tri koraka
+    // Koristi step1DataWithoutConfirm umesto celog step1Form.value da izostavi confirmPassword
+    const payload = {
+      ...step1DataWithoutConfirm,
+      ...this.step2Form.value,
+      ...this.step3Form.value,
+    };
+
+    // Ovde bi išao poziv backend servisu npr. this.authService.register(payload)...
+
+    console.log('Poslali smo formu:', payload);
+
+    // Prikaži poruku uspeha sa emailom korisnika
+    const email = this.step1Form.get('email')?.value || '[nepoznat email]';
+    this.successMessage = `Na email: ${email} je poslat link za verifikaciju.`;
+    this.formSubmitted = true;
+
+    // Nakon 4 sekunde preusmeri korisnika na login stranicu
+    setTimeout(() => {
+      this.router.navigate(['/login']);
+    }, 4000);
+
+  } else {
+    // Nismo još na poslednjem koraku, pređi na sledeći korak forme
+    this.nextStep();
+  }
+}
 }
