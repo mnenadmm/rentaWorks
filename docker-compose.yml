@@ -17,7 +17,7 @@ services:
     depends_on:
        - postgres
     environment:
-       - PYTHONUNBUFFERED=1
+       - PYTHONUNBUFFERED=1 #Omogucava print u konzoli
 
     networks:
        - backend-net
