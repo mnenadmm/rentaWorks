@@ -17,7 +17,7 @@ services:
     depends_on:
        - postgres
     entrypoint: 
-      - PYTHONUNBUFFERED=1
+       - PYTHONUNBUFFERED=1
     networks:
        - backend-net
        - frontend-net
