@@ -11,7 +11,7 @@ def registracija():
     username = data.get('username')
     password = data.get('password')
     # ... registracija korisnika ...
-    return jsonify({"message": "Korisnik registrovan uspešno"})
+    return jsonify(data)
 
 
 @app.route('/konekcija')
