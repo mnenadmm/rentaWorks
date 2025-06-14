@@ -28,6 +28,7 @@ def db_check():
         return jsonify({"error": str(e)}), 500
 @app.route('/')
 def home():
+    print('aaaaaaaaaaaaaaaaaaaaaaa')
     return {"message": "Nenad 1234S sada radi "}
 if __name__ == "__main__":
     app.run(host='0.0.0.0', debug=True, use_reloader=True)
