@@ -259,17 +259,18 @@
           </div>
         </div>
         <div>  <!-- Prikazujemo samo ako je tip = fizicko_lice -->
-  <div *ngIf="step3Form.get('tip')?.value === 'fizicko_lice'">
-  <div class="form-group">
-    <label for="zanimanje">Zanimanje</label>
-    <div class="input-icon">
-      <i class="icon">👨‍⚕️</i>
-      <div class="zanimanje-scroll">
-        <select formControlName="zanimanje" (change)="onZanimanjeSelected($event)">
-          <option *ngFor="let zanimanje of zanimanja" [value]="zanimanje.id">
-            {{ zanimanje.naziv }}
-          </option>
-        </select>
+  <div *ngIf="step3Form.get('tip')?.value === 'fizicko_lice'" class="form-group">
+  <label for="zanimanje">Zanimanje</label>
+  <div class="input-icon">
+    <i class="icon">👨‍⚕️</i>
+    <div class="zanimanje-scroll">
+      <div
+        *ngFor="let zanimanje of zanimanja"
+        class="zanimanje-item"
+        [class.selected]="step3Form.get('zanimanje')?.value === zanimanje.id"
+        (click)="selectZanimanje(zanimanje.id)"
+      >
+        {{ zanimanje.naziv }}
       </div>
     </div>
   </div>
