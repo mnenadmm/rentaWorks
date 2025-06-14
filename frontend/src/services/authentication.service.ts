@@ -9,6 +9,6 @@ export class AuthenticationService {
   constructor(private http :HttpClient) { }
   register(userData: any): Observable<any> {
     // POST na backend endpoint za registraciju
-    return this.http.post(`${this.apiUrl}registracija`, userData);
+    return this.http.post(`${this.apiUrl}registracija`, userData, { withCredentials: true });
   }
 }
