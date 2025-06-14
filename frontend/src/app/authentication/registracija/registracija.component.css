@@ -171,7 +171,7 @@ input[type="date"].custom-date::-webkit-calendar-picker-indicator {
   line-height: 1; /* Visina linije */
 }
 
-/* Hover i focus efekti za dugme */
+/* Hover i focus efekti za dugme  vestine-wrapper*/
 .toggle-password:hover,
 .toggle-password:focus {
   opacity: 1; /* Potpuno vidljivo */
@@ -530,18 +530,20 @@ button:hover:not([disabled]) {
 .form-check {
   margin-bottom: 6px;
 }
-.scrollable-select {
-  max-height: 35px;
+.zanimanje-scroll {
+  max-height: 150px;
   overflow-y: auto;
   border: 1px solid #ccc;
+  padding: 4px;
   border-radius: 4px;
-  padding: 8px;
-  background-color: white;
+  background-color: #fff;
+  user-select: none; /* sprečava selekciju teksta prilikom klika */
 }
 
 .zanimanje-item {
   padding: 6px 10px;
   cursor: pointer;
+  border-radius: 3px;
 }
 
 .zanimanje-item:hover {
