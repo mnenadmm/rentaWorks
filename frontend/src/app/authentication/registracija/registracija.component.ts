@@ -158,6 +158,7 @@ getSelectedZanimanjeNaziv(): string | null {
 selectZanimanje(id: number) {
   this.step3Form.get('zanimanje')?.setValue(id);
   this.izabranoZanimanjeId = id; // opciono, ako ti treba za nešto drugo
+  this.zanimanjeDropdownOpen = false; // <- Ovdje se zatvara dropdown
 }
   private initStep3Form() {
     this.step3Form = this.fb.group({
