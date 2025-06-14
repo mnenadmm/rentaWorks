@@ -1,8 +1,18 @@
 from applicationSetup import create_app,db
-from flask import jsonify
+from flask import jsonify, request
 from sqlalchemy import text  # type: ignore
 from extensions import db
 app = create_app()
+
+@app.route('/registracija', methods=['POST'])
+def registracija():
+    data = request.json  # podaci koje šalje frontend
+    # ovde ide logika za registraciju, npr. validacija i čuvanje korisnika u bazu
+    username = data.get('username')
+    password = data.get('password')
+    # ... registracija korisnika ...
+    return jsonify({"message": "Korisnik registrovan uspešno"})
+
 
 @app.route('/konekcija')
 def db_check():

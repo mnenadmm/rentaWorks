@@ -10,7 +10,7 @@ import { LoginComponent } from './authentication/login/login.component';
 import { ResetPasswordComponent } from './authentication/reset-password/reset-password.component';
 import { RegistracijaComponent } from './authentication/registracija/registracija.component';
 import { CustomDatepickerComponent } from './components/custom-datepicker/custom-datepicker.component';
-
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -27,6 +27,7 @@ import { CustomDatepickerComponent } from './components/custom-datepicker/custom
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
+     HttpClientModule,
     
   
   ],

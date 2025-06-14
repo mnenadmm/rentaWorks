@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
-
+import { AuthenticationService } from '../../../services/authentication.service';
+import { error } from 'console';
 @Component({
   selector: 'app-registracija',
   templateUrl: './registracija.component.html',
@@ -74,7 +75,9 @@ export class RegistracijaComponent implements OnInit {
     { id: 10, naziv: 'Zanimanje 10' }
   ];
 
-  constructor(private fb: FormBuilder, private router: Router) {
+  constructor(private fb: FormBuilder, 
+              private router: Router, 
+              private authService : AuthenticationService) {
     // Konstruktor koristi se samo za dependency injection
   }
 
@@ -340,22 +343,25 @@ handleSubmit() {
     };
 
     // Ovde bi išao poziv backend servisu npr. this.authService.register(payload)...
-
-    console.log('Poslali smo formu:', payload);
-
-    // Prikaži poruku uspeha sa emailom korisnika
-    const email = this.step1Form.get('email')?.value || '[nepoznat email]';
-    this.successMessage = `Na email: ${email} je poslat link za verifikaciju.`;
-    this.formSubmitted = true;
-
-    // Nakon 4 sekunde preusmeri korisnika na login stranicu
-    setTimeout(() => {
-      this.router.navigate(['/login']);
-    }, 4000);
-
-  } else {
-    // Nismo još na poslednjem koraku, pređi na sledeći korak forme
+    this.authService.register(payload).subscribe({
+      next: (response)=>{
+        console.log('Uspesna registracija', response);
+        const email = this.step1Form.get('email')?.value || '[nepoznat email]';
+        this.successMessage = `Na email: ${email} je poslat link za verifikaciju.`;
+        this.formSubmitted = true;
+         // Nakon 4 sekunde preusmeri korisnika na login stranicu
+        setTimeout(() => {
+        this.router.navigate(['/login']);
+                }, 4000);
+      },error: (error)=>{
+        console.error('Greska u registraciji: ',error);
+        this.successMessage = `Došlo je do greške prilikom registracije. Pokušajte ponovo.`;
+      }
+    });
+  }else{
     this.nextStep();
   }
 }
+
+
 }
