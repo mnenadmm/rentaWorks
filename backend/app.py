@@ -10,6 +10,7 @@ def registracija():
     # ovde ide logika za registraciju, npr. validacija i čuvanje korisnika u bazu
     username = data.get('username')
     password = data.get('password')
+    print(data)
     # ... registracija korisnika ...
     return jsonify(data)
 
