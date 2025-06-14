@@ -2,14 +2,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import {
-  FormGroup,
-  FormBuilder,
-  Validators,
-  AbstractControl,
-} from '@angular/forms';
-
-@Component({
+import {FormGroup,FormBuilder,Validators,AbstractControl} from '@angular/forms';@Component({
   selector: 'app-registracija',
   standalone: false,
   templateUrl: './registracija.component.html',
@@ -25,7 +18,6 @@ export class RegistracijaComponent implements OnInit {
   showPassword = false;
   isLockedOut = false;
   formSubmitted = false;
-
   tipLica: string = '';
   izabranoZanimanjeId: number | null = null;
   successMessage = '';
@@ -93,7 +85,6 @@ closeVestineSection() {
   this.showVestineSection = false;
 }
 closeZanimanjeDropdown() {
-  // Zatvori dropdown kad fokus ode van elementa
   this.zanimanjeDropdownOpen = false;
 }
 getSelectedZanimanjeNaziv(): string | null {
@@ -156,9 +147,12 @@ getSelectedZanimanjeNaziv(): string | null {
     });
   }
 selectZanimanje(id: number) {
-  this.step3Form.get('zanimanje')?.setValue(id);
-  this.izabranoZanimanjeId = id; // opciono, ako ti treba za nešto drugo
-  this.zanimanjeDropdownOpen = false; // <- Ovdje se zatvara dropdown
+  const control = this.step3Form.get('zanimanje');
+  if (control?.enabled) {
+    control.setValue(id);
+    this.izabranoZanimanjeId = id;
+    this.zanimanjeDropdownOpen = false;
+  }
 }
   private initStep3Form() {
     this.step3Form = this.fb.group({
