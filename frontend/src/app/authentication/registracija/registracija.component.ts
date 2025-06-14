@@ -17,6 +17,7 @@ import {
 })
 export class RegistracijaComponent implements OnInit {
   vestineDropdownOpen = false;
+  zanimanjeDropdownOpen = false;
   showVestineSection = false;
   currentStep = 1;
   totalSteps = 3;
@@ -77,16 +78,29 @@ export class RegistracijaComponent implements OnInit {
   constructor(private fb: FormBuilder,private router: Router) {
     // Konstruktor samo dependency injection
   }
+  
 toggleVestineSection() {
   this.showVestineSection = !this.showVestineSection;
 }
-
+toggleZanimanjeDropdown() {
+  this.zanimanjeDropdownOpen = !this.zanimanjeDropdownOpen;
+}
 openVestineSection() {
   this.showVestineSection = true;
 }
 
 closeVestineSection() {
   this.showVestineSection = false;
+}
+closeZanimanjeDropdown() {
+  // Zatvori dropdown kad fokus ode van elementa
+  this.zanimanjeDropdownOpen = false;
+}
+getSelectedZanimanjeNaziv(): string | null {
+  const id = this.step3Form.get('zanimanje')?.value;
+  if (!id) return null;
+  const zanimanje = this.zanimanja.find(z => z.id === id);
+  return zanimanje ? zanimanje.naziv : null;
 }
   ngOnInit() {
     this.initStep1Form();

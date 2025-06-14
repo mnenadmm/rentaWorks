@@ -263,14 +263,26 @@
   <label for="zanimanje">Zanimanje</label>
   <div class="input-icon">
     <i class="icon">👨‍⚕️</i>
-    <div class="zanimanje-scroll">
+
+    <div class="zanimanje-dropdown" (click)="toggleZanimanjeDropdown()" tabindex="0" (blur)="closeZanimanjeDropdown()">
+      <div class="zanimanje-selected">
+        {{ getSelectedZanimanjeNaziv() || 'Izaberi zanimanje' }}
+        <span class="arrow" [class.open]="zanimanjeDropdownOpen">▼</span>
+      </div>
+
       <div
-        *ngFor="let zanimanje of zanimanja"
-        class="zanimanje-item"
-        [class.selected]="step3Form.get('zanimanje')?.value === zanimanje.id"
-        (click)="selectZanimanje(zanimanje.id)"
+        class="zanimanje-scroll"
+        *ngIf="zanimanjeDropdownOpen"
+        (click)="$event.stopPropagation()" 
       >
-        {{ zanimanje.naziv }}
+        <div
+          *ngFor="let zanimanje of zanimanja"
+          class="zanimanje-item"
+          [class.selected]="step3Form.get('zanimanje')?.value === zanimanje.id"
+          (click)="selectZanimanje(zanimanje.id)"
+        >
+          {{ zanimanje.naziv }}
+        </div>
       </div>
     </div>
   </div>

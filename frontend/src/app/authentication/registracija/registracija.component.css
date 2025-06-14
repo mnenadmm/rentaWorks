@@ -530,14 +530,44 @@ button:hover:not([disabled]) {
 .form-check {
   margin-bottom: 6px;
 }
+.zanimanje-dropdown {
+  position: relative;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 8px 12px;
+  background-color: white;
+  cursor: pointer;
+  user-select: none;
+  max-width: 300px;
+}
+
+.zanimanje-selected {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.arrow {
+  transition: transform 0.3s ease;
+}
+
+.arrow.open {
+  transform: rotate(180deg);
+}
+
 .zanimanje-scroll {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
   max-height: 150px;
   overflow-y: auto;
   border: 1px solid #ccc;
-  padding: 4px;
-  border-radius: 4px;
-  background-color: #fff;
-  user-select: none;
+  background-color: white;
+  z-index: 1000;
+  border-radius: 0 0 4px 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  margin-top: 2px;
 }
 
 .zanimanje-item {
