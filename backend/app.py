@@ -5,15 +5,7 @@ from extensions import db
 import logging
 app = create_app()
 
-@app.route('/registracija', methods=['POST'])
-def registracija():
-    data = request.json  # podaci koje šalje frontend
-    # ovde ide logika za registraciju, npr. validacija i čuvanje korisnika u bazu
-    username = data.get('username')
-    password = data.get('password')
-    
-    # ... registracija korisnika ...
-    return jsonify(data)
+
 
 
 @app.route('/konekcija')
