@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-registracija',
   templateUrl: './registracija.component.html',
+  standalone: false,
   styleUrls: ['./registracija.component.css']
 })
 export class RegistracijaComponent implements OnInit {
