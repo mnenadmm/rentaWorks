@@ -16,8 +16,9 @@ services:
       - "5001:5000"
     depends_on:
        - postgres
-    entrypoint: 
+    environment:
        - PYTHONUNBUFFERED=1
+
     networks:
        - backend-net
        - frontend-net
