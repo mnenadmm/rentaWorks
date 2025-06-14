@@ -11,7 +11,7 @@ def registracija():
     # ovde ide logika za registraciju, npr. validacija i čuvanje korisnika u bazu
     username = data.get('username')
     password = data.get('password')
-    print('ovo je data', jsonify(data))
+    
     # ... registracija korisnika ...
     return jsonify(data)
 
@@ -27,10 +27,7 @@ def db_check():
             return jsonify({"message": "Upit je prošao, ali rezultat nije očekivan"}), 500
     except Exception as e:
         return jsonify({"error": str(e)}), 500
-@app.route('/')
-def home():
-    print('aaaaaaaaaaaaaaaaaaaaaaa')
-    return {"message": "Nenad 1234S sada radi "}
+
 
 
 if __name__ == "__main__":
