@@ -16,6 +16,8 @@ services:
       - "5001:5000"
     depends_on:
        - postgres
+    entrypoint: 
+      - PYTHONUNBUFFERED=1
     networks:
        - backend-net
        - frontend-net
@@ -58,7 +60,7 @@ services:
       - "4200:4200"
     environment:
       - CHOKIDAR_USEPOLLING=true
-      - PYTHONUNBUFFERED=1
+      
     networks:
       - frontend-net
   
