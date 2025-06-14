@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy # type: ignore
 from extensions import db, migrate
 from flask_migrate import Migrate, upgrade # type: ignore
 from konekcija import get_database_uri
-
+from routes import register_blueprints
 
 
 migrate = Migrate()
@@ -16,6 +16,7 @@ def create_app():
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
     db.init_app(app)
     migrate.init_app(app, db)
+    register_blueprints(app)
     import modeli
     with app.app_context():
         upgrade()  # Primeni migracije (safe)
