@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl, FormArray } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../../../services/authentication.service';
-import { error } from 'console';
+import { ReferenceService } from '../../../services/reference.service';
+import { Zanimanje,Vestina,Drzava } from '../../interfaces/reference.interface';
 @Component({
   selector: 'app-registracija',
   templateUrl: './registracija.component.html',
@@ -10,6 +11,9 @@ import { error } from 'console';
   styleUrls: ['./registracija.component.css']
 })
 export class RegistracijaComponent implements OnInit {
+  zanimanja: Zanimanje[] = [];
+  vestine: Vestina[] = [];
+  drzave: Drzava[] = [];
   // --- UI state ---
   vestineDropdownOpen = false;
   zanimanjeDropdownOpen = false;
@@ -33,51 +37,12 @@ export class RegistracijaComponent implements OnInit {
   tipLica: string = '';
   izabranoZanimanjeId: number | null = null;
 
-  zanimanja = [
-    { id: 1, naziv: 'Gradjevincki radnik' },
-    { id: 2, naziv: 'Vozac C' },
-    { id: 3, naziv: 'Moler' },
-    { id: 4, naziv: 'Elektricar' },
-    { id: 5, naziv: 'Programer' },
-    { id: 6, naziv: 'Vodoinstalater' },
-    { id: 7, naziv: 'Dostavljac' },
-    { id: 8, naziv: 'Fizicki radnik' },
-    { id: 9, naziv: 'Gradjevincki radnik' },
-    { id: 10, naziv: 'Zanimanje 10' },
-    { id: 11, naziv: 'Zanimanje 11' },
-    { id: 12, naziv: 'Zanimanje 12' },
-    { id: 13, naziv: 'Zanimanje 13' },
-    { id: 14, naziv: 'Zanimanje 14' },
-    { id: 15, naziv: 'Zanimanje 15' },
-    { id: 16, naziv: 'Zanimanje 16' },
-  ];
 
-  drzave = [
-    { code: 'RS', name: 'Srbija' },
-    { code: 'HR', name: 'Hrvatska' },
-    { code: 'BA', name: 'Bosna i Hercegovina' },
-    { code: 'MK', name: 'Severna Makedonija' },
-    { code: 'SI', name: 'Slovenija' },
-    { code: 'ME', name: 'Crna Gora' },
-    { code: 'AL', name: 'Albanija' },
-  ];
-
-  vestine = [
-    { id: 1, naziv: 'Spajanje optičkih kablova' },
-    { id: 2, naziv: 'Vožnja B kategorije' },
-    { id: 3, naziv: 'Zamena instalacija' },
-    { id: 4, naziv: 'Rad na visini' },
-    { id: 5, naziv: 'Zanimanje 5' },
-    { id: 6, naziv: 'Zanimanje 6' },
-    { id: 7, naziv: 'Zanimanje 7' },
-    { id: 8, naziv: 'Zanimanje 8' },
-    { id: 9, naziv: 'Zanimanje 9' },
-    { id: 10, naziv: 'Zanimanje 10' }
-  ];
 
   constructor(private fb: FormBuilder, 
               private router: Router, 
-              private authService : AuthenticationService) {
+              private authService : AuthenticationService,
+              private referenceService: ReferenceService) {
     // Konstruktor koristi se samo za dependency injection
   }
 
