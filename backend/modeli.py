@@ -18,6 +18,12 @@ class Zanimanje(db.Model):
 
     def __repr__(self):
         return f"<Zanimanje {self.naziv}>"
+    
+korisnik_vestina = db.Table(
+    'korisnik_vestina',
+    db.Column('korisnik_id', db.Integer, db.ForeignKey('korisnici.id'), primary_key=True),
+    db.Column('vestina_id', db.Integer, db.ForeignKey('vestine.id'), primary_key=True)
+)
 #model sadrzi podatke o korisniku
 class Korisnik(db.Model):
 
@@ -65,7 +71,7 @@ class Korisnik(db.Model):
             "profilna_slika": self.profilna_slika,
             "biografija": self.biografija,
             "grad": self.grad,
-            "drzava": self.drzava,
+            "drzava": self.drzavljanstvo,
             "telefon": self.telefon,
             "block_user": self.block_user,
             "prva_rola": self.prva_rola,
