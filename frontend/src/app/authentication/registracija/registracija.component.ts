@@ -52,6 +52,10 @@ export class RegistracijaComponent implements OnInit {
     this.initStep2Form();
     this.initStep3Form();
     this.registerFormListeners();
+    //Dodeljivanja vrednosti iz sevisa
+    this.referenceService.getZanimanja().subscribe(data=>{this.zanimanja=data});
+    this.referenceService.getDrzave().subscribe(data=>{this.drzave=data});
+    this.referenceService.getVestine().subscribe(data=>{this.vestine=data});
   }
 
   // =====================
