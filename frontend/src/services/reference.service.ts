@@ -7,7 +7,7 @@ import { Zanimanje,Vestina,Drzava } from '../app/interfaces/reference.interface'
   providedIn: 'root'
 })
 export class ReferenceService {
-   private baseUrl = 'http://5.75.164.111:5001';
+   private baseUrl = 'http://5.75.164.111:5001/api/';
   constructor(private http: HttpClient) { }
     getZanimanja(): Observable<Zanimanje[]> {
     return this.http.get<Zanimanje[]>(`${this.baseUrl}/zanimanja`);
