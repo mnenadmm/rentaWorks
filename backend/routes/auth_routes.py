@@ -22,11 +22,12 @@ def registracija():
     korisnik_data = { k: v for k, v in data.items() if k in dozvoljena_polja}
     #kreira novog korsinika
     novi_korisnik = Korisnik(**korisnik_data)
-    try:
-        db.session.add(novi_korisnik)
-        db.session.commit()
-    except Exception as e:
-        db.session.rollback()
-        return jsonify({'error':'Doslo je do greske prilikom konekcije ka bazi', 'details': str(e)})
-    
     return jsonify({'message': 'Korisnik uspešno registrovan'}), 201
+    #try:
+    #    db.session.add(novi_korisnik)
+    #    db.session.commit()
+    #except Exception as e:
+    #    db.session.rollback()
+    #    return jsonify({'error':'Doslo je do greske prilikom konekcije ka bazi', 'details': str(e)})
+    #
+    #return jsonify({'message': 'Korisnik uspešno registrovan'}), 201
