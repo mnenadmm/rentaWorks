@@ -36,8 +36,9 @@ def registracija():
     try:
         db.session.add(novi_korisnik)
         db.session.commit()
+        return jsonify({'message': 'Korisnik uspešno registrovan'}), 200
     except Exception as e:
         db.session.rollback()
-        return jsonify({'error': 'Došlo je do greške prilikom konekcije ka bazi', 'details': str(e)}), 500
-    
-    return jsonify({'message': 'Korisnik uspešno registrovan'}), 201
+        import traceback
+        traceback.print_exc()  # Ovo će ispisati detalje greške u konzoli
+    return jsonify({'error': 'Došlo je do greške prilikom konekcije ka bazi', 'details': str(e)}), 500
