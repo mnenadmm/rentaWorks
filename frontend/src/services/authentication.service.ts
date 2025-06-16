@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private apiUrl = "http://5.75.164.111:5001/";
+  private apiUrl = "http://5.75.164.111:5001/api";
   readonly httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
