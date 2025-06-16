@@ -34,7 +34,7 @@ class Korisnik(db.Model):
     ime = db.Column(db.String(50), nullable=False)
     prezime = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
-    lozinka = db.Column(db.String(128), nullable=False)
+    lozinka = db.Column(db.String(255), nullable=False)
     tip_korisnika = db.Column(db.Enum(TipKorisnika), nullable=False)
     datum_rodjenja = db.Column(db.Date, nullable=True)
     datum_registracije = db.Column(db.DateTime, default=datetime.utcnow)
