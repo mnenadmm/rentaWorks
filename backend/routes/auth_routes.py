@@ -22,4 +22,4 @@ def registracija():
     #kreira novog korsinika
     novi_korisnik = Korisnik(**korisnik_data)
 
-    return jsonify(data)
+    return jsonify(novi_korisnik)
