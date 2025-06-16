@@ -8,27 +8,36 @@ auth_bp = Blueprint('auth', __name__)
 @auth_bp.route('/registracija', methods=['POST'])
 def registracija():
     data = request.json
-    # Hesovanje lozinke
+    
+    # Provera obaveznih polja
+    obavezna_polja = ['username', 'password', 'ime', 'prezime', 'email']
+    for polje in obavezna_polja:
+        if polje not in data or not data[polje]:
+            return jsonify({'error': f'Polje "{polje}" je obavezno.'}), 400
+    
+    # Hesovanje lozinke i preimenovanje ključa
     data['lozinka'] = generate_password_hash(data.pop('password'))
-    # Rebacuje datum iz stringa u objekat
+
+    # Validacija datuma rodjenja, ako postoji
     if 'datumRodjenja' in data:
         try:
-            data['datumRodjenja'] = datetime.strptime(data['datumRodjenja'],'%Y-%m-%d').date()
-        except ValueError :
-            return jsonify({'error' : 'Neospravan format datuma'}),400
-    #Preuzimamo nazive kolona iz modela
-    dozvoljena_polja =  Korisnik.__table__.columns.keys()
-    #Filtrita podatke za prolsedjivanje modelu
-    korisnik_data = { k: v for k, v in data.items() if k in dozvoljena_polja}
-    #kreira novog korsinika
+            data['datumRodjenja'] = datetime.strptime(data['datumRodjenja'], '%Y-%m-%d').date()
+        except ValueError:
+            return jsonify({'error': 'Neispravan format datuma, očekuje se YYYY-MM-DD'}), 400
+    
+    # Filtriranje dozvoljenih polja iz modela
+    dozvoljena_polja = Korisnik.__table__.columns.keys()
+    korisnik_data = {k: v for k, v in data.items() if k in dozvoljena_polja}
+    
+    # Kreiranje novog korisnika
     novi_korisnik = Korisnik(**korisnik_data)
     print("Podaci za novog korisnika:", korisnik_data)
+    
+    try:
+        db.session.add(novi_korisnik)
+        db.session.commit()
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': 'Došlo je do greške prilikom konekcije ka bazi', 'details': str(e)}), 500
+    
     return jsonify({'message': 'Korisnik uspešno registrovan'}), 201
-    #try:
-    #    db.session.add(novi_korisnik)
-    #    db.session.commit()
-    #except Exception as e:
-    #    db.session.rollback()
-    #    return jsonify({'error':'Doslo je do greske prilikom konekcije ka bazi', 'details': str(e)})
-    #
-    #return jsonify({'message': 'Korisnik uspešno registrovan'}), 201
