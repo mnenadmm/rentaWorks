@@ -17,6 +17,6 @@ export class AuthenticationService {
 
   register(userData: any): Observable<any> {
     // POST na backend endpoint za registraciju sa httpOptions
-    return this.http.post(`${this.apiUrl}/registracija`, userData, this.httpOptions);
+    return this.http.post(`${this.apiUrl}registracija`, userData, this.httpOptions);
   }
 }
