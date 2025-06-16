@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private apiUrl = "http://5.75.164.111:5001/api/";
+  private apiUrl = "http://5.75.164.111:5001/api";
   readonly httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json'
@@ -17,6 +17,6 @@ export class AuthenticationService {
 
   register(userData: any): Observable<any> {
     // POST na backend endpoint za registraciju sa httpOptions
-    return this.http.post(`${this.apiUrl}registracija`, userData, this.httpOptions);
+    return this.http.post(`${this.apiUrl}/registracija`, userData, this.httpOptions);
   }
 }
