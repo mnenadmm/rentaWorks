@@ -10,7 +10,7 @@ from routes import register_blueprints
 migrate = Migrate()
 def create_app():
     app = Flask(__name__)
-    CORS(app, resources={r"/*": {"origins": ["http://5.75.164.111"]}}, supports_credentials=True)
+    CORS(app, supports_credentials=True)
 
 
     #CORS(app, resources={r"/*": {"origins": "http://5.75.164.111:4200"}}, supports_credentials=True)
