@@ -44,15 +44,15 @@ def registracija():
     novi_korisnik = Korisnik(**korisnik_data)
     print("Podaci za novog korisnika:", korisnik_data)
     
-    # Zakomentarisano ubacivanje u bazu da bi se samo proverili podaci
-    # try:
-    #     db.session.add(novi_korisnik)
-    #     db.session.commit()
-    #     return jsonify({'message': 'Korisnik uspešno registrovan'}), 200
-    # except Exception as e:
-    #     db.session.rollback()
-    #     import traceback
-    #     traceback.print_exc()
-    #     return jsonify({'error': 'Došlo je do greške prilikom konekcije ka bazi', 'details': str(e)}), 500
+     
+    try:
+         db.session.add(novi_korisnik)
+         db.session.commit()
+         return jsonify({'message': 'Korisnik uspešno registrovan'}), 200
+    except Exception as e:
+         db.session.rollback()
+         import traceback
+         traceback.print_exc()
+         return jsonify({'error': 'Došlo je do greške prilikom konekcije ka bazi', 'details': str(e)}), 500
 
-    return jsonify({'primljeni_podaci': korisnik_data}), 200
+
