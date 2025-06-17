@@ -22,7 +22,7 @@ def create_app():
     register_blueprints(app)
     import modeli
     with app.app_context():
-        upgrade()  # Primeni migracije (safe)
-
+        #upgrade()  # Primeni migracije (safe)
+        pass
 
     return app
