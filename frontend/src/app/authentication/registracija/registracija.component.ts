@@ -34,9 +34,12 @@ export class RegistracijaComponent implements OnInit {
   step3Form!: FormGroup;
 
   // --- Podaci za selekt liste ---
-  tipLica: string = '';
   izabranoZanimanjeId: number | null = null;
-
+ tipoviKorisnika = [
+  { value: 'fizicko_lice', label: 'Fizičko lice' },
+  { value: 'pravno_lice', label: 'Pravno lice' },
+  { value: 'admin', label: 'Administrator' }
+];
 
 
   constructor(private fb: FormBuilder, 
