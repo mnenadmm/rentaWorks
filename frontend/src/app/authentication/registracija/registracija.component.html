@@ -233,114 +233,106 @@
       </ng-container>
 
       <!-- STEP 3 -->
-      <ng-container *ngIf="currentStep === 3">
-        <div class="form-group">
-          <label>Tip korisnika:</label><br />
-          <div class="radio-group">
-            <label>
-              <input
-                type="radio"
-                formControlName="tip"
-                value="fizicko_lice"
-              />
-              Fizicko lice
-            </label>
-            <label>
-              <input
-                type="radio"
-                formControlName="tip"
-                value="pravno_lice"
-              />
-              Pravno lice
-            </label>
-          </div>
-          <div *ngIf="step3Form.get('tip')?.touched && step3Form.get('tip')?.invalid" class="error">
-            Izaberite tip korisnika.
-          </div>
-        </div>
-        <div>  <!-- Prikazujemo samo ako je tip = fizicko_lice -->
-  <div *ngIf="step3Form.get('tip')?.value === 'fizicko_lice'" class="form-group">
-  <label for="zanimanje">Zanimanje</label>
-  <div class="input-icon">
-    <i class="icon">👨‍⚕️</i>
-
-    <div class="zanimanje-dropdown" (click)="toggleZanimanjeDropdown()" tabindex="0" (blur)="closeZanimanjeDropdown()">
-      <div class="zanimanje-selected">
-        {{ getSelectedZanimanjeNaziv() || 'Izaberi zanimanje' }}
-        <span class="arrow" [class.open]="zanimanjeDropdownOpen">▼</span>
-      </div>
-
-      <div
-        class="zanimanje-scroll"
-        *ngIf="zanimanjeDropdownOpen"
-        (click)="$event.stopPropagation()" 
-      >
-        <div
-          *ngFor="let zanimanje of zanimanja"
-          class="zanimanje-item"
-          [class.selected]="step3Form.get('zanimanje')?.value === zanimanje.id"
-          (click)="selectZanimanje(zanimanje.id)"
-        >
-          {{ zanimanje.naziv }}
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-    <div *ngIf="step3Form.get('tip')?.value === 'fizicko_lice'">
-        <div class="form-group">
-  <label for="datumRodjenja">Datum rođenja</label>
-  <div class="input-icon">
-    <i class="icon">📅</i> <!-- Možeš izmeniti ikonicu po želji -->
-    <app-custom-datepicker (dateSelected)="onDateSelected($event)"></app-custom-datepicker>
-  </div>
-
-
-  <div class="text-danger mt-1" *ngIf="step3Form.get('datumRodjenja')?.touched && step3Form.get('datumRodjenja')?.invalid">
-    Datum rođenja je obavezan.
-  </div>
-</div>
-<div class="form-group">
-  <label for="vestineToggle" class="form-label">Veštine (opciono)</label>
-
-  <div class="mb-2">
-    <button type="button" class="btn btn-outline-primary btn-sm w-100" (click)="toggleVestineSection()" id="vestineToggle">
-      {{ showVestineSection ? 'Sakrij veštine' : 'Dodaj veštine' }}
-    </button>
-  </div>
-
-  <div *ngIf="showVestineSection" class="vestine-wrapper border rounded p-3 bg-light">
-    <p class="mb-2">Izaberi veštine:</p>
-
-    <!-- OVO JE DODATA KUTIJA ZA SCROLL -->
-    <div class="vestine-scroll">
-      <div class="form-check" *ngFor="let vestina of vestine">
+      <!-- STEP 3 -->
+<ng-container *ngIf="currentStep === 3">
+  <div class="form-group">
+    <label>Tip korisnika:</label><br />
+    <div class="radio-group">
+      <label>
         <input
-          class="form-check-input"
-          type="checkbox"
-          [value]="vestina.id"
-          (change)="onVestinaChange($event)"
-          [checked]="step3Form.get('vestine')?.value?.includes(vestina.id)"
-          [id]="'vestina_' + vestina.id"
+          type="radio"
+          formControlName="tip_korisnika"
+          value="fizicko_lice"
         />
-        <label class="form-check-label" [for]="'vestina_' + vestina.id">
-          {{ vestina.naziv }}
-        </label>
+        Fizicko lice
+      </label>
+      <label>
+        <input
+          type="radio"
+          formControlName="tip_korisnika"
+          value="pravno_lice"
+        />
+        Pravno lice
+      </label>
+    </div>
+    <div *ngIf="step3Form.get('tip_korisnika')?.touched && step3Form.get('tip_korisnika')?.invalid" class="error">
+      Izaberite tip korisnika.
+    </div>
+  </div>
+
+  <!-- Prikazujemo samo ako je tip_korisnika = fizicko_lice -->
+  <div *ngIf="step3Form.get('tip_korisnika')?.value === 'fizicko_lice'" class="form-group">
+    <label for="zanimanje">Zanimanje</label>
+    <div class="input-icon">
+      <i class="icon">👨‍⚕️</i>
+
+      <div class="zanimanje-dropdown" (click)="toggleZanimanjeDropdown()" tabindex="0" (blur)="closeZanimanjeDropdown()">
+        <div class="zanimanje-selected">
+          {{ getSelectedZanimanjeNaziv() || 'Izaberi zanimanje' }}
+          <span class="arrow" [class.open]="zanimanjeDropdownOpen">▼</span>
+        </div>
+
+        <div class="zanimanje-scroll" *ngIf="zanimanjeDropdownOpen" (click)="$event.stopPropagation()">
+          <div
+            *ngFor="let zanimanje of zanimanja"
+            class="zanimanje-item"
+            [class.selected]="step3Form.get('zanimanje')?.value === zanimanje.id"
+            (click)="selectZanimanje(zanimanje.id)"
+          >
+            {{ zanimanje.naziv }}
+          </div>
+        </div>
       </div>
     </div>
   </div>
-</div>
 
+  <div *ngIf="step3Form.get('tip_korisnika')?.value === 'fizicko_lice'">
+    <div class="form-group">
+      <label for="datumRodjenja">Datum rođenja</label>
+      <div class="input-icon">
+        <i class="icon">📅</i>
+        <app-custom-datepicker (dateSelected)="onDateSelected($event)"></app-custom-datepicker>
+      </div>
+      <div class="text-danger mt-1" *ngIf="step3Form.get('datumRodjenja')?.touched && step3Form.get('datumRodjenja')?.invalid">
+        Datum rođenja je obavezan.
+      </div>
     </div>
 
-        
+    <div class="form-group">
+      <label for="vestineToggle" class="form-label">Veštine (opciono)</label>
+      <div class="mb-2">
+        <button type="button" class="btn btn-outline-primary btn-sm w-100" (click)="toggleVestineSection()" id="vestineToggle">
+          {{ showVestineSection ? 'Sakrij veštine' : 'Dodaj veštine' }}
+        </button>
+      </div>
 
-        <div class="buttons">
-          <button type="button" (click)="prevStep()">Nazad</button>
-          <button type="submit" [disabled]="step3Form.invalid">Završi</button>
+      <div *ngIf="showVestineSection" class="vestine-wrapper border rounded p-3 bg-light">
+        <p class="mb-2">Izaberi veštine:</p>
+        <div class="vestine-scroll">
+          <div class="form-check" *ngFor="let vestina of vestine">
+            <input
+              class="form-check-input"
+              type="checkbox"
+              [value]="vestina.id"
+              (change)="onVestinaChange($event)"
+              [checked]="step3Form.get('vestine')?.value?.includes(vestina.id)"
+              [id]="'vestina_' + vestina.id"
+            />
+            <label class="form-check-label" [for]="'vestina_' + vestina.id">
+              {{ vestina.naziv }}
+            </label>
+          </div>
         </div>
       </div>
-      </ng-container>
+    </div>
+  </div>
+
+  <div class="buttons">
+    <button type="button" (click)="prevStep()">Nazad</button>
+    <button type="submit" [disabled]="step3Form.invalid">Završi</button>
+  </div>
+</ng-container>
+
     </form>
     </div>
   </div>
