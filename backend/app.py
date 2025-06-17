@@ -11,7 +11,7 @@ app = create_app()
 @app.route('/konekcija')
 def db_check():
     try:
-        # Izvršavanje jednostavnog upita preko SQLAlchemy
+        # Izvršavanje jednostavnog upita preko SQLAlchemya
         result = db.session.execute(text('SELECT 1')).scalar()
         if result == 1:
             return jsonify({"message": "Konekcija na bazu je uspešna"}), 200
