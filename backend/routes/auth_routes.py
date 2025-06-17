@@ -17,6 +17,7 @@ def registracija():
         if polje not in data or not data[polje]:
             return jsonify({'error': f'Polje "{polje}" je obavezno.'}), 400
     
+    # Validacija enum tip_korisnika
     try:
         data['tip_korisnika'] = TipKorisnika(data['tip_korisnika'])
     except ValueError:
@@ -36,11 +37,14 @@ def registracija():
     dozvoljena_polja = Korisnik.__table__.columns.keys()
     korisnik_data = {k: v for k, v in data.items() if k in dozvoljena_polja}
     
-    # Kreiranje novog korisnika (samo za proveru)
+    # Pretvori enum u string radi JSON odgovora
+    if 'tip_korisnika' in korisnik_data:
+        korisnik_data['tip_korisnika'] = korisnik_data['tip_korisnika'].value
+
     novi_korisnik = Korisnik(**korisnik_data)
     print("Podaci za novog korisnika:", korisnik_data)
     
-    # Zakomentarisana konekcija ka bazi:
+    # Zakomentarisano ubacivanje u bazu da bi se samo proverili podaci
     # try:
     #     db.session.add(novi_korisnik)
     #     db.session.commit()
