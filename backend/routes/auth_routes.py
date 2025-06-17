@@ -1,8 +1,9 @@
 from flask import Blueprint, request, jsonify
 from datetime import datetime
-from modeli import Korisnik
+from modeli import Korisnik, TipKorisnika
 from werkzeug.security import generate_password_hash
 from applicationSetup import db
+
 auth_bp = Blueprint('auth', __name__)
 
 @auth_bp.route('/registracija', methods=['POST'])
@@ -10,10 +11,16 @@ def registracija():
     data = request.json
     
     # Provera obaveznih polja
-    obavezna_polja = ['username', 'password', 'ime', 'prezime', 'email']
+    obavezna_polja = ['username', 'password', 'ime', 'prezime', 'email', 'tip_korisnika']
+
     for polje in obavezna_polja:
         if polje not in data or not data[polje]:
             return jsonify({'error': f'Polje "{polje}" je obavezno.'}), 400
+    
+    try:
+        data['tip_korisnika'] = TipKorisnika(data['tip_korisnika'])
+    except ValueError:
+        return jsonify({'error': 'Neispravan tip korisnika.'}), 400
     
     # Hesovanje lozinke i preimenovanje ključa
     data['lozinka'] = generate_password_hash(data.pop('password'))
@@ -29,17 +36,19 @@ def registracija():
     dozvoljena_polja = Korisnik.__table__.columns.keys()
     korisnik_data = {k: v for k, v in data.items() if k in dozvoljena_polja}
     
-    # Kreiranje novog korisnika
+    # Kreiranje novog korisnika (samo za proveru)
     novi_korisnik = Korisnik(**korisnik_data)
     print("Podaci za novog korisnika:", korisnik_data)
     
-    try:
-        db.session.add(novi_korisnik)
-        db.session.commit()
-        return jsonify({'message': 'Korisnik uspešno registrovan'}), 200
-    except Exception as e:
-        db.session.rollback()
-        import traceback
-        traceback.print_exc()  # Ovo će ispisati detaljan traceback u konzolu
-        return jsonify({'error': 'Došlo je do greške prilikom konekcije ka bazi', 'details': str(e)}), 500
+    # Zakomentarisana konekcija ka bazi:
+    # try:
+    #     db.session.add(novi_korisnik)
+    #     db.session.commit()
+    #     return jsonify({'message': 'Korisnik uspešno registrovan'}), 200
+    # except Exception as e:
+    #     db.session.rollback()
+    #     import traceback
+    #     traceback.print_exc()
+    #     return jsonify({'error': 'Došlo je do greške prilikom konekcije ka bazi', 'details': str(e)}), 500
 
+    return jsonify({'primljeni_podaci': korisnik_data}), 200
