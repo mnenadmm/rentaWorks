@@ -135,11 +135,11 @@ export class RegistracijaComponent implements OnInit {
 
   // ===========================
   // --- Form Kontrole i Promene ---
-  // ===========================
+  // =========================== 
 
   /** Registruje osluškivače promena za dinamičku logiku na formi */
   private registerFormListeners() {
-    this.step3Form.get('tip')?.valueChanges.subscribe(value => {
+    this.step3Form.get('tip_korisnika')?.valueChanges.subscribe(value => {
       const jeFizicko = value === 'fizicko_lice';
 
       // Omogući ili onemogući polja zanimanje i datumRodjenja
