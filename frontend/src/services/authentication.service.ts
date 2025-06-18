@@ -19,7 +19,7 @@ export class AuthenticationService {
  * @param credentials Objekt koji sadrži email i lozinku korisnika.
  *  @returns Observable koji vraća odgovor sa servera 
  */
-  login(credentials: { email: string; password: string }): Observable<any> {
+  login(credentials: { username: string; lozinka: string }): Observable<any> {
   return this.http.post(`${this.apiUrl}/login`, credentials, this.httpOptions);
 }
   /**
