@@ -1,3 +1,8 @@
+/**
+ * Koristi se za zakljucavanje inputa kada pogresi 3 puta
+ * zakljucava na 30 sek
+ * 
+ */
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { BehaviorSubject, interval, Subscription } from 'rxjs';

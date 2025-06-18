@@ -8,6 +8,27 @@ import logging
 logger = logging.getLogger(__name__)
 auth_bp = Blueprint('auth', __name__)
 
+#
+# Ruta za login
+#
+
+@auth_bp.route('/login', methods=['POST'])
+def login():
+    data = request.json
+    if not data or 'username' not in data or 'lozinka' not in data:
+        return jsonify({'error': 'Usernamei lozinka su obavezni.'}), 400
+
+    username= data['username']
+    lozinka = data['lozinka']
+    return jsonify({'message': f'Uspesno ste se ulogovali ${username}'}), 200
+
+
+
+
+
+#
+# Ruta za registraciju novih korisnika
+#
 @auth_bp.route('/registracija', methods=['POST'])
 def registracija():
     data = request.json
@@ -37,10 +58,10 @@ def registracija():
 
     novi_korisnik = Korisnik(**korisnik_data)
 
-    # OBAVEZNO prvo dodaj korisnika u sesiju
+    # dodaje korisnika u sesiji     
     db.session.add(novi_korisnik)
 
-    # Sada dodaj zanimanja i veštine
+    # Dodaje zanimanje i vestine 
     if 'zanimanje' in data:
         zanimanje_id = data['zanimanje']
         zanimanje = Zanimanje.query.get(zanimanje_id)
