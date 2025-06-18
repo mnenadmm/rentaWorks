@@ -142,9 +142,9 @@ export class RegistracijaComponent implements OnInit {
     this.step3Form.get('tip_korisnika')?.valueChanges.subscribe(value => {
       const jeFizicko = value === 'fizicko_lice';
 
-      // Omogući ili onemogući polja zanimanje i datumRodjenja
+      // Omogući ili onemogući polja zanimanje i datum_rodjenja
       this.toggleFormControl('zanimanje', jeFizicko);
-      this.toggleFormControl('datumRodjenja', jeFizicko);
+      this.toggleFormControl('datum_rodjenja', jeFizicko);
 
       // Validacija polja zanimanje na osnovu tipa lica
       const zanimanjeControl = this.step3Form.get('zanimanje');
@@ -258,12 +258,12 @@ export class RegistracijaComponent implements OnInit {
   onDateSelected(date: Date | null) {
     if (date) {
       const isoDate = date.toISOString().split('T')[0]; // format YYYY-MM-DD
-      this.step3Form.get('datumRodjenja')!.setValue(isoDate);
+      this.step3Form.get('datum_rodjenja')!.setValue(isoDate);
     } else {
-      this.step3Form.get('datumRodjenja')!.setValue(null);
+      this.step3Form.get('datum_rodjenja')!.setValue(null);
     }
-    this.step3Form.get('datumRodjenja')!.markAsTouched();
-    this.step3Form.get('datumRodjenja')!.updateValueAndValidity();
+    this.step3Form.get('datum_rodjenja')!.markAsTouched();
+    this.step3Form.get('datum_rodjenja')!.updateValueAndValidity();
   }
 
   /** Handler za promenu selekcije veština checkbox-ovima */
