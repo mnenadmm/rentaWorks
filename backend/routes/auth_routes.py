@@ -15,6 +15,7 @@ auth_bp = Blueprint('auth', __name__)
 @auth_bp.route('/login', methods=['POST'])
 def login():
     data = request.json
+    logger.info(f"Primljeni payload: {data}")
     if not data or 'username' not in data or 'password' not in data:
         return jsonify({'error': 'Usernamei lozinka su obavezni.'}), 400
 
