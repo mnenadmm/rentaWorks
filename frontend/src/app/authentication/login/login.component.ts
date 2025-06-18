@@ -11,7 +11,7 @@ import { AuthenticationService } from '../../../services/authentication.service'
 })
 export class LoginComponent implements OnDestroy {
   username = '';
-  password = '';
+  lozinka = '';
   showPassword = false;
   errorMessage = '';
   isLockedOut = false;
@@ -36,12 +36,12 @@ export class LoginComponent implements OnDestroy {
   onLogin() {
     if (this.isLockedOut) return;
 
-    if (!this.username || !this.password) {
+    if (!this.username || !this.lozinka) {
       this.errorMessage = 'Korisničko ime i lozinka su obavezni.';
       return;
     }
 
-    const validFormat = this.password.length >= 8 && /[A-Z]/.test(this.password);
+    const validFormat = this.lozinka.length >= 8 && /[A-Z]/.test(this.lozinka);
     if (!validFormat) {
     this.loginLockService.recordAttempt(false);
     this.errorMessage = 'Lozinka mora imati najmanje 8 karaktera i jedno veliko slovo.';
@@ -50,8 +50,8 @@ export class LoginComponent implements OnDestroy {
     this.loginLockService.recordAttempt(validFormat);
     
     const credentials = {
-    email: this.username, 
-    password: this.password
+    username: this.username, 
+    lozinka: this.lozinka
                         };
     this.authService.login(credentials).subscribe({
       next: (response)=>{
