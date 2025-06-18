@@ -89,7 +89,7 @@ export class RegistracijaComponent implements OnInit {
     this.step2Form = this.fb.group({
       drzavljanstvo: ['', Validators.required],
       adresa: ['', Validators.required],
-      adresaBroj: ['', [Validators.required, Validators.min(1)]],
+      broj_adrese: ['', [Validators.required, Validators.min(1)]],
       grad: ['', Validators.required],
       telefon: ['', Validators.required],
     });
@@ -100,7 +100,7 @@ export class RegistracijaComponent implements OnInit {
     this.step3Form = this.fb.group({
       tip_korisnika: ['', Validators.required],
       zanimanje: [{ value: '', disabled: true }, Validators.required],
-      datumRodjenja: [{ value: '', disabled: true }, Validators.required],
+      datum_rodjenja: [{ value: '', disabled: true }, Validators.required],
       vestine: this.fb.array([]), // Prazan niz veština
     });
   }
