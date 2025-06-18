@@ -37,7 +37,7 @@ def registracija():
     dozvoljena_polja = Korisnik.__table__.columns.keys()
     korisnik_data = {k: v for k, v in data.items() if k in dozvoljena_polja}
     
-    # Pretvori enum u string radi JSON odgovora
+    # Pretvori enum u string radi JSON odgovoraa
     if 'tip_korisnika' in korisnik_data:
         korisnik_data['tip_korisnika'] = korisnik_data['tip_korisnika'].value
 
