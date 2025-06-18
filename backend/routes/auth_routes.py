@@ -15,11 +15,11 @@ auth_bp = Blueprint('auth', __name__)
 @auth_bp.route('/login', methods=['POST'])
 def login():
     data = request.json
-    if not data or 'username' not in data or 'lozinka' not in data:
+    if not data or 'username' not in data or 'password' not in data:
         return jsonify({'error': 'Usernamei lozinka su obavezni.'}), 400
 
     username= data['username']
-    lozinka = data['lozinka']
+    password = data['password']
     return jsonify({'message': f'Uspesno ste se ulogovali ${username}'}), 200
 
 
