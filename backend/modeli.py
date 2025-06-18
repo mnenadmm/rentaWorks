@@ -25,7 +25,7 @@ class TipKorisnikaEnum(enum.Enum):
     fizicko_lice = "fizicko_lice"
     pravno_lice = "pravno_lice"
     admin = "admin"
-#model sadrzi podatke o korisniku
+#model sadrzi podatke o korisniku1
 class Korisnik(db.Model):
 
     __tablename__ = "korisnici"
