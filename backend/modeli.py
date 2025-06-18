@@ -126,3 +126,8 @@ class Firma(db.Model):
 
     def __repr__(self):
         return f"<Firma {self.naziv}>"
+
+
+
+
+

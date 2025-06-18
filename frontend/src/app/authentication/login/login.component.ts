@@ -1,7 +1,8 @@
 import { Component, OnDestroy } from '@angular/core';
 import { LoginLockService } from '../../../services/login-lock.service';
 import { Subscription } from 'rxjs';
-
+import { Router } from '@angular/router';
+import { AuthenticationService } from '../../../services/authentication.service';
 @Component({
   selector: 'app-login',
   standalone: false,
@@ -17,7 +18,7 @@ export class LoginComponent implements OnDestroy {
   remainingLockTime = 0;
   private timerSub?: Subscription;
 
-  constructor(private loginLockService: LoginLockService) {
+  constructor(private loginLockService: LoginLockService, private authService: AuthenticationService,private router: Router) {
     this.isLockedOut = this.loginLockService.isLocked();
     this.timerSub = this.loginLockService.remainingTime$.subscribe(time => {
       this.remainingLockTime = time;
@@ -41,24 +42,29 @@ export class LoginComponent implements OnDestroy {
     }
 
     const validFormat = this.password.length >= 8 && /[A-Z]/.test(this.password);
-    const isValid = validFormat && this.fakeLogin(this.username, this.password);
+    if (!validFormat) {
+    this.loginLockService.recordAttempt(false);
+    this.errorMessage = 'Lozinka mora imati najmanje 8 karaktera i jedno veliko slovo.';
+    return;
+  }
+    this.loginLockService.recordAttempt(validFormat);
     
-    this.loginLockService.recordAttempt(isValid);
-
-    if (!isValid) {
-      this.errorMessage = 'Korisničko ime ili lozinka nisu ispravni. Molimo pokušajte ponovo.';
-      return;
-    }
-
-    this.errorMessage = '';
-    console.log('Prijava uspešna:', this.username);
-    // TODO: dodati navigaciju po potrebi
+    const credentials = {
+    email: this.username, 
+    password: this.password
+                        };
+    this.authService.login(credentials).subscribe({
+      next: (response)=>{
+        this.loginLockService.recordAttempt(true); //resetuj pokusaje
+        this.errorMessage = '';
+        this.router.navigate(['/']);
+    console.log('Prijava uspešna:', response);
+      },error : (error)=>{
+          this.loginLockService.recordAttempt(false);
+      this.errorMessage = error.error?.error || 'Greška pri prijavi. Pokušajte ponovo.';
+      }
+    })
   }
-
-  fakeLogin(user: string, pass: string): boolean {
-    return user === 'admin' && pass === 'Admin123';
-  }
-
   ngOnDestroy() {
     this.timerSub?.unsubscribe();
   }

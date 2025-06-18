@@ -1,0 +1,21 @@
+SELECT z.*
+FROM zanimanja z
+JOIN korisnik_zanimanje kz ON z.id = kz.zanimanje_id
+WHERE kz.korisnik_id = 1;
+
+-- Veštine korisnika 
+SELECT v.*
+FROM vestine v
+JOIN korisnik_vestina kv ON v.id = kv.vestina_id
+WHERE kv.korisnik_id = 1;
+
+select * from korisnici;
+select * from korisnik_zanimanje;
+select * from korisnik_vestina;
+select * from zanimanja;
+select * from vestine;
+INSERT INTO vestine (naziv) VALUES ('Viljaskarista');
+INSERT INTO zanimanja (naziv) VALUES ('Laborant');
+
+//Koristi se za resetovanje id-a seryal 
+ALTER SEQUENCE zanimanja_id_seq RESTART WITH 6;
