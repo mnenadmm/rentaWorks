@@ -99,7 +99,7 @@ export class RegistracijaComponent implements OnInit {
   private initStep3Form() {
     this.step3Form = this.fb.group({
       tip_korisnika: ['', Validators.required],
-      zanimanje: [{ value: '', disabled: true }, Validators.required],
+      zanimanje: [{ value: null, disabled: true }, Validators.required],
       datum_rodjenja: [{ value: '', disabled: true }, Validators.required],
       vestine: this.fb.array([]), // Prazan niz veština
     });
