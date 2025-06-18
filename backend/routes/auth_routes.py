@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 from datetime import datetime
-from modeli import Korisnik, TipKorisnika
+from modeli import Korisnik, TipKorisnika,TipKorisnikaEnum
 from werkzeug.security import generate_password_hash
 from applicationSetup import db
 
