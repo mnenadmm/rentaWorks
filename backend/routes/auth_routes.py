@@ -48,7 +48,7 @@ def registracija():
         if zanimanje:
             # Postavi listu sa jednim zanimanjem
             novi_korisnik.zanimanja = [zanimanje]
-    
+
     # Ako je 'vestine' lista ID-jeva
     if 'vestine' in data:
         novi_korisnik.vestine = []  # obriši postojeće veštine ako ih ima
@@ -56,7 +56,8 @@ def registracija():
             vestina = Vestina.query.get(vestina_id)
             if vestina:
                 novi_korisnik.vestine.append(vestina)
-
+    print("Primljeni podaci za registraciju:", data)
+    print("Primljeni podaci za registraciju:", data)
     try:
         db.session.add(novi_korisnik)
         db.session.commit()
