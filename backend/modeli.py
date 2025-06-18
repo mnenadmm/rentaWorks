@@ -2,10 +2,7 @@ from extensions import db
 from datetime import datetime
 import enum
 
-class TipKorisnika(enum.Enum):
-    fizicko_lice = "fizicko_lice"
-    pravno_lice = "pravno_lice"
-    admin = "admin"
+
 korisnik_zanimanje = db.Table(
     'korisnik_zanimanje',
     db.Column('korisnik_id', db.Integer, db.ForeignKey('korisnici.id'), primary_key=True),
@@ -24,6 +21,10 @@ korisnik_vestina = db.Table(
     db.Column('korisnik_id', db.Integer, db.ForeignKey('korisnici.id'), primary_key=True),
     db.Column('vestina_id', db.Integer, db.ForeignKey('vestine.id'), primary_key=True)
 )
+class TipKorisnikaEnum(enum.Enum):
+    fizicko_lice = "fizicko_lice"
+    pravno_lice = "pravno_lice"
+    admin = "admin"
 #model sadrzi podatke o korisniku
 class Korisnik(db.Model):
 
@@ -35,7 +36,13 @@ class Korisnik(db.Model):
     prezime = db.Column(db.String(50), nullable=False)
     email = db.Column(db.String(120), unique=True, nullable=False)
     lozinka = db.Column(db.String(255), nullable=False)
-    tip_korisnika = db.Column(db.Enum(TipKorisnika), nullable=False)
+    tip_korisnika = db.Column(
+    db.Enum(
+        TipKorisnikaEnum,
+        name="tipkorisnika"  
+    ),
+    nullable=False
+)
     datum_rodjenja = db.Column(db.Date, nullable=True)
     datum_registracije = db.Column(db.DateTime, default=datetime.utcnow)
     aktivan = db.Column(db.Boolean, default=True)
