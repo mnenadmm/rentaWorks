@@ -3,13 +3,15 @@ from datetime import datetime
 from modeli import Korisnik, TipKorisnikaEnum, Zanimanje, Vestina  # Dodao Zanimanje i Vestina modele
 from werkzeug.security import generate_password_hash
 from applicationSetup import db
+import logging
 
+logger = logging.getLogger(__name__)
 auth_bp = Blueprint('auth', __name__)
 
 @auth_bp.route('/registracija', methods=['POST'])
 def registracija():
     data = request.json
-
+    logger.info(f"Primljeni payload: {data}")
     # Obavezna polja za registraciju
     obavezna_polja = ['username', 'password', 'ime', 'prezime', 'email', 'tip_korisnika']
 
@@ -56,8 +58,8 @@ def registracija():
             vestina = Vestina.query.get(vestina_id)
             if vestina:
                 novi_korisnik.vestine.append(vestina)
-    print("Primljeni podaci za registraciju:", data)
-    print("Primljeni podaci za registraciju:", data)
+ 
+
     try:
         db.session.add(novi_korisnik)
         db.session.commit()
