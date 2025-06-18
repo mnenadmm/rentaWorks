@@ -53,7 +53,8 @@ class Korisnik(db.Model):
     biografija = db.Column(db.Text, nullable=True)
     grad = db.Column(db.String(100), nullable=True)
     adresa = db.Column(db.String(255), nullable=True)
-    broj_adrese = db.Column(db.String(10), nullable=True)
+    broj_adrese = db.Column(db.Integer, nullable=True)
+
     drzavljanstvo = db.Column(db.String(100), nullable=True)
     telefon = db.Column(db.String(30), nullable=True)
     block_user = db.Column(db.Boolean, default=False, nullable=False)
