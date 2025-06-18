@@ -35,15 +35,15 @@ def registracija():
     
     # Enum u bazu može kao enum, ne moraš u string pre nego što ga proslediš modelu
     novi_korisnik = Korisnik(**korisnik_data)
-    
+
     data['tip_korisnika'] = data['tip_korisnika'].name if isinstance(data['tip_korisnika'], TipKorisnikaEnum) else data['tip_korisnika']
-    return jsonify({'primljeni_podaci': data}), 200
-    #try:
-    #    db.session.add(novi_korisnik)
-    #    db.session.commit()
-    #    return jsonify({'message': 'Korisnik uspešno registrovan'}), 200
-    #except Exception as e:
-    #    db.session.rollback()
-    #    return jsonify({'error': 'Greška prilikom čuvanja u bazu', 'details': str(e)}), 500
+    
+    try:
+        db.session.add(novi_korisnik)
+        db.session.commit()
+        return jsonify({'message': 'Korisnik uspešno registrovan'}), 200
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': 'Greška prilikom čuvanja u bazu', 'details': str(e)}), 500
 
 
