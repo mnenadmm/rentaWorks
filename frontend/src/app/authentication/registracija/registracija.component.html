@@ -288,12 +288,12 @@
 
   <div *ngIf="step3Form.get('tip_korisnika')?.value === 'fizicko_lice'">
     <div class="form-group">
-      <label for="datumRodjenja">Datum rođenja</label>
+      <label for="datum_rodjenja">Datum rođenja</label>
       <div class="input-icon">
         <i class="icon">📅</i>
         <app-custom-datepicker (dateSelected)="onDateSelected($event)"></app-custom-datepicker>
       </div>
-      <div class="text-danger mt-1" *ngIf="step3Form.get('datumRodjenja')?.touched && step3Form.get('datumRodjenja')?.invalid">
+      <div class="text-danger mt-1" *ngIf="step3Form.get('datum_rodjenja')?.touched && step3Form.get('datum_rodjenja')?.invalid">
         Datum rođenja je obavezan.
       </div>
     </div>
