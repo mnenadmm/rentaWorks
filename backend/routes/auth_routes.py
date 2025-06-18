@@ -41,15 +41,18 @@ def registracija():
     novi_korisnik = Korisnik(**korisnik_data)
 
     # Dodatno: dodela zanimanja ako su poslata (lista ID-jeva)
-    if 'zanimanja_ids' in data:
-        for zanimanje_id in data['zanimanja_ids']:
-            zanimanje = Zanimanje.query.get(zanimanje_id)
-            if zanimanje:
-                novi_korisnik.zanimanja.append(zanimanje)
-
-    # Dodatno: dodela veština ako su poslata (lista ID-jeva)
-    if 'vestine_ids' in data:
-        for vestina_id in data['vestine_ids']:
+    # Ako je 'zanimanje' jedan ID
+    if 'zanimanje' in data:
+        zanimanje_id = data['zanimanje']
+        zanimanje = Zanimanje.query.get(zanimanje_id)
+        if zanimanje:
+            # Postavi listu sa jednim zanimanjem
+            novi_korisnik.zanimanja = [zanimanje]
+    
+    # Ako je 'vestine' lista ID-jeva
+    if 'vestine' in data:
+        novi_korisnik.vestine = []  # obriši postojeće veštine ako ih ima
+        for vestina_id in data['vestine']:
             vestina = Vestina.query.get(vestina_id)
             if vestina:
                 novi_korisnik.vestine.append(vestina)
