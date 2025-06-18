@@ -16,11 +16,11 @@ auth_bp = Blueprint('auth', __name__)
 def login():
     data = request.json
     logger.info(f"Primljeni payload: {data}")
-    if not data or 'username' not in data or 'password' not in data:
+    if not data or 'username' not in data or 'lozinka' not in data:
         return jsonify({'error': 'Usernamei lozinka su obavezni.'}), 400
 
     username= data['username']
-    password = data['password']
+    lozinka= data['lozinka']
     return jsonify({'message': f'Uspesno ste se ulogovali ${username}'}), 200
 
 
