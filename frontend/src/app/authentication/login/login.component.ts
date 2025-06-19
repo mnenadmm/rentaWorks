@@ -72,7 +72,8 @@ export class LoginComponent implements OnDestroy {
             aktivan: true
         }
         this.currentUserService.setCurrentUser(this.currentUser);
-        console.log('Login ')
+        console.log('Login uspešan:', this.currentUser);
+    console.log('Trenutni korisnik iz servisa:', this.currentUserService.getCurrentUser());
        // this.router.navigate(['/']);
     
       },error : (error)=>{
