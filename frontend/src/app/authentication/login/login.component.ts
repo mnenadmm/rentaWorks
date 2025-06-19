@@ -74,12 +74,13 @@ export class LoginComponent implements OnDestroy {
         this.currentUserService.setCurrentUser(this.currentUser);
         localStorage.setItem('jwtToken', response.token);
        // this.router.navigate(['/']);
-    console.log('Prijava uspešna:', response,this.currentUser);
+    
       },error : (error)=>{
           this.loginLockService.recordAttempt(false);
       this.errorMessage = error.error?.error || 'Greška pri prijavi. Pokušajte ponovo.';
       }
     })
+    console.log('Currnet:', this.currentUser);
   }
   ngOnDestroy() {
     this.timerSub?.unsubscribe();
