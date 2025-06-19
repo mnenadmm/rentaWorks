@@ -5,7 +5,7 @@ from extensions import db, migrate
 from flask_migrate import Migrate, upgrade # type: ignore
 from konekcija import get_database_uri
 from routes import register_blueprints
-
+from flask_jwt_extended import JWTManager
 
 migrate = Migrate()
 def create_app():
@@ -20,6 +20,8 @@ def create_app():
     db.init_app(app)
     migrate.init_app(app, db)
     register_blueprints(app)
+    app.config['JWT_SECRET_KEY'] = 'moj_tajni_kljuc'
+    jwt = JWTManager(app)
     import modeli
     with app.app_context():
         upgrade()  # Primeni migracije (safe)

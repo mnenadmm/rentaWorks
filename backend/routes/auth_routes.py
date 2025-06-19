@@ -1,8 +1,10 @@
 from flask import Blueprint, request, jsonify
 from datetime import datetime
-from modeli import Korisnik, TipKorisnikaEnum, Zanimanje, Vestina  # Dodao Zanimanje i Vestina modele
-from werkzeug.security import generate_password_hash
+from modeli import Korisnik, TipKorisnikaEnum, Zanimanje, Vestina  
+from werkzeug.security import generate_password_hash,check_password_hash
+from flask_jwt_extended import create_access_token
 from applicationSetup import db
+from datetime import timedelta
 import logging
 
 logger = logging.getLogger(__name__)
@@ -16,12 +18,24 @@ auth_bp = Blueprint('auth', __name__)
 def login():
     data = request.json
     logger.info(f"Primljeni payload: {data}")
+
     if not data or 'username' not in data or 'lozinka' not in data:
         return jsonify({'error': 'Usernamei lozinka su obavezni.'}), 400
 
     username= data['username']
     lozinka= data['lozinka']
-    return jsonify({'message': f'Uspesno ste se ulogovali ${username}'}), 200
+    korisnik = Korisnik.query.filter_by(username = username).first()
+    if not korisnik:
+        return jsonify({'error':'Neispravno korisnicko ime ili lozinka.'}),401
+    if not check_password_hash(korisnik.lozinka, lozinka):
+        return jsonify({'error':'Neispravno korisnicko ime ili lozinka.'}),401
+    #Generise JWT token
+    access_token = create_access_token(identity=korisnik.id, expires_delta=timedelta(hours=1))
+    return jsonify({
+        'message': f'Uspesno ste se ulogovali kao {korisnik.username}',
+        'token': access_token,
+        'user_id': korisnik.id
+    }), 200
 
 
 
