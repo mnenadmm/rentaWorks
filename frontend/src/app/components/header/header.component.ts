@@ -12,7 +12,8 @@ export class HeaderComponent {
 
   constructor(public currentUserService: CurrentUserService ) {}
    ngOnInit() {
-    this.isLoggedIn = this.currentUserService.isLoggedIn();  
+    this.isLoggedIn = this.currentUserService.isLoggedIn(); 
+    console.log('isLoggedIn:', this.isLoggedIn); 
   }
   menuOpen = false;
 
