@@ -72,7 +72,7 @@ export class LoginComponent implements OnDestroy {
             aktivan: true
         }
         this.currentUserService.setCurrentUser(this.currentUser);
-        localStorage.setItem('jwtToken', response.token);
+        console.log('Login ')
        // this.router.navigate(['/']);
     
       },error : (error)=>{
@@ -80,7 +80,7 @@ export class LoginComponent implements OnDestroy {
       this.errorMessage = error.error?.error || 'Greška pri prijavi. Pokušajte ponovo.';
       }
     })
-    console.log('Currnet:', this.currentUser);
+    
   }
   ngOnDestroy() {
     this.timerSub?.unsubscribe();
