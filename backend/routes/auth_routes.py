@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify
 from datetime import datetime
 from modeli import Korisnik, TipKorisnikaEnum, Zanimanje, Vestina  
 from werkzeug.security import generate_password_hash,check_password_hash
-from flask_jwt_extended import create_access_token
+from flask_jwt_extended import create_access_token # type: ignore
 from applicationSetup import db
 from datetime import timedelta
 import logging
@@ -24,6 +24,7 @@ def login():
 
     username= data['username']
     lozinka= data['lozinka']
+    #Trazi korsinika u bazu
     korisnik = Korisnik.query.filter_by(username = username).first()
     if not korisnik:
         return jsonify({'error':'Neispravno korisnicko ime ili lozinka.'}),401
@@ -34,7 +35,8 @@ def login():
     return jsonify({
         'message': f'Uspesno ste se ulogovali kao {korisnik.username}',
         'token': access_token,
-        'user_id': korisnik.id
+        'user_id': korisnik.id,
+        'tip_korisnika' :korisnik.tip_korisnika
     }), 200
 
 
