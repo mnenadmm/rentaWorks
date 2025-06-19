@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { CurrentUserService } from '../../currentUser/service/current-user.service';
 import { AuthenticationService } from '../../../services/authentication.service';
 @Component({  
@@ -10,7 +11,7 @@ import { AuthenticationService } from '../../../services/authentication.service'
 export class HeaderComponent {
    isLoggedIn = false;
 
-  constructor(public currentUserService: CurrentUserService ) {}
+  constructor(public currentUserService: CurrentUserService,private router: Router ) {}
    ngOnInit() {
     this.isLoggedIn = this.currentUserService.isLoggedIn(); 
     console.log('isLoggedIn:', this.isLoggedIn); 
@@ -28,5 +29,10 @@ toggleMenu() {
 
 closeMenu() {
   this.setMenuState(false);
+}
+logout() {
+  this.currentUserService.clearCurrentUser();
+  // dalje možeš da obrišeš i token, ili da odradiš redirekciju:
+  this.router.navigate(['/login']);
 }
 }

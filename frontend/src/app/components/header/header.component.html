@@ -11,7 +11,8 @@
     <li><a class="btn btn-outline-light" routerLink="/info" (click)="closeMenu()">Info</a></li>
     <!-- Prikaži registraciju i login samo ako korisnik NIJE ulogovan -->
     <li *ngIf="!isLoggedIn"><a class="btn btn-outline-light" routerLink="/register" (click)="closeMenu()">Registruj se </a></li>
-    <li><a class="btn btn-outline-light" routerLink="/login" (click)="closeMenu()">Login</a></li>
+   
+     <li><button (click)="logout()">Logout</button></li>
   </ul>
 </nav>
 
