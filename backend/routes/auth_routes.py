@@ -2,7 +2,7 @@ from flask import Blueprint, request, jsonify
 from datetime import datetime
 from modeli import Korisnik, TipKorisnikaEnum, Zanimanje, Vestina  
 from werkzeug.security import generate_password_hash,check_password_hash
-from flask_jwt_extended import create_access_token # type: ignore
+from flask_jwt_extended import create_access_token,create_refresh_token, jwt_required, get_jwt_identity # type: ignore
 from applicationSetup import db
 from datetime import timedelta
 import logging
@@ -31,13 +31,25 @@ def login():
     if not check_password_hash(korisnik.lozinka, lozinka):
         return jsonify({'error':'Neispravno korisnicko ime ili lozinka.'}),401
     #Generise JWT token
-    access_token = create_access_token(identity=korisnik.id, expires_delta=timedelta(hours=1))
+    access_token = create_access_token(identity=korisnik.id, expires_delta=timedelta(hours=15))
+    refresh_token = create_refresh_token(identity=korisnik.id)
     return jsonify({
         'message': f'Uspesno ste se ulogovali kao {korisnik.username}',
         'token': access_token,
+        'refresh_token': refresh_token,
         'user_id': korisnik.id,
-        'tip_korisnika': korisnik.tip_korisnika.value 
+        'tip_korisnika': korisnik.tip_korisnika.value,
+         
     }), 200
+#
+#Ova ruta se koristi za rifres tokena 
+#
+@auth_bp.route('/refresh', methods=['POST'])
+@jwt_required(refresh=True)
+def refresh():
+    current_user_id = get_jwt_identity()
+    new_access_token = create_access_token(identity=current_user_id, expires_delta=timedelta(minutes=15))
+    return jsonify({'access_token': new_access_token}), 200
 
 
 
