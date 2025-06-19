@@ -10,7 +10,7 @@
     <li><a class="btn btn-outline-light" routerLink="/" (click)="closeMenu()">Pocetna</a></li>
     <li><a class="btn btn-outline-light" routerLink="/info" (click)="closeMenu()">Info</a></li>
     <!-- Prikaži registraciju i login samo ako korisnik NIJE ulogovan -->
-    <li *ngIf="!currentUserService.isLoggedIn()"><a class="btn btn-outline-light" routerLink="/register" (click)="closeMenu()">Registruj se </a></li>
+    <li *ngIf="!isLoggedIn"><a class="btn btn-outline-light" routerLink="/register" (click)="closeMenu()">Registruj se </a></li>
     <li><a class="btn btn-outline-light" routerLink="/login" (click)="closeMenu()">Login</a></li>
   </ul>
 </nav>
