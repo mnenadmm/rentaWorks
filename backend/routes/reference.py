@@ -10,7 +10,7 @@ def get_zanimanja():
     zanimanja = Zanimanje.query.all()
     result = [{"id": z.id, "naziv": z.naziv} for z in zanimanja]
     return jsonify(result)
-
+#Povlaci vestine iz baze
 @reference_bp.route('/vestine', methods=['GET'])
 def get_vestine():
     vestine = Vestina.query.all()
