@@ -11,6 +11,7 @@ import { ResetPasswordComponent } from './authentication/reset-password/reset-pa
 import { RegistracijaComponent } from './authentication/registracija/registracija.component';
 import { CustomDatepickerComponent } from './components/custom-datepicker/custom-datepicker.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ProfilComponent } from './components/profil/profil.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { HttpClientModule } from '@angular/common/http';
     LoginComponent,
     ResetPasswordComponent,
     RegistracijaComponent,
-    CustomDatepickerComponent
+    CustomDatepickerComponent,
+    ProfilComponent
   ],
   imports: [
     BrowserModule,
