@@ -36,6 +36,9 @@ export class LoginComponent implements OnDestroy {
         : '';
     });
   }
+testLog() {
+  console.log('Test dugme kliknuto');
+}
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
