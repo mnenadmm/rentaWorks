@@ -2,6 +2,8 @@ import { Component, OnDestroy } from '@angular/core';
 import { LoginLockService } from '../../../services/login-lock.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
+import { CurrentUserInterface } from '../../interfaces/current-user.interface';
+import { CurrentUserService } from '../../currentUser/service/current-user.service';
 import { AuthenticationService } from '../../../services/authentication.service';
 @Component({
   selector: 'app-login',
@@ -17,8 +19,14 @@ export class LoginComponent implements OnDestroy {
   isLockedOut = false;
   remainingLockTime = 0;
   private timerSub?: Subscription;
-
-  constructor(private loginLockService: LoginLockService, private authService: AuthenticationService,private router: Router) {
+  currentUser!: CurrentUserInterface; // Objekat za tipizovanog korisnika
+  constructor(
+    private loginLockService: LoginLockService, 
+    private authService: AuthenticationService,
+    private router: Router,
+    private currentUserService: CurrentUserService,
+  
+  ) {
     this.isLockedOut = this.loginLockService.isLocked();
     this.timerSub = this.loginLockService.remainingTime$.subscribe(time => {
       this.remainingLockTime = time;
@@ -57,8 +65,16 @@ export class LoginComponent implements OnDestroy {
       next: (response)=>{
         this.loginLockService.recordAttempt(true); //resetuj pokusaje
         this.errorMessage = '';
+        this.currentUser={
+            id: response.user_id,
+            username: this.username,
+            tip_korisnika: response.tip_korisnika,
+            aktivan: true
+        }
+        this.currentUserService.setCurrentUser(this.currentUser);
+        localStorage.setItem('jwtToken', response.token);
         this.router.navigate(['/']);
-    console.log('Prijava uspešna:', response);
+    console.log('Prijava uspešna:', response,this.currentUser);
       },error : (error)=>{
           this.loginLockService.recordAttempt(false);
       this.errorMessage = error.error?.error || 'Greška pri prijavi. Pokušajte ponovo.';
