@@ -53,7 +53,7 @@
 
       <!-- Submit dugme -->
       <button type="submit" [disabled]="isLockedOut">Prijavi se</button>
-
+<button type="button" (click)="testLog()">Test Log</button>
       <!-- Poruka o grešci ili zaključavanju -->
       <div
         *ngIf="errorMessage"
