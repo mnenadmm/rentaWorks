@@ -36,9 +36,7 @@ export class LoginComponent implements OnDestroy {
         : '';
     });
   }
-testLog() {
-  console.log('Test dugme kliknuto');
-}
+
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
@@ -75,8 +73,7 @@ testLog() {
             aktivan: true
         }
         this.currentUserService.setCurrentUser(this.currentUser);
-        console.log('Login uspešan:', this.currentUser);
-    console.log('Trenutni korisnik iz servisa:', this.currentUserService.getCurrentUser());
+       
        // this.router.navigate(['/']);
     
       },error : (error)=>{

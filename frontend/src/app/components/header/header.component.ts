@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
-
+import { Component, OnInit } from '@angular/core';
+import { CurrentUserService } from '../../currentUser/service/current-user.service';
+import { AuthenticationService } from '../../../services/authentication.service';
 @Component({  
   selector: 'app-header',
   standalone: false,
@@ -7,6 +8,12 @@ import { Component } from '@angular/core';
   styleUrl: './header.component.css'
 })
 export class HeaderComponent {
+   isLoggedIn = false;
+
+  constructor(public currentUserService: CurrentUserService ) {}
+   ngOnInit() {
+    this.isLoggedIn = this.currentUserService.isLoggedIn();  
+  }
   menuOpen = false;
 
 setMenuState(open: boolean) {
