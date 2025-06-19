@@ -25,9 +25,11 @@ export class CurrentUserService {
    * @param user objekat trenutnog korisnika koji treba sačuvati
    */
   setCurrentUser(user: CurrentUserInterface) {
-    this._currentUser = user;
+  this._currentUser = user;
+  if (typeof localStorage !== 'undefined') {
     localStorage.setItem(this.currentUserKey, JSON.stringify(user));
   }
+}
 
   /**
    * Vraća objekat trenutno ulogovanog korisnika iz memorije
@@ -40,10 +42,12 @@ export class CurrentUserService {
   /**
    * Briše podatke o korisniku iz memorije i localStorage (koristi se prilikom odjave)
    */
-  clearCurrentUser() {
-    this._currentUser = null;
+clearCurrentUser() {
+  this._currentUser = null;
+  if (typeof localStorage !== 'undefined') {
     localStorage.removeItem(this.currentUserKey);
   }
+}
 
   /**
    * Proverava da li postoji trenutno ulogovan korisnik
