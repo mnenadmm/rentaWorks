@@ -159,16 +159,3 @@ nav ul li a:hover {
     display: flex;
   }
 }
-.logout-btn {
-  background-color: #dc3545; /* crvena */
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  font-weight: bold;
-  border-radius: 4px;
-  transition: background-color 0.3s ease;
-}
-
-.logout-btn:hover {
-  background-color: #c82333;
-}
