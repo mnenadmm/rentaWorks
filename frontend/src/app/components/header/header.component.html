@@ -21,7 +21,9 @@
     <li *ngIf="!isLoggedIn">
       <a class="btn btn-outline-light" routerLink="/login" (click)="closeMenu()">Login</a>
     </li>
-
+    <li *ngIf="isLoggedIn">
+      <a class="btn btn-outline-success" routerLink="/profil" (click)="closeMenu()">Profil</a>
+    </li>
     <!-- Logout se prikazuje samo ako korisnik JESTE ulogovan -->
     <li *ngIf="isLoggedIn">
       <button class="btn btn-outline-primary"  (click)="logout(); closeMenu()">Logout</button>
