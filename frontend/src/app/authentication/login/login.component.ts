@@ -74,7 +74,7 @@ export class LoginComponent implements OnDestroy {
         }
         this.currentUserService.setCurrentUser(this.currentUser);
        
-       // this.router.navigate(['/']);
+        this.router.navigate(['/']);
     
       },error : (error)=>{
           this.loginLockService.recordAttempt(false);
