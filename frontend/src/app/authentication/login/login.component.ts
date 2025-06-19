@@ -43,7 +43,7 @@ export class LoginComponent implements OnDestroy {
 
   onLogin() {
     if (this.isLockedOut) return;
-
+    console.log('Pozvana metoda onLogin()');
     if (!this.username || !this.lozinka) {
       this.errorMessage = 'Korisničko ime i lozinka su obavezni.';
       return;
