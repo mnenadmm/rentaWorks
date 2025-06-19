@@ -36,7 +36,7 @@ def login():
         'message': f'Uspesno ste se ulogovali kao {korisnik.username}',
         'token': access_token,
         'user_id': korisnik.id,
-        'tip_korisnika' :korisnik.tip_korisnika
+        'tip_korisnika': korisnik.tip_korisnika.value 
     }), 200
 
 
