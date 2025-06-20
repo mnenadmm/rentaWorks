@@ -22,6 +22,7 @@ export class ProfilComponent implements OnInit, OnDestroy {
     if (id){
       this.userService.getKorisnikById(id).subscribe({
         next: (data) =>{
+          console.log('Stigao korisnik:', data); // Ovde vidiš šta je stiglo
           this.user=data;
         },
         error: (err)=>{
