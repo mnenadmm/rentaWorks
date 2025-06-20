@@ -4,10 +4,11 @@ from sqlalchemy import text  # type: ignore
 from extensions import db
 import logging
 app = create_app()
+from flask_jwt_extended import  jwt_required # type: ignore
 
 
-
-@app.route('/konekcija')
+@app.route('/proba')
+@jwt_required()
 def proba():
     return jsonify('Uspesnooooooooo')
 @app.route('/konekcija')
