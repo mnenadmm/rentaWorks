@@ -6,9 +6,9 @@ import { CurrentUserInterface } from '../app/interfaces/current-user.interface';
   providedIn: 'root'
 })
 export class UserService {
-
+   private apiUrl = "http://5.75.164.111:5001/api";
   constructor(private http: HttpClient) { }
   getKorisnikById(id: number): Observable<CurrentUserInterface> {
-    return this.http.get<CurrentUserInterface>(`/api/korisnici/${id}`);
+    return this.http.get<CurrentUserInterface>(`${this.apiUrl}/korisnici/${id}`);
   }
 }
