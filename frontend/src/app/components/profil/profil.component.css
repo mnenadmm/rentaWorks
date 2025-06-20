@@ -1,0 +1,66 @@
+.profil-container {
+  max-width: 600px;
+  margin: auto;
+  padding: 1rem;
+  font-family: Arial, sans-serif;
+}
+
+.profil-header {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.profilna-slika {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #007bff;
+}
+
+.username {
+  color: gray;
+  font-style: italic;
+}
+
+.biografija {
+  margin-top: 1rem;
+  font-style: italic;
+}
+
+.verified {
+  color: green;
+  margin-left: 0.5rem;
+  font-weight: bold;
+}
+
+.active {
+  color: green;
+  font-weight: bold;
+}
+
+.inactive {
+  color: red;
+  font-weight: bold;
+}
+
+.osnovni-podaci p {
+  margin: 0.3rem 0;
+}
+
+.zanimanja ul,
+.vestine ul,
+.firme ul {
+  list-style: none;
+  padding: 0;
+}
+
+.zanimanja li,
+.vestine li,
+.firme li {
+  background-color: #f0f0f0;
+  padding: 0.3rem 0.5rem;
+  margin: 0.2rem 0;
+  border-radius: 3px;
+  display: inline-block;
+}
