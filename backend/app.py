@@ -7,7 +7,9 @@ app = create_app()
 
 
 
-
+@app.route('/konekcija')
+def proba():
+    return jsonify('Uspesnooooooooo')
 @app.route('/konekcija')
 def db_check():
     try:
