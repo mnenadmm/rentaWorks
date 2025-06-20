@@ -5,7 +5,7 @@ from extensions import db, migrate
 from flask_migrate import Migrate, upgrade # type: ignore
 from konekcija import get_database_uri
 from routes import register_blueprints
-from flask_jwt_extended import JWTManager # type: ignore
+from flask_jwt_extended import JWTManager,jwt_required # type: ignore
 from datetime import timedelta
 migrate = Migrate()
 def create_app():
