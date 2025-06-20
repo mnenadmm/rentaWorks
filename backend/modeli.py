@@ -71,7 +71,7 @@ class Korisnik(db.Model):
             "ime": self.ime,
             "prezime": self.prezime,
             "email": self.email,
-            "adresa" : self.adresa,
+            "adresa": self._puna_adresa(),
             "tip_korisnika": self.tip_korisnika.value if self.tip_korisnika else None,
             "datum_registracije": self.datum_registracije.isoformat() if self.datum_registracije else None,
             "aktivan": self.aktivan,
@@ -86,6 +86,15 @@ class Korisnik(db.Model):
             "druga_rola": self.druga_rola,
             "treca_rola": self.treca_rola
         }
+    def _puna_adresa(self):
+        delovi = []
+        if self.adresa:
+            delovi.append(self.adresa)
+        if self.broj_adrese:
+            delovi.append(str(self.broj_adrese))
+        if self.grad:
+            delovi.append(self.grad)
+        return ", ".join(delovi) if delovi else None
     def __repr__(self):
         return f"<Korisnik {self.ime} {self.prezime}>"
 
