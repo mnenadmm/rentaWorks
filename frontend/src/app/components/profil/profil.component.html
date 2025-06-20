@@ -1,16 +1,34 @@
-<div class="profil-container">
+<div class="profil-container" *ngIf="user">
   <div class="profil-header">
-    <img src="URL_DO_PROFILNE_SLIKE" alt="Profilna slika" class="profilna-slika" />
-    <h1>Ime Prezime</h1>
-    <p class="username">korisnicko_ime</p>
+    <img
+      [src]="user.profilna_slika || 'assets/default-avatar.png'"
+      alt="Profilna slika"
+      class="profilna-slika"
+    />
+    <h1>{{ user.ime }} {{ user.prezime }}</h1>
+    <p class="username">&#64;{{ user.username }}</p>
   </div>
 
-  <p class="biografija">Ovo je kratka biografija korisnika. Može sadržati opis, interesovanja ili dodatne informacije.</p>
+  <div class="biografija">
+    <p *ngIf="user.biografija; else noBio">
+      {{ user.biografija }}
+    </p>
+    <ng-template #noBio>
+      <p><em>Korisnik još nije napisao biografiju.</em></p>
+    </ng-template>
+  </div>
 
   <div class="osnovni-podaci">
-    <p><strong>Email:</strong> emailprimer.com <span class="verified">✔️ Verifikovan</span></p>
-    <p><strong>Telefon:</strong> +381 64 123 456</p>
-    <p><strong>Adresa:</strong> Ulica 123, 10, Beograd, Srbija</p>
-    <p><strong>Tip korisnika:</strong> fizicko_lice</p>
-    <p><strong>Datum registra
-
+    <p><strong>Email:</strong> {{ user.email }}
+      <span *ngIf="user.verifikovan_email" class="verified">✔️ Verifikovan</span>
+    </p>
+    <p><strong>Telefon:</strong> {{ user.telefon }}</p>
+    <p><strong>Adresa:</strong> {{ user.adresa }}</p>
+    <p><strong>Grad:</strong> {{ user.grad }}</p>
+    <p><strong>Država:</strong> {{ user.drzava }}</p>
+    <p><strong>Tip korisnika:</strong> {{ user.tip_korisnika }}</p>
+    <p><strong>Datum registracije:</strong> 
+      {{ user.datum_registracije | date: 'dd.MM.yyyy. HH:mm' }}
+    </p>
+  </div>
+</div>
