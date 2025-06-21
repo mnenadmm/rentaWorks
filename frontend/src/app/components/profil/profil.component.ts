@@ -43,9 +43,10 @@ uploadImage() {
   this.userService.uploadProfileImage(formData).subscribe({
     next: (res) => {
       console.log('Slika uspešno uploadovana:', res.filename);
-      console.log('FormData:', [...formData.entries()]);
+      
     },
     error: (err) => {
+      console.log('FormData:', [...formData.entries()]);
       console.error('Greška pri uploadu slike:', err);
     }
   });
