@@ -64,6 +64,7 @@ def serve_upload(filename):
 def upload_profile_image():
     auth_header = request.headers.get('Authorization')
     logger('Authorization header:')
+    return jsonify("sve je u redu")
     if 'image' not in request.files:
         return jsonify({'error': 'Nije prosleđen fajl'}), 400
 
