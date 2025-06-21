@@ -1,100 +1,114 @@
 .profil-container {
-  max-width: 600px;
-  margin: auto;
-  padding: 1rem;
-  font-family: Arial, sans-serif;
+  max-width: 480px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
 }
 
 .profil-header {
   text-align: center;
-  margin-bottom: 1rem;
-  padding: 15px;
+  margin-bottom: 20px;
+  position: relative;
 }
 
 .profilna-slika {
-  width: 120px;
-  height: 120px;
+  width: 130px;
+  height: 130px;
   border-radius: 50%;
   object-fit: cover;
+  border: 4px solid #007bff;
+  box-shadow: 0 0 10px rgba(0,123,255,0.4);
   display: block;
   margin: 0 auto 15px auto;
-  border: 2px solid #007bff;
+  transition: transform 0.3s ease;
+}
+
+.profilna-slika:hover {
+  transform: scale(1.05);
 }
 
 .username {
-  color: gray;
+  font-size: 1rem;
+  color: #666;
   font-style: italic;
+  margin-top: -5px;
+  margin-bottom: 15px;
+}
+
+h1 {
+  font-size: 1.8rem;
+  margin-bottom: 5px;
+  font-weight: 700;
+  color: #222;
 }
 
 .biografija {
-  margin-top: 1rem;
   font-style: italic;
+  color: #555;
+  margin-bottom: 25px;
+  text-align: center;
+  min-height: 50px;
 }
 
 .verified {
-  color: green;
-  margin-left: 0.5rem;
-  font-weight: bold;
-}
-
-.active {
-  color: green;
-  font-weight: bold;
-}
-
-.inactive {
-  color: red;
-  font-weight: bold;
+  color: #28a745;
+  margin-left: 8px;
+  font-weight: 700;
 }
 
 .osnovni-podaci p {
-  margin: 0.3rem 0;
+  margin: 8px 0;
+  font-size: 1rem;
 }
 
-.zanimanja ul,
-.vestine ul,
-.firme ul {
-  list-style: none;
-  padding: 0;
-}
-
-.zanimanja li,
-.vestine li,
-.firme li {
-  background-color: #f0f0f0;
-  padding: 0.3rem 0.5rem;
-  margin: 0.2rem 0;
-  border-radius: 3px;
-  display: inline-block;
+.osnovni-podaci strong {
+  color: #444;
 }
 
 .upload-slika {
+  margin-top: 25px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 10px;
-  gap: 8px;
+  gap: 12px;
 }
 
 .upload-slika h3 {
-  margin: 0 0 5px 0;
   font-weight: 600;
   color: #007bff;
+  margin-bottom: 5px;
 }
 
 .upload-slika input[type="file"] {
   cursor: pointer;
+  border: 2px dashed #007bff;
+  border-radius: 8px;
+  padding: 12px 20px;
+  width: 100%;
+  max-width: 300px;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.upload-slika input[type="file"]:hover {
+  background-color: #e6f0ff;
 }
 
 .upload-slika button {
-  padding: 8px 20px;
   background-color: #28a745;
-  border: none;
   color: white;
-  border-radius: 5px;
-  cursor: pointer;
+  border: none;
+  padding: 12px 28px;
   font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
   transition: background-color 0.3s ease;
+  width: 100%;
+  max-width: 300px;
 }
 
 .upload-slika button:disabled {
@@ -106,14 +120,24 @@
   background-color: #1e7e34;
 }
 
-/* Mobile first: na malim ekranima malo više razmaka */
-@media (max-width: 480px) {
-  .upload-slika {
-    width: 100%;
+/* Responsive */
+@media (max-width: 500px) {
+  .profil-container {
+    margin: 15px;
+    padding: 15px;
   }
 
+  .profilna-slika {
+    width: 110px;
+    height: 110px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .upload-slika input[type="file"],
   .upload-slika button {
-    width: 100%;
+    max-width: 100%;
   }
 }
-
