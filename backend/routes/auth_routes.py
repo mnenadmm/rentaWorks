@@ -62,6 +62,8 @@ def serve_upload(filename):
 @auth_bp.route('/upload_profile_image', methods=['POST'])
 @jwt_required()
 def upload_profile_image():
+    auth_header = request.headers.get('Authorization')
+    print('Authorization header:', auth_header)
     if 'image' not in request.files:
         return jsonify({'error': 'Nije prosleđen fajl'}), 400
 
