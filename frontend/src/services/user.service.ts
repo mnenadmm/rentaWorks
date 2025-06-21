@@ -16,8 +16,7 @@ export class UserService {
        const token = localStorage.getItem('token'); // ili sessionStorage.getItem('token')
    
       const headers = new HttpHeaders({
-  Authorization: `Bearer ${token}`,
-   'Content-Type': 'multipart/form-data' // Obično se ne stavlja za FormData!
+  Authorization: `Bearer ${token}`
 });
 
   return this.http.post<{ filename: string }>(`${this.apiUrl}/upload_profile_image`, formData,{ headers });

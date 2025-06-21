@@ -32,24 +32,23 @@ openBioEditor() {
   console.log('Otvori editor biografije');
 }
 uploadImage() {
-  if (!this.selectedFile) return;
+  if (!this.selectedFile) {
+    console.error('Nema izabranog fajla!');
+    return;
+  }
 
   const formData = new FormData();
-  formData.append('image', this.selectedFile);
+  formData.append('image', this.selectedFile); // mora biti 'image'
 
-  this.subscription = this.userService.uploadProfileImage(formData)
-  .subscribe({
-    next: (res)=>{
-      console.log('ovo smo primili', res);
-      //if (this.user){
-      //  this.user.profilna_slika = res.filename;
-      //}
-      //this.selectedFile = null;
-      //console.log('Profilna slika uploadovana:', res.filename)
-    }, error: (err)=>{ console.error('Greška pri uploadu slike:', err);}
-  })
- 
-  
+  this.userService.uploadProfileImage(formData).subscribe({
+    next: (res) => {
+      console.log('Slika uspešno uploadovana:', res.filename);
+      console.log('FormData:', [...formData.entries()]);
+    },
+    error: (err) => {
+      console.error('Greška pri uploadu slike:', err);
+    }
+  });
 }
   ngOnInit() {
     const id = this.currentUserService.getCurrentUser()?.id;
