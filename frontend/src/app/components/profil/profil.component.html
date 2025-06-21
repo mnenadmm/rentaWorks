@@ -17,13 +17,18 @@
   </div>
 
   <div class="biografija">
-    <p *ngIf="user.biografija; else noBio">
-      {{ user.biografija }}
-    </p>
-    <ng-template #noBio>
-      <p><em>Korisnik još nije napisao biografiju.</em></p>
-    </ng-template>
-  </div>
+  <p *ngIf="user.biografija; else noBio">
+    {{ user.biografija }}
+  </p>
+  <ng-template #noBio>
+    <p><em>Korisnik još nije napisao biografiju.</em></p>
+  </ng-template>
+
+  <!-- Dugme za dodavanje/izmenu biografije -->
+  <button class="btn btn-outline-primary mt-3" (click)="openBioEditor()">
+    {{ user.biografija ? 'Izmeni biografiju' : 'Dodaj biografiju' }}
+  </button>
+</div>
 
   <div class="osnovni-podaci">
     <p>
