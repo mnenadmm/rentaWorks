@@ -1,42 +1,152 @@
 .profil-container {
-  max-width: 600px;
-  margin: auto;
-  padding: 1.5rem;
-  font-family: Arial, sans-serif;
-  font-size: 18px; /* veća veličina fonta za bolju čitljivost */
-  color: #222; /* tamno siva, za manji napor očiju nego crna */
-  background-color: #fff; /* bela pozadina za dobar kontrast */
+  max-width: 480px;
+  margin: 20px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgb(0 0 0 / 0.1);
+  font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  color: #333;
+}
+/* Dodaj za h1 i username da budu malo "deblji" */
+h1 {
+  font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 900; /* malo deblje slovo */
+  font-size: 1.8rem;
+  margin-bottom: 5px;
+  color: #222;
+}
+.profil-header {
+  text-align: center;
+  margin-bottom: 20px;
+  position: relative;
 }
 
-.profil-header h1 {
-  font-size: 2.5rem; /* veće ime */
-  font-weight: 700;
-  color: #004085; /* tamnoplava za dobar kontrast */
-  margin-bottom: 0.2rem;
+.profilna-slika {
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #007bff;
+  box-shadow: 0 0 10px rgba(0,123,255,0.4);
+  display: block;
+  margin: 0 auto 15px auto;
+  transition: transform 0.3s ease;
+}
+
+.profilna-slika:hover {
+  transform: scale(1.05);
 }
 
 .username {
-  font-size: 1.2rem;
-  color: #555; /* tamnosiva */
-  font-style: normal;
-  letter-spacing: 0.05em;
+  font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 600;
+  font-size: 1rem;
+  color: #666;
+  font-style: italic;
+  margin-top: -5px;
+  margin-bottom: 15px;
 }
 
-.biografija p, .osnovni-podaci p {
-  font-size: 1.1rem;
-  line-height: 1.5;
-  color: #333;
+h1 {
+  font-size: 1.8rem;
+  margin-bottom: 5px;
+  font-weight: 700;
+  color: #222;
+}
+
+.biografija,
+.osnovni-podaci p,
+.upload-slika h3 {
+  font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-weight: 400;
+  color: #555;
 }
 
 .verified {
-  color: #28a745; /* jarka zelena */
+  color: #28a745;
+  margin-left: 8px;
   font-weight: 700;
-  margin-left: 0.5rem;
 }
 
-/* Za upload sekciju */
+.osnovni-podaci p {
+  margin: 8px 0;
+  font-size: 1rem;
+}
+
+.osnovni-podaci strong {
+  color: #444;
+}
+
+.upload-slika {
+  margin-top: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
 .upload-slika h3 {
-  font-size: 1.4rem;
+  font-weight: 600;
   color: #007bff;
-  margin-bottom: 0.5rem;
+  margin-bottom: 5px;
+}
+
+.upload-slika input[type="file"] {
+  cursor: pointer;
+  border: 2px dashed #007bff;
+  border-radius: 8px;
+  padding: 12px 20px;
+  width: 100%;
+  max-width: 300px;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.upload-slika input[type="file"]:hover {
+  background-color: #e6f0ff;
+}
+
+.upload-slika button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  max-width: 300px;
+}
+
+.upload-slika button:disabled {
+  background-color: #999;
+  cursor: not-allowed;
+}
+
+.upload-slika button:hover:not(:disabled) {
+  background-color: #1e7e34;
+}
+
+/* Responsive */
+@media (max-width: 500px) {
+  .profil-container {
+    margin: 15px;
+    padding: 15px;
+  }
+
+  .profilna-slika {
+    width: 110px;
+    height: 110px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .upload-slika input[type="file"],
+  .upload-slika button {
+    max-width: 100%;
+  }
 }
