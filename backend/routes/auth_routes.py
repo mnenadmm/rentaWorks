@@ -63,7 +63,7 @@ def serve_upload(filename):
 @jwt_required()
 def upload_profile_image():
     auth_header = request.headers.get('Authorization')
-    logger.info('Authorization header:', auth_header)
+    logger('Authorization header:')
     if 'image' not in request.files:
         return jsonify({'error': 'Nije prosleđen fajl'}), 400
 
