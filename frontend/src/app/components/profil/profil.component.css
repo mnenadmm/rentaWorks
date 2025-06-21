@@ -68,29 +68,22 @@
   display: inline-block;
 }
 
-/* Upload div odmah ispod slike */
 .upload-slika {
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
+  margin-top: 10px;
+  gap: 8px;
 }
 
-.upload-label {
-  background-color: #007bff;
-  color: white;
-  padding: 8px 15px;
-  border-radius: 5px;
-  cursor: pointer;
+.upload-slika h3 {
+  margin: 0 0 5px 0;
   font-weight: 600;
-  user-select: none;
-  transition: background-color 0.3s ease;
+  color: #007bff;
 }
 
-.upload-label:hover {
-  background-color: #0056b3;
+.upload-slika input[type="file"] {
+  cursor: pointer;
 }
 
 .upload-slika button {
@@ -113,15 +106,14 @@
   background-color: #1e7e34;
 }
 
-/* Responsive na manje ekrane */
+/* Mobile first: na malim ekranima malo više razmaka */
 @media (max-width: 480px) {
   .upload-slika {
-    flex-direction: column;
-    gap: 8px;
+    width: 100%;
   }
-  .upload-label, 
+
   .upload-slika button {
     width: 100%;
-    text-align: center;
   }
 }
+
