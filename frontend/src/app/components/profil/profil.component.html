@@ -1,10 +1,10 @@
 <div class="profil-container" *ngIf="user">
   <div class="profil-header">
     <img
-  [src]="user.profilna_slika ? 'http://localhost:5001/static/uploads/' + user.profilna_slika : 'assets/default-avatar.png'"
-  alt="Profilna slika"
-  class="profilna-slika"
-/>
+      [src]="user.profilna_slika ? 'http://5.75.164.111:5001/static/uploads/' + user.profilna_slika : 'assets/default-avatar.png'"
+      alt="Profilna slika"
+      class="profilna-slika"
+    />
     <h1>{{ user.ime }} {{ user.prezime }}</h1>
     <p class="username">&#64;{{ user.username }}</p>
   </div>
@@ -19,7 +19,8 @@
   </div>
 
   <div class="osnovni-podaci">
-    <p><strong>Email:</strong> {{ user.email }}
+    <p>
+      <strong>Email:</strong> {{ user.email }}
       <span *ngIf="user.verifikovan_email" class="verified">✔️ Verifikovan</span>
     </p>
     <p><strong>Telefon:</strong> {{ user.telefon }}</p>
@@ -30,5 +31,12 @@
     <p><strong>Datum registracije:</strong> 
       {{ user.datum_registracije | date: 'dd.MM.yyyy. HH:mm' }}
     </p>
+  </div>
+
+  <!-- Deo za upload slike -->
+  <div class="upload-slika">
+    <h3>Dodaj / Promeni profilnu sliku</h3>
+    <input type="file" (change)="onFileSelected($event)" />
+    <button (click)="uploadImage()" [disabled]="!selectedFile">Dodaj sliku</button>
   </div>
 </div>

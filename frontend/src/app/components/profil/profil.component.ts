@@ -12,11 +12,29 @@ import e from 'express';
 })
 export class ProfilComponent implements OnInit, OnDestroy {
   private subscription?: Subscription;
+  selectedFile: File | null = null;
     user: CurrentUserInterface | null = null;
     constructor(
     private userService: UserService,
     private currentUserService: CurrentUserService
   ) {}
+  onFileSelected(event: any) {
+  const file: File = event.target.files[0];
+  if (file) {
+    this.selectedFile = file;
+  }
+}
+
+uploadImage() {
+  if (!this.selectedFile) return;
+
+  const formData = new FormData();
+  formData.append('image', this.selectedFile);
+
+  // Pozovi servis koji šalje POST zahtev na backend za upload slike
+ 
+  
+}
   ngOnInit() {
     const id = this.currentUserService.getCurrentUser()?.id;
     if (id){

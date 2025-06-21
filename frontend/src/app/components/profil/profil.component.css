@@ -64,3 +64,39 @@
   border-radius: 3px;
   display: inline-block;
 }
+.upload-slika {
+  margin-top: 20px;
+  padding: 10px;
+  border-top: 1px solid #ccc;
+}
+
+.upload-slika h3 {
+  margin-bottom: 10px;
+  font-size: 1.2em;
+  color: #333;
+}
+
+.upload-slika input[type="file"] {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.upload-slika button {
+  padding: 8px 16px;
+  background-color: #007bff; /* plava boja */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease;
+}
+
+.upload-slika button:disabled {
+  background-color: #999;
+  cursor: not-allowed;
+}
+
+.upload-slika button:hover:not(:disabled) {
+  background-color: #0056b3; /* tamnija plava */
+}
