@@ -128,6 +128,20 @@ h1 {
 .upload-slika button:hover:not(:disabled) {
   background-color: #1e7e34;
 }
+.biografija button {
+  font-size: 0.8rem;
+  padding: 4px 10px;
+  color: #666;
+  border: 1px solid #ccc;
+  background: transparent;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.biografija button:hover {
+  background-color: #f0f0f0;
+}
 
 /* Responsive */
 @media (max-width: 500px) {
