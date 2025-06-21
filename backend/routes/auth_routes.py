@@ -33,8 +33,9 @@ def login():
     if not check_password_hash(korisnik.lozinka, lozinka):
         return jsonify({'error':'Neispravno korisnicko ime ili lozinka.'}),401
     #Generise JWT token
-    access_token = create_access_token(identity=korisnik.id, expires_delta=timedelta(hours=15))
-    refresh_token = create_refresh_token(identity=korisnik.id)
+    access_token = create_access_token(identity=str(korisnik.id), expires_delta=timedelta(hours=15))
+    refresh_token = create_refresh_token(identity=str(korisnik.id))
+
     return jsonify({
         'message': f'Uspesno ste se ulogovali kao {korisnik.username}',
         'token': access_token,
@@ -51,6 +52,7 @@ def login():
 def refresh():
     current_user_id = get_jwt_identity()
     new_access_token = create_access_token(identity=current_user_id, expires_delta=timedelta(minutes=15))
+
     return jsonify({'access_token': new_access_token}), 200
 
 
