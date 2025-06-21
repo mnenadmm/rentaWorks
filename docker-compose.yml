@@ -9,7 +9,8 @@ services:
     image: zadruga-backend:dev
     restart: unless-stopped
     volumes:
-      - ./backend:/app  
+      - ./backend:/app
+      - ./backend/static/uploads:/app/static/uploads  # ← OVO je za slike  
     env_file:
       - .env
     ports:

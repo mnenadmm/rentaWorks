@@ -1,10 +1,10 @@
 <div class="profil-container" *ngIf="user">
   <div class="profil-header">
     <img
-      [src]="user.profilna_slika || 'assets/default-avatar.png'"
-      alt="Profilna slika"
-      class="profilna-slika"
-    />
+  [src]="user.profilna_slika ? 'http://localhost:5001/static/uploads/' + user.profilna_slika : 'assets/default-avatar.png'"
+  alt="Profilna slika"
+  class="profilna-slika"
+/>
     <h1>{{ user.ime }} {{ user.prezime }}</h1>
     <p class="username">&#64;{{ user.username }}</p>
   </div>
