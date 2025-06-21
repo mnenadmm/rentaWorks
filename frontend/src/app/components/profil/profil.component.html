@@ -5,27 +5,38 @@
       alt="Profilna slika"
       class="profilna-slika"
     />
-    
-    <!-- Upload slika deo -->
-    <div class="upload-slika">
-      <label for="fileUpload" class="upload-label">
-        Izaberi sliku
-        <input
-          type="file"
-          id="fileUpload"
-          (change)="onFileSelected($event)"
-          accept="image/*"
-          hidden
-        />
-      </label>
-      <button (click)="uploadImage()" [disabled]="!selectedFile">
-        Dodaj sliku
-      </button>
-    </div>
-
     <h1>{{ user.ime }} {{ user.prezime }}</h1>
     <p class="username">&#64;{{ user.username }}</p>
+
+    <!-- Upload polje odmah ispod slike i imena -->
+    <div class="upload-slika">
+      <h3>Dodaj / Promeni profilnu sliku</h3>
+      <input type="file" (change)="onFileSelected($event)" />
+      <button (click)="uploadImage()" [disabled]="!selectedFile">Dodaj sliku</button>
+    </div>
   </div>
 
-  <!-- ostatak koda ostaje isti -->
+  <div class="biografija">
+    <p *ngIf="user.biografija; else noBio">
+      {{ user.biografija }}
+    </p>
+    <ng-template #noBio>
+      <p><em>Korisnik još nije napisao biografiju.</em></p>
+    </ng-template>
+  </div>
+
+  <div class="osnovni-podaci">
+    <p>
+      <strong>Email:</strong> {{ user.email }}
+      <span *ngIf="user.verifikovan_email" class="verified">✔️ Verifikovan</span>
+    </p>
+    <p><strong>Telefon:</strong> {{ user.telefon }}</p>
+    <p><strong>Adresa:</strong> {{ user.adresa }}</p>
+    <p><strong>Grad:</strong> {{ user.grad }}</p>
+    <p><strong>Država:</strong> {{ user.drzava }}</p>
+    <p><strong>Tip korisnika:</strong> {{ user.tip_korisnika }}</p>
+    <p><strong>Datum registracije:</strong> 
+      {{ user.datum_registracije | date: 'dd.MM.yyyy. HH:mm' }}
+    </p>
+  </div>
 </div>
