@@ -63,8 +63,12 @@ def serve_upload(filename):
 @jwt_required()
 def upload_profile_image():
     auth_header = request.headers.get('Authorization')
-    logger('Authorization header:')
-    return jsonify("sve je u redu")
+    logger.info(f'Authorization header: {auth_header}', )
+    
+    current_user_id = get_jwt_identity()
+    logger.info(f'JWT identitet: {current_user_id}')
+
+    return jsonify({"msg": "sve je u redu"})
     if 'image' not in request.files:
         return jsonify({'error': 'Nije prosleđen fajl'}), 400
 
