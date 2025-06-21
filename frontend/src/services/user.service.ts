@@ -11,4 +11,7 @@ export class UserService {
   getKorisnikById(id: number): Observable<CurrentUserInterface> {
     return this.http.get<CurrentUserInterface>(`${this.apiUrl}/korisnici/${id}`);
   }
+    uploadProfileImage(formData: FormData): Observable<{ filename: string }> {
+  return this.http.post<{ filename: string }>(`${this.apiUrl}/upload_profile_image`, formData);
+}
 }

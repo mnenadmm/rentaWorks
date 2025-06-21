@@ -7,6 +7,8 @@ from applicationSetup import db
 from datetime import timedelta
 import logging
 import os
+import uuid
+
 logger = logging.getLogger(__name__)
 auth_bp = Blueprint('auth', __name__)
 
@@ -57,7 +59,50 @@ def serve_upload(filename):
     uploads_dir = os.path.join(current_app.root_path, 'static', 'uploads')
     return send_from_directory(uploads_dir, filename)
 
+@auth_bp.route('/upload_profile_image', methods=['POST'])
+@jwt_required()
+def upload_profile_image():
+    if 'file' not in request.files:
+        return jsonify({'error': 'Nije prosleđen fajl'}), 400
 
+    file = request.files['file']
+    if file.filename == '':
+        return jsonify({'error': 'Nema izabranog fajla'}), 400
+
+    # Provera ekstenzije fajla
+    if '.' in file.filename:
+        ext = file.filename.rsplit('.', 1)[1].lower()
+    else:
+        return jsonify({'error': 'Fajl nema ekstenziju'}), 400
+
+    # Možeš dodati dodatnu proveru dozvoljenih tipova fajla (npr. jpg, png)
+    dozvoljene_ekstenzije = {'jpg', 'jpeg', 'png', 'gif'}
+    if ext not in dozvoljene_ekstenzije:
+        return jsonify({'error': 'Nepodržani format fajla'}), 400
+
+    # Kreiraj jedinstveno ime fajla
+    filename = f"{uuid.uuid4().hex}.{ext}"
+
+    uploads_dir = os.path.join(current_app.root_path, 'static', 'uploads')
+    if not os.path.exists(uploads_dir):
+        os.makedirs(uploads_dir)
+
+    filepath = os.path.join(uploads_dir, filename)
+    file.save(filepath)
+
+    # Sačuvaj ime fajla u bazi za trenutnog korisnika
+    korisnik_id = get_jwt_identity()
+    korisnik = Korisnik.query.get(korisnik_id)
+    if not korisnik:
+        return jsonify({'error': 'Korisnik nije pronađen'}), 404
+
+    korisnik.profilna_slika = filename
+    try:
+        db.session.commit()
+    except Exception as e:
+        return jsonify({'error': 'Greška pri čuvanju u bazu', 'details': str(e)}), 500
+
+    return jsonify({'message': 'Slika uspešno uploadovana', 'filename': filename}), 200
 
 #
 # Ruta za registraciju novih korisnika
