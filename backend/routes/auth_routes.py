@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify,send_from_directory, current_app
 from datetime import datetime
 from modeli import Korisnik, TipKorisnikaEnum, Zanimanje, Vestina  
 from werkzeug.security import generate_password_hash,check_password_hash
@@ -6,7 +6,7 @@ from flask_jwt_extended import create_access_token,create_refresh_token, jwt_req
 from applicationSetup import db
 from datetime import timedelta
 import logging
-
+import os
 logger = logging.getLogger(__name__)
 auth_bp = Blueprint('auth', __name__)
 
@@ -52,6 +52,10 @@ def refresh():
     return jsonify({'access_token': new_access_token}), 200
 
 
+@auth_bp.route('/static/uploads/<filename>')
+def serve_upload(filename):
+    uploads_dir = os.path.join(current_app.root_path, 'static', 'uploads')
+    return send_from_directory(uploads_dir, filename)
 
 
 
