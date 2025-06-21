@@ -24,7 +24,11 @@ export class ProfilComponent implements OnInit, OnDestroy {
     this.selectedFile = file;
   }
 }
-
+openBioEditor() {
+  // Logika za otvaranje forme/modal-a za izmenu/dodavanje biografije
+  // Na primer, možeš da prikažeš modal ili preusmeriš korisnika na neki edit profil deo
+  console.log('Otvori editor biografije');
+}
 uploadImage() {
   if (!this.selectedFile) return;
 
