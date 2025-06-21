@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { tap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
@@ -20,7 +21,14 @@ export class AuthenticationService {
  *  @returns Observable koji vraća odgovor sa servera 
  */
   login(credentials: { username: string; lozinka: string }): Observable<any> {
-  return this.http.post(`${this.apiUrl}/login`, credentials, this.httpOptions);
+  return this.http.post<any>(`${this.apiUrl}/login`, credentials, this.httpOptions).pipe(
+    tap(response => {
+      // Sačuvaj token u localStorage
+      if (response.token) {
+        localStorage.setItem('token', response.token);
+      }
+    })
+  );
 }
   /**
    * Registruje novog korisnika.
