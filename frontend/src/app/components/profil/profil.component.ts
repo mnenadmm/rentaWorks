@@ -41,11 +41,11 @@ uploadImage() {
   .subscribe({
     next: (res)=>{
       console.log('ovo smo primili', res);
-      if (this.user){
-        this.user.profilna_slika = res.filename;
-      }
-      this.selectedFile = null;
-      console.log('Profilna slika uploadovana:', res.filename)
+      //if (this.user){
+      //  this.user.profilna_slika = res.filename;
+      //}
+      //this.selectedFile = null;
+      //console.log('Profilna slika uploadovana:', res.filename)
     }, error: (err)=>{ console.error('Greška pri uploadu slike:', err);}
   })
  
