@@ -62,10 +62,10 @@ def serve_upload(filename):
 @auth_bp.route('/upload_profile_image', methods=['POST'])
 #@jwt_required()
 def upload_profile_image():
-    if 'file' not in request.files:
+    if 'image' not in request.files:
         return jsonify({'error': 'Nije prosleđen fajl'}), 400
 
-    file = request.files['file']
+    file = request.files['image']
     if file.filename == '':
         return jsonify({'error': 'Nema izabranog fajla'}), 400
 
