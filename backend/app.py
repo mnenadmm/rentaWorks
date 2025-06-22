@@ -8,9 +8,9 @@ from flask_jwt_extended import  jwt_required # type: ignore
 
 
 @app.route('/proba')
-@jwt_required()
+#@jwt_required()
 def proba():
-    return jsonify('Uspesnooooooooo')
+    return jsonify('Uspesnooooooooo i sada je')
 @app.route('/konekcija')
 def db_check():
     try:
