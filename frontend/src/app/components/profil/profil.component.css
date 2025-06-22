@@ -23,8 +23,8 @@ h1 {
 }
 
 .profilna-slika {
-  width: 130px;
-  height: 130px;
+  width: 180px;
+  height: 180px;
   border-radius: 50%;
   object-fit: cover;
   border: 4px solid #007bff;
@@ -151,8 +151,8 @@ h1 {
   }
 
   .profilna-slika {
-    width: 110px;
-    height: 110px;
+    width: 180px;
+    height: 180px;
   }
 
   h1 {
