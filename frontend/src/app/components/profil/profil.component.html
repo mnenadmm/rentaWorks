@@ -1,4 +1,8 @@
 <div class="profil-container" *ngIf="user">
+    <!-- Poruka o uspehu ili grešci -->
+  <div *ngIf="uploadMessage" class="alert" [ngClass]="{ 'alert-success': isSuccessMessage, 'alert-error': !isSuccessMessage }">
+    {{ uploadMessage }}
+  </div>
   <div class="profil-header">
     <img
       [src]="user.profilna_slika ? 'http://5.75.164.111:5001/static/uploads/' + user.profilna_slika : 'assets/default-avatar.png'"
@@ -11,32 +15,49 @@
     <!-- Upload polje odmah ispod slike i imena -->
     <div class="upload-slika">
       <h3>Dodaj fotografiju </h3>
-      <input type="file" (change)="onFileSelected($event)" />
-      <button (click)="uploadImage()" [disabled]="!selectedFile">Dodaj sliku</button>
+      <input type="file" (change)="onFileSelected($event)" #fileInput />
+      <button (click)="uploadImage(fileInput)" [disabled]="!selectedFile">Dodaj sliku</button>
+
     </div>
   </div>
 
- <div class="biografija">
-  <p *ngIf="user.biografija">
-    {{ user.biografija }}
-  </p>
-  
-  <!-- Dugme za dodavanje/izmenu biografije, bez else dela -->
-  <button class="btn btn-sm btn-outline-secondary mt-2" (click)="openBioEditor()">
-    {{ user.biografija ? 'Izmeni biografiju' : 'Dodaj biografiju' }}
-  </button>
-</div>
+  <div class="biografija">
+    <p *ngIf="user.biografija">
+      {{ user.biografija }}
+    </p>
+    
+    <!-- Dugme za dodavanje/izmenu biografije, bez else dela -->
+    <button class="btn btn-sm btn-outline-secondary mt-2" (click)="openBioEditor()">
+      {{ user.biografija ? 'Izmeni biografiju' : 'Dodaj biografiju' }}
+    </button>
+  </div>
 
   <div class="osnovni-podaci">
+    <p><strong>Zanimanja:</strong></p>
+    <div class="badge-container">
+      <span *ngFor="let zanimanje of user.zanimanja" class="badge">{{ zanimanje }}</span>
+    </div>
+
+    <p><strong>Dodatne veštine:</strong></p>
+    <div class="badge-container">
+      <span *ngFor="let vestina of user.vestine" class="badge skill">{{ vestina }}</span>
+    </div>
+
+    <p><strong>Datum rođenja:</strong> {{ user.datum_rodjenja | date: 'dd.MM.yyyy.' }}</p>
+
+    <p><strong>Tip korisnika:</strong> {{ user.tip_korisnika }}</p>
+
     <p>
       <strong>Email:</strong> {{ user.email }}
-      <span *ngIf="user.verifikovan_email" class="verified">✔️ Verifikovan</span>
+      <span [class.verified]="user.verifikovan_email" [class.not-verified]="!user.verifikovan_email">
+        {{ user.verifikovan_email ? '✔️ Verifikovan' : '❌ Nije verifikovan' }}
+      </span>
     </p>
+
     <p><strong>Telefon:</strong> {{ user.telefon }}</p>
     <p><strong>Adresa:</strong> {{ user.adresa }}</p>
     <p><strong>Grad:</strong> {{ user.grad }}</p>
-    <p><strong>Država:</strong> {{ user.drzava }}</p>
-    <p><strong>Tip korisnika:</strong> {{ user.tip_korisnika }}</p>
+
     <p><strong>Datum registracije:</strong> 
       {{ user.datum_registracije | date: 'dd.MM.yyyy. HH:mm' }}
     </p>

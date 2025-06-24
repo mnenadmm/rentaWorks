@@ -8,17 +8,21 @@ import { CurrentUserInterface } from '../app/interfaces/current-user.interface';
 export class UserService {
    private apiUrl = "http://5.75.164.111:5001/api";
   constructor(private http: HttpClient) { }
-
+  /**
+   * 
+   * @param id 
+   * @returns vraca podatke u ulogovanom korisniku
+   */
   getKorisnikById(id: number): Observable<CurrentUserInterface> {
     return this.http.get<CurrentUserInterface>(`${this.apiUrl}/korisnici/${id}`);
   }
-    uploadProfileImage(formData: FormData): Observable<{ filename: string }> {
+    uploadProfileImage(formData: FormData): Observable<{ filename: string, message: string  }> {
        const token = localStorage.getItem('token'); // ili sessionStorage.getItem('token')
    
       const headers = new HttpHeaders({
   Authorization: `Bearer ${token}`
 });
 
-  return this.http.post<{ filename: string }>(`${this.apiUrl}/upload_profile_image`, formData,{ headers });
+  return this.http.post<{ filename: string, message: string }>(`${this.apiUrl}/upload_profile_image`, formData,{ headers });
 }
 }
