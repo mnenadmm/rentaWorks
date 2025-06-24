@@ -19,6 +19,9 @@ export interface CurrentUserInterface {
   profilna_slika?: string | null;
   biografija?: string | null;
   verifikovan_email?: boolean;
+  datum_rodjenja?: string;
+  zanimanja?: string[]; // ➕ novo
+  vestine?: string[];   // ➕ novo
 }
 
 

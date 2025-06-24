@@ -74,6 +74,7 @@ class Korisnik(db.Model):
             "adresa": self._puna_adresa(),
             "tip_korisnika": self.tip_korisnika.value if self.tip_korisnika else None,
             "datum_registracije": self.datum_registracije.isoformat() if self.datum_registracije else None,
+            "datum_rodjenja": self.datum_rodjenja.isoformat() if self.datum_rodjenja else None,
             "aktivan": self.aktivan,
             "verifikovan_email": self.verifikovan_email,
             "profilna_slika": self.profilna_slika,
@@ -84,7 +85,9 @@ class Korisnik(db.Model):
             "block_user": self.block_user,
             "prva_rola": self.prva_rola,
             "druga_rola": self.druga_rola,
-            "treca_rola": self.treca_rola
+            "treca_rola": self.treca_rola,
+            "zanimanja": [z.naziv for z in self.zanimanja],
+            "vestine": [v.naziv for v in self.vestine]
         }
     def _puna_adresa(self):
         delovi = []

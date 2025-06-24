@@ -8,9 +8,9 @@ import { CurrentUserInterface } from '../../interfaces/current-user.interface';
 export class CurrentUserService {
   private currentUserKey = 'currentUser';
   private _currentUser: CurrentUserInterface | null = null;
-   // BehaviorSubject sa početnom vrednošću null (nije ulogovan)
+  
   private currentUserSubject = new BehaviorSubject<CurrentUserInterface | null>(null);
-  // Observable za praćenje spolja
+  
   currentUser$: Observable<CurrentUserInterface | null> = this.currentUserSubject.asObservable();
 
   constructor() {

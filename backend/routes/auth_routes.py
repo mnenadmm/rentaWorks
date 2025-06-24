@@ -64,15 +64,12 @@ def serve_upload(filename):
 @auth_bp.route('/upload_profile_image', methods=['POST'])
 @jwt_required()
 def upload_profile_image():
-    auth_header = request.headers.get('Authorization')
-    print('Authorization header:', auth_header)
     if 'image' not in request.files:
         return jsonify({'error': 'Nije prosleđen fajl'}), 400
 
     file = request.files['image']
     if file.filename == '':
         return jsonify({'error': 'Nema izabranog fajla'}), 400
-
     # Provera ekstenzije fajla
     if '.' in file.filename:
         ext = file.filename.rsplit('.', 1)[1].lower()
@@ -80,8 +77,9 @@ def upload_profile_image():
         return jsonify({'error': 'Fajl nema ekstenziju'}), 400
 
     # Možeš dodati dodatnu proveru dozvoljenih tipova fajla (npr. jpg, png)
-    dozvoljene_ekstenzije = {'jpg', 'jpeg', 'png', 'gif'}
+    dozvoljene_ekstenzije = {'jpg', 'jpeg', 'png', 'gif', 'webp', 'heic'}
     if ext not in dozvoljene_ekstenzije:
+        logger.error(f"Nepodržani format fajla: {ext}")
         return jsonify({'error': 'Nepodržani format fajla'}), 400
 
     # Kreiraj jedinstveno ime fajla
@@ -99,7 +97,15 @@ def upload_profile_image():
     korisnik = Korisnik.query.get(korisnik_id)
     if not korisnik:
         return jsonify({'error': 'Korisnik nije pronađen'}), 404
-
+    # Obriši staru sliku ako postoji
+    if korisnik.profilna_slika:
+        stari_fajl = os.path.join(current_app.root_path, 'static', 'uploads', korisnik.profilna_slika)
+        if os.path.exists(stari_fajl):
+            try:
+                os.remove(stari_fajl)
+            except Exception as e:
+                return jsonify({'error': 'Greška prilikom brisanja stare slike', 'details': str(e)}), 500
+    # Ažuriraj na novu sliku
     korisnik.profilna_slika = filename
     try:
         db.session.commit()
