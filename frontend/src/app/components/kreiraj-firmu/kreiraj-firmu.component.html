@@ -1,0 +1,190 @@
+<div class="firma-container" *ngIf="!isLoadingFirma; else loadingFirma">
+  <!-- Poruka o uspehu ili grešci -->
+  <div
+    *ngIf="responseMessage"
+    class="alert"
+    [ngClass]="{ 'alert-success': isSuccessMessage, 'alert-error': !isSuccessMessage }"
+    role="alert"
+    aria-live="assertive"
+  >
+    <span class="alert-icon" aria-hidden="true">
+      <ng-container *ngIf="isSuccessMessage; else errorIcon">✔️</ng-container>
+      <ng-template #errorIcon>❌</ng-template>
+    </span>
+    <span class="alert-text">{{ responseMessage }}</span>
+  </div>
+
+  <div class="firma-header">
+    <h1>Dodaj firmu</h1>
+    <p class="subtitle">Popunite podatke o firmi</p>
+
+    <!-- Spinner prilikom slanja -->
+    <div *ngIf="isSubmitting" class="spinner submit-spinner" aria-label="Učitavanje..."></div>
+  </div>
+
+  <form class="firma-form" #firmaForm="ngForm" (ngSubmit)="kreirajFirmu()">
+    <!-- Naziv firme -->
+    <div class="form-group">
+      <label for="naziv">Naziv firme</label>
+      <input
+        type="text"
+        id="naziv"
+        name="naziv"
+        [(ngModel)]="firma.naziv"
+        placeholder="Unesite naziv firme"
+        required
+        #nazivInput="ngModel"
+        aria-describedby="nazivError"
+      />
+      <div
+        id="nazivError"
+        class="error-message"
+        *ngIf="nazivInput.invalid && (nazivInput.dirty || nazivInput.touched)"
+      >
+        Naziv firme je obavezno polje.
+      </div>
+    </div>
+
+    <!-- PIB -->
+    <div class="form-group">
+      <label for="pib">PIB</label>
+      <input
+        type="text"
+        id="pib"
+        name="pib"
+        [(ngModel)]="firma.pib"
+        placeholder="Unesite PIB (9 cifara)"
+        pattern="^[0-9]{9}$"
+        required
+        #pibInput="ngModel"
+        aria-describedby="pibError"
+      />
+      <div
+        id="pibError"
+        class="error-message"
+        *ngIf="pibInput.invalid && (pibInput.dirty || pibInput.touched)"
+      >
+        PIB mora sadržati tačno 9 cifara.
+      </div>
+    </div>
+
+    <!-- Adresa -->
+    <div class="form-group">
+      <label for="adresa">Adresa</label>
+      <input
+        type="text"
+        id="adresa"
+        name="adresa"
+        [(ngModel)]="firma.adresa"
+        placeholder="Unesite adresu"
+        required
+        #adresaInput="ngModel"
+        aria-describedby="adresaError"
+      />
+      <div
+        id="adresaError"
+        class="error-message"
+        *ngIf="adresaInput.invalid && (adresaInput.dirty || adresaInput.touched)"
+      >
+        Adresa je obavezno polje.
+      </div>
+    </div>
+
+    <!-- Telefon -->
+    <div class="form-group">
+      <label for="telefon">Telefon</label>
+      <input
+        type="tel"
+        id="telefon"
+        name="telefon"
+        [(ngModel)]="firma.telefon"
+        placeholder="Unesite telefon"
+        pattern="^[0-9+ ]{6,15}$"
+        required
+        #telefonInput="ngModel"
+        aria-describedby="telefonError"
+      />
+      <div
+        id="telefonError"
+        class="error-message"
+        *ngIf="telefonInput.invalid && (telefonInput.dirty || telefonInput.touched)"
+      >
+        Unesite validan broj telefona (6-15 cifara, može + i razmaci).
+      </div>
+    </div>
+
+    <!-- Email -->
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        [(ngModel)]="firma.email"
+        placeholder="Unesite email"
+        required
+        #emailInput="ngModel"
+        aria-describedby="emailError"
+      />
+      <div
+        id="emailError"
+        class="error-message"
+        *ngIf="emailInput.invalid && (emailInput.dirty || emailInput.touched)"
+      >
+        Unesite validan email.
+      </div>
+    </div>
+
+    <!-- Web sajt -->
+    <div class="form-group">
+      <label for="web_sajt">Web sajt</label>
+      <input
+        type="text"
+        id="web_sajt"
+        name="web_sajt"
+        [(ngModel)]="firma.web_sajt"
+        placeholder="Unesite URL web sajta"
+        pattern=".*\.(com|rs|net|org|info|co|io).*"
+        #webSajtInput="ngModel"
+        aria-describedby="webSajtError"
+      />
+      <div
+        id="webSajtError"
+        class="error-message"
+        *ngIf="webSajtInput.invalid && (webSajtInput.dirty || webSajtInput.touched)"
+      >
+        Unesite validan URL sa odgovarajućom ekstenzijom.
+      </div>
+    </div>
+
+    <!-- Logo firme upload sekcija -->
+    <div class="firma-upload">
+      <h3>Logo firme (opciono)</h3>
+      <input
+        type="file"
+        id="logo"
+        name="logo"
+        (change)="onLogoSelected($event)"
+        accept=".png,.jpg,.jpeg,.svg,.webp"
+        aria-describedby="logoError"
+      />
+      <div *ngIf="selectedLogoName" class="selected-file">
+        Selektovani fajl: {{ selectedLogoName }}
+      </div>
+      <div id="logoError" class="error-message" *ngIf="logoUploadError">
+        {{ logoUploadError }}
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="firmaForm.invalid || isSubmitting">
+      Kreiraj firmu
+    </button>
+  </form>
+</div>
+
+<ng-template #loadingFirma>
+  <div class="loading-firma-container">
+    <div class="spinner loading-spinner" aria-label="Učitavanje..."></div>
+    <p>Učitavanje forme...</p>
+  </div>
+</ng-template>

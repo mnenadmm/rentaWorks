@@ -39,4 +39,25 @@ export class AuthenticationService {
     // POST na backend endpoint za registraciju sa httpOptions
     return this.http.post(`${this.apiUrl}/registracija`, userData, this.httpOptions);
   }
+  /**
+ * Osvežava access token koristeći refresh token (koji se šalje kao cookie).
+ * @returns Observable sa novim access_token-om
+ */
+refreshToken(): Observable<any> {
+  return this.http.post<{ access_token: string }>(
+    `${this.apiUrl}/refresh`,
+    {},
+    {
+      withCredentials: true 
+    }
+  ).pipe(
+    tap(response => {
+      if (response.access_token) {
+        localStorage.setItem('token', response.access_token);
+      }
+    })
+  );
+}
+
+  
 }

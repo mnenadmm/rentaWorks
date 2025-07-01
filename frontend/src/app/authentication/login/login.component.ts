@@ -43,45 +43,53 @@ export class LoginComponent implements OnDestroy {
   }
 
   onLogin() {
-    if (this.isLockedOut) return;
-    if (!this.username || !this.lozinka) {
-      this.errorMessage = 'Korisničko ime i lozinka su obavezni.';
-      return;
-    }
+  if (this.isLockedOut) return;
+  if (!this.username || !this.lozinka) {
+    this.errorMessage = 'Korisničko ime i lozinka su obavezni.';
+    return;
+  }
 
-    const validFormat = this.lozinka.length >= 8 && /[A-Z]/.test(this.lozinka);
-    if (!validFormat) {
-    this.loginLockService.recordAttempt(false);
+  const validFormat = this.lozinka.length >= 8 && /[A-Z]/.test(this.lozinka);
+  if (!validFormat) {
+    this.loginLockService.recordAttempt(false);  // Neuspeh zbog lošeg formata
     this.errorMessage = 'Lozinka mora imati najmanje 8 karaktera i jedno veliko slovo.';
     return;
   }
-    this.loginLockService.recordAttempt(validFormat);
-    
-    const credentials = {
-    username: this.username, 
+
+  const credentials = {
+    username: this.username,
     lozinka: this.lozinka
-                        };
-    this.authService.login(credentials).subscribe({
-      next: (response)=>{
-        this.loginLockService.recordAttempt(true); //resetuj pokusaje
-        this.errorMessage = '';
-        this.currentUser={
-            id: response.user_id,
-            username: this.username,
-            tip_korisnika: response.tip_korisnika,
-            aktivan: true
-        }
-        this.currentUserService.setCurrentUser(this.currentUser);
-       
-        this.router.navigate(['/']);
-    
-      },error : (error)=>{
-          this.loginLockService.recordAttempt(false);
-      this.errorMessage = error.error?.error || 'Greška pri prijavi. Pokušajte ponovo.';
+  };
+
+  this.authService.login(credentials).subscribe({
+    next: (response) => {
+      this.loginLockService.recordAttempt(true);  // Uspešan login
+      this.errorMessage = '';
+      const user = response.user;
+      this.currentUser = {
+        id: user.id,
+        username: user.username,
+        tip_korisnika: user.tip_korisnika,
+        aktivan: true,
+        ima_firmu: user.ima_firmu
+      };
+      this.currentUserService.setCurrentUser(this.currentUser);
+      this.router.navigate(['/']);
+    },
+    error: (error) => {
+      if (error.status === 401){
+        this.loginLockService.recordAttempt(false); // Neuspešan login
+        this.errorMessage = error.error?.error || 'Greška pri prijavi. Pokušajte ponovo.';
+      }else {
+        // Za druge greške ne tretiraj kao neuspešan pokušaj, već recimo obavesti korisnika
+       this.errorMessage = error.error?.error || 'Greška pri prijavi. Pokušajte ponovo.';
       }
-    })
-    
-  }
+      
+      
+    }
+  });
+}
+
   ngOnDestroy() {
     this.timerSub?.unsubscribe();
   }

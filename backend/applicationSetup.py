@@ -9,12 +9,18 @@ from routes import register_blueprints
 from administrator.routes import admin_bp
 from flask_jwt_extended import JWTManager
 from datetime import timedelta
+from werkzeug.exceptions import RequestEntityTooLarge,HTTPException
 
 def create_app():
     app = Flask(__name__)
-
-    # JWT konfiguracija
+    # CORS 
+    CORS(app, supports_credentials=True)
+    app.config['MAX_CONTENT_LENGTH'] = 20 * 1024 * 1024 
+    # JWT konfiguracijaa
     jwt = JWTManager(app)
+    @app.errorhandler(RequestEntityTooLarge)
+    def handle_large_file(error):
+        return jsonify({'error': 'Fajl je prevelik. Maksimalna dozvoljena veličina je 20MB.'}), 413
     @jwt.unauthorized_loader
     def handle_missing_token(error_string):
         return jsonify({'error': 'Token nije prosleđen ili je neispravan.'}), 401
@@ -30,17 +36,18 @@ def create_app():
     # Globalni error handler za neuhvaćene greške
     @app.errorhandler(Exception)
     def handle_unexpected_error(error):
+        if isinstance(error, HTTPException):
+            # prepusti Flask-u da obradi HTTP greške (npr. 400, 404, itd.)
+            return error
         app.logger.error(f"Neočekivana greška: {error}", exc_info=True)
-        # Možeš slati samo poruku ili i detalje ako želiš (ali pazi na osetljive informacije)
         return jsonify({'error': 'Došlo je do greške na serveru.'}), 500
 
 
     app.config['JWT_SECRET_KEY'] = 'moj_tajni_kljuc'
     app.config['JWT_ACCESS_TOKEN_EXPIRES'] = timedelta(minutes=15)
     app.config['JWT_REFRESH_TOKEN_EXPIRES'] = timedelta(days=7)
-
-    # CORS
-    CORS(app, resources={r"/*": {"origins": "http://5.75.164.111:4200"}}, supports_credentials=True)
+     
+    
     # Baza
     app.config['SQLALCHEMY_DATABASE_URI'] = get_database_uri()
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
