@@ -12,6 +12,10 @@ import { RegistracijaComponent } from './authentication/registracija/registracij
 import { CustomDatepickerComponent } from './components/custom-datepicker/custom-datepicker.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ProfilComponent } from './components/profil/profil.component';
+import { KreirajFirmuComponent } from './components/kreiraj-firmu/kreiraj-firmu.component';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from './auth.interceptor';
+import { MojaFirmaComponent } from './components/moja-firma/moja-firma.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +26,9 @@ import { ProfilComponent } from './components/profil/profil.component';
     ResetPasswordComponent,
     RegistracijaComponent,
     CustomDatepickerComponent,
-    ProfilComponent
+    ProfilComponent,
+    KreirajFirmuComponent,
+    MojaFirmaComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +40,13 @@ import { ProfilComponent } from './components/profil/profil.component';
   
   ],
   providers: [
-    provideClientHydration(withEventReplay())
+    provideClientHydration(withEventReplay()),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    }
+    
     
   ],
   bootstrap: [AppComponent]

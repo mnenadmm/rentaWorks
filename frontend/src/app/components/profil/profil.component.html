@@ -1,23 +1,32 @@
-<div class="profil-container" *ngIf="user">
-    <!-- Poruka o uspehu ili grešci -->
+<div class="profil-container" *ngIf="user; else loadingUser">
+  <!-- Poruka o uspehu ili grešci -->
   <div *ngIf="uploadMessage" class="alert" [ngClass]="{ 'alert-success': isSuccessMessage, 'alert-error': !isSuccessMessage }">
     {{ uploadMessage }}
   </div>
+
   <div class="profil-header">
     <img
       [src]="user.profilna_slika ? 'http://5.75.164.111:5001/static/uploads/' + user.profilna_slika : 'assets/default-avatar.png'"
       alt="Profilna slika"
       class="profilna-slika"
-    />
+    /> 
+
+    <!-- Spinner za upload slike -->
+    <div *ngIf="isUploading" class="spinner upload-spinner"></div>
+
     <h1>{{ user.ime }} {{ user.prezime }}</h1>
     <p class="username">&#64;{{ user.username }}</p>
 
-    <!-- Upload polje odmah ispod slike i imena -->
     <div class="upload-slika">
       <h3>Dodaj fotografiju </h3>
-      <input type="file" (change)="onFileSelected($event)" #fileInput />
-      <button (click)="uploadImage(fileInput)" [disabled]="!selectedFile">Dodaj sliku</button>
+      <input type="file" accept="image/*" (change)="onFileSelected($event)" #fileInput />
+      <button type="button" (click)="uploadImage(fileInput)" [disabled]="!selectedFile || isUploading">Dodaj sliku</button>
+    </div>
 
+    <!-- Progres bar za upload -->
+    <div *ngIf="uploadProgress !== null" class="progress-wrapper">
+      <p>Upload: {{ uploadProgress }}%</p>
+      <progress [value]="uploadProgress" max="100"></progress>
     </div>
   </div>
 
@@ -25,8 +34,6 @@
     <p *ngIf="user.biografija">
       {{ user.biografija }}
     </p>
-    
-    <!-- Dugme za dodavanje/izmenu biografije, bez else dela -->
     <button class="btn btn-sm btn-outline-secondary mt-2" (click)="openBioEditor()">
       {{ user.biografija ? 'Izmeni biografiju' : 'Dodaj biografiju' }}
     </button>
@@ -44,7 +51,6 @@
     </div>
 
     <p><strong>Datum rođenja:</strong> {{ user.datum_rodjenja | date: 'dd.MM.yyyy.' }}</p>
-
     <p><strong>Tip korisnika:</strong> {{ user.tip_korisnika }}</p>
 
     <p>
@@ -58,8 +64,14 @@
     <p><strong>Adresa:</strong> {{ user.adresa }}</p>
     <p><strong>Grad:</strong> {{ user.grad }}</p>
 
-    <p><strong>Datum registracije:</strong> 
-      {{ user.datum_registracije | date: 'dd.MM.yyyy. HH:mm' }}
-    </p>
+    <p><strong>Datum registracije:</strong> {{ user.datum_registracije | date: 'dd.MM.yyyy. HH:mm' }}</p>
   </div>
 </div>
+
+<!-- Spinner i poruka dok se učitava korisnik -->
+<ng-template #loadingUser>
+  <div class="loading-user-container">
+    <div class="spinner loading-spinner"></div>
+    <p>Učitavanje profila...</p>
+  </div>
+</ng-template>

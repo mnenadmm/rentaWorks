@@ -1,0 +1,299 @@
+.firma-container {
+  max-width: 480px;
+  margin: 40px auto;
+  padding: 30px 35px;
+  background: linear-gradient(145deg, #f9fbff, #e6f0ff);
+  border: 1.5px solid #a3c1ff;
+  border-radius: 14px;
+  box-shadow: 0 8px 24px rgba(50, 100, 200, 0.12);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #2a2a2a;
+  transition: box-shadow 0.4s ease;
+}
+.firma-container:hover {
+  box-shadow: 0 12px 38px rgba(50, 100, 200, 0.25);
+}
+
+.firma-header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+.firma-header h1 {
+  font-weight: 900;
+  font-size: 2.25rem;
+  margin-bottom: 8px;
+  color: #174ea6;
+  letter-spacing: 0.05em;
+  text-shadow: 1px 1px 2px #bdd7ff;
+}
+.firma-header .subtitle {
+  font-weight: 500;
+  color: #4a6180;
+  font-size: 1.1rem;
+  font-style: italic;
+}
+
+/* Forma i inputi */
+.firma-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.firma-form .form-group {
+  display: flex;
+  flex-direction: column;
+}
+.firma-form label {
+  font-weight: 700;
+  margin-bottom: 6px;
+  font-size: 1.1rem;
+  color: #1e3a8a;
+}
+.firma-form input[type="text"],
+.firma-form input[type="email"],
+.firma-form input[type="tel"],
+.firma-form input[type="url"] {
+  font-size: 1.05rem;
+  padding: 12px 16px;
+  border: 2px solid #aac6ff;
+  border-radius: 10px;
+  outline-offset: 3px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: inset 0 1px 3px rgb(0 0 0 / 0.07);
+}
+.firma-form input:focus {
+  border-color: #1f59d9;
+  outline: none;
+  box-shadow: 0 0 10px 2px rgba(31, 89, 217, 0.5);
+  background-color: #f0f6ff;
+}
+
+/* Upload logo input */
+.firma-form .form-group input[type="file"] {
+  font-size: 1rem;
+  padding: 8px 10px;
+  border: 2px solid #aac6ff;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  background-color: #f9fbff;
+  color: #174ea6;
+}
+.firma-form .form-group input[type="file"]:focus {
+  border-color: #1f59d9;
+  outline: none;
+  box-shadow: 0 0 10px 2px rgba(31, 89, 217, 0.5);
+  background-color: #f0f6ff;
+}
+.firma-form .form-group input[type="file"]:hover {
+  border-color: #2049c0;
+  background-color: #e6f0ff;
+}
+
+/* Prikaz selektovanog fajla */
+.selected-file {
+  margin-top: 6px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #2a2a2a;
+  user-select: none;
+  letter-spacing: 0.02em;
+  font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-style: italic;
+}
+
+/* Poruke o grešci */
+.error-message {
+  color: #d4343a;
+  font-size: 0.85rem;
+  margin-top: 4px;
+  user-select: none;
+  min-height: 20px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* Dugme */
+.firma-form button {
+  margin-top: 18px;
+  padding: 16px 0;
+  font-weight: 800;
+  font-size: 1.15rem;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, #1f59d9, #2a76f7);
+  color: white;
+  cursor: pointer;
+  box-shadow: 0 6px 15px rgba(31, 89, 217, 0.65);
+  transition: background 0.4s ease, box-shadow 0.4s ease, transform 0.2s ease;
+}
+.firma-form button:disabled {
+  background-color: #a3b5cc;
+  box-shadow: none;
+  cursor: not-allowed;
+  color: #e2e6f0;
+}
+.firma-form button:not(:disabled):hover {
+  background: linear-gradient(135deg, #2049c0, #3c7af9);
+  box-shadow: 0 9px 22px rgba(31, 89, 217, 0.8);
+  transform: translateY(-2px);
+}
+
+/* Poruke uspeha i greške */
+.alert {
+  display: flex;
+  align-items: center;
+  padding: 12px 18px;
+  margin-bottom: 22px;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07);
+  animation: fadeInDown 0.5s ease forwards;
+  user-select: none;
+}
+.alert-success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1.5px solid #c3e6cb;
+}
+.alert-error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1.5px solid #f5c6cb;
+}
+.alert-icon {
+  font-size: 1.5rem;
+  margin-right: 14px;
+  user-select: none;
+}
+.alert-text {
+  flex: 1;
+}
+
+/* Animacija za poruke */
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Loading container */
+.loading-firma-container {
+  text-align: center;
+  padding: 36px 0;
+  color: #708090;
+  font-style: italic;
+  font-weight: 600;
+}
+
+/* Spinner */
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #2a76f7;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+.submit-spinner {
+  width: 26px;
+  height: 26px;
+  border-width: 3.5px;
+  margin: 14px auto 0;
+  display: inline-block;
+  vertical-align: middle;
+  border-left-color: #1f59d9;
+}
+.loading-spinner {
+  width: 50px;
+  height: 50px;
+  margin: 0 auto 20px;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive */
+@media (max-width: 520px) {
+  .firma-container {
+    margin: 20px 20px;
+    padding: 25px 30px;
+  }
+  .firma-header h1 {
+    font-size: 1.8rem;
+  }
+  .firma-form input {
+    font-size: 1rem;
+    padding: 10px 14px;
+  }
+  .firma-form button {
+    font-size: 1.05rem;
+    padding: 14px 0;
+  }
+}
+.firma-upload {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+.firma-upload h3 {
+  font-weight: 600;
+  color: #007bff;
+  margin-bottom: 6px;
+  letter-spacing: 0.03em;
+  font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+}
+.firma-upload input[type="file"] {
+  cursor: pointer;
+  border: 2px dashed #007bff;
+  border-radius: 8px;
+  padding: 14px 20px;
+  width: 100%;
+  max-width: 320px;
+  text-align: center;
+  transition: background-color 0.3s ease, border-color 0.3s ease;
+  font-size: 1rem;
+  color: #444;
+  font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+}
+.firma-upload input[type="file"]:hover {
+  background-color: #e6f0ff;
+  border-color: #0056b3;
+}
+
+/* Dugme za upload (ako koristiš) */
+.firma-upload button {
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 14px 30px;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  max-width: 320px;
+  font-size: 1rem;
+  box-shadow: 0 3px 8px rgba(40,167,69,0.6);
+  font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+}
+
+.firma-upload button:disabled {
+  background-color: #999;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.firma-upload button:hover:not(:disabled) {
+  background-color: #1e7e34;
+  box-shadow: 0 5px 14px rgba(30,126,52,0.8);
+}

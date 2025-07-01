@@ -1,0 +1,41 @@
+<!-- Loading spinner dok se firma učitava -->
+<div *ngIf="firmaPostoji === null" class="firma-poruka">
+  <div class="spinner loading-spinner"></div>
+  <p>Učitavam podatke o firmi...</p>
+</div>
+
+<!-- Prikaz firme ako postoji -->
+<div *ngIf="firmaPostoji === true && firma" class="firma-wrapper">
+  <h2 class="firma-naslov">Moja firma:</h2>
+
+  <div class="firma-header">
+    <img 
+  [src]="firma.logo_url 
+    ? 'http://5.75.164.111:5001/static/uploads/logos/' + firma.logo_url 
+    : 'assets/default-avatar.png'" 
+  alt="Logo firme" 
+  class="firma-logo" />
+    <h3 class="firma-naziv">{{ firma.naziv }}</h3>
+  </div>
+
+  <div class="firma-podaci">
+    <p><strong>PIB:</strong> {{ firma.pib }}</p>
+    <p *ngIf="firma.adresa"><strong>Adresa:</strong> {{ firma.adresa }}</p>
+    <p *ngIf="firma.telefon"><strong>Telefon:</strong> {{ firma.telefon }}</p>
+    <p *ngIf="firma.email"><strong>Email:</strong> {{ firma.email }}</p>
+    <p *ngIf="firma.web_sajt">
+      <strong>Web sajt:</strong>
+      <a [href]="firma.web_sajt" target="_blank" rel="noopener noreferrer">{{ firma.web_sajt }}</a>
+    </p>
+  </div>
+</div>
+
+<!-- Poruka ako firma ne postoji -->
+<div *ngIf="firmaPostoji === false" class="firma-poruka">
+  <p>Nemate kreiranu firmu.</p>
+</div>
+
+<!-- Prikaz greške -->
+<div *ngIf="errorMessage" class="firma-greska">
+  <p>{{ errorMessage }}</p>
+</div>

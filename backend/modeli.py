@@ -87,7 +87,8 @@ class Korisnik(db.Model):
             "druga_rola": self.druga_rola,
             "treca_rola": self.treca_rola,
             "zanimanja": [z.naziv for z in self.zanimanja],
-            "vestine": [v.naziv for v in self.vestine]
+            "vestine": [v.naziv for v in self.vestine],
+            "ima_firmu": len(self.firme) > 0  # True ako ima barem jedna firma, False ako nema
         }
     def _puna_adresa(self):
         delovi = []
@@ -120,10 +121,8 @@ class Firma(db.Model):
     telefon = db.Column(db.String(30), nullable=True)
     email = db.Column(db.String(120), nullable=True)
     web_sajt = db.Column(db.String(255), nullable=True)
+    logo = db.Column(db.String(255), nullable=True)
     vlasnik_id = db.Column(db.Integer, db.ForeignKey('korisnici.id'), nullable=False)
-
-   
-
     def to_dict(self):
         return {
             "id": self.id,
@@ -134,6 +133,7 @@ class Firma(db.Model):
             "email": self.email,
             "web_sajt": self.web_sajt,
             "vlasnik_id": self.vlasnik_id,
+            "logo_url": self.logo 
         }
 
     def __repr__(self):

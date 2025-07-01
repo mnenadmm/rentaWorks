@@ -1,0 +1,79 @@
+.firma-poruka,
+.firma-greska {
+  text-align: center;
+  padding: 1.5rem;
+  font-size: 1.1rem;
+  color: #555;
+}
+
+.firma-greska {
+  color: #d9534f; /* crvena za greške */
+}
+
+.loading-spinner,
+.upload-spinner {
+  width: 32px;
+  height: 32px;
+  border: 4px solid #ccc;
+  border-top: 4px solid #007bff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  margin: 1rem auto;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.firma-wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 1.5rem;
+  border: 1px solid #e0e0e0;
+  border-radius: 12px;
+  background-color: #fafafa;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.firma-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.firma-logo {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  border-radius: 8px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+
+.firma-naslov {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.firma-naziv {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.firma-podaci p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+.firma-podaci a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+.firma-podaci a:hover {
+  text-decoration: underline;
+}

@@ -20,6 +20,7 @@ export interface CurrentUserInterface {
   biografija?: string | null;
   verifikovan_email?: boolean;
   datum_rodjenja?: string;
+  ima_firmu: boolean;  // 
   zanimanja?: string[]; // ➕ novo
   vestine?: string[];   // ➕ novo
 }

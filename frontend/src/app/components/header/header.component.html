@@ -7,6 +7,15 @@
     <span></span>
   </div>
   <ul [class.open]="menuOpen">
+    <!-- Prikazi Kreiraj firmu ako je pravno lice ili admin I NEMA firmu -->
+     <!-- Ovo cemo dodati da zakljucamo && !currentUserService.getCurrentUser()?.ima_firmu-->
+    <li *ngIf="isLoggedIn && (currentUserService.isPravnoLice() || currentUserService.isAdmin()) ">
+      <a class="btn btn-outline-light" routerLink="/kreirajFirmu" (click)="closeMenu()">Kreiraj firmu</a>
+    </li>
+    <!-- Prikazi Moja firma ako je pravno lice ili admin i IMA firmu -->
+<li *ngIf="isLoggedIn && (currentUserService.isPravnoLice() || currentUserService.isAdmin()) && currentUserService.getCurrentUser()?.ima_firmu">
+  <a class="btn btn-outline-light" routerLink="/mojaFirma" (click)="closeMenu()">Moja firma</a>
+</li>
     <li>
       <a class="btn btn-outline-light" routerLink="/" (click)="closeMenu()">Početna</a>
     </li>
