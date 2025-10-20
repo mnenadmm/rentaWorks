@@ -1,0 +1,158 @@
+<div class="firme-container">
+  <!-- Spinner dok se učitava firma -->
+  <div *ngIf="loading" class="spinner"></div>
+
+  <!-- Prikaz greške -->
+  <div *ngIf="errorMessage" class="alert alert-error">{{ errorMessage }}</div>
+
+  <!-- Prikaz firme -->
+  <div *ngIf="!loading && !errorMessage && firma" class="firma-lista">
+    <article class="firma-kartica" [attr.aria-label]="'Firma: ' + firma.naziv">
+
+      <!-- Gornji red: logo + naziv + ocene -->
+      <div class="gornji-red">
+        <img *ngIf="firma.logo_url"
+             [src]="'http://5.75.164.111:5001/static/uploads/logos/' + firma.logo_url"
+             [alt]="firma.naziv ? ('Logo firme ' + firma.naziv) : 'Logo firme'"
+             class="firma-logo"
+             loading="lazy" />
+
+        <div class="firma-info-text">
+          <h4 class="firma-naziv">{{ firma.naziv }}</h4>
+
+          <!-- Ocene sa klikom za modal -->
+          <div class="firma-ocena">
+            <ng-container *ngFor="let z of [1,2,3,4,5]">
+              <span class="zvezdica klikabilna"
+                    [ngClass]="{
+                      'puna': (firma.prosecna_ocena || 0) >= z,
+                      'polu': (firma.prosecna_ocena || 0) >= z - 0.5 && (firma.prosecna_ocena || 0) < z
+                    }"
+                    (click)="otvoriModal()">
+                &#9733;
+              </span>
+            </ng-container>
+            <span class="broj-ocena" *ngIf="(firma.broj_ocena || 0) > 0">({{ firma.broj_ocena }})</span>
+            <span class="broj-ocena" *ngIf="(firma.broj_ocena || 0) === 0">(Još nema ocena)</span>
+          </div>
+
+          <p class="firma-pib"><strong>PIB:</strong> {{ firma.pib }}</p>
+        </div>
+      </div>
+
+      <!-- Podaci firme -->
+      <div class="firma-podaci">
+        <p *ngIf="firma.adresa"><strong>Adresa:</strong> {{ firma.adresa }}</p>
+        <p *ngIf="firma.telefon"><strong>Telefon:</strong> {{ firma.telefon }}</p>
+        <p *ngIf="firma.email"><strong>Email:</strong> {{ firma.email }}</p>
+        <p *ngIf="firma.web_sajt"><strong>Web sajt:</strong> 
+          <a [href]="firma.web_sajt" target="_blank" rel="noopener noreferrer">{{ firma.web_sajt }}</a>
+        </p>
+        <p *ngIf="firma.godina_osnivanja"><strong>Godina osnivanja:</strong> {{ firma.godina_osnivanja }}</p>
+        <p *ngIf="firma.opis"><strong>Opis:</strong> {{ firma.opis }}</p>
+      </div>
+
+      <!-- Sekcija komentara -->
+      <div class="firma-komentari">
+        <h4>Komentari korisnika</h4>
+
+        <div *ngIf="komentari && komentari.length > 0; else nemaKomentara">
+          <div *ngFor="let kom of (komentari | slice:0:3)" class="komentar">
+            <div class="komentar-header">
+              <img [src]="kom.profilna_slika ? 'http://5.75.164.111:5001/static/uploads/' + kom.profilna_slika : 'assets/default-avatar.png'"
+                   [alt]="kom.korisnik_ime"
+                   class="profilna-slika" />
+              <div class="komentar-meta">
+                <span class="korisnik-ime" (click)="idiNaProfil(kom.korisnik_id)">{{ kom.korisnik_ime }}</span>
+                <span class="vreme">{{ kom.created_at | date:'short' }}</span>
+              </div>
+            </div>
+            <p class="komentar-tekst">{{ kom.tekst }}</p>
+          </div>
+
+          <button *ngIf="komentari.length > 3" class="btn-pogledaj-vise" (click)="otvoriSveKomentareModal()">
+            Prikaži sve komentare ({{ komentari.length }})
+          </button>
+        </div>
+
+        <ng-template #nemaKomentara>
+          <p class="nema-komentara">Još nema komentara — budi prvi koji će ostaviti utisak!</p>
+        </ng-template>
+
+        <button class="btn-dodaj-komentar" (click)="otvoriDodajKomentarModal()">➕ Dodaj komentar</button>
+      </div>
+
+      <button class="btn-back" (click)="nazad()">⬅️ Nazad</button>
+    </article>
+  </div>
+</div>
+
+<!-- Modal za dodavanje komentara -->
+<div class="modal-backdrop" *ngIf="dodajKomentarModalVidljiv" (click)="zatvoriDodajKomentarModal()"></div>
+<div class="modal-container komentar-modal" *ngIf="dodajKomentarModalVidljiv">
+  <div class="modal-content komentar-modal-sadrzaj">
+    <button class="modal-close" (click)="zatvoriDodajKomentarModal()">&times;</button>
+    <h4 class="modal-title">Dodaj komentar</h4>
+    <textarea [(ngModel)]="noviKomentarTekst" placeholder="Napišite svoj komentar..." rows="3"></textarea>
+    <div class="modal-buttons">
+      <button class="btn-submit" (click)="posaljiKomentar()">Pošalji</button>
+    </div>
+  </div>
+</div>
+
+<!-- Modal za sve komentare -->
+<div class="modal-backdrop" *ngIf="sviKomentariModalVidljiv" (click)="zatvoriSveKomentareModal()"></div>
+<div class="modal-container komentari-modal" *ngIf="sviKomentariModalVidljiv">
+  <div class="modal-content komentari-modal-sadrzaj">
+    <button class="modal-close" (click)="zatvoriSveKomentareModal()">&times;</button>
+    <h4 class="modal-title">Svi komentari ({{ komentari.length }})</h4>
+    <div class="komentari-scroll">
+      <div *ngFor="let kom of komentari" class="komentar">
+        <div class="komentar-header">
+          <img [src]="kom.profilna_slika ? 'http://5.75.164.111:5001/static/uploads/' + kom.profilna_slika : 'assets/default-avatar.png'"
+               [alt]="kom.korisnik_ime"
+               class="profilna-slika" />
+          <div class="komentar-meta">
+            <span class="korisnik-ime" (click)="idiNaProfil(kom.korisnik_id)">{{ kom.korisnik_ime }}</span>
+            <span class="vreme">{{ kom.created_at | date:'short' }}</span>
+          </div>
+        </div>
+        <p class="komentar-tekst">{{ kom.tekst }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal za ocene -->
+<div class="modal-backdrop" *ngIf="oceniVidljivo" (click)="zatvoriModal()"></div>
+<div class="modal-container" *ngIf="oceniVidljivo">
+  <div class="modal-content">
+    <button class="modal-close" (click)="zatvoriModal()">&times;</button>
+    <h4 class="modal-title">Oceni firmu</h4>
+
+    <!-- Ako korisnik može da oceni -->
+    <ng-container *ngIf="mozeOceni; else prikaziPoruku">
+      <div class="modal-ocena">
+        <ng-container *ngFor="let z of [1,2,3,4,5]">
+          <span class="zvezdica klikabilna"
+                [ngClass]="{
+                  'puna': userOcena >= z,
+                  'polu': userOcena >= z - 0.5 && userOcena < z
+                }"
+                (click)="userOcena = z">
+            &#9733;
+          </span>
+        </ng-container>
+      </div>
+      <div class="modal-buttons">
+        <button class="btn-submit" (click)="posaljiOcenu()">Pošalji</button>
+      </div>
+    </ng-container>
+
+    <!-- Ako korisnik NE može da oceni -->
+    <ng-template #prikaziPoruku>
+      <p class="poruka-ocene">{{ porukaOcene }}</p>
+    </ng-template>
+
+  </div>
+</div>

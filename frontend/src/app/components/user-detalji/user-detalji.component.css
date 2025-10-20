@@ -1,0 +1,203 @@
+/* --- Glavni kontejner --- */
+.user-container {
+  max-width: 480px;
+  margin: 20px auto;
+  padding: 20px 25px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+  font-family: 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  color: #333;
+  transition: box-shadow 0.3s ease;
+}
+.user-container:hover {
+  box-shadow: 0 10px 28px rgba(0,0,0,0.18);
+}
+
+/* --- Header sa slikom --- */
+.profil-header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.profilna-slika {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid #007bff;
+  box-shadow: 0 0 10px rgba(0,123,255,0.4);
+  display: block;
+  margin: 0 auto 18px auto;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.profilna-slika:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 18px rgba(0,123,255,0.6);
+}
+
+h1 {
+  font-weight: 900;
+  font-size: 1.8rem;
+  margin-bottom: 5px;
+  color: #222;
+}
+
+.username {
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: #555;
+  font-style: italic;
+  margin-top: -4px;
+  margin-bottom: 20px;
+}
+
+/* --- Osnovni podaci --- */
+.osnovni-podaci p {
+  margin: 8px 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #444;
+}
+
+.osnovni-podaci strong {
+  color: #222;
+  font-weight: 700;
+}
+
+/* --- Badge oznake --- */
+.badge {
+  display: inline-block;
+  background-color: #e0e0e0;
+  color: #333;
+  border-radius: 20px;
+  padding: 5px 12px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 0 4px 4px 0;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+/* --- Dugme nazad --- */
+.btn-back {
+  display: inline-block;
+  margin-top: 25px;
+  padding: 10px 20px;
+  font-weight: 600;
+  font-size: 1rem;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+.btn-chat {
+  display: inline-block;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 25px;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  margin: 20px auto 0 auto; /* centriranje horizontalno */
+  display: block;           /* da margin auto radi */
+}
+
+.btn-chat:hover {
+  background-color: #0056b3;
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.btn-chat:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 6px rgba(0, 123, 255, 0.3);
+}
+
+.btn-chat:disabled {
+  background-color: #999;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+.btn-back:hover {
+  background-color: #0056b3;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+/* --- Spinner --- */
+/* --- Spinner stil --- */
+.spinner {
+  border: 4px solid rgba(0,0,0,0.1);
+  border-left-color: #4CAF50; /* zelena boja */
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  animation: spin 1s linear infinite;
+  margin: 50px auto;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+/* Centriranje spenera u containeru */
+.loading-user-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px; /* ili koliko ti je potrebno */
+}
+/* --- Alert poruke --- */
+.alert {
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.alert-error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+/* --- Responsive --- */
+@media (max-width: 500px) {
+  .user-container {
+    margin: 15px;
+    padding: 15px 20px;
+  }
+  .btn-chat {
+    width: 100%;
+    padding: 12px 0;
+    font-size: 0.95rem;
+  }
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .profilna-slika {
+    width: 150px;
+    height: 150px;
+    border-width: 3px;
+  }
+
+  .username {
+    font-size: 0.95rem;
+  }
+
+  .badge {
+    font-size: 0.8rem;
+    padding: 4px 10px;
+  }
+
+  .btn-back {
+    width: 100%;
+    font-size: 0.95rem;
+    padding: 10px 0;
+  }
+}

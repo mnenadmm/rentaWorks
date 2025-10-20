@@ -1,0 +1,112 @@
+/* ---------- Glavni container ---------- */
+.firme-container { max-width: 900px; margin: 20px auto; padding: 1rem; }
+.firma-lista { display: flex; flex-direction: column; gap: 1.5rem; }
+
+/* ---------- Firma kartica ---------- */
+.firma-kartica {
+  display: flex; flex-direction: column; align-items: center; text-align: center;
+  background: linear-gradient(135deg, #f0f4ff, #e6f0ff);
+  border: 1px solid #cfd9e7; border-radius: 14px; padding: 1.5rem 2rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, box-shadow 0.25s ease;
+}
+.firma-kartica:hover { transform: translateY(-3px); box-shadow: 0 8px 18px rgba(0,0,0,0.12); }
+
+/* ---------- Logo i naziv ---------- */
+.gornji-red { display: flex; flex-direction: column; align-items: center; gap: 0.6rem; width: 100%; }
+.firma-logo { max-width: 250px; width: auto; max-height: 150px; height: auto; object-fit: contain; border-radius: 12px; box-shadow: 0 3px 10px rgba(0,0,0,0.2); margin-bottom: 12px; }
+.firma-info-text { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.firma-naziv { font-size: 1.5rem; font-weight: 700; margin: 0; color: #1a1a1a; }
+.firma-pib { font-size: 1rem; color: #555; margin: 0; }
+
+/* ---------- Ocene ---------- */
+.firma-ocena { display: flex; align-items: center; justify-content: center; gap: 4px; margin-bottom: 6px; font-size: 1.8rem; color: #ccc; }
+.firma-ocena .zvezdica.puna { color: #f5a623; }
+.firma-ocena .zvezdica.polu::before { content:'\2605'; position:absolute; left:0; top:0; width:50%; overflow:hidden; color:#f5a623; pointer-events:none; }
+/* ---------- Zvezdice (puna/polu) ---------- */
+.firma-ocena .zvezdica,
+.modal-ocena .zvezdica {
+  position: relative; /* dodaj ovo */
+  display: inline-block;
+}
+
+/* ---------- Podaci firme ---------- */
+.firma-podaci p { margin:6px 0; font-size:1rem; color:#444; }
+.firma-podaci a { color:#3366cc; text-decoration:none; }
+.firma-podaci a:hover { text-decoration:underline; }
+
+/* ---------- Komentari ---------- */
+.komentar { background:#f9f9f9; border:1px solid #ddd; border-radius:10px; padding:10px 15px; margin-bottom:10px; }
+.komentar-header { display:flex; align-items:center; gap:10px; margin-bottom:6px; }
+.profilna-slika { width:36px; height:36px; border-radius:50%; object-fit:cover; border:1px solid #ccc; }
+.korisnik-ime { font-weight:600; color:#222; }
+.vreme { font-size:0.8rem; color:#777; }
+.komentar-tekst { font-size:0.95rem; color:#333; text-align:left; line-height:1.4; font-style:italic; }
+.nema-komentara { color:#666; font-style:italic; text-align:center; margin:10px 0; }
+
+/* ---------- Dugmad ---------- */
+.btn-pogledaj-vise, .btn-dodaj-komentar, .btn-back, .btn-submit { cursor:pointer; border:none; border-radius:6px; font-weight:600; }
+.btn-pogledaj-vise, .btn-dodaj-komentar { background-color:#3366cc; color:#fff; padding:8px 16px; transition:0.2s; margin-top:10px; }
+.btn-pogledaj-vise:hover, .btn-dodaj-komentar:hover { background-color:#254a99; transform:scale(1.03); }
+.btn-back { background:#ccc; color:#222; padding:0.5rem 0.8rem; margin-top:12px; }
+.btn-submit { background-color:#4CAF50; color:white; padding:8px 18px; }
+.btn-submit:hover { background-color:#45a049; }
+
+/* ---------- Modali ---------- */
+.modal-backdrop { position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.35); z-index:999; }
+.modal-container { position:fixed; top:50%; left:50%; transform:translate(-50%, -50%); background:#fff; border-radius:12px; padding:25px 35px; box-shadow:0 8px 30px rgba(0,0,0,0.4); z-index:1000; max-width:500px; width:90%; display:flex; flex-direction:column; align-items:center; }
+.modal-content { width:100%; display:flex; flex-direction:column; gap:12px; }
+.modal-close { position:absolute; top:-10px; right:-10px; background:#f5f5f5; border:1px solid #ddd; border-radius:50%; width:32px; height:32px; display:flex; justify-content:center; align-items:center; font-size:1.2rem; font-weight:bold; color:#666; cursor:pointer; box-shadow:0 2px 6px rgba(0,0,0,0.2); }
+.modal-close:hover { background:#e0e0e0; color:#333; transform:scale(1.15); }
+
+/* ---------- Spinner ---------- */
+.spinner { border:4px solid rgba(0,0,0,0.1); border-left-color:#4CAF50; border-radius:50%; width:48px; height:48px; animation:spin 1s linear infinite; margin:40px auto; }
+@keyframes spin { to { transform:rotate(360deg); } }
+/* ---------- Zvezdice u modal-u ---------- */
+.modal-ocena {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin: 12px 0;
+  font-size: 2rem;
+  color: #ccc;
+  position: relative;
+}
+
+.modal-ocena .zvezdica.puna {
+  color: #f5a623;
+}
+
+.modal-ocena .zvezdica.polu::before {
+  content: '★';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 50%;
+  overflow: hidden;
+  color: #f5a623;
+  pointer-events: none;
+}
+
+.modal-ocena .zvezdica.klikabilna {
+  cursor: pointer;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+.komentari-scroll {
+  max-height: 400px;
+  overflow-y: auto;
+}
+.modal-ocena .zvezdica.klikabilna:hover {
+  transform: scale(1.2);
+  color: #f5a623;
+}
+/* ---------- Mobilna podrška ---------- */
+@media (max-width:600px) {
+  .firma-logo { max-width:90%; max-height:150px; }
+  .firma-naziv { font-size:1.25rem; }
+  .firma-pib, .firma-podaci p { font-size:0.95rem; }
+  .btn-back { padding:0.4rem 0.7rem; font-size:0.85rem; }
+  .modal-container { padding:20px; }
+  .modal-ocena .zvezdica { font-size:1.8rem; }
+  .btn-submit { padding:6px 12px; max-width:100px; }
+}

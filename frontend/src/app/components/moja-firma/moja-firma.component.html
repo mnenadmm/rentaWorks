@@ -1,41 +1,36 @@
-<!-- Loading spinner dok se firma učitava -->
-<div *ngIf="firmaPostoji === null" class="firma-poruka">
-  <div class="spinner loading-spinner"></div>
-  <p>Učitavam podatke o firmi...</p>
-</div>
-
-<!-- Prikaz firme ako postoji -->
-<div *ngIf="firmaPostoji === true && firma" class="firma-wrapper">
-  <h2 class="firma-naslov">Moja firma:</h2>
-
-  <div class="firma-header">
+<div *ngIf="!loadingFirma && firmaPostoji === true && firma" class="firma-container">
+  <div class="firma-content">
     <img 
-  [src]="firma.logo_url 
-    ? 'http://5.75.164.111:5001/static/uploads/logos/' + firma.logo_url 
-    : 'assets/default-avatar.png'" 
-  alt="Logo firme" 
-  class="firma-logo" />
-    <h3 class="firma-naziv">{{ firma.naziv }}</h3>
+      [src]="firma.logo_url 
+        ? 'http://5.75.164.111:5001/static/uploads/logos/' + firma.logo_url 
+        : 'assets/default-avatar.png'" 
+      alt="Logo firme" 
+      class="firma-logo" />
+
+    <h2 class="firma-ime">{{ firma.naziv }}</h2>
+    <p class="firma-pib">PIB: {{ firma.pib }}</p>
+
+    <div class="firma-podaci">
+      <p *ngIf="firma.adresa"><strong>Adresa:</strong> {{ firma.adresa }}</p>
+      <p *ngIf="firma.telefon"><strong>Telefon:</strong> {{ firma.telefon }}</p>
+      <p *ngIf="firma.email"><strong>Email:</strong> {{ firma.email }}</p>
+      <p *ngIf="firma.web_sajt">
+        <strong>Web sajt:</strong>
+        <a [href]="firma.web_sajt" target="_blank" rel="noopener noreferrer">{{ firma.web_sajt }}</a>
+      </p>
+      <p *ngIf="firma.godina_osnivanja"><strong>Godina osnivanja:</strong> {{ firma.godina_osnivanja }}</p>
+      <p *ngIf="firma.opis"><strong>Opis:</strong> {{ firma.opis }}</p>
+    </div>
+
+    <div class="firma-dugmad">
+      <!-- Promenjeno na btn-oglasi -->
+      <button class="btn-oglasi" (click)="kreirajOglas()">➕ Dodaj oglas</button>
+      <button class="btn-oglasi" (click)="upravljajOglasima()">Upravljaj oglasima</button>
+    </div>
+
+    <!-- Dugme izmeni postavljeno skroz u gornji desni ugao -->
+    <button class="btn-edit" (click)="azurirajFirmu()" title="Izmeni podatke" aria-label="Izmeni podatke">
+      ✏️
+    </button>
   </div>
-
-  <div class="firma-podaci">
-    <p><strong>PIB:</strong> {{ firma.pib }}</p>
-    <p *ngIf="firma.adresa"><strong>Adresa:</strong> {{ firma.adresa }}</p>
-    <p *ngIf="firma.telefon"><strong>Telefon:</strong> {{ firma.telefon }}</p>
-    <p *ngIf="firma.email"><strong>Email:</strong> {{ firma.email }}</p>
-    <p *ngIf="firma.web_sajt">
-      <strong>Web sajt:</strong>
-      <a [href]="firma.web_sajt" target="_blank" rel="noopener noreferrer">{{ firma.web_sajt }}</a>
-    </p>
-  </div>
-</div>
-
-<!-- Poruka ako firma ne postoji -->
-<div *ngIf="firmaPostoji === false" class="firma-poruka">
-  <p>Nemate kreiranu firmu.</p>
-</div>
-
-<!-- Prikaz greške -->
-<div *ngIf="errorMessage" class="firma-greska">
-  <p>{{ errorMessage }}</p>
 </div>

@@ -11,17 +11,20 @@ import { NgForm } from '@angular/forms';
 })
 export class KreirajFirmuComponent implements OnInit, OnDestroy {
   @ViewChild('firmaForm') firmaForm!: NgForm;
-
+  currentYear = new Date().getFullYear();
+  years: number[] = [];
   firma: Partial<Firma_interface> = {
     naziv: '',
     pib: '',
     adresa: '',
     telefon: '',
     email: '',
-    web_sajt: ''
+    web_sajt: '',
+    opis: '',              
+    godina_osnivanja: null
   };
 
-  isLoadingFirma = true;
+  isLoadingFirma = false;
   selectedLogo: File | null = null;
   selectedLogoName: string | null = null;
   logoUploadError: string | null = null;
@@ -29,11 +32,14 @@ export class KreirajFirmuComponent implements OnInit, OnDestroy {
   isSuccessMessage: boolean = true;
   isSubmitting: boolean = false;
   constructor(private firmaService: FirmaService) {}
-  ngOnInit(): void {
-    setTimeout(() => {
-      this.isLoadingFirma = false;
-    }, 500);
+ ngOnInit(): void {
+  for (let y = this.currentYear; y >= 1950; y--) {
+    this.years.push(y);
   }
+  setTimeout(() => {
+    this.isLoadingFirma = false;
+  }, 500);
+}
   ngOnDestroy(): void {}
   // Korisnik može da izabere bilo koju veličinu fajla, bez provere veličine
   onLogoSelected(event: Event): void {
@@ -109,7 +115,9 @@ kreirajFirmu() {
           adresa: '',
           telefon: '',
           email: '',
-          web_sajt: ''
+          web_sajt: '',
+          opis: '',              
+          godina_osnivanja: undefined
         };
 
         if (!this.selectedLogo) {

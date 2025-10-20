@@ -65,27 +65,25 @@ export class LoginComponent implements OnDestroy {
     next: (response) => {
       this.loginLockService.recordAttempt(true);  // Uspešan login
       this.errorMessage = '';
-      const user = response.user;
-      this.currentUser = {
-        id: user.id,
-        username: user.username,
-        tip_korisnika: user.tip_korisnika,
-        aktivan: true,
-        ima_firmu: user.ima_firmu
-      };
-      this.currentUserService.setCurrentUser(this.currentUser);
+
+      // Direktno setovanje korisnika iz response.user
+      this.currentUserService.setCurrentUser(response.user);
+
+      // Opcionalno možeš čuvati lokalno ako želiš
+      this.currentUser = response.user;
+
+      console.log('Uspesno ulogovan korisnik:', response.user);
+
+      // Preusmeravanje na početnu stranicu
       this.router.navigate(['/']);
     },
     error: (error) => {
       if (error.status === 401){
         this.loginLockService.recordAttempt(false); // Neuspešan login
         this.errorMessage = error.error?.error || 'Greška pri prijavi. Pokušajte ponovo.';
-      }else {
-        // Za druge greške ne tretiraj kao neuspešan pokušaj, već recimo obavesti korisnika
-       this.errorMessage = error.error?.error || 'Greška pri prijavi. Pokušajte ponovo.';
+      } else {
+        this.errorMessage = error.error?.error || 'Greška pri prijavi. Pokušajte ponovo.';
       }
-      
-      
     }
   });
 }

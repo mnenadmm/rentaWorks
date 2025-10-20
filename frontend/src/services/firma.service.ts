@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders  } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpEvent  } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Firma_interface } from '../app/interfaces/firma-interface';
 
@@ -36,8 +36,26 @@ export class FirmaService {
   const headers = this.getAuthHeaders();
   return this.http.get<Firma_interface>(`${this.apiUrl}/moja-firma`, { headers });
 }
+updateFirma(formData: FormData): Observable<any> {
+  const token = localStorage.getItem('token') || '';
+  const headers = new HttpHeaders({
+    'Authorization': `Bearer ${token}`
+    // Ne stavljamo 'Content-Type' jer Angular automatski postavlja za FormData
+  });
+
+  return this.http.put<any>(`${this.apiUrl}/moja-firma`, formData, { 
+    headers,
+   observe: 'events',  // mora da stoji zbog upload progress
+    reportProgress: true });
+}
 
   izlistajFirme(): Observable<Firma_interface[]> {
     return this.http.get<Firma_interface[]>(`${this.apiUrl}/firme`);
   }
+  getFirmaPoId(firmaId: number): Observable<Firma_interface> {
+  const headers = this.getAuthHeaders();
+  return this.http.get<Firma_interface>(`${this.apiUrl}/firme/${firmaId}`, { headers });
+}
+
+  
 }

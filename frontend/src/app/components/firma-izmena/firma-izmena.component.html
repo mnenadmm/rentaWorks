@@ -1,0 +1,56 @@
+<div class="firma-container">
+  <button class="btn-back" (click)="back()" title="Nazad" aria-label="Nazad">
+    ⬅️ Nazad
+  </button>
+
+  <img 
+    [src]="formaZaIzmenu.value.logo_url ? 'http://5.75.164.111:5001/static/uploads/logos/' + formaZaIzmenu.value.logo_url : 'assets/default-avatar.png'" 
+    alt="Logo firme" 
+    class="firma-logo" 
+  />
+
+  <!-- Poruke sa stilovima -->
+  <div *ngIf="successMessage" class="success-message">
+    ✅ {{ successMessage }}
+  </div>
+  <div *ngIf="errorMessage" class="error-message">
+    ❌ {{ errorMessage }}
+  </div>
+
+  <form [formGroup]="formaZaIzmenu" (ngSubmit)="sacuvajIzmene()" class="formaZaIzmenu">
+    <label>
+      Logo fajl:
+      <input type="file" accept="image/*" (change)="onLogoSelected($event)" />
+    </label>
+
+    <label>
+      Naziv firme:
+      <input type="text" formControlName="naziv" />
+    </label>
+    <label>
+      PIB:
+      <input type="text" formControlName="pib" />
+    </label>
+    <label>
+      Adresa:
+      <input type="text" formControlName="adresa" />
+    </label>
+    <label>
+      Telefon:
+      <input type="text" formControlName="telefon" />
+    </label>
+    <label>
+      Email:
+      <input type="email" formControlName="email" />
+    </label>
+    <label class="firma-web-sajt">
+      Web sajt:
+      <input type="text" formControlName="web_sajt" />
+    </label>
+    <label>
+      Logo URL:
+      <input type="text" formControlName="logo_url" />
+    </label>
+
+    <button type="submit" [disabled]="formaZaIzmenu.invalid">Sačuvaj</button>
+  

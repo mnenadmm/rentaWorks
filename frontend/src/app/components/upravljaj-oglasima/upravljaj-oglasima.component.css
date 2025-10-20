@@ -1,0 +1,250 @@
+/* ---------- Container svih oglasa ---------- */
+.oglasi-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1rem;
+  max-width: 900px;
+  margin: 0 auto;
+  padding-bottom: 2rem;
+}
+
+/* ---------- Pojedinačna kartica oglasa ---------- */
+.oglas-kartica {
+  display: flex;
+  flex-direction: column; /* logo gore, sve ispod */
+  align-items: center;
+  text-align: center;
+  background: linear-gradient(135deg, #f0f4ff, #e6f0ff);
+  border: 1px solid #cfd9e7;
+  border-radius: 14px;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  word-break: break-word;
+}
+
+.oglas-kartica:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* ---------- Logo firme ---------- */
+.firma-logo {
+  max-width: 250px;
+  width: auto;
+  height: auto;
+  max-height: 150px;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+  margin-bottom: 12px;
+}
+
+/* ---------- Tekstualni deo kartice ---------- */
+.firma-info-text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 100%;
+}
+
+/* Ime firme */
+.firma-naziv {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin: 0;
+}
+
+/* Zanimanje */
+.zanimanja-info {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 0.5rem;
+}
+
+.zanimanja-info span {
+  font-weight: 600;
+  color: #333;
+}
+
+/* Opis oglasa */
+.opis {
+  font-size: 1.1rem;
+  line-height: 1.25;
+  color: #444;
+  margin-bottom: 0.5rem;
+}
+
+/* Meta info: lokacija i datum */
+.meta-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 0.75rem;
+}
+
+/* Dugmad za akcije */
+.akcije-dugmad {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.btn-outline {
+  padding: 0.45rem 0.9rem;
+  border-radius: 10px;
+  background: #fff;
+  border: 1px solid #cfd9e7;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.15s ease, transform 0.15s ease;
+}
+.btn-outline:hover {
+  background: #eef4ff;
+  transform: translateY(-1px);
+}
+
+.btn-danger {
+  padding: 0.45rem 0.9rem;
+  border-radius: 10px;
+  background: #ff5c5c;
+  color: #fff;
+  border: 1px solid #de4444;
+  cursor: pointer;
+  font-weight: 600;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+}
+.btn-danger:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255,92,92,0.25);
+}
+
+/* ---------- Loader ---------- */
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.loading-spinner {
+  width: 40px;
+  height: 40px;
+  border: 4px solid #cfd9e7;
+  border-top-color: #4f8cff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ---------- Alerti ---------- */
+.alert {
+  max-width: 900px;
+  margin: 0 auto 1rem auto;
+  padding: 0.85rem 1rem;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+}
+
+.alert-error { background: #ffe9e9; color: #a33; border-color: #e9b3b3; }
+.alert-empty { background: #f3f7ff; color: #335; border-color: #d5e0ff; }
+
+/* ---------- Modal ---------- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+.modal-content {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 2rem 2.5rem;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+  text-align: center;
+  animation: slideDown 0.25s ease-out;
+}
+
+.modal-content h3 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  color: #1a1a1a;
+}
+
+.modal-content p {
+  font-size: 1.1rem;
+  color: #444;
+  margin: 1rem 0 1.5rem 0;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-around;
+  gap: 10px;
+}
+
+.modal-actions .btn-outline {
+  flex: 1;
+}
+
+.modal-actions .btn-danger {
+  flex: 1;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideDown {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* ---------- Mobilna podrška ---------- */
+@media (max-width: 600px) {
+  .oglas-kartica {
+    padding: 1rem;
+  }
+
+  .firma-logo {
+    max-width: 90%;
+    max-height: 150px;
+    height: auto;
+    margin-bottom: 10px;
+  }
+
+  .firma-naziv { font-size: 1.25rem; }
+  .zanimanja-info { font-size: 1.05rem; }
+  .opis { font-size: 1rem; line-height: 1.2; margin-bottom: 0.4rem; }
+  .meta-info { font-size: 0.95rem; gap: 4px; }
+  .akcije-dugmad { flex-direction: column; gap: 8px; }
+
+  .modal-content {
+    padding: 1.5rem 1.5rem;
+  }
+
+  .modal-content h3 {
+    font-size: 1.25rem;
+  }
+
+  .modal-content p {
+    font-size: 1rem;
+  }
+}

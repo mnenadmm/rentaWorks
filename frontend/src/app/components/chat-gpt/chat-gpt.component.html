@@ -1,0 +1,33 @@
+<div class="chat-container">
+  <!-- Lista poruka -->
+  <div #messagesList class="messages-list">
+    <!-- Typing indikator -->
+    <div *ngIf="typingStatus === 'typing'"  class="bot-message typing">
+      asistent kuca...
+    </div>
+    <div *ngFor="let poruka of poruke">
+  <div [ngClass]="{'user-message': poruka.role==='user', 'bot-message': poruka.role==='assistant'}">
+    {{ poruka.content }}
+    <div class="message-time">
+      <ng-container *ngIf="porukaIsToday(poruka.created_at); else olderMessage">
+        {{ poruka.created_at | date:'shortTime' }}
+      </ng-container>
+      <ng-template #olderMessage>
+        {{ poruka.created_at | date:'shortTime' }}, {{ poruka.created_at | date:'shortDate' }}
+      </ng-template>
+    </div>
+  </div>
+</div>
+  </div>
+
+  <!-- Input za novu poruku -->
+  <div class="input-container">
+    <input
+      type="text"
+      placeholder="Unesi poruku..."
+      [(ngModel)]="novaPoruka"
+      (keyup.enter)="posaljiPoruku()"
+    />
+    <button (click)="posaljiPoruku()">Pošalji</button>
+  </div>
+</div>

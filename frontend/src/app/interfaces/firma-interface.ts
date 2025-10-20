@@ -13,4 +13,9 @@ export interface Firma_interface {
   logo_url?: string;
   vlasnik_id?: number;   // opcionalno, backend može da doda
   logo?: string;
+    opis?: string;
+  godina_osnivanja?: number | null;
+  prosecna_ocena?: number;  // prosečna ocena firme (1–5)
+  broj_ocena?: number;      // ukupan broj ocena
+
 }

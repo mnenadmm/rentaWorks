@@ -1,0 +1,68 @@
+<!-- Modal za potvrdu brisanja (uvek na vrhu DOM-a) -->
+<div class="modal-overlay" *ngIf="modalVisible">
+  <div class="modal-content">
+    <h3>Potvrda brisanja</h3>
+    <p>Da li ste sigurni da želite da obrišete ovaj oglas?</p>
+    <div class="modal-actions">
+      <button class="btn-outline" (click)="zatvoriModal()">Otkaži</button>
+      <button class="btn-danger" (click)="potvrdiBrisanje()">Obriši</button>
+    </div>
+  </div>
+</div>
+
+<!-- Loader -->
+<div *ngIf="loading" class="spinner-container">
+  <div class="loading-spinner"></div>
+</div>
+
+<!-- Greška -->
+<div *ngIf="!loading && error" class="alert alert-error">
+  {{ error }}
+</div>
+
+<!-- Prazno stanje -->
+<div *ngIf="!loading && !error && oglasi.length === 0" class="alert alert-empty">
+  Trenutno nema oglasa za vašu firmu.
+</div>
+
+<!-- Lista oglasa -->
+<div *ngIf="!loading && !error && oglasi.length > 0" class="oglasi-container">
+  <div *ngFor="let oglas of oglasi" class="oglas-kartica">
+
+    <!-- Logo firme na vrhu -->
+    <img
+      *ngIf="oglas.firmaLogo"
+      [src]="'http://5.75.164.111:5001/static/uploads/logos/' + oglas.firmaLogo"
+      alt="Logo firme"
+      class="firma-logo"
+    />
+
+    <!-- Tekstualni deo ispod loga -->
+    <div class="firma-info-text">
+      <h4 *ngIf="oglas.firmaNaziv" class="firma-naziv">{{ oglas.firmaNaziv }}</h4>
+
+      <!-- Zanimanje -->
+      <div *ngIf="oglas.zanimanja?.length" class="zanimanja-info">
+        <span *ngFor="let z of oglas.zanimanja; let last = last">
+          {{ z }}<span *ngIf="!last">, </span>
+        </span>
+      </div>
+
+      <!-- Opis oglasa -->
+      <p class="opis">{{ oglas.opis }}</p>
+
+      <!-- Meta info: Lokacija i Datum -->
+      <div class="meta-info">
+        <span><strong>Lokacija:</strong> {{ oglas.lokacija || '—' }}</span>
+        <span><strong>Datum:</strong> {{ oglas.datum_objave | date }}</span>
+      </div>
+
+      <!-- Dugmad za akcije -->
+      <div class="akcije-dugmad">
+        <button class="btn-outline" (click)="izmeniOglas(oglas)">✏️ Izmeni</button>
+        <button class="btn-danger" (click)="pokaziModal(oglas.id)">🗑️ Obriši</button>
+      </div>
+    </div>
+
+  </div>
+</div>

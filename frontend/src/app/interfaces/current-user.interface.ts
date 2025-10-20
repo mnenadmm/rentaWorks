@@ -10,6 +10,11 @@ export interface CurrentUserInterface {
   aktivan: boolean;
   ime?: string;
   prezime?: string;
+  firme?: {
+  id: number;
+  naziv: string;
+  logo?: string;
+  }[] | null | undefined;
   email?: string;
   telefon?: string;
   adresa?: string;
@@ -23,6 +28,7 @@ export interface CurrentUserInterface {
   ima_firmu: boolean;  // 
   zanimanja?: string[]; // ➕ novo
   vestine?: string[];   // ➕ novo
+  token: string; 
 }
 
 

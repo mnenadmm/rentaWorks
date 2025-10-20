@@ -1,0 +1,50 @@
+<!-- ---------- Container svih oglasa ---------- -->
+<div class="oglasi-container" *ngIf="!loading">
+  <article *ngFor="let oglas of oglasi" class="oglas-kartica" [attr.aria-label]="'Oglas: ' + oglas.naslov">
+    
+    <div class="gornji-red">
+      <!-- Logo firme -->
+      <img *ngIf="oglas.firmaLogo"
+           [src]="'http://5.75.164.111:5001/static/uploads/logos/' + oglas.firmaLogo"
+           [alt]="'Logo firme ' + oglas.firmaNaziv"
+           class="firma-logo"
+           loading="lazy"
+           (click)="idiNaFirmu(oglas.firma_id)" />
+
+      <div class="firma-info-text">
+        <!-- Radno mesto (uvek postoji) -->
+        <h3 class="oglas-naslov">
+          {{ oglas.naslov }}
+        </h3>
+
+        <!-- Firma -->
+        <h4 class="firma-naziv" (click)="idiNaFirmu(oglas.firma_id)">
+          {{ oglas.firmaNaziv }}
+        </h4>
+
+        <!-- Zanimanja -->
+        <div *ngIf="oglas.zanimanja?.length" class="zanimanja-info">
+          <span *ngFor="let z of oglas.zanimanja; let last = last">
+            {{ z }}<span *ngIf="!last">, </span>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Opis oglasa -->
+    <div class="opis-blok">
+      <p class="opis">{{ oglas.opis }}</p>
+    </div>
+
+    <!-- Meta informacije -->
+    <div class="meta-info">
+      <div><strong>Lokacija:</strong> {{ oglas.lokacija || 'Nije navedeno' }}</div>
+      <div><strong>Datum objave:</strong> {{ oglas.datum_objave | date:'mediumDate' }}</div>
+    </div>
+  </article>
+
+  <!-- Poruka ako nema oglasa -->
+  <div *ngIf="oglasi.length === 0" class="nema-oglasa">
+    Trenutno nema oglasa za prikaz.
+  </div>
+</div>

@@ -1,0 +1,38 @@
+<div class="user-container" *ngIf="!loading && user; else loadingUser">
+  <div class="profil-header">
+    <img [src]="user.profilna_slika ? 'http://5.75.164.111:5001/static/uploads/' + user.profilna_slika : 'assets/default-avatar.png'"
+         [alt]="user.ime + ' ' + user.prezime"
+         class="profilna-slika" />
+
+    <h1>{{ user.ime }} {{ user.prezime }}</h1>
+    <p class="username">&#64;{{ user.username }}</p>
+  </div>
+
+  <div class="osnovni-podaci">
+    <p><strong>Email:</strong> {{ user.email }}</p>
+    <p><strong>Telefon:</strong> {{ user.telefon }}</p>
+    <p><strong>Adresa:</strong> {{ user.adresa }}</p>
+    <p><strong>Grad:</strong> {{ user.grad }}</p>
+    <p><strong>Datum rođenja:</strong> {{ user.datum_rodjenja | date: 'dd.MM.yyyy.' }}</p>
+    <p><strong>Zanimanja:</strong>
+      <span *ngFor="let zanimanje of user.zanimanja" class="badge">{{ zanimanje }}</span>
+    </p>
+    <p><strong>Dodatne veštine:</strong>
+      <span *ngFor="let vestina of user.vestine" class="badge">{{ vestina }}</span>
+    </p>
+    <p><strong>Tip korisnika:</strong> {{ user.tip_korisnika }}</p>
+    <p><strong>Datum registracije:</strong> {{ user.datum_registracije | date:'dd.MM.yyyy. HH:mm' }}</p>
+     <!-- Dugme za chat -->
+  <button class="btn-chat" (click)="openChat(user.id)">💬 Pošalji poruku</button>
+</div>
+
+  <button class="btn-back" (click)="nazad()">⬅️ Nazad</button>
+</div>
+<ng-template #loadingUser>
+  <div class="loading-user-container">
+    <div class="spinner"></div>
+    <p *ngIf="errorMessage" class="alert alert-error">{{ errorMessage }}</p>
+  </div>
+</ng-template>
+
+

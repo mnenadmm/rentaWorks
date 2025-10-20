@@ -1,0 +1,75 @@
+<div class="firme-container">
+  <!-- Spinner dok se učitavaju firme -->
+  <div *ngIf="loading" class="loading-spinner spinner"></div>
+
+  <!-- Prikaz greške ako postoji -->
+  <div *ngIf="errorMessage" class="alert alert-error">
+    {{ errorMessage }}
+  </div>
+
+  <!-- Pretraga -->
+  <div class="search-container" *ngIf="!loading && !errorMessage && firme.length > 0">
+    <input 
+      type="text" 
+      placeholder="Pretraži firme po nazivu..." 
+      [(ngModel)]="searchTerm" 
+      class="search-input" />
+  </div>
+
+  <!-- Lista firmi -->
+  <div *ngIf="!loading && !errorMessage && firme.length > 0" class="firma-lista">
+    <article *ngFor="let firma of filteredFirme()" class="firma-kartica" [attr.aria-label]="'Firma: ' + firma.naziv">
+      
+      <div class="gornji-red">
+        <img *ngIf="firma.logo_url"
+             [src]="'http://5.75.164.111:5001/static/uploads/logos/' + firma.logo_url"
+             [alt]="firma.naziv ? ('Logo firme ' + firma.naziv) : 'Logo firme'"
+             class="firma-logo"
+             loading="lazy" 
+             (click)="idiNaFirmu(firma.id)"/>
+
+        <div class="firma-info-text">
+          <h4 class="firma-naziv" (click)="idiNaFirmu(firma.id)">{{ firma.naziv }}</h4>
+
+          <!-- Ocene -->
+          <div class="firma-ocena">
+            <ng-container *ngFor="let z of [1,2,3,4,5]">
+              <span 
+                class="zvezdica" 
+                [ngClass]="{
+                  'puna': (firma.prosecna_ocena || 0) >= z,
+                  'polu': (firma.prosecna_ocena || 0) >= z - 0.5 && (firma.prosecna_ocena || 0) < z
+                }">
+                &#9733;
+              </span>
+            </ng-container>
+            <span class="broj-ocena" *ngIf="(firma.broj_ocena || 0) > 0">
+              ({{ firma.broj_ocena }})
+            </span>
+            <span class="broj-ocena" *ngIf="(firma.broj_ocena || 0) === 0">
+              (Još nema ocena)
+            </span>
+          </div>
+
+          <p class="firma-pib"><strong>PIB:</strong> {{ firma.pib }}</p>
+        </div>
+      </div>
+
+      <div class="firma-podaci">
+        <p *ngIf="firma.adresa"><strong>Adresa:</strong> {{ firma.adresa }}</p>
+        <p *ngIf="firma.telefon"><strong>Telefon:</strong> {{ firma.telefon }}</p>
+        <p *ngIf="firma.email"><strong>Email:</strong> {{ firma.email }}</p>
+        <p *ngIf="firma.web_sajt">
+          <strong>Web sajt:</strong>
+          <a [href]="firma.web_sajt" target="_blank" rel="noopener noreferrer">{{ firma.web_sajt }}</a>
+        </p>
+      </div>
+
+    </article>
+  </div>
+
+  <!-- Poruka ako nema firmi -->
+  <p *ngIf="!loading && !errorMessage && filteredFirme().length === 0" class="no-firme-msg">
+    Nema dostupnih firmi za prikaz.
+  </p>
+</div>

@@ -157,6 +157,33 @@
       </div>
     </div>
 
+    <!-- Opis firme -->
+    <div class="form-group">
+      <label for="opis">Opis firme</label>
+      <textarea
+        id="opis"
+        name="opis"
+        [(ngModel)]="firma.opis"
+        placeholder="Unesite kratak opis firme"
+        rows="3"
+      ></textarea>
+    </div>
+
+   <!-- Godina osnivanja -->
+<div class="form-group">
+  <label for="godina_osnivanja">Godina osnivanja</label>
+  <select
+    id="godina_osnivanja"
+    name="godina_osnivanja"
+    [(ngModel)]="firma.godina_osnivanja"
+    #godinaInput="ngModel"
+    aria-describedby="godinaError"
+  >
+    <option [ngValue]="null" selected>Izaberite godinu</option>
+    <option *ngFor="let g of years" [ngValue]="g">{{ g }}</option>
+  </select>
+</div>
+
     <!-- Logo firme upload sekcija -->
     <div class="firma-upload">
       <h3>Logo firme (opciono)</h3>

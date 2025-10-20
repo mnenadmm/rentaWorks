@@ -1,0 +1,42 @@
+<div class="oglas-container">
+  <button class="btn-back" (click)="back()" title="Nazad">⬅️ Nazad</button>
+
+  <h2>Izmeni Oglas</h2>
+
+  <div *ngIf="successMessage" class="success-message">
+    ✅ {{ successMessage }}
+  </div>
+  <div *ngIf="errorMessage" class="error-message">
+    ❌ {{ errorMessage }}
+  </div>
+
+  <form [formGroup]="formaZaIzmenu" (ngSubmit)="sacuvajIzmene()">
+    <label>
+      Opis:
+      <textarea formControlName="opis"></textarea>
+    </label>
+
+    <label>
+      Lokacija:
+      <input type="text" formControlName="lokacija" />
+    </label>
+
+    <label>
+      Datum objave:
+      <input type="date" formControlName="datum_objave" />
+    </label>
+
+    <div class="form-group">
+      <label for="zanimanjeSelect">Zanimanje:</label>
+      <select id="zanimanjeSelect" formControlName="zanimanje_ids">
+        <option [ngValue]="null" disabled>-- Izaberite zanimanje --</option>
+        <option *ngFor="let z of svaZanimanja" [ngValue]="z.id">{{ z.naziv }}</option>
+      </select>
+      <div *ngIf="formaZaIzmenu.get('zanimanje_ids')?.touched && formaZaIzmenu.get('zanimanje_ids')?.invalid" class="error">
+        Molimo izaberite zanimanje.
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="formaZaIzmenu.invalid">Sačuvaj izmene</button>
+  </form>
+</div>

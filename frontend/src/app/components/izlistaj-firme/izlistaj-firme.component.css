@@ -1,0 +1,207 @@
+/* ---------- Glavni container ---------- */
+.firme-container {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 1rem;
+}
+
+/* Lista firmi */
+.firma-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Jedna firma */
+.firma-kartica {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: linear-gradient(135deg, #f0f4ff, #e6f0ff);
+  border: 1px solid #cfd9e7;
+  border-radius: 14px;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  word-break: break-word;
+}
+
+.firma-kartica:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+.firma-ocena {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin-bottom: 6px;
+  font-size: 1.8rem;
+  color: #ccc; /* boja prazne zvezdice */
+}
+
+.firma-ocena .zvezdica {
+  position: relative;
+  display: inline-block;
+  color: #ccc; /* default prazna zvezdica */
+  font-size: 1.8rem;
+  line-height: 1;
+}
+
+.firma-ocena .zvezdica.puna {
+  color: #f5a623; /* boja pune zvezdice */
+}
+.firma-ocena .zvezdica.polug {
+  position: relative;
+}
+.firma-ocena .zvezdica.polu::before {
+  content: '\2605';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 50%;
+  overflow: hidden;
+  display: block;
+  color: #f5a623;
+  pointer-events: none;
+}
+
+.firma-ocena .broj-ocena {
+  font-size: 0.9rem;
+  color: #555;
+  margin-left: 6px;
+}
+/* Gornji red (logo + naziv) */
+.gornji-red {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+}
+
+.firma-logo {
+  max-width: 250px;  /* maksimalna širina loga */
+  width: auto;       /* dozvoljava da uske slike ne budu iste širine kao kontenjer */
+  height: auto;      /* proporcionalna visina */
+  max-height: 150px; /* maksimalna visina */
+  object-fit: contain; /* ceo logo se vidi, ne seče */
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+  margin-bottom: 12px;
+}
+
+/* Tekst pored loga */
+.firma-info-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.firma-naziv {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin: 0;
+  color: #1a1a1a;
+}
+
+.firma-pib {
+  font-size: 1rem;
+  color: #555;
+  margin: 0;
+}
+
+/* Podaci firme */
+.firma-podaci p {
+  margin: 6px 0;
+  font-size: 1rem;
+  color: #444;
+}
+
+.firma-podaci a {
+  color: #3366cc;
+  text-decoration: none;
+}
+.firma-podaci a:hover {
+  text-decoration: underline;
+}
+
+/* Spinner */
+.spinner {
+  border: 4px solid rgba(0,0,0,0.1);
+  border-left-color: #4CAF50;
+  border-radius: 50%;
+  width: 48px;
+  height: 48px;
+  animation: spin 1s linear infinite;
+  margin: 40px auto;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Poruka kada nema firmi */
+.no-firme-msg {
+  font-style: italic;
+  color: #666;
+  text-align: center;
+  margin-top: 20px;
+}
+
+/* Search input */
+.search-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+.search-input {
+  width: 100%;
+  max-width: 100%;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+.search-input::placeholder {
+  color: #999;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #3366cc;
+  box-shadow: 0 0 8px rgba(51,102,204,0.3);
+}
+
+/* ---------- Mobilna podrška ---------- */
+@media (max-width: 600px) {
+  .firma-logo {
+    max-width: 90%;
+    max-height: 150px; /* veća visina za mobilni */
+    height: auto;
+    margin-bottom: 10px;
+  }
+
+  .firma-naziv {
+    font-size: 1.25rem;
+  }
+
+  .firma-pib {
+    font-size: 0.95rem;
+  }
+
+  .firma-podaci p {
+    font-size: 0.95rem;
+  }
+
+  .search-input {
+    max-width: 100%;
+    font-size: 0.95rem;
+    padding: 10px 14px;
+  }
+}

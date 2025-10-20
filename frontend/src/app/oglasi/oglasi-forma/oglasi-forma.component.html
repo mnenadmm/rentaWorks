@@ -1,0 +1,75 @@
+<!-- HTML -->
+<div class="forma-oglas-wrapper">
+  <div class="forma-oglas">
+    <h2 *ngIf="nazivFirme">{{ nazivFirme }}</h2>
+    <h3>Dodaj oglas</h3>
+
+    <!-- Dugme za AI pomoć -->
+    <div class="ai-help-wrapper" (click)="toggleChat()">
+      <span class="ai-help-icon">🔍</span>
+      <span class="ai-help-text">Trebaš pomoć? (AI)</span>
+    </div>
+
+    <form [formGroup]="oglasForm" (ngSubmit)="posaljiOglas()">
+      <div class="form-group">
+        <label for="opis">Opis:</label>
+        <textarea id="opis" formControlName="opis" placeholder="Unesite opis oglasa..."></textarea>
+        <div *ngIf="oglasForm.get('opis')?.touched && oglasForm.get('opis')?.invalid" class="error">
+          Molimo unesite opis.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="lokacija">Lokacija:</label>
+        <input id="lokacija" formControlName="lokacija" placeholder="Unesite lokaciju" />
+        <div *ngIf="oglasForm.get('lokacija')?.touched && oglasForm.get('lokacija')?.invalid" class="error">
+          Molimo unesite lokaciju.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="datum_objave">Datum objave:</label>
+        <input id="datum_objave" formControlName="datum_objave" type="date" />
+        <div *ngIf="oglasForm.get('datum_objave')?.touched && oglasForm.get('datum_objave')?.invalid" class="error">
+          Molimo izaberite datum.
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="zanimanjeSelect">Zanimanje:</label>
+        <select id="zanimanjeSelect" formControlName="zanimanje_ids">
+          <option [ngValue]="null" disabled selected>-- Izaberite zanimanje --</option>
+          <option *ngFor="let z of svaZanimanja" [value]="z.id">{{ z.naziv }}</option>
+        </select>
+        <div *ngIf="oglasForm.get('zanimanje_ids')?.touched && oglasForm.get('zanimanje_ids')?.invalid" class="error">
+          Molimo izaberite zanimanje.
+        </div>
+      </div>
+
+      <div class="dugmad">
+        <button type="button" class="back-button" (click)="korakNazad()">⬅ Nazad</button>
+        <button type="submit" [disabled]="oglasForm.invalid">Pošalji oglas</button>
+      </div>
+    </form>
+
+    <div *ngIf="uspeh" class="poruka-uspeh">Oglas uspešno dodat!</div>
+    <div *ngIf="greska" class="poruka-greska">{{ greska }}</div>
+
+    <!-- AI Chat modal sa overlay unutar forme -->
+    <div class="ai-chat-container" [class.show-overlay]="showChat">
+      <!-- Overlay -->
+      <div class="ai-chat-overlay" (click)="toggleChat()"></div>
+
+      <!-- Modal -->
+      <div class="ai-chat-modal" [class.open]="showChat" (click)="$event.stopPropagation()">
+        <div class="ai-chat-header" (click)="$event.stopPropagation()">
+          <span>Chat AI</span>
+          <button class="close-btn" (click)="toggleChat()">✖</button>
+        </div>
+        <div class="ai-chat-body" (click)="$event.stopPropagation()">
+          <app-chat-gpt></app-chat-gpt>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

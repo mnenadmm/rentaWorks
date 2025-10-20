@@ -3,9 +3,14 @@ from flask import jsonify, request
 from sqlalchemy import text  # type: ignore
 from extensions import db
 import logging
-app = create_app()
+
+
 from flask_jwt_extended import  jwt_required # type: ignore
 
+app = create_app()
+import routes.chatGbt_routes  # registruje send_message i ostale evente
+import socket_events    
+ 
 
 @app.route('/proba')
 #@jwt_required()
@@ -24,6 +29,10 @@ def db_check():
         return jsonify({"error": str(e)}), 500
 
 
-
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', debug=True, use_reloader=True)
+    from extensions import socketio
+    socketio.run(app, host='0.0.0.0', debug=True)
+
+#if __name__ == "__main__":
+#    app.run(host='0.0.0.0', debug=True, use_reloader=True)
+#

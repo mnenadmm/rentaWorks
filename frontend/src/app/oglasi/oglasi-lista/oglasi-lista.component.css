@@ -1,0 +1,253 @@
+/* ---------- Container svih oglasa ---------- */
+.oglasi-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1rem;
+  max-width: 900px;
+  margin: 0 auto;
+  padding-bottom: 2rem;
+}
+
+/* Spinner Container */
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+/* Spinner */
+.loading-spinner {
+  border: 6px solid #f3f3f3; /* svetlo siva pozadina */
+  border-top: 6px solid #3498db; /* plava boja vrha */
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+/* ---------- Filter bar iznad oglasa ---------- */
+.filter-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.filter-bar label {
+  font-weight: 500;
+  color: #333;
+}
+
+.filter-bar select,
+.filter-bar button {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: 1px solid #cfd9e7;
+  background-color: #f0f4ff;
+  color: #1a1a1a;
+  cursor: pointer;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.filter-bar select:hover,
+.filter-bar button:hover {
+  background-color: #e6f0ff;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.filter-bar button.reset-filter {
+  background-color: #ffeded;
+  border-color: #ffb3b3;
+  color: #a10000;
+}
+
+.filter-bar button.reset-filter:hover {
+  background-color: #ffc9c9;
+}
+
+/* ---------- Jedna kartica oglasa ---------- */
+.oglas-kartica {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: linear-gradient(135deg, #f0f4ff, #e6f0ff);
+  border: 1px solid #cfd9e7;
+  border-radius: 14px;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+  word-break: break-word;
+}
+
+.oglas-kartica:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+}
+
+/* Gornji red sa logom i info */
+.gornji-red {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  width: 100%;
+}
+
+/* Logo firme */
+.firma-logo {
+  max-width: 250px;
+  width: auto;
+  max-height: 150px;
+  height: auto;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+  margin-bottom: 12px;
+  cursor: pointer;
+}
+
+/* Tekst ispod loga */
+.firma-info-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: center;
+}
+
+/* Ime firme */
+.firma-naziv {
+  font-size: 1.3rem;
+  font-weight: 500;
+  margin: 0;
+  color: #1a1a1a;
+  cursor: pointer;
+}
+
+/* Zanimanja */
+.zanimanja-info {
+  font-size: 1.1rem;
+  color: #555;
+  margin-top: 0.5rem;
+}
+
+.zanimanja-info span {
+  font-weight: 700;
+  color: #333;
+}
+
+/* Opis oglasa */
+.opis {
+  font-size: 1.05rem;
+  color: #444;
+  margin-bottom: 0.5rem;
+  max-width: 100%;
+}
+
+/* Meta info: lokacija i datum */
+.meta-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 1rem;
+  color: #555;
+  margin-top: 0.5rem;
+}
+
+/* Poruka kada nema oglasa */
+.nema-oglasa {
+  text-align: center;
+  font-size: 1.1rem;
+  color: #888;
+  margin-top: 2rem;
+}
+
+/* Animacija rotacije */
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* ---------- Mobilna optimizacija ---------- */
+@media (max-width: 600px) {
+  .oglas-kartica {
+    padding: 1.25rem;
+  }
+
+  .firma-logo {
+    max-width: 90%;
+    max-height: 150px;
+    width: auto;
+    height: auto;
+    margin-bottom: 10px;
+  }
+
+  .firma-naziv {
+    font-size: 1.15rem;
+  }
+
+  .zanimanja-info {
+    font-size: 1rem;
+  }
+
+  .opis {
+    font-size: 0.95rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .meta-info {
+    font-size: 0.95rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  /* Mobilni filter bar */
+  .filter-bar {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .filter-bar select,
+  .filter-bar button {
+    width: 100%;
+    font-size: 0.95rem;
+    padding: 0.45rem 0.8rem;
+  }
+}
+
+/* ---------- Dodatak: minimalni toggle za prikaz/sakrivanje filtera ---------- */
+/* Ne dira stilove oglasa — samo stil za dugme koje otvara filtere. */
+.filter-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.toggle-filters {
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.toggle-filters:hover {
+  background-color: #2176b8;
+}
+
+@media (max-width: 600px) {
+  .toggle-filters {
+    width: 100%;
+  }
+}

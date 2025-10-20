@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile.dev  # koristi za razvoj (otkomentariši po potrebi)
       # dockerfile: Dockerfile.prod  # koristi za produkcijuqq
     image: zadruga-backend:dev
-    restart: unless-stopped
+    #restart: unless-stopped
     volumes:
       - ./backend:/app
       - ./backend/static/uploads:/app/static/uploads  # ← OVO je za slike  
@@ -15,7 +15,7 @@ services:
       - .env
     ports:
       - "5001:5000"
-    restart: always
+    #restart: always
     depends_on:
        - postgres
     environment:

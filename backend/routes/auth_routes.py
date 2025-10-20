@@ -21,17 +21,24 @@ def current_user():
     if not korisnik:
         return jsonify({'error': 'Korisnik nije pronađen'}), 404
 
-    # Pretpostavljam da nemaš to_dict() metodu, pa ti je evo primer:
+    
     user_data = {
         'id': korisnik.id,
         'username': korisnik.username,
         'ime': korisnik.ime,
         'prezime': korisnik.prezime,
         'email': korisnik.email,
-        'ima_firmu': len(korisnik.firme) > 0,  # True ako ima firmu, False ako nema
+        'ima_firmu': len(korisnik.firme) > 0,
         'tip_korisnika': korisnik.tip_korisnika.value if korisnik.tip_korisnika else None,
-        'profilna_slika': korisnik.profilna_slika if hasattr(korisnik, 'profilna_slika') else None
-        # Dodaj ovde još polja koja ti trebaju u frontend-u
+        'profilna_slika': korisnik.profilna_slika if hasattr(korisnik, 'profilna_slika') else None,
+        # Lista firmi korisnika
+        'firme': [
+            {
+                'id': firma.id,
+                'naziv': firma.naziv,
+                'logo': getattr(firma, 'logo', None)
+            } for firma in korisnik.firme
+        ] if korisnik.firme else []
     }
 
     return jsonify(user_data), 200
@@ -65,8 +72,15 @@ def login():
         'prezime': korisnik.prezime,
         'email': korisnik.email,
         'tip_korisnika': korisnik.tip_korisnika.value if korisnik.tip_korisnika else None,
-        'ima_firmu': len(korisnik.firme) > 0,  # True ako ima firmu, False ako nema
-        'profilna_slika': korisnik.profilna_slika if hasattr(korisnik, 'profilna_slika') else None
+        'ima_firmu': len(korisnik.firme) > 0,
+        'profilna_slika': korisnik.profilna_slika if hasattr(korisnik, 'profilna_slika') else None,
+        'firme': [
+            {
+                'id': firma.id,
+                'naziv': firma.naziv,
+                'logo': getattr(firma, 'logo', None)
+            } for firma in korisnik.firme
+        ] if korisnik.firme else []
     }
 
     response = make_response(jsonify({

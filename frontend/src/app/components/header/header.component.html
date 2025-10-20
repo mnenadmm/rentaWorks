@@ -7,35 +7,41 @@
     <span></span>
   </div>
   <ul [class.open]="menuOpen">
+    <li *ngIf="isLoggedIn" >
+      <a class="btn btn-outline-light" routerLink="/listaFirmi" (click)="closeMenu()">🏭 Lista firmi</a>
+    </li>
     <!-- Prikazi Kreiraj firmu ako je pravno lice ili admin I NEMA firmu -->
      <!-- Ovo cemo dodati da zakljucamo && !currentUserService.getCurrentUser()?.ima_firmu-->
     <li *ngIf="isLoggedIn && (currentUserService.isPravnoLice() || currentUserService.isAdmin()) ">
-      <a class="btn btn-outline-light" routerLink="/kreirajFirmu" (click)="closeMenu()">Kreiraj firmu</a>
+      <a class="btn btn-outline-light" routerLink="/kreirajFirmu" (click)="closeMenu()">➕ Kreiraj firmu</a>
     </li>
     <!-- Prikazi Moja firma ako je pravno lice ili admin i IMA firmu -->
 <li *ngIf="isLoggedIn && (currentUserService.isPravnoLice() || currentUserService.isAdmin()) && currentUserService.getCurrentUser()?.ima_firmu">
-  <a class="btn btn-outline-light" routerLink="/mojaFirma" (click)="closeMenu()">Moja firma</a>
+  <a class="btn btn-outline-light" routerLink="/mojaFirma" (click)="closeMenu()">🏭 Moja firma</a>
 </li>
     <li>
-      <a class="btn btn-outline-light" routerLink="/" (click)="closeMenu()">Početna</a>
+      <a class="btn btn-outline-light" routerLink="/" (click)="closeMenu()">🏠 Početna</a>
     </li>
     <li>
-      <a class="btn btn-outline-light" routerLink="/info" (click)="closeMenu()">Info</a>
+  <a class="btn btn-outline-light" routerLink="/oglasi" (click)="closeMenu()">📢 Oglasi</a>
+</li>
+    <li>
+      <a class="btn btn-outline-light" routerLink="/info" (click)="closeMenu()">ℹ️ Info</a>
     </li>
 
     <!-- Registracija i login se prikazuju samo ako korisnik NIJE ulogovan -->
     <li *ngIf="!isLoggedIn">
-      <a class="btn btn-outline-light" routerLink="/register" (click)="closeMenu()">Registruj se</a>
+      <a class="btn btn-outline-light" routerLink="/register" (click)="closeMenu()">📝 Registruj se</a>
     </li>
     <li *ngIf="!isLoggedIn">
-      <a class="btn btn-outline-light" routerLink="/login" (click)="closeMenu()">Login</a>
+      <a class="btn btn-outline-light" routerLink="/login" (click)="closeMenu()">🔐 Login</a>
     </li>
     <li *ngIf="isLoggedIn">
-      <a class="btn btn-outline-success" routerLink="/profil" (click)="closeMenu()">Profil</a>
+      <a class="btn btn-outline-success" routerLink="/profil" (click)="closeMenu()">👤 Profil</a>
     </li>
     <!-- Logout se prikazuje samo ako korisnik JESTE ulogovan -->
     <li *ngIf="isLoggedIn">
-      <button class="btn btn-outline-primary"  (click)="logout(); closeMenu()">Logout</button>
+      <button class="btn btn-outline-primary"  (click)="logout(); closeMenu()">🔓 Logout</button>
     </li>
   </ul>
 </nav>

@@ -1,0 +1,30 @@
+<div class="chat-window-container">
+
+  <!-- Header -->
+  <div class="chat-header">
+    <img [src]="user?.profilna_slika ? 'http://5.75.164.111:5001/static/uploads/' + user.profilna_slika : 'assets/default-avatar.png'"
+         [alt]="user?.ime + ' ' + user?.prezime"
+         class="chat-user-avatar" />
+    <h2 class="chat-user-name">{{ user?.ime }} {{ user?.prezime }}</h2>
+  </div>
+
+  <!-- Body -->
+  <div class="chat-body" #chatBody>
+    <div *ngFor="let poruka of poruke"
+         [ngClass]="{'my-message': poruka.role === 'user', 'other-message': poruka.role !== 'user'}">
+      <p class="message-text">{{ poruka.content }}</p>
+      <span class="message-time">{{ poruka.created_at | date:'HH:mm' }}</span>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="chat-footer">
+    <input type="text"
+           placeholder="Napiši poruku..."
+           [(ngModel)]="novaPoruka"
+           (input)="korisnikTipka()"
+           (keyup.enter)="posaljiPoruku()" />
+    <button (click)="posaljiPoruku()">📨 Pošalji</button>
+  </div>
+
+</div>
